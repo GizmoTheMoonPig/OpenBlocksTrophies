@@ -2,6 +2,7 @@
 
 Brings back trophies from the mod OpenBlocks. They have a .1% chance of dropping from a mob, and can be placed in world.
 
+---
 ### Adding your own trophies:
 
 Every trophy is registered through a json. A trophy json looks something like this:
@@ -28,6 +29,8 @@ Each field should be self-explanatory, but if not here's an explanation for each
 - `behavior`: defines what the entity does when right-clicked. There are 10 pre-made behaviors, and each comes with its own parameters you need to define. More details below.
 ---
 Jsons should be put in `data/modid/trophies`. All trophies will automatically be registered, added to the creative tab, and drop from their respective mobs.
+
+---
 
 ### Behaviors
 Datapacks can define what happens when a trophy is right-clicked. 10 behaviors are built into the mod itself, but any other mods can easily add more if they want to. The behaviors are as follows:
