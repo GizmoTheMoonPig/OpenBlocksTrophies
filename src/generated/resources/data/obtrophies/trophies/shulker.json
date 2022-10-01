@@ -1,0 +1,12 @@
+{
+  "behavior": {
+    "type": "obtrophies:mob_effect",
+    "amplifier": 1,
+    "effect": "minecraft:levitation",
+    "time": 100
+  },
+  "dropChance": 0.001,
+  "entity": "minecraft:shulker",
+  "offset": 0.0,
+  "scale": 1.0
+}

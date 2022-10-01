@@ -1,0 +1,11 @@
+{
+  "behavior": {
+    "type": "obtrophies:explosion",
+    "destructive": false,
+    "power": 2.0
+  },
+  "dropChance": 0.001,
+  "entity": "minecraft:creeper",
+  "offset": 0.0,
+  "scale": 1.0
+}

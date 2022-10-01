@@ -1,0 +1,11 @@
+{
+  "behavior": {
+    "type": "obtrophies:item",
+    "cooldown": 10000,
+    "item": "minecraft:rotten_flesh"
+  },
+  "dropChance": 0.001,
+  "entity": "minecraft:zoglin",
+  "offset": 0.0,
+  "scale": 0.85
+}

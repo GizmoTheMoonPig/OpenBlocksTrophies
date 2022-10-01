@@ -1,0 +1,12 @@
+{
+  "behavior": {
+    "type": "obtrophies:item",
+    "cooldown": 10000,
+    "item": "minecraft:emerald",
+    "sound": "minecraft:entity.wandering_trader.yes"
+  },
+  "dropChance": 0.001,
+  "entity": "minecraft:wandering_trader",
+  "offset": 0.0,
+  "scale": 1.0
+}

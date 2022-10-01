@@ -1,0 +1,10 @@
+{
+  "behavior": {
+    "type": "obtrophies:set_fire",
+    "seconds": 4
+  },
+  "dropChance": 0.001,
+  "entity": "minecraft:blaze",
+  "offset": 0.0,
+  "scale": 1.0
+}

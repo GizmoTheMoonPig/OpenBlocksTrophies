@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[43,)"
+license="MIT"
+issueTrackerURL="https://github.com/GizmoTheMoonPig/OpenBlocksTrophies/issues"
+
+[[mods]]
+modId="obtrophies"
+version="${file.jarVersion}"
+displayName="OpenBlocks Trophies"
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
+logoFile="trophy.png"
+credits="Original Trophies made by the OpenMods team"
+authors="GizmoTheMoonPig"
+description='''
+Brings back the trophies from Openblocks.
+'''
+
+[[dependencies.obtrophies]]
+    modId="forge"
+    mandatory=true
+    versionRange="[43,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.obtrophies]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.2,1.20)"
+    ordering="NONE"
+    side="BOTH"

@@ -1,0 +1,6 @@
+{
+  "block.obtrophies.trophy": "Trophy",
+  "block.obtrophies.trophy.entity": "%s Trophy",
+  "item.obtrophies.trophy.modid": "From %s",
+  "itemGroup.obtrophies": "OpenBlocks Trophies"
+}
