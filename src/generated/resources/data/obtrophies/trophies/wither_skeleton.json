@@ -4,8 +4,8 @@
     "cooldown": 50000,
     "item": "minecraft:wither_skeleton_skull"
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:wither_skeleton",
   "offset": 0.0,
-  "scale": 0.95
+  "scale": 1.0
 }

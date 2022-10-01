@@ -4,7 +4,7 @@
     "cooldown": 20000,
     "item": "minecraft:bone"
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:skeleton_horse",
   "offset": 0.0,
   "scale": 0.9

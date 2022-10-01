@@ -5,7 +5,7 @@
     "item": "minecraft:egg",
     "sound": "minecraft:entity.chicken.egg"
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:chicken",
   "offset": 0.0,
   "scale": 1.5

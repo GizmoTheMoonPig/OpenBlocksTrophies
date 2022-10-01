@@ -4,7 +4,7 @@
     "cooldown": 20000,
     "item": "minecraft:leather"
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:hoglin",
   "offset": 0.0,
   "scale": 0.85

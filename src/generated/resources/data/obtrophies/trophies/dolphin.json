@@ -5,7 +5,7 @@
     "effect": "minecraft:dolphins_grace",
     "time": 300
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:dolphin",
   "offset": 0.0,
   "scale": 1.0

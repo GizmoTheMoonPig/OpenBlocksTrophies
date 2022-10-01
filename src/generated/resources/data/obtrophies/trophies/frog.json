@@ -4,7 +4,7 @@
     "cooldown": 20000,
     "item": "minecraft:slime_ball"
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:frog",
   "offset": 0.0,
   "scale": 1.5

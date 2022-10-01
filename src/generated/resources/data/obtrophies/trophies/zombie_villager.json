@@ -1,5 +1,5 @@
 {
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:zombie_villager",
   "offset": 0.0,
   "scale": 1.0

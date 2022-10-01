@@ -1,5 +1,5 @@
 {
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:ghast",
   "offset": 0.3,
   "scale": 0.25

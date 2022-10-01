@@ -5,7 +5,7 @@
     "effect": "minecraft:blindness",
     "time": 70
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:witch",
   "offset": 0.0,
   "scale": 0.9

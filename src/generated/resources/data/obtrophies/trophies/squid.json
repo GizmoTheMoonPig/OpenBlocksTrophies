@@ -4,7 +4,7 @@
     "block": "minecraft:water",
     "place_around_trophy": false
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:squid",
   "offset": 0.5,
   "scale": 1.0

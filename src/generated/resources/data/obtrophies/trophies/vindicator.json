@@ -4,7 +4,7 @@
     "cooldown": 20000,
     "item": "minecraft:iron_axe"
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:vindicator",
   "offset": 0.0,
   "scale": 1.0

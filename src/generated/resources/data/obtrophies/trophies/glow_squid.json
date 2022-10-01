@@ -5,7 +5,7 @@
     "effect": "minecraft:glowing",
     "time": 200
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:glow_squid",
   "offset": 0.5,
   "scale": 1.0

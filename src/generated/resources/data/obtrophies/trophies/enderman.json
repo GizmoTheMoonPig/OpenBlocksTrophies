@@ -2,7 +2,7 @@
   "behavior": {
     "type": "obtrophies:ender_pearl"
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:enderman",
   "offset": 0.0,
   "scale": 0.75

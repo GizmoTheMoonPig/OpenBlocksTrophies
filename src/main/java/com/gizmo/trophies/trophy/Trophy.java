@@ -79,7 +79,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 		public JsonElement serialize(Trophy trophy, Type type, JsonSerializationContext context) {
 			JsonObject jsonobject = new JsonObject();
 			jsonobject.add("entity", context.serialize(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type())).toString()));
-			jsonobject.add("dropChance", context.serialize(trophy.dropChance()));
+			jsonobject.add("drop_chance", context.serialize(trophy.dropChance()));
 			jsonobject.add("offset", context.serialize(trophy.verticalOffset()));
 			jsonobject.add("scale", context.serialize(trophy.scale()));
 			if (trophy.behavior() != null) {

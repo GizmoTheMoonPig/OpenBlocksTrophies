@@ -3,7 +3,7 @@
     "type": "obtrophies:arrow",
     "amount": 1
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:skeleton",
   "offset": 0.0,
   "scale": 1.0

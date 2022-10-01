@@ -5,8 +5,8 @@
     "effect": "minecraft:darkness",
     "time": 200
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:warden",
   "offset": 0.0,
-  "scale": 0.75
+  "scale": 0.85
 }

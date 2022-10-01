@@ -5,7 +5,7 @@
     "effect": "minecraft:levitation",
     "time": 100
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:shulker",
   "offset": 0.0,
   "scale": 1.0

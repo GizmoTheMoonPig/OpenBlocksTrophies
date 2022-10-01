@@ -4,7 +4,7 @@
     "cooldown": 20000,
     "item": "minecraft:cod"
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:polar_bear",
   "offset": 0.0,
   "scale": 1.0

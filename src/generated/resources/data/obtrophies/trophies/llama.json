@@ -2,7 +2,7 @@
   "behavior": {
     "type": "obtrophies:llama_spit"
   },
-  "dropChance": 0.001,
+  "drop_chance": 0.001,
   "entity": "minecraft:llama",
   "offset": 0.0,
   "scale": 0.9
