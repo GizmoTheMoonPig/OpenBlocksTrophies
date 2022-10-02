@@ -1,4 +1,4 @@
-// 1.19.2	2022-10-01T15:06:43.3476922	Default OpenBlocks Trophies
+// 1.19.2	2022-10-01T21:12:32.4534341	Default OpenBlocks Trophies
 0f37c153956695534854e0497319138a8ad470b9 data/obtrophies/trophies/allay.json
 6eb35c2df17fda213d6e6fac3ce46a35e3f83ee2 data/obtrophies/trophies/axolotl.json
 a6e278d8cbd3535afd460decf84df8d5c06b5795 data/obtrophies/trophies/bat.json
@@ -16,6 +16,7 @@ b4a6ac5275efe381c5baa39847ad494d38eff98b data/obtrophies/trophies/drowned.json
 bf1954c63a1525580c5ae94bba7b85f9bc452860 data/obtrophies/trophies/elder_guardian.json
 d4d93049c5f02587310d94052adba72d968ded86 data/obtrophies/trophies/enderman.json
 c37a27380cc0d8f9f641784d74bcdd434502520f data/obtrophies/trophies/endermite.json
+13b883f28d18a960dabdf86e16127e423c64b83b data/obtrophies/trophies/ender_dragon.json
 fcde8c22f8a2b81fbdc45a013f4fe13375c867b0 data/obtrophies/trophies/evoker.json
 06f3889938114b4755ec50beb5317ecfc450a55a data/obtrophies/trophies/fox.json
 5b356d36dbc999a18e31c4f02dd9091662fe7f73 data/obtrophies/trophies/frog.json
@@ -66,6 +67,7 @@ f0a7e1d87dc3539b5610fc54b6a0900ca36dd9cd data/obtrophies/trophies/vindicator.jso
 965430f900173d031683152e3d03c229bd014d72 data/obtrophies/trophies/wandering_trader.json
 564821f95fcba2304954a69325a495b908253800 data/obtrophies/trophies/warden.json
 902370ea231d43dc38f2c9ec19ccaabc789e1e8d data/obtrophies/trophies/witch.json
+6c3f55499a0ce0a425ba020c9e6af37bd5a5fb21 data/obtrophies/trophies/wither.json
 da85bcd695f2b9e885f9ea5eaca7b09217f633d5 data/obtrophies/trophies/wither_skeleton.json
 2e37425bab1d29a7124be46044fbd58684b89f0b data/obtrophies/trophies/wolf.json
 5288fb8e7113f795bf6edc253b4f74a2f9fc57b4 data/obtrophies/trophies/zoglin.json

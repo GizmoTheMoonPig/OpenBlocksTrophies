@@ -18,7 +18,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -72,6 +72,10 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			} else {
 				stack.mulPose(Vector3f.YP.rotationDegrees(getCorrectRotation(be.getBlockState().getValue(TrophyBlock.FACING).getOpposite())));
 			}
+		}
+
+		if (entity instanceof EnderDragon) {
+			stack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
 		}
 
 		stack.scale(0.4F, 0.4F, 0.4F);
