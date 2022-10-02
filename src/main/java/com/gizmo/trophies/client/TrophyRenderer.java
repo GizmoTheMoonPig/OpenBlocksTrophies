@@ -44,11 +44,11 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 	@Override
 	public void render(TrophyBlockEntity blockEntity, float partialTicks, PoseStack stack, MultiBufferSource source, int light, int overlay) {
 		if (blockEntity.getTrophy() != null) {
-			renderEntity(blockEntity, partialTicks, blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light);
+			renderEntity(blockEntity, blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light);
 		}
 	}
 
-	public static void renderEntity(@Nullable TrophyBlockEntity be, float partialTicks, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light) {
+	public static void renderEntity(@Nullable TrophyBlockEntity be, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light) {
 		stack.pushPose();
 		Entity entity = fetchEntity(trophy.type(), Objects.requireNonNull(level));
 		EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();

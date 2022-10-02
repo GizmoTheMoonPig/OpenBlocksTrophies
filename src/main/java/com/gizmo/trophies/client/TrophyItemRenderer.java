@@ -30,7 +30,7 @@ public class TrophyItemRenderer extends BlockEntityWithoutLevelRenderer {
 			if (stack.hasTag()) {
 				Trophy trophy = TrophyItem.getTrophy(stack);
 				if (trophy != null) {
-					TrophyRenderer.renderEntity(null, 0.0F, Minecraft.getInstance().level, BlockPos.ZERO, trophy, ms, source, light);
+					TrophyRenderer.renderEntity(null, Minecraft.getInstance().level, BlockPos.ZERO, trophy, ms, source, light);
 				}
 			}
 		}
