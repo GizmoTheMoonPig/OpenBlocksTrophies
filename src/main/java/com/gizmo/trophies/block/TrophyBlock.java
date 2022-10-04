@@ -6,6 +6,7 @@ import com.gizmo.trophies.trophy.AmbientSoundFetcher;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -83,7 +84,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 					level.playSound(null, pos, ambientSound, SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
 				}
 				if (trophyBE.getCooldown() <= 0 && trophy.behavior() != null) {
-					trophyBE.setCooldown(trophy.behavior().execute(trophyBE, player));
+					trophyBE.setCooldown(trophy.behavior().execute(trophyBE, (ServerPlayer) player));
 				}
 			}
 		}

@@ -5,14 +5,15 @@ import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.entity.player.Player;
 
 public class PlayerSetFireBehavior extends CustomBehavior {
 
 	private int time;
 
-	public PlayerSetFireBehavior() {}
+	public PlayerSetFireBehavior() {
+	}
 
 	public PlayerSetFireBehavior(int time) {
 		this.time = time;
@@ -34,7 +35,7 @@ public class PlayerSetFireBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, Player player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player) {
 		player.setSecondsOnFire(this.time);
 		return 0;
 	}

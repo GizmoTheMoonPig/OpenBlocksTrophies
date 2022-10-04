@@ -5,10 +5,10 @@ import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -39,7 +39,7 @@ public class ItemDropBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public  void serializeToJson(JsonObject object, JsonSerializationContext context) {
+	public void serializeToJson(JsonObject object, JsonSerializationContext context) {
 		object.add("item", context.serialize(ForgeRegistries.ITEMS.getKey(this.itemToDrop).toString()));
 		object.add("cooldown", context.serialize(this.cooldown));
 		if (this.sound != null) {
@@ -59,7 +59,7 @@ public class ItemDropBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, Player player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player) {
 		if (this.sound != null) {
 			player.getLevel().playSound(null, player.blockPosition(), this.sound, SoundSource.BLOCKS, 1.0F, (block.getLevel().getRandom().nextFloat() - block.getLevel().getRandom().nextFloat()) * 0.2F + 1.0F);
 		}

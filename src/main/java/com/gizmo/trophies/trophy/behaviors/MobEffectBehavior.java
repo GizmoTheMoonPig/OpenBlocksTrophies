@@ -5,10 +5,10 @@ import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class MobEffectBehavior extends CustomBehavior {
@@ -17,7 +17,8 @@ public class MobEffectBehavior extends CustomBehavior {
 	private int time;
 	private int amplifier;
 
-	public MobEffectBehavior() {}
+	public MobEffectBehavior() {
+	}
 
 	public MobEffectBehavior(MobEffect effect, int time, int amplifier) {
 		this.effect = effect;
@@ -46,7 +47,7 @@ public class MobEffectBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, Player player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player) {
 		player.addEffect(new MobEffectInstance(this.effect, this.time, this.amplifier));
 		return this.time;
 	}

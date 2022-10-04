@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.level.Level;
 
@@ -27,7 +27,7 @@ public class ShootEnderPearlBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, Player player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player) {
 		Level level = block.getLevel();
 		ThrownEnderpearl pearl = new ThrownEnderpearl(level, player);
 		BlockPos pos = block.getBlockPos();

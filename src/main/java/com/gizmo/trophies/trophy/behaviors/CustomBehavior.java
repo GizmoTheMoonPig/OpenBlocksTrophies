@@ -4,7 +4,7 @@ import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 
 public abstract class CustomBehavior {
 
@@ -21,5 +21,5 @@ public abstract class CustomBehavior {
 
 	public abstract CustomBehavior fromJson(JsonObject object);
 
-	public abstract int execute(TrophyBlockEntity block, Player player);
+	public abstract int execute(TrophyBlockEntity block, ServerPlayer player);
 }

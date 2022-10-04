@@ -6,22 +6,24 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraftforge.registries.ForgeRegistries;
 
+@SuppressWarnings("deprecation")
 public class PlaceBlockBehavior extends CustomBehavior {
 
 	private Block blockToPlace;
 	private boolean aroundTrophy;
 
-	public PlaceBlockBehavior() {}
+	public PlaceBlockBehavior() {
+	}
 
 	public PlaceBlockBehavior(Block block, boolean placeAroundTrophy) {
 		this.blockToPlace = block;
@@ -47,7 +49,7 @@ public class PlaceBlockBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, Player player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player) {
 		BlockPos base = block.getBlockPos();
 		Level level = block.getLevel();
 		assert level != null;
