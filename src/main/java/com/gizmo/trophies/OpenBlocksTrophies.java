@@ -7,14 +7,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -90,7 +88,7 @@ public class OpenBlocksTrophies {
 
 		@Override
 		public ItemStack makeIcon() {
-			if(this.keys.isEmpty()) {
+			if (this.keys.isEmpty() && !Trophy.getTrophies().isEmpty()) {
 				this.keys = new ArrayList<>(Trophy.getTrophies().keySet().stream().map(ResourceLocation::toString).collect(Collectors.toList()));
 			}
 
