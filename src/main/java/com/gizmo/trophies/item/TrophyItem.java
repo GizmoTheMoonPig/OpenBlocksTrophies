@@ -49,8 +49,8 @@ public class TrophyItem extends BlockItem {
 			CompoundTag tag = BlockItem.getBlockEntityData(stack);
 			if (tag != null && tag.contains(ENTITY_TAG)) {
 				String entityKey = tag.getString(ENTITY_TAG);
-				if (Trophy.getTrophies().getValidTrophies().containsKey(ResourceLocation.tryParse(entityKey))) {
-					return Trophy.getTrophies().getValidTrophies().get(ResourceLocation.tryParse(entityKey));
+				if (Trophy.getTrophies().containsKey(ResourceLocation.tryParse(entityKey))) {
+					return Trophy.getTrophies().get(ResourceLocation.tryParse(entityKey));
 				}
 			}
 		}
@@ -80,9 +80,9 @@ public class TrophyItem extends BlockItem {
 	@Override
 	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stacks) {
 		if (this.allowedIn(tab)) {
-			if (!Trophy.getTrophies().getValidTrophies().isEmpty()) {
+			if (!Trophy.getTrophies().isEmpty()) {
 				Map<ResourceLocation, Trophy> sortedTrophies = new TreeMap<>(Comparator.naturalOrder());
-				sortedTrophies.putAll(Trophy.getTrophies().getValidTrophies());
+				sortedTrophies.putAll(Trophy.getTrophies());
 				for (Map.Entry<ResourceLocation, Trophy> trophyEntry : sortedTrophies.entrySet()) {
 					ItemStack stack = new ItemStack(this);
 					CompoundTag tag = new CompoundTag();

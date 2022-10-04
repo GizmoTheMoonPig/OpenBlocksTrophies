@@ -1,17 +1,23 @@
 package com.gizmo.trophies.trophy;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
+import com.gizmo.trophies.SyncTrophyConfigsPacket;
+import com.gizmo.trophies.TrophyNetworkHandler;
 import com.gizmo.trophies.trophy.behaviors.CustomBehavior;
 import com.gizmo.trophies.trophy.behaviors.CustomBehaviorRegistry;
 import com.google.gson.*;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.OnDatapackSyncEvent;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Type;
+import java.util.Map;
 import java.util.Objects;
 
 public record Trophy(EntityType<?> type, double dropChance, double verticalOffset, float scale, @Nullable CustomBehavior behavior) {
@@ -32,17 +38,20 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 		this(type, 0.001D, verticalOffset, scale, behavior);
 	}
 
-	private static TrophyReloadListener TROPHIES;
-
 	public static void reloadTrophies(AddReloadListenerEvent event) {
-		TROPHIES = new TrophyReloadListener();
-		event.addListener(TROPHIES);
+		event.addListener(new TrophyReloadListener());
 	}
 
-	public static TrophyReloadListener getTrophies() {
-		if (TROPHIES == null)
-			throw new IllegalStateException("Can not retrieve Trophies yet!");
-		return TROPHIES;
+	public static void syncTrophiesToClient(OnDatapackSyncEvent event) {
+		if (event.getPlayer() != null) {
+			TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), new SyncTrophyConfigsPacket(getTrophies()));
+		} else {
+			event.getPlayerList().getPlayers().forEach(player -> TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncTrophyConfigsPacket(getTrophies())));
+		}
+	}
+
+	public static Map<ResourceLocation, Trophy> getTrophies() {
+		return TrophyReloadListener.getValidTrophies();
 	}
 
 	public static Trophy fromJson(JsonObject object) {
@@ -51,8 +60,8 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 			throw new JsonParseException("Entity" + entityType + " defined in Trophy config does not exist!");
 		}
 		EntityType<?> realEntity = ForgeRegistries.ENTITY_TYPES.getValue(ResourceLocation.tryParse(entityType));
-		float dropChance = GsonHelper.getAsFloat(object, "drop_chance", 0.025F);
-		float verticalOffset = GsonHelper.getAsFloat(object, "offset", 0.0F);
+		double dropChance = GsonHelper.getAsDouble(object, "drop_chance", 0.001D);
+		double verticalOffset = GsonHelper.getAsDouble(object, "offset", 0.0D);
 		float scale = GsonHelper.getAsFloat(object, "scale", 1.0F);
 		CustomBehavior behavior = null;
 		if (object.has("behavior")) {
@@ -65,6 +74,18 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 			}
 		}
 		return new Trophy(realEntity, dropChance, verticalOffset, scale, behavior);
+	}
+
+	public static Trophy fromNetwork(FriendlyByteBuf buf) {
+		//behaviors dont happen client side, no need to send them
+		return new Trophy(buf.readRegistryId(), buf.readDouble(), buf.readDouble(), buf.readFloat(), null);
+	}
+
+	public void toNetwork(FriendlyByteBuf buf) {
+		buf.writeRegistryId(ForgeRegistries.ENTITY_TYPES, this.type());
+		buf.writeDouble(this.dropChance());
+		buf.writeDouble(this.verticalOffset());
+		buf.writeFloat(this.scale());
 	}
 
 	public static class Serializer implements JsonSerializer<Trophy>, JsonDeserializer<Trophy> {

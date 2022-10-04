@@ -18,8 +18,7 @@ import java.util.Map;
 public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
 
 	public static final Gson GSON = new GsonBuilder().registerTypeAdapter(Trophy.class, new Trophy.Serializer()).create();
-	private final Map<ResourceLocation, Trophy> validTrophies = new HashMap<>();
-	private final Map<ResourceLocation, Trophy> skippedTrophies = new HashMap<>();
+	private static final Map<ResourceLocation, Trophy> validTrophies = new HashMap<>();
 
 	public TrophyReloadListener() {
 		super(GSON, "trophies");
@@ -27,28 +26,26 @@ public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
 
 	@Override
 	protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager manager, ProfilerFiller profiler) {
-		this.validTrophies.clear();
+		validTrophies.clear();
 		map.forEach((resourceLocation, jsonElement) -> {
 			try {
 				JsonObject object = GsonHelper.convertToJsonObject(jsonElement, "trophy");
 				Trophy trophy = Trophy.fromJson(object);
 				//only add entries if the entity exists, otherwise skip it
 				if (ForgeRegistries.ENTITY_TYPES.containsValue(trophy.type())) {
-					this.validTrophies.put(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type()), trophy);
-				} else {
-					this.skippedTrophies.put(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type()), trophy);
+					validTrophies.put(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type()), trophy);
 				}
 			} catch (Exception exception) {
 				OpenBlocksTrophies.LOGGER.error("Caught an error loading trophy config for {}! {}", resourceLocation, exception.getMessage());
 			}
 		});
-		OpenBlocksTrophies.LOGGER.info("Loaded {} Trophy configs, and skipped {} configs.", this.validTrophies.size(), this.skippedTrophies.size());
-		//we dont need this to stick around
-		this.skippedTrophies.clear();
+		OpenBlocksTrophies.LOGGER.info("Loaded {} Trophy configs.", validTrophies.size());
 	}
 
-	public Map<ResourceLocation, Trophy> getValidTrophies() {
-		return this.validTrophies;
+
+
+	public static Map<ResourceLocation, Trophy> getValidTrophies() {
+		return validTrophies;
 	}
 
 	public static JsonElement serialize(Trophy trophy) {

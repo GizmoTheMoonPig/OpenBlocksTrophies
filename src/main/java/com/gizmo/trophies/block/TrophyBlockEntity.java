@@ -60,8 +60,8 @@ public class TrophyBlockEntity extends BlockEntity {
 	@Override
 	public void load(CompoundTag tag) {
 		super.load(tag);
-		if (Trophy.getTrophies().getValidTrophies().containsKey(ResourceLocation.tryParse(tag.getString("entity")))) {
-			this.setTrophy(Trophy.getTrophies().getValidTrophies().get(ResourceLocation.tryParse(tag.getString("entity"))));
+		if (Trophy.getTrophies().containsKey(ResourceLocation.tryParse(tag.getString("entity")))) {
+			this.setTrophy(Trophy.getTrophies().get(ResourceLocation.tryParse(tag.getString("entity"))));
 		}
 		this.setCooldown(tag.getInt("cooldown"));
 	}

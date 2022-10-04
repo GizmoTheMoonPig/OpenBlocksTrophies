@@ -39,6 +39,7 @@ public class OpenBlocksTrophies {
 		bus.addListener(this::commonSetup);
 		MinecraftForge.EVENT_BUS.addListener(this::maybeDropTrophy);
 		MinecraftForge.EVENT_BUS.addListener(Trophy::reloadTrophies);
+		MinecraftForge.EVENT_BUS.addListener(Trophy::syncTrophiesToClient);
 
 		Registries.BLOCKS.register(bus);
 		Registries.BLOCK_ENTITIES.register(bus);
@@ -58,12 +59,13 @@ public class OpenBlocksTrophies {
 			CustomBehaviorRegistry.registerBehavior(new ShootLlamaSpitBehavior());
 			CustomBehaviorRegistry.registerBehavior(new TotemOfUndyingEffectBehavior());
 		});
+		TrophyNetworkHandler.init();
 	}
 
 	public void maybeDropTrophy(LivingDropsEvent event) {
 		if (event.getSource().getEntity() instanceof Player) {
-			if (Trophy.getTrophies().getValidTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
-				Trophy trophy = Trophy.getTrophies().getValidTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
+			if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
+				Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
 				if (trophy != null) {
 					double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophy.dropChance()) - TROPHY_RANDOM.nextDouble();
 					if (chance > 0.0D) {
@@ -89,7 +91,7 @@ public class OpenBlocksTrophies {
 		@Override
 		public ItemStack makeIcon() {
 			if(this.keys.isEmpty()) {
-				this.keys = new ArrayList<>(Trophy.getTrophies().getValidTrophies().keySet().stream().map(ResourceLocation::toString).collect(Collectors.toList()));
+				this.keys = new ArrayList<>(Trophy.getTrophies().keySet().stream().map(ResourceLocation::toString).collect(Collectors.toList()));
 			}
 
 			ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
