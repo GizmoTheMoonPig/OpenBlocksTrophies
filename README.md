@@ -57,3 +57,8 @@ Datapacks can define what happens when a trophy is right-clicked. 10 behaviors a
 - `obtrophies:totem_of_undying`: plays the totem animation on your screen. 
 ---
 If you're a mod maker, and you want to add your own behaviors, simply follow the instructions in `CustomBehaviorRegistry`.
+
+
+## Future TODO list:
+- add support for Entity NBT, allowing for mob variants (brown mooshrooms, axolotl types, cat types, etc)
+- add a builin datapack that creates trophies for a bunch of mod entities
