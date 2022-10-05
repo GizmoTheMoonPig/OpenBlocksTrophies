@@ -1,6 +1,6 @@
 {
-  "drop_chance": 0.001,
   "entity": "minecraft:spider",
+  "drop_chance": 0.001,
   "offset": 0.0,
   "scale": 1.0
 }

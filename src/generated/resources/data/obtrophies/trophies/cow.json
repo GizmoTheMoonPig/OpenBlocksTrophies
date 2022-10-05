@@ -1,11 +1,11 @@
 {
+  "entity": "minecraft:cow",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 1.0,
   "behavior": {
     "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:leather"
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:cow",
-  "offset": 0.0,
-  "scale": 1.0
+    "item": "minecraft:leather",
+    "cooldown": 20000
+  }
 }

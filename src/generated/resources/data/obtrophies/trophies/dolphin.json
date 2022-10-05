@@ -1,12 +1,12 @@
 {
+  "entity": "minecraft:dolphin",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 1.0,
   "behavior": {
     "type": "obtrophies:mob_effect",
-    "amplifier": 0,
     "effect": "minecraft:dolphins_grace",
-    "time": 300
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:dolphin",
-  "offset": 0.0,
-  "scale": 1.0
+    "time": 300,
+    "amplifier": 0
+  }
 }

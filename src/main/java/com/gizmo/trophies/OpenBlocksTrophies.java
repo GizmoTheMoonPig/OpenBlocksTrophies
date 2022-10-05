@@ -6,7 +6,6 @@ import com.gizmo.trophies.trophy.behaviors.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -28,6 +27,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Mod(OpenBlocksTrophies.MODID)
@@ -35,7 +35,7 @@ public class OpenBlocksTrophies {
 	public static final String MODID = "obtrophies";
 
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
-	public static final RandomSource TROPHY_RANDOM = RandomSource.create();
+	public static final Random TROPHY_RANDOM = new Random();
 
 	public OpenBlocksTrophies() {
 		{
@@ -75,14 +75,14 @@ public class OpenBlocksTrophies {
 		if (!(event.getSource().getEntity() instanceof Player) && !TrophyConfig.COMMON_CONFIG.anySourceDropsTrophies.get()) return;
 		if (event.getSource().getEntity() instanceof FakePlayer && !TrophyConfig.COMMON_CONFIG.fakePlayersDropTrophies.get()) return;
 
-		if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
-			Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
+		if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITIES.getKey(event.getEntity().getType()))) {
+			Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITIES.getKey(event.getEntity().getType()));
 			if (trophy != null) {
 				double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophy.dropChance()) - TROPHY_RANDOM.nextDouble();
 				if (chance > 0.0D) {
 					ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
 					CompoundTag tag = new CompoundTag();
-					tag.putString(TrophyItem.ENTITY_TAG, ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).toString());
+					tag.putString(TrophyItem.ENTITY_TAG, ForgeRegistries.ENTITIES.getKey(event.getEntity().getType()).toString());
 					stack.addTagElement("BlockEntityTag", tag);
 					event.getDrops().add(new ItemEntity(event.getEntity().getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack));
 				}

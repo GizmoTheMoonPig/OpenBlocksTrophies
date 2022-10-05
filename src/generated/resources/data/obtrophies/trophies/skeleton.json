@@ -1,10 +1,10 @@
 {
+  "entity": "minecraft:skeleton",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 1.0,
   "behavior": {
     "type": "obtrophies:arrow",
     "amount": 1
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:skeleton",
-  "offset": 0.0,
-  "scale": 1.0
+  }
 }

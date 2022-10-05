@@ -1,11 +1,11 @@
 {
+  "entity": "minecraft:wither_skeleton",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 1.0,
   "behavior": {
     "type": "obtrophies:item",
-    "cooldown": 50000,
-    "item": "minecraft:wither_skeleton_skull"
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:wither_skeleton",
-  "offset": 0.0,
-  "scale": 1.0
+    "item": "minecraft:wither_skeleton_skull",
+    "cooldown": 50000
+  }
 }

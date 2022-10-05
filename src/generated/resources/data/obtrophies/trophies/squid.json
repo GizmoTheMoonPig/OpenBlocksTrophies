@@ -1,11 +1,11 @@
 {
+  "entity": "minecraft:squid",
+  "drop_chance": 0.001,
+  "offset": 0.5,
+  "scale": 1.0,
   "behavior": {
     "type": "obtrophies:place_block",
     "block": "minecraft:water",
     "place_around_trophy": false
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:squid",
-  "offset": 0.5,
-  "scale": 1.0
+  }
 }

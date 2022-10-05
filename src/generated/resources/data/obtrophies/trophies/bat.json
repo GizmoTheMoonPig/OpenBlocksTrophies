@@ -1,6 +1,6 @@
 {
-  "drop_chance": 0.001,
   "entity": "minecraft:bat",
+  "drop_chance": 0.001,
   "offset": -0.3,
   "scale": 2.0
 }

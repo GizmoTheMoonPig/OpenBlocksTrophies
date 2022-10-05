@@ -1,9 +1,9 @@
 {
+  "entity": "minecraft:guardian",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 1.0,
   "behavior": {
     "type": "obtrophies:guardian_curse"
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:guardian",
-  "offset": 0.0,
-  "scale": 1.0
+  }
 }

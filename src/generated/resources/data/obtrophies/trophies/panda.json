@@ -1,11 +1,11 @@
 {
+  "entity": "minecraft:panda",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 0.75,
   "behavior": {
     "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:bamboo"
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:panda",
-  "offset": 0.0,
-  "scale": 0.75
+    "item": "minecraft:bamboo",
+    "cooldown": 20000
+  }
 }

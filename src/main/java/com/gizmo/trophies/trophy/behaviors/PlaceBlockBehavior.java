@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @SuppressWarnings("deprecation")
@@ -63,7 +64,7 @@ public class PlaceBlockBehavior extends CustomBehavior {
 							int layers = level.getRandom().nextInt(8) + 1;
 							level.setBlockAndUpdate(pos, layer.defaultBlockState().setValue(SnowLayerBlock.LAYERS, layers));
 						} else {
-							if (this.blockToPlace instanceof LiquidBlock liquid && liquid.getFluid().getFluidType().isVaporizedOnPlacement(level, pos, null)) {
+							if (this.blockToPlace instanceof LiquidBlock liquid && liquid.getFluid() == Fluids.WATER && player.getLevel().dimensionType().ultraWarm()) {
 								level.playSound(null, base, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F);
 								return 100;
 							}
@@ -74,7 +75,7 @@ public class PlaceBlockBehavior extends CustomBehavior {
 			}
 		} else {
 			BlockPos pos = base.above();
-			if (this.blockToPlace instanceof LiquidBlock liquid && liquid.getFluid().getFluidType().isVaporizedOnPlacement(level, pos, null)) {
+			if (this.blockToPlace instanceof LiquidBlock liquid && liquid.getFluid() == Fluids.WATER && player.getLevel().dimensionType().ultraWarm()) {
 				level.playSound(null, base, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F);
 				return 100;
 			}

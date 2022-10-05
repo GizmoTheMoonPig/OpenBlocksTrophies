@@ -1,12 +1,12 @@
 {
+  "entity": "minecraft:pufferfish",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 2.0,
   "behavior": {
     "type": "obtrophies:mob_effect",
-    "amplifier": 0,
     "effect": "minecraft:nausea",
-    "time": 100
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:pufferfish",
-  "offset": 0.0,
-  "scale": 2.0
+    "time": 100,
+    "amplifier": 0
+  }
 }

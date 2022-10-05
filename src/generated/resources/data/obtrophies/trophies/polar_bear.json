@@ -1,11 +1,11 @@
 {
+  "entity": "minecraft:polar_bear",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 1.0,
   "behavior": {
     "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:cod"
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:polar_bear",
-  "offset": 0.0,
-  "scale": 1.0
+    "item": "minecraft:cod",
+    "cooldown": 20000
+  }
 }

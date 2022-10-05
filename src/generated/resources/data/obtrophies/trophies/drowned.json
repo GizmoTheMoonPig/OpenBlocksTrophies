@@ -1,11 +1,11 @@
 {
+  "entity": "minecraft:drowned",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 1.0,
   "behavior": {
     "type": "obtrophies:item",
-    "cooldown": 50000,
-    "item": "minecraft:nautilus_shell"
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:drowned",
-  "offset": 0.0,
-  "scale": 1.0
+    "item": "minecraft:nautilus_shell",
+    "cooldown": 50000
+  }
 }

@@ -1,11 +1,11 @@
 {
+  "entity": "minecraft:donkey",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 0.9,
   "behavior": {
     "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:wheat"
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:donkey",
-  "offset": 0.0,
-  "scale": 0.9
+    "item": "minecraft:wheat",
+    "cooldown": 20000
+  }
 }

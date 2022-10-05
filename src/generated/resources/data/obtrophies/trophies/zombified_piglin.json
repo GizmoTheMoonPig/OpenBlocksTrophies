@@ -1,11 +1,11 @@
 {
+  "entity": "minecraft:zombified_piglin",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 1.0,
   "behavior": {
     "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:gold_nugget"
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:zombified_piglin",
-  "offset": 0.0,
-  "scale": 1.0
+    "item": "minecraft:gold_nugget",
+    "cooldown": 20000
+  }
 }

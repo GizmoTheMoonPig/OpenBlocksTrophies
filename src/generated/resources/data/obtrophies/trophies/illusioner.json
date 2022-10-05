@@ -1,12 +1,12 @@
 {
+  "entity": "minecraft:illusioner",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 1.0,
   "behavior": {
     "type": "obtrophies:mob_effect",
-    "amplifier": 1,
     "effect": "minecraft:blindness",
-    "time": 100
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:illusioner",
-  "offset": 0.0,
-  "scale": 1.0
+    "time": 100,
+    "amplifier": 1
+  }
 }

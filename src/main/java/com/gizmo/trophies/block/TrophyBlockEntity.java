@@ -52,7 +52,7 @@ public class TrophyBlockEntity extends BlockEntity {
 	protected void saveAdditional(CompoundTag tag) {
 		super.saveAdditional(tag);
 		if (this.getTrophy() != null) {
-			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getTrophy().type())).toString());
+			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITIES.getKey(this.getTrophy().type())).toString());
 		}
 		tag.putInt("cooldown", this.getCooldown());
 	}

@@ -56,10 +56,10 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 
 	public static Trophy fromJson(JsonObject object) {
 		String entityType = GsonHelper.getAsString(object, "entity");
-		if (ForgeRegistries.ENTITY_TYPES.getValue(ResourceLocation.tryParse(entityType)) == null) {
+		if (ForgeRegistries.ENTITIES.getValue(ResourceLocation.tryParse(entityType)) == null) {
 			throw new JsonParseException("Entity" + entityType + " defined in Trophy config does not exist!");
 		}
-		EntityType<?> realEntity = ForgeRegistries.ENTITY_TYPES.getValue(ResourceLocation.tryParse(entityType));
+		EntityType<?> realEntity = ForgeRegistries.ENTITIES.getValue(ResourceLocation.tryParse(entityType));
 		double dropChance = GsonHelper.getAsDouble(object, "drop_chance", 0.001D);
 		double verticalOffset = GsonHelper.getAsDouble(object, "offset", 0.0D);
 		float scale = GsonHelper.getAsFloat(object, "scale", 1.0F);
@@ -82,7 +82,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 	}
 
 	public void toNetwork(FriendlyByteBuf buf) {
-		buf.writeRegistryId(ForgeRegistries.ENTITY_TYPES, this.type());
+		buf.writeRegistryIdUnsafe(ForgeRegistries.ENTITIES, this.type());
 		buf.writeDouble(this.dropChance());
 		buf.writeDouble(this.verticalOffset());
 		buf.writeFloat(this.scale());
@@ -99,7 +99,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 		@Override
 		public JsonElement serialize(Trophy trophy, Type type, JsonSerializationContext context) {
 			JsonObject jsonobject = new JsonObject();
-			jsonobject.add("entity", context.serialize(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type())).toString()));
+			jsonobject.add("entity", context.serialize(Objects.requireNonNull(ForgeRegistries.ENTITIES.getKey(trophy.type())).toString()));
 			jsonobject.add("drop_chance", context.serialize(trophy.dropChance()));
 			jsonobject.add("offset", context.serialize(trophy.verticalOffset()));
 			jsonobject.add("scale", context.serialize(trophy.scale()));

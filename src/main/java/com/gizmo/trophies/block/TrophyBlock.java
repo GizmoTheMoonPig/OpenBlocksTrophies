@@ -98,7 +98,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		if (blockEntity instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
 			ItemStack newStack = new ItemStack(this);
 			CompoundTag tag = new CompoundTag();
-			tag.putString(TrophyItem.ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().type())).toString());
+			tag.putString(TrophyItem.ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITIES.getKey(trophyBE.getTrophy().type())).toString());
 			if (trophyBE.getCooldown() > 0) {
 				tag.putInt(TrophyItem.COOLDOWN_TAG, trophyBE.getCooldown());
 			}
@@ -113,7 +113,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		ItemStack newStack = new ItemStack(this);
 		CompoundTag tag = new CompoundTag();
 		if (getter.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
-			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().type())).toString());
+			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITIES.getKey(trophyBE.getTrophy().type())).toString());
 			newStack.addTagElement("BlockEntityTag", tag);
 		}
 		return newStack;

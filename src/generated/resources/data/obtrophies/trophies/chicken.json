@@ -1,12 +1,12 @@
 {
+  "entity": "minecraft:chicken",
+  "drop_chance": 0.001,
+  "offset": 0.0,
+  "scale": 1.5,
   "behavior": {
     "type": "obtrophies:item",
-    "cooldown": 10000,
     "item": "minecraft:egg",
+    "cooldown": 10000,
     "sound": "minecraft:entity.chicken.egg"
-  },
-  "drop_chance": 0.001,
-  "entity": "minecraft:chicken",
-  "offset": 0.0,
-  "scale": 1.5
+  }
 }
