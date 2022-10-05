@@ -11,14 +11,18 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,6 +38,12 @@ public class OpenBlocksTrophies {
 	public static final RandomSource TROPHY_RANDOM = RandomSource.create();
 
 	public OpenBlocksTrophies() {
+		{
+			final Pair<TrophyConfig.CommonConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(TrophyConfig.CommonConfig::new);
+			ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, specPair.getRight());
+			TrophyConfig.COMMON_CONFIG = specPair.getLeft();
+		}
+
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::commonSetup);
 		MinecraftForge.EVENT_BUS.addListener(this::maybeDropTrophy);
@@ -62,19 +72,19 @@ public class OpenBlocksTrophies {
 	}
 
 	public void maybeDropTrophy(LivingDropsEvent event) {
-		//only fire for real player kills, modded mob farms make getting trophies way too easy
-		if (event.getSource().getEntity() instanceof Player && !(event.getSource().getEntity() instanceof FakePlayer)) {
-			if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
-				Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
-				if (trophy != null) {
-					double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophy.dropChance()) - TROPHY_RANDOM.nextDouble();
-					if (chance > 0.0D) {
-						ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
-						CompoundTag tag = new CompoundTag();
-						tag.putString(TrophyItem.ENTITY_TAG, ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).toString());
-						stack.addTagElement("BlockEntityTag", tag);
-						event.getDrops().add(new ItemEntity(event.getEntity().getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack));
-					}
+		if (!(event.getSource().getEntity() instanceof Player) && !TrophyConfig.COMMON_CONFIG.anySourceDropsTrophies.get()) return;
+		if (event.getSource().getEntity() instanceof FakePlayer && !TrophyConfig.COMMON_CONFIG.fakePlayersDropTrophies.get()) return;
+
+		if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
+			Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
+			if (trophy != null) {
+				double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophy.dropChance()) - TROPHY_RANDOM.nextDouble();
+				if (chance > 0.0D) {
+					ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
+					CompoundTag tag = new CompoundTag();
+					tag.putString(TrophyItem.ENTITY_TAG, ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).toString());
+					stack.addTagElement("BlockEntityTag", tag);
+					event.getDrops().add(new ItemEntity(event.getEntity().getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack));
 				}
 			}
 		}
