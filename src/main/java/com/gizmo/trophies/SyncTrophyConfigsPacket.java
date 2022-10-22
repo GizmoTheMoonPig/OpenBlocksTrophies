@@ -27,7 +27,7 @@ public class SyncTrophyConfigsPacket {
 
 	public static class Handler {
 		@SuppressWarnings("Convert2Lambda")
-		public static boolean handle(SyncTrophyConfigsPacket message, Supplier<NetworkEvent.Context> ctx) {
+		public static void handle(SyncTrophyConfigsPacket message, Supplier<NetworkEvent.Context> ctx) {
 			ctx.get().enqueueWork(new Runnable() {
 				@Override
 				public void run() {
@@ -35,7 +35,6 @@ public class SyncTrophyConfigsPacket {
 				}
 			});
 			ctx.get().setPacketHandled(true);
-			return true;
 		}
 	}
 }
