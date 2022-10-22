@@ -1,6 +1,27 @@
 {
   "block.obtrophies.trophy": "Trophy",
   "block.obtrophies.trophy.entity": "%s Trophy",
-  "item.obtrophies.trophy.modid": "From %s",
-  "itemGroup.obtrophies": "OpenBlocks Trophies"
+  "item.obtrophies.trophy.modid": "From: %s",
+  "itemGroup.obtrophies": "OpenBlocks Trophies",
+
+  "item.obtrophies.trophy.modid.alexsmobs": "Alex's Mobs",
+  "item.obtrophies.trophy.modid.aquaculture": "Aquaculture 2",
+  "item.obtrophies.trophy.modid.biomemakeover": "Biome Makeover",
+  "item.obtrophies.trophy.modid.cataclysm": "L_Ender's Cataclysm",
+  "item.obtrophies.trophy.modid.cloudstorage": "Cloud Storage",
+  "item.obtrophies.trophy.modid.earthmobsmod": "Minecraft Earth Mobs",
+  "item.obtrophies.trophy.modid.enchantwithmob": "Enchant With Mob",
+  "item.obtrophies.trophy.modid.energeticsheep": "Energetic Sheep",
+  "item.obtrophies.trophy.modid.exoticbirds": "Exotic Birds",
+  "item.obtrophies.trophy.modid.friendsandfoes": "Friends and Foes",
+  "item.obtrophies.trophy.modid.guardvillagers": "Guard Villagers",
+  "item.obtrophies.trophy.modid.hunterillager": "Hunter Illager",
+  "item.obtrophies.trophy.modid.mca": "Minecraft Comes Alive",
+  "item.obtrophies.trophy.modid.netherskeletons": "Nether Skeletons",
+  "item.obtrophies.trophy.modid.productivebees": "Productive Bees",
+  "item.obtrophies.trophy.modid.snowpig": "Snow Pig",
+  "item.obtrophies.trophy.modid.sushigocrafting": "Sushi Go Crafting",
+  "item.obtrophies.trophy.modid.twilightforest": "The Twilight Forest",
+  "item.obtrophies.trophy.modid.undergarden": "The Undergarden",
+  "item.obtrophies.trophy.modid.witherstormmod": "Wither Storm Mod"
 }

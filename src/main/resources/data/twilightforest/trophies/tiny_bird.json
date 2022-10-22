@@ -1,0 +1,11 @@
+{
+  "behavior": {
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": "minecraft:feather"
+  },
+  "drop_chance": 0.001,
+  "entity": "twilightforest:tiny_bird",
+  "offset": 0.0,
+  "scale": 1.75
+}

@@ -12,6 +12,7 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
@@ -43,10 +44,12 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 	}
 
 	public static void syncTrophiesToClient(OnDatapackSyncEvent event) {
-		if (event.getPlayer() != null) {
-			TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), new SyncTrophyConfigsPacket(getTrophies()));
-		} else {
-			event.getPlayerList().getPlayers().forEach(player -> TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncTrophyConfigsPacket(getTrophies())));
+		if (FMLEnvironment.dist.isDedicatedServer()) {
+			if (event.getPlayer() != null) {
+				TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), new SyncTrophyConfigsPacket(getTrophies()));
+			} else {
+				event.getPlayerList().getPlayers().forEach(player -> TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncTrophyConfigsPacket(getTrophies())));
+			}
 		}
 	}
 

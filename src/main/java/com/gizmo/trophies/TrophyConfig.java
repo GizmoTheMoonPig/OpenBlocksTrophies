@@ -10,6 +10,7 @@ public class TrophyConfig {
 
 		public ForgeConfigSpec.BooleanValue fakePlayersDropTrophies;
 		public ForgeConfigSpec.BooleanValue anySourceDropsTrophies;
+		public ForgeConfigSpec.DoubleValue dropChanceOverride;
 
 
 		public CommonConfig(ForgeConfigSpec.Builder builder) {
@@ -26,6 +27,14 @@ public class TrophyConfig {
 							If true, allows trophies to drop whenever a mob dies. This can be to fall damage, another mob, etc.
 							Basically, a kill doesnt have to count as a player kill for a trophy to drop.""").
 					define("any_kill_drops", false);
+
+			this.dropChanceOverride = builder.
+					translation("obtrophies.config.drop_chance").
+					comment("""
+							The chance a trophy will drop from its respective mob.
+							All trophy drop chances are defined in their trophy json, but if you want to override that chance without going through and changing every json this is for you.
+							Set this value to -1 to disable.""").
+					defineInRange("trophy_drop_override", -1.0D, -1.0D, 1.0D);
 		}
 	}
 }

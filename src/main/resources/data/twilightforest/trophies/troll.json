@@ -1,0 +1,11 @@
+{
+  "behavior": {
+    "type": "obtrophies:item",
+    "cooldown": 40000,
+    "item": "twilightforest:magic_beans"
+  },
+  "drop_chance": 0.001,
+  "entity": "twilightforest:troll",
+  "offset": 0.0,
+  "scale": 0.9
+}

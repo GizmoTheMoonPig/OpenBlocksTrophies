@@ -1,0 +1,11 @@
+{
+  "behavior": {
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": "minecraft:hay_block"
+  },
+  "drop_chance": 0.001,
+  "entity": "ornamental:hay_golem",
+  "offset": 0.0,
+  "scale": 1.0
+}

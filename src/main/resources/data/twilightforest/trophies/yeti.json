@@ -1,0 +1,11 @@
+{
+  "behavior": {
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": "twilightforest:arctic_fur"
+  },
+  "drop_chance": 0.001,
+  "entity": "twilightforest:yeti",
+  "offset": 0.0,
+  "scale": 0.8
+}
