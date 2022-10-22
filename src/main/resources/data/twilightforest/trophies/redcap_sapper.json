@@ -1,0 +1,11 @@
+{
+  "behavior": {
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": "twilightforest:ironwood_pickaxe"
+  },
+  "drop_chance": 0.001,
+  "entity": "twilightforest:redcap_sapper",
+  "offset": 0.0,
+  "scale": 1.0
+}

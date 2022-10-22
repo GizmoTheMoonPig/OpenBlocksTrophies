@@ -1,0 +1,11 @@
+{
+  "behavior": {
+    "type": "obtrophies:item",
+    "cooldown": 10000,
+    "item": "minecraft:snowball"
+  },
+  "drop_chance": 0.001,
+  "entity": "twilightforest:ice_crystal",
+  "offset": -0.25,
+  "scale": 1.25
+}
