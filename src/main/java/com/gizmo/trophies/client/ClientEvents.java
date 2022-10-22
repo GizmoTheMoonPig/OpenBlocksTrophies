@@ -16,11 +16,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import twilightforest.entity.TFEntities;
 import twilightforest.entity.boss.KnightPhantom;
 import twilightforest.entity.monster.ArmoredGiant;
 import twilightforest.entity.monster.SnowGuardian;
-import twilightforest.init.TFEntities;
-import twilightforest.init.TFItems;
+import twilightforest.item.TFItems;
 
 @Mod.EventBusSubscriber(modid = OpenBlocksTrophies.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientEvents {

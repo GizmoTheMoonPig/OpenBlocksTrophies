@@ -35,8 +35,8 @@ public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
 					JsonObject object = GsonHelper.convertToJsonObject(jsonElement, "trophy");
 					Trophy trophy = Trophy.fromJson(object);
 					//only add entries if the entity exists, otherwise skip it
-					if (ForgeRegistries.ENTITY_TYPES.containsValue(trophy.type())) {
-						validTrophies.put(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type()), trophy);
+					if (ForgeRegistries.ENTITIES.containsValue(trophy.type())) {
+						validTrophies.put(ForgeRegistries.ENTITIES.getKey(trophy.type()), trophy);
 					}
 				} catch (Exception exception) {
 					OpenBlocksTrophies.LOGGER.error("Caught an error loading trophy config for {}! {}", resourceLocation, exception.getMessage());

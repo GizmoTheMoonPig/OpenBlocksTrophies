@@ -100,6 +100,8 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.80'
     implementation fg.deobf("mezz.jei:jei-1.18.2:9.7.1.255")
     implementation fg.deobf("curse.maven:jade-324717:3970956")
+
+	compileOnly fg.deobf("curse.maven:the-twilight-forest-227639:3998681")
 }
 
 jar {
