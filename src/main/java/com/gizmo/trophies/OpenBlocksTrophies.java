@@ -78,7 +78,8 @@ public class OpenBlocksTrophies {
 		if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
 			Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
 			if (trophy != null) {
-				double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophy.dropChance()) - TROPHY_RANDOM.nextDouble();
+				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.dropChance();
+				double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
 				if (chance > 0.0D) {
 					ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
 					CompoundTag tag = new CompoundTag();
