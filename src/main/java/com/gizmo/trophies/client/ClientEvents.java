@@ -13,8 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.DrawSelectionEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RenderHighlightEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -80,7 +80,7 @@ public class ClientEvents {
 		//why? because I hate when hitboxes dont fit the block, and making it fit depending on entity is impossible.
 		//so, we'll just make the hitbox rather large (almost a full block) but invisible.
 		@SubscribeEvent
-		public static void dontRenderTrophyHitbox(RenderHighlightEvent.Block event) {
+		public static void dontRenderTrophyHitbox(DrawSelectionEvent.HighlightBlock event) {
 			BlockState state = event.getCamera().getEntity().level.getBlockState(event.getTarget().getBlockPos());
 			if (state.is(Registries.TROPHY.get()) && !state.getValue(TrophyBlock.PEDESTAL)) {
 				event.setCanceled(true);
