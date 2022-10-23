@@ -41,13 +41,6 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 	public TrophyRenderer(BlockEntityRendererProvider.Context unused) {
 	}
 
-	@Override
-	public void render(TrophyBlockEntity blockEntity, float partialTicks, PoseStack stack, MultiBufferSource source, int light, int overlay) {
-		if (blockEntity.getTrophy() != null) {
-			renderEntity(blockEntity, blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light);
-		}
-	}
-
 	public static void renderEntity(@Nullable TrophyBlockEntity be, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light) {
 		stack.pushPose();
 		Entity entity = fetchEntity(trophy.type(), Objects.requireNonNull(level));
@@ -103,6 +96,18 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		if (type == null)
 			return null;
 		return ENTITY_CACHE.getUnchecked(EntityContext.of(type, level));
+	}
+
+	@Override
+	public void render(TrophyBlockEntity blockEntity, float partialTicks, PoseStack stack, MultiBufferSource source, int light, int overlay) {
+		if (blockEntity.getTrophy() != null) {
+			stack.pushPose();
+			if (!blockEntity.getBlockState().getValue(TrophyBlock.PEDESTAL)) {
+				stack.translate(0.0D, -0.25D, 0.0D);
+			}
+			renderEntity(blockEntity, blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light);
+			stack.popPose();
+		}
 	}
 
 	public static record EntityContext<T extends Entity>(EntityType<T> type, Level level) {
