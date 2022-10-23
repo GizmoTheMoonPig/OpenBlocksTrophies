@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:dirt"
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:dirt"
   },
   "drop_chance": 0.001,
   "entity": "ornamental:dirt_golem",

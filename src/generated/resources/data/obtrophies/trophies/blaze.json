@@ -1,7 +1,7 @@
 {
   "behavior": {
-    "type": "obtrophies:set_fire",
-    "seconds": 4
+	"type": "obtrophies:set_fire",
+	"seconds": 4
   },
   "drop_chance": 0.001,
   "entity": "minecraft:blaze",

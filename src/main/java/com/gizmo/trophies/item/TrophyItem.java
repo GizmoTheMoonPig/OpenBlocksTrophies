@@ -35,15 +35,6 @@ public class TrophyItem extends BlockItem {
 		super(block, properties);
 	}
 
-	@Override
-	public Component getName(ItemStack stack) {
-		Trophy trophy = getTrophy(stack);
-		if (trophy != null) {
-			return Component.translatable("block.obtrophies.trophy.entity", trophy.type().getDescription().getString());
-		}
-		return super.getName(stack);
-	}
-
 	@Nullable
 	public static Trophy getTrophy(@Nonnull ItemStack stack) {
 		if (stack.hasTag()) {
@@ -57,6 +48,15 @@ public class TrophyItem extends BlockItem {
 		}
 
 		return null;
+	}
+
+	@Override
+	public Component getName(ItemStack stack) {
+		Trophy trophy = getTrophy(stack);
+		if (trophy != null) {
+			return Component.translatable("block.obtrophies.trophy.entity", trophy.type().getDescription().getString());
+		}
+		return super.getName(stack);
 	}
 
 	@Override

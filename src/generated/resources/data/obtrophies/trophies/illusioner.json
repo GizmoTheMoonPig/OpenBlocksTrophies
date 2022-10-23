@@ -1,9 +1,9 @@
 {
   "behavior": {
-    "type": "obtrophies:mob_effect",
-    "amplifier": 1,
-    "effect": "minecraft:blindness",
-    "time": 100
+	"type": "obtrophies:mob_effect",
+	"amplifier": 1,
+	"effect": "minecraft:blindness",
+	"time": 100
   },
   "drop_chance": 0.001,
   "entity": "minecraft:illusioner",

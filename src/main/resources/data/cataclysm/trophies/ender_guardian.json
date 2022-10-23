@@ -1,5 +1,5 @@
 {
-  "drop_chance": 0.001,
+  "drop_chance": 0.075,
   "entity": "cataclysm:ender_guardian",
   "offset": 0.0,
   "scale": 0.5

@@ -1,10 +1,10 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "twilightforest:carminite"
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "twilightforest:carminite"
   },
-  "drop_chance": 0.001,
+  "drop_chance": 0.075,
   "entity": "twilightforest:ur_ghast",
   "offset": 0.0,
   "scale": 0.1

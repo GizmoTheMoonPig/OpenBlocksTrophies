@@ -17,9 +17,9 @@ import java.util.Objects;
 
 public abstract class TrophyProvider implements DataProvider {
 
+	protected final Map<ResourceLocation, Trophy> builder = Maps.newLinkedHashMap();
 	private final String modid;
 	private final DataGenerator.PathProvider entryPath;
-	protected final Map<ResourceLocation, Trophy> builder = Maps.newLinkedHashMap();
 
 	public TrophyProvider(DataGenerator generator, String modid) {
 		this.modid = modid;
@@ -48,6 +48,7 @@ public abstract class TrophyProvider implements DataProvider {
 
 	/**
 	 * Datagen a trophy here!
+	 *
 	 * @param trophy the trophy you want to make. A trophy takes the entity type at the very minimum. You can also specify the scale, vertical offset, drop chance, and custom right click behavior.
 	 */
 	protected void makeTrophy(Trophy trophy) {

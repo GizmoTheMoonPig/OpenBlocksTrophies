@@ -1,9 +1,9 @@
 {
   "behavior": {
-    "type": "obtrophies:mob_effect",
-    "amplifier": 0,
-    "effect": "minecraft:dolphins_grace",
-    "time": 300
+	"type": "obtrophies:mob_effect",
+	"amplifier": 0,
+	"effect": "minecraft:dolphins_grace",
+	"time": 300
   },
   "drop_chance": 0.001,
   "entity": "minecraft:dolphin",

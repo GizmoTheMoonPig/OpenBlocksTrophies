@@ -25,6 +25,14 @@ public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
 		super(GSON, "trophies");
 	}
 
+	public static Map<ResourceLocation, Trophy> getValidTrophies() {
+		return validTrophies;
+	}
+
+	public static JsonElement serialize(Trophy trophy) {
+		return GSON.toJsonTree(trophy);
+	}
+
 	@Override
 	protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager manager, ProfilerFiller profiler) {
 		validTrophies.clear();
@@ -44,16 +52,6 @@ public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
 			}
 		});
 		OpenBlocksTrophies.LOGGER.info("Loaded {} Trophy configs.", validTrophies.size());
-	}
-
-
-
-	public static Map<ResourceLocation, Trophy> getValidTrophies() {
-		return validTrophies;
-	}
-
-	public static JsonElement serialize(Trophy trophy) {
-		return GSON.toJsonTree(trophy);
 	}
 
 }

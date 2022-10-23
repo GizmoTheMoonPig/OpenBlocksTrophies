@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 50000,
-    "item": "minecraft:wither_skeleton_skull"
+	"type": "obtrophies:item",
+	"cooldown": 50000,
+	"item": "minecraft:wither_skeleton_skull"
   },
   "drop_chance": 0.001,
   "entity": "minecraft:wither_skeleton",

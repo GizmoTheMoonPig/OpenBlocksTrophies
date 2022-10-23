@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:phantom_membrane"
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:phantom_membrane"
   },
   "drop_chance": 0.001,
   "entity": "minecraft:phantom",

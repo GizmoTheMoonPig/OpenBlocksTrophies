@@ -93,8 +93,8 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy(EntityType.FROG, 0.0D, 1.5F, new ItemDropBehavior(Items.SLIME_BALL, 20000)));
 		this.makeTrophy(new Trophy(EntityType.TADPOLE, 0.0D, 2.0F));
 		this.makeTrophy(new Trophy(EntityType.WARDEN, 0.0D, 0.85F, new MobEffectBehavior(MobEffects.DARKNESS, 200, 0)));
-		this.makeTrophy(new Trophy(EntityType.WITHER, -0.2D, 0.75F));
-		this.makeTrophy(new Trophy(EntityType.ENDER_DRAGON, 0.0D, 0.25F));
+		this.makeTrophy(new Trophy(EntityType.WITHER, 0.075D, -0.2D, 0.75F, null));
+		this.makeTrophy(new Trophy(EntityType.ENDER_DRAGON, 0.075D, 0.0D, 0.25F, null));
 	}
 
 	@Override

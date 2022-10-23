@@ -1,6 +1,6 @@
 {
   "behavior": {
-    "type": "obtrophies:guardian_curse"
+	"type": "obtrophies:guardian_curse"
   },
   "drop_chance": 0.001,
   "entity": "minecraft:guardian",

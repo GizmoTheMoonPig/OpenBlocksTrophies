@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:wheat"
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:wheat"
   },
   "drop_chance": 0.001,
   "entity": "minecraft:donkey",

@@ -1,5 +1,5 @@
 {
-  "drop_chance": 0.001,
+  "drop_chance": 0.075,
   "entity": "ars_nouveau:wilden_boss",
   "offset": 0.0,
   "scale": 1.0

@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 50000,
-    "item": "minecraft:saddle"
+	"type": "obtrophies:item",
+	"cooldown": 50000,
+	"item": "minecraft:saddle"
   },
   "drop_chance": 0.001,
   "entity": "minecraft:ravager",

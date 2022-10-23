@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:explosion",
-    "destructive": false,
-    "power": 2.0
+	"type": "obtrophies:explosion",
+	"destructive": false,
+	"power": 2.0
   },
   "drop_chance": 0.001,
   "entity": "minecraft:creeper",

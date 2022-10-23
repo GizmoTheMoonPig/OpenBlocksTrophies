@@ -1,7 +1,7 @@
 {
   "behavior": {
-    "type": "obtrophies:arrow",
-    "amount": 1
+	"type": "obtrophies:arrow",
+	"amount": 1
   },
   "drop_chance": 0.001,
   "entity": "minecraft:skeleton",

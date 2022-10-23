@@ -1,6 +1,6 @@
 {
   "behavior": {
-    "type": "obtrophies:ender_pearl"
+	"type": "obtrophies:ender_pearl"
   },
   "drop_chance": 0.001,
   "entity": "minecraft:enderman",

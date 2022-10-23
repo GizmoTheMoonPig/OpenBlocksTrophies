@@ -30,7 +30,8 @@ public class TrophyExtraRendering {
 
 	/**
 	 * Register an entity for extra rendering work here!
-	 * @param type the entity type to call this for
+	 *
+	 * @param type   the entity type to call this for
 	 * @param render the render configuration. This takes in the entity based on the entity type you provide, so It's safe to cast it to its proper entity.
 	 */
 	public static void addExtraRenderForEntity(EntityType<?> type, ExtraRender render) {

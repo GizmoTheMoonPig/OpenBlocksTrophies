@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:diamond"
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:diamond"
   },
   "drop_chance": 0.001,
   "entity": "ornamental:diamond_golem",

@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:iron_pickaxe"
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:iron_pickaxe"
   },
   "drop_chance": 0.001,
   "entity": "twilightforest:redcap",

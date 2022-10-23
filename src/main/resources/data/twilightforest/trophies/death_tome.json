@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:paper"
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:paper"
   },
   "drop_chance": 0.001,
   "entity": "twilightforest:death_tome",
