@@ -1,11 +1,11 @@
 {
-  "entity": "minecraft:ravager",
-  "drop_chance": 0.001,
-  "offset": 0.0,
-  "scale": 0.75,
   "behavior": {
-    "type": "obtrophies:item",
-    "item": "minecraft:saddle",
-    "cooldown": 50000
-  }
+	"type": "obtrophies:item",
+	"cooldown": 50000,
+	"item": "minecraft:saddle"
+  },
+  "drop_chance": 0.001,
+  "entity": "minecraft:ravager",
+  "offset": 0.0,
+  "scale": 0.75
 }

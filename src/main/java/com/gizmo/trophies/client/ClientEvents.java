@@ -2,6 +2,7 @@ package com.gizmo.trophies.client;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.Registries;
+import com.gizmo.trophies.block.TrophyBlock;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.TropicalFish;
@@ -10,8 +11,10 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RenderHighlightEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -68,5 +71,20 @@ public class ClientEvents {
 
 	private static int calculateVariant(TropicalFish.Pattern pattern, DyeColor base, DyeColor accent) {
 		return pattern.getBase() & 255 | (pattern.getIndex() & 255) << 8 | (base.getId() & 255) << 16 | (accent.getId() & 255) << 24;
+	}
+
+	@Mod.EventBusSubscriber(modid = OpenBlocksTrophies.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+	public static class ForgeClientEvents {
+
+		//disables rendering the trophy hitbox if theres no visible pedestal.
+		//why? because I hate when hitboxes dont fit the block, and making it fit depending on entity is impossible.
+		//so, we'll just make the hitbox rather large (almost a full block) but invisible.
+		@SubscribeEvent
+		public static void dontRenderTrophyHitbox(RenderHighlightEvent.Block event) {
+			BlockState state = event.getCamera().getEntity().level.getBlockState(event.getTarget().getBlockPos());
+			if (state.is(Registries.TROPHY.get()) && !state.getValue(TrophyBlock.PEDESTAL)) {
+				event.setCanceled(true);
+			}
+		}
 	}
 }

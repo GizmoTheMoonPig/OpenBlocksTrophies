@@ -1,11 +1,11 @@
 {
-  "entity": "minecraft:piglin",
-  "drop_chance": 0.001,
-  "offset": 0.0,
-  "scale": 1.0,
   "behavior": {
-    "type": "obtrophies:item",
-    "item": "minecraft:gold_ingot",
-    "cooldown": 35000
-  }
+	"type": "obtrophies:item",
+	"cooldown": 35000,
+	"item": "minecraft:gold_ingot"
+  },
+  "drop_chance": 0.001,
+  "entity": "minecraft:piglin",
+  "offset": 0.0,
+  "scale": 1.0
 }

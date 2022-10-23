@@ -1,12 +1,12 @@
 {
-  "entity": "minecraft:wandering_trader",
-  "drop_chance": 0.001,
-  "offset": 0.0,
-  "scale": 1.0,
   "behavior": {
-    "type": "obtrophies:item",
-    "item": "minecraft:emerald",
-    "cooldown": 10000,
-    "sound": "minecraft:entity.wandering_trader.yes"
-  }
+	"type": "obtrophies:item",
+	"cooldown": 10000,
+	"item": "minecraft:emerald",
+	"sound": "minecraft:entity.wandering_trader.yes"
+  },
+  "drop_chance": 0.001,
+  "entity": "minecraft:wandering_trader",
+  "offset": 0.0,
+  "scale": 1.0
 }

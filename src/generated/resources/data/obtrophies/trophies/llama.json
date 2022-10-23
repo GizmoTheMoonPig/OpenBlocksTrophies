@@ -1,9 +1,9 @@
 {
-  "entity": "minecraft:llama",
-  "drop_chance": 0.001,
-  "offset": 0.0,
-  "scale": 0.9,
   "behavior": {
-    "type": "obtrophies:llama_spit"
-  }
+	"type": "obtrophies:llama_spit"
+  },
+  "drop_chance": 0.001,
+  "entity": "minecraft:llama",
+  "offset": 0.0,
+  "scale": 0.9
 }

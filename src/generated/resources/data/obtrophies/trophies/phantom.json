@@ -1,11 +1,11 @@
 {
-  "entity": "minecraft:phantom",
-  "drop_chance": 0.001,
-  "offset": 0.0,
-  "scale": 1.0,
   "behavior": {
-    "type": "obtrophies:item",
-    "item": "minecraft:phantom_membrane",
-    "cooldown": 20000
-  }
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:phantom_membrane"
+  },
+  "drop_chance": 0.001,
+  "entity": "minecraft:phantom",
+  "offset": 0.0,
+  "scale": 1.0
 }

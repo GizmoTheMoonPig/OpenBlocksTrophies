@@ -1,11 +1,11 @@
 {
-  "entity": "minecraft:snow_golem",
-  "drop_chance": 0.001,
-  "offset": 0.0,
-  "scale": 1.0,
   "behavior": {
-    "type": "obtrophies:place_block",
-    "block": "minecraft:snow",
-    "place_around_trophy": true
-  }
+	"type": "obtrophies:place_block",
+	"block": "minecraft:snow",
+	"place_around_trophy": true
+  },
+  "drop_chance": 0.001,
+  "entity": "minecraft:snow_golem",
+  "offset": 0.0,
+  "scale": 1.0
 }

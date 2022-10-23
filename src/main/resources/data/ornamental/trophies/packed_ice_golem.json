@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:packed_ice"
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:packed_ice"
   },
   "drop_chance": 0.001,
   "entity": "ornamental:packed_ice_golem",

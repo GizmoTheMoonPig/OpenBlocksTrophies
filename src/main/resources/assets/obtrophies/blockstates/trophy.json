@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "pedestal=true": {
       "model": "obtrophies:block/trophy"
-    }
+    },
+    "pedestal=false": {
+          "model": "obtrophies:block/no_pedestal_trophy"
+	}
   }
 }

@@ -1,11 +1,11 @@
 {
-  "entity": "minecraft:zoglin",
-  "drop_chance": 0.001,
-  "offset": 0.0,
-  "scale": 0.85,
   "behavior": {
-    "type": "obtrophies:item",
-    "item": "minecraft:rotten_flesh",
-    "cooldown": 10000
-  }
+	"type": "obtrophies:item",
+	"cooldown": 10000,
+	"item": "minecraft:rotten_flesh"
+  },
+  "drop_chance": 0.001,
+  "entity": "minecraft:zoglin",
+  "offset": 0.0,
+  "scale": 0.85
 }

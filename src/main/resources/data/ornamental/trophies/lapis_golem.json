@@ -1,8 +1,8 @@
 {
   "behavior": {
-    "type": "obtrophies:item",
-    "cooldown": 20000,
-    "item": "minecraft:lapis_lazuli"
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:lapis_lazuli"
   },
   "drop_chance": 0.001,
   "entity": "ornamental:lapis_golem",

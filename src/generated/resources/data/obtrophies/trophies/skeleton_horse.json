@@ -1,11 +1,11 @@
 {
-  "entity": "minecraft:skeleton_horse",
-  "drop_chance": 0.001,
-  "offset": 0.0,
-  "scale": 0.9,
   "behavior": {
-    "type": "obtrophies:item",
-    "item": "minecraft:bone",
-    "cooldown": 20000
-  }
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:bone"
+  },
+  "drop_chance": 0.001,
+  "entity": "minecraft:skeleton_horse",
+  "offset": 0.0,
+  "scale": 0.9
 }

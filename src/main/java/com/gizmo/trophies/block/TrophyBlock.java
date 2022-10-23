@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -26,11 +27,13 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
@@ -42,10 +45,23 @@ import java.util.Objects;
 @SuppressWarnings({"deprecation", "unchecked"})
 public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlock {
 
-	private static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 4.0D, 12.0D);
+	public static final BooleanProperty PEDESTAL = BooleanProperty.create("pedestal");
+	private static final VoxelShape PEDESTAL_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 4.0D, 13.0D);
+	private static final VoxelShape NO_PEDESTAL_SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 12.0D, 12.0D);
 
 	public TrophyBlock(Properties properties) {
 		super(properties);
+		this.registerDefaultState(this.getStateDefinition().any().setValue(PEDESTAL, true));
+	}
+
+	@Nullable
+	protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> blockAtPos, BlockEntityType<E> fedBlock, BlockEntityTicker<? super E> ticker) {
+		return fedBlock == blockAtPos ? (BlockEntityTicker<A>) ticker : null;
+	}
+
+	@Override
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
+		return state.getValue(PEDESTAL) ? PEDESTAL_SHAPE : Shapes.empty();
 	}
 
 	@Nullable
@@ -56,7 +72,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-		return SHAPE;
+		return state.getValue(PEDESTAL) ? PEDESTAL_SHAPE : NO_PEDESTAL_SHAPE;
 	}
 
 	@Override
@@ -76,6 +92,11 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		if (player.isShiftKeyDown()) {
+			level.setBlockAndUpdate(pos, state.cycle(PEDESTAL));
+			level.playSound(null, pos, SoundEvents.CANDLE_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+			return InteractionResult.sidedSuccess(level.isClientSide());
+		}
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			Trophy trophy = trophyBE.getTrophy();
 			if (trophy != null) {
@@ -127,18 +148,13 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
-		builder.add(FACING);
+		builder.add(FACING, PEDESTAL);
 	}
 
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new TrophyBlockEntity(pos, state);
-	}
-
-	@Nullable
-	protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> blockAtPos, BlockEntityType<E> fedBlock, BlockEntityTicker<? super E> ticker) {
-		return fedBlock == blockAtPos ? (BlockEntityTicker<A>) ticker : null;
 	}
 
 	@Nullable

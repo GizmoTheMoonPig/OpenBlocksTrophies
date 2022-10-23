@@ -15,6 +15,7 @@ public class CustomBehaviorRegistry {
 
 	/**
 	 * Register a new Right Click behavior!
+	 *
 	 * @param behavior the behavior class to register. You'll need to make a custom class to do this, just make sure you extend {@link CustomBehavior} and implement all the abstract methods.
 	 */
 	public static void registerBehavior(CustomBehavior behavior) {

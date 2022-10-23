@@ -1,11 +1,11 @@
 {
-  "entity": "minecraft:hoglin",
-  "drop_chance": 0.001,
-  "offset": 0.0,
-  "scale": 0.85,
   "behavior": {
-    "type": "obtrophies:item",
-    "item": "minecraft:leather",
-    "cooldown": 20000
-  }
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:leather"
+  },
+  "drop_chance": 0.001,
+  "entity": "minecraft:hoglin",
+  "offset": 0.0,
+  "scale": 0.85
 }
