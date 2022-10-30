@@ -1,6 +1,9 @@
 {
   "block.obtrophies.trophy": "Trophy",
   "block.obtrophies.trophy.entity": "%s Trophy",
+  "command.obtrophies.count": "Trophy Count: %s",
+  "command.obtrophies.empty_list": "Trophy list is not populated!",
+  "command.obtrophies.place": "Placed %s Trophies",
   "item.obtrophies.trophy.modid": "From: %s",
   "itemGroup.obtrophies": "OpenBlocks Trophies",
   "item.obtrophies.trophy.modid.alexsmobs": "Alex's Mobs",

@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -74,6 +75,7 @@ public class OpenBlocksTrophies {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::commonSetup);
 		MinecraftForge.EVENT_BUS.addListener(this::maybeDropTrophy);
+		MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
 		MinecraftForge.EVENT_BUS.addListener(Trophy::reloadTrophies);
 		MinecraftForge.EVENT_BUS.addListener(Trophy::syncTrophiesToClient);
 
@@ -100,6 +102,10 @@ public class OpenBlocksTrophies {
 			CustomBehaviorRegistry.registerBehavior(new TotemOfUndyingEffectBehavior());
 		});
 		TrophyNetworkHandler.init();
+	}
+
+	public void registerCommands(RegisterCommandsEvent event) {
+		TrophiesCommands.register(event.getDispatcher());
 	}
 
 	public void maybeDropTrophy(LivingDropsEvent event) {
