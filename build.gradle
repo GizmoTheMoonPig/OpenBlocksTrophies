@@ -14,14 +14,14 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 
-version = '1.18-1.4'
+version = '1.19-1.5'
 group = 'com.gizmo.trophies'
 archivesBaseName = 'OpenBlocksTrophies'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: 'official', version: '1.18.2'
+    mappings channel: 'official', version: '1.19.2'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -97,11 +97,13 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.80'
-    implementation fg.deobf("mezz.jei:jei-1.18.2:9.7.1.255")
-    implementation fg.deobf("curse.maven:jade-324717:3970956")
+    minecraft 'net.minecraftforge:forge:1.19.2-43.1.47'
 
-	compileOnly fg.deobf("curse.maven:the-twilight-forest-227639:3998681")
+    implementation fg.deobf("mezz.jei:jei-1.19.2-forge:11.3.0.262")
+    implementation fg.deobf("curse.maven:jade-324717:3916646-api-3916647")
+
+	compileOnly fg.deobf("curse.maven:the-twilight-forest-227639:3995805")
+	compileOnly fg.deobf("curse.maven:alexs-mobs-426558:4021371")
 }
 
 jar {
