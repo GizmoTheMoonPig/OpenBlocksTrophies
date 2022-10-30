@@ -6,6 +6,7 @@ import com.gizmo.trophies.trophy.Trophy;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
@@ -45,7 +46,9 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		stack.pushPose();
 		Entity entity = fetchEntity(trophy.type(), Objects.requireNonNull(level));
 		EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
+		boolean hitboxes = dispatcher.shouldRenderHitBoxes();
 		dispatcher.setRenderShadow(false);
+		dispatcher.setRenderHitBoxes(false);
 		entity.setPos(pos.getX() + 0.5D, pos.getY() + 0.25D + trophy.verticalOffset(), pos.getZ() + 0.5D);
 		stack.translate(0.5F, 0.25D + trophy.verticalOffset(), 0.5F);
 		if (be != null) {
@@ -77,8 +80,9 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			TrophyExtraRendering.getRenderForEntity(trophy.type()).createExtraRender(entity);
 		}
 
-		dispatcher.render(entity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F, stack, source, light);
-		dispatcher.setRenderShadow(false);
+		RenderSystem.runAsFancy(() -> dispatcher.render(entity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F, stack, source, light));
+		dispatcher.setRenderShadow(true);
+		dispatcher.setRenderHitBoxes(hitboxes);
 		stack.popPose();
 	}
 
