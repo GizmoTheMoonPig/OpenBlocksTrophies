@@ -8,5 +8,5 @@
   "drop_chance": 0.001,
   "entity": "minecraft:warden",
   "offset": 0.0,
-  "scale": 0.85
+  "scale": 0.75
 }

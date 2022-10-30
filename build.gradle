@@ -103,6 +103,7 @@ dependencies {
     implementation fg.deobf("curse.maven:jade-324717:3916646-api-3916647")
 
 	compileOnly fg.deobf("curse.maven:the-twilight-forest-227639:3995805")
+	compileOnly fg.deobf("curse.maven:alexs-mobs-426558:4021371")
 }
 
 jar {

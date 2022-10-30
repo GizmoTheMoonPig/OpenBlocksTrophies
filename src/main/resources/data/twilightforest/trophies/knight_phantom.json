@@ -1,6 +1,6 @@
 {
   "drop_chance": 0.075,
   "entity": "twilightforest:knight_phantom",
-  "offset": 0.0,
+  "offset": -0.1,
   "scale": 1.0
 }

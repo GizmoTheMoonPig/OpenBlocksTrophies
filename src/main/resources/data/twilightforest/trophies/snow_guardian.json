@@ -1,6 +1,6 @@
 {
   "drop_chance": 0.001,
   "entity": "twilightforest:snow_guardian",
-  "offset": 0.0,
+  "offset": -0.1,
   "scale": 1.0
 }
