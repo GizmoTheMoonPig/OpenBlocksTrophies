@@ -16,6 +16,6 @@ public class TrophyNetworkHandler {
 	@SuppressWarnings("UnusedAssignment")
 	public static void init() {
 		int id = 0;
-		CHANNEL.registerMessage(id++, SyncTrophyConfigsPacket.class, SyncTrophyConfigsPacket::encode, SyncTrophyConfigsPacket::new, SyncTrophyConfigsPacket.Handler::handle);
+		CHANNEL.messageBuilder(SyncTrophyConfigsPacket.class, id++).encoder(SyncTrophyConfigsPacket::encode).decoder(SyncTrophyConfigsPacket::new).consumer(SyncTrophyConfigsPacket.Handler::handle).add();
 	}
 }
