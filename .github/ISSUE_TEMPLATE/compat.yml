@@ -1,7 +1,7 @@
 name: Compatibility
 description: Create a ticket to suggest mod compatibility
 title: "[Compat] "
-labels: [mod-compat]
+labels: [ mod-compat ]
 body:
   - type: input
     attributes:

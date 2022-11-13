@@ -1,7 +1,7 @@
 name: Suggestion
 description: Create a suggestion ticket
 title: "[Suggestion] "
-labels: [suggestion]
+labels: [ suggestion ]
 body:
   - type: textarea
     attributes:

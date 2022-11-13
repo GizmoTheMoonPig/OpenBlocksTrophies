@@ -1,6 +1,6 @@
 name: Bug Report
 description: Create an issue about a bug
-labels: [bug]
+labels: [ bug ]
 body:
   - type: input
     attributes:

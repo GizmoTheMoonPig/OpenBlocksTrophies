@@ -21,8 +21,7 @@ import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.Objects;
 
-public record Trophy(EntityType<?> type, double dropChance, double verticalOffset, float scale,
-					 @Nullable CustomBehavior behavior) {
+public record Trophy(EntityType<?> type, double dropChance, double verticalOffset, float scale, @Nullable CustomBehavior behavior) {
 
 	public Trophy(EntityType<?> type) {
 		this(type, 0.001D, 0.0D, 1.0F, null);

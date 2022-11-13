@@ -48,9 +48,11 @@ public class OpenBlocksTrophies {
 			}
 
 			ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
-			CompoundTag tag = new CompoundTag();
-			tag.putString(TrophyItem.ENTITY_TAG, this.keys.get(TROPHY_RANDOM.nextInt(this.keys.size())));
-			stack.addTagElement("BlockEntityTag", tag);
+			if (this.keys.size() > 0) {
+				CompoundTag tag = new CompoundTag();
+				tag.putString(TrophyItem.ENTITY_TAG, this.keys.get(TROPHY_RANDOM.nextInt(this.keys.size())));
+				stack.addTagElement("BlockEntityTag", tag);
+			}
 			return stack;
 		}
 
@@ -58,9 +60,11 @@ public class OpenBlocksTrophies {
 		public ItemStack getIconItem() {
 			this.makeIcon();
 			ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
-			CompoundTag tag = new CompoundTag();
-			tag.putString(TrophyItem.ENTITY_TAG, this.keys.get((int) (Minecraft.getInstance().level.getGameTime() / 20 % this.keys.size())));
-			stack.addTagElement("BlockEntityTag", tag);
+			if (this.keys.size() > 0) {
+				CompoundTag tag = new CompoundTag();
+				tag.putString(TrophyItem.ENTITY_TAG, this.keys.get((int) (Minecraft.getInstance().level.getGameTime() / 20 % this.keys.size())));
+				stack.addTagElement("BlockEntityTag", tag);
+			}
 			return stack;
 		}
 	};

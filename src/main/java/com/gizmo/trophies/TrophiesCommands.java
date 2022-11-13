@@ -13,7 +13,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Comparator;
@@ -33,15 +33,15 @@ public class TrophiesCommands {
 
 	public static int count(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
 		if (Trophy.getTrophies().isEmpty()) {
-			throw new SimpleCommandExceptionType(Component.translatable("command.obtrophies.empty_list").withStyle(ChatFormatting.RED)).create();
+			throw new SimpleCommandExceptionType(new TranslatableComponent("command.obtrophies.empty_list").withStyle(ChatFormatting.RED)).create();
 		}
-		context.getSource().sendSuccess(Component.translatable("command.obtrophies.count", Trophy.getTrophies().size()), false);
+		context.getSource().sendSuccess(new TranslatableComponent("command.obtrophies.count", Trophy.getTrophies().size()), false);
 		return Command.SINGLE_SUCCESS;
 	}
 
 	public static int placeAll(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
 		if (Trophy.getTrophies().isEmpty()) {
-			throw new SimpleCommandExceptionType(Component.translatable("command.obtrophies.empty_list").withStyle(ChatFormatting.RED)).create();
+			throw new SimpleCommandExceptionType(new TranslatableComponent("command.obtrophies.empty_list").withStyle(ChatFormatting.RED)).create();
 		}
 
 		int amount = Trophy.getTrophies().size();
@@ -54,14 +54,14 @@ public class TrophiesCommands {
 			for (int j = 0; j < sideLength; j++) {
 				int index = j + i * sideLength;
 				if (index > amount - 1) break;
-				BlockPos pos = context.getSource().getPlayer().blockPosition().offset(i, 0, j);
+				BlockPos pos = context.getSource().getEntity().blockPosition().offset(i, 0, j);
 				context.getSource().getLevel().setBlockAndUpdate(pos, Registries.TROPHY.get().defaultBlockState().setValue(TrophyBlock.FACING, Direction.WEST));
 				if (context.getSource().getLevel().getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 					trophyBE.setTrophy(sortedTrophies.entrySet().stream().toList().get(index).getValue());
 				}
 			}
 		}
-		context.getSource().sendSuccess(Component.translatable("command.obtrophies.place", amount), false);
+		context.getSource().sendSuccess(new TranslatableComponent("command.obtrophies.place", amount), false);
 		return Command.SINGLE_SUCCESS;
 	}
 }
