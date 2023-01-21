@@ -44,7 +44,7 @@ public class OpenBlocksTrophies {
 		@Override
 		public ItemStack makeIcon() {
 			if (this.keys.isEmpty() && !Trophy.getTrophies().isEmpty()) {
-				this.keys = new ArrayList<>(Trophy.getTrophies().keySet().stream().map(ResourceLocation::toString).collect(Collectors.toList()));
+				this.keys = Trophy.getTrophies().keySet().stream().map(ResourceLocation::toString).collect(Collectors.toList());
 			}
 
 			ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
@@ -120,11 +120,7 @@ public class OpenBlocksTrophies {
 				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.dropChance();
 				double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
 				if (chance > 0.0D) {
-					ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
-					CompoundTag tag = new CompoundTag();
-					tag.putString(TrophyItem.ENTITY_TAG, ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()).toString());
-					stack.addTagElement("BlockEntityTag", tag);
-					event.getDrops().add(new ItemEntity(event.getEntity().getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack));
+					event.getDrops().add(new ItemEntity(event.getEntity().getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.type())));
 				}
 			}
 		}
