@@ -4,7 +4,7 @@
 	"cooldown": 2000,
 	"item": "minecraft:snowball"
   },
-  "drop_chance": 0.075,
+  "drop_chance": 0.0075,
   "entity": "twilightforest:snow_queen",
   "offset": 0.0,
   "scale": 0.95

@@ -1,5 +1,5 @@
 {
-  "drop_chance": 0.075,
+  "drop_chance": 0.0075,
   "entity": "cataclysm:netherite_monstrosity",
   "offset": 0.0,
   "scale": 0.25

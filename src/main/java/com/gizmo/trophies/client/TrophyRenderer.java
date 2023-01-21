@@ -57,6 +57,8 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		entity.setYRot(0.0F);
 		entity.setYHeadRot(0.0F);
 		entity.setYBodyRot(0.0F);
+		entity.setOnGround(true);
+		entity.hasImpulse = false;
 		if (entity instanceof Mob mob) {
 			mob.setNoAi(true);
 		}
@@ -142,7 +144,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		}
 	}
 
-	public static record EntityContext<T extends Entity>(EntityType<T> type, Level level) {
+	public record EntityContext<T extends Entity>(EntityType<T> type, Level level) {
 		public static <T extends Entity> EntityContext<T> of(EntityType<T> type, Level level) {
 			return new EntityContext<>(type, level);
 		}
