@@ -50,6 +50,14 @@ public class TrophyItem extends BlockItem {
 		return null;
 	}
 
+	public static ItemStack loadEntityToTrophy(EntityType<?> type) {
+		ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
+		CompoundTag tag = new CompoundTag();
+		tag.putString(ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(type)).toString());
+		stack.addTagElement("BlockEntityTag", tag);
+		return stack;
+	}
+
 	@Override
 	public Component getName(ItemStack stack) {
 		Trophy trophy = getTrophy(stack);

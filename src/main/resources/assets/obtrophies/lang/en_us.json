@@ -33,4 +33,8 @@
   "item.obtrophies.trophy.modid.twilightforest": "The Twilight Forest",
   "item.obtrophies.trophy.modid.undergarden": "The Undergarden",
   "item.obtrophies.trophy.modid.witherstormmod": "Wither Storm Mod"
+  "gui.obtrophies.trophy_jei": "Trophy Drops",
+  "gui.obtrophies.jei.drop_chance": "Chance: %s%%",
+  "gui.obtrophies.jei.fake_player_drops": "(fake players count)",
+  "gui.obtrophies.jei.player_drops": "Drops on player kill only"
 }
