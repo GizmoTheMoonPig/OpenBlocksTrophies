@@ -35,7 +35,7 @@ public class AmbientSoundFetcher {
 			try {
 				sound = (SoundEvent) handle_Mob_getAmbientSound.invokeExact(mob);
 			} catch (Throwable e) {
-				//fail silently, doesnt matter as this method can be null
+				//fail silently, doesn't matter as this method can be null
 			}
 		}
 		return sound;

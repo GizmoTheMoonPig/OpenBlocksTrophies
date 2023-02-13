@@ -8,9 +8,9 @@ public class TrophyConfig {
 
 	public static class CommonConfig {
 
-		public ForgeConfigSpec.BooleanValue fakePlayersDropTrophies;
-		public ForgeConfigSpec.BooleanValue anySourceDropsTrophies;
-		public ForgeConfigSpec.DoubleValue dropChanceOverride;
+		public final ForgeConfigSpec.BooleanValue fakePlayersDropTrophies;
+		public final ForgeConfigSpec.BooleanValue anySourceDropsTrophies;
+		public final ForgeConfigSpec.DoubleValue dropChanceOverride;
 
 
 		public CommonConfig(ForgeConfigSpec.Builder builder) {

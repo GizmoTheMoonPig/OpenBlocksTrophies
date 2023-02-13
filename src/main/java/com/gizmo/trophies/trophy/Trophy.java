@@ -81,7 +81,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 	}
 
 	public static Trophy fromNetwork(FriendlyByteBuf buf) {
-		//behaviors dont happen client side, no need to send them
+		//behaviors don't happen client side, no need to send them
 		return new Trophy(buf.readRegistryId(), buf.readDouble(), buf.readDouble(), buf.readFloat(), null);
 	}
 

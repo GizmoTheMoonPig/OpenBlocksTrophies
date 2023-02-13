@@ -42,7 +42,7 @@ public class ClientEvents {
 			});
 			TrophyExtraRendering.addExtraRenderForEntity(EntityType.TROPICAL_FISH, entity -> {
 				TropicalFish fish = (TropicalFish) entity;
-				fish.setVariant(calculateVariant(TropicalFish.Pattern.KOB, DyeColor.ORANGE, DyeColor.WHITE));
+				fish.setPackedVariant(new TropicalFish.Variant(TropicalFish.Pattern.KOB, DyeColor.ORANGE, DyeColor.WHITE).getPackedId());
 			});
 
 			if (ModList.get().isLoaded("twilightforest")) {
@@ -69,15 +69,11 @@ public class ClientEvents {
 		});
 	}
 
-	private static int calculateVariant(TropicalFish.Pattern pattern, DyeColor base, DyeColor accent) {
-		return pattern.getBase() & 255 | (pattern.getIndex() & 255) << 8 | (base.getId() & 255) << 16 | (accent.getId() & 255) << 24;
-	}
-
 	@Mod.EventBusSubscriber(modid = OpenBlocksTrophies.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 	public static class ForgeClientEvents {
 
-		//disables rendering the trophy hitbox if theres no visible pedestal.
-		//why? because I hate when hitboxes dont fit the block, and making it fit depending on entity is impossible.
+		//disables rendering the trophy hitbox if there's no visible pedestal.
+		//why? because I hate when hitboxes don't fit the block, and making it fit depending on entity is impossible.
 		//so, we'll just make the hitbox rather large (almost a full block) but invisible.
 		@SubscribeEvent
 		public static void dontRenderTrophyHitbox(RenderHighlightEvent.Block event) {

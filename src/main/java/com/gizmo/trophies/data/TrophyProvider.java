@@ -1,47 +1,45 @@
 package com.gizmo.trophies.data;
 
-import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.TrophyReloadListener;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 public abstract class TrophyProvider implements DataProvider {
 
 	protected final Map<ResourceLocation, Trophy> builder = Maps.newLinkedHashMap();
 	private final String modid;
-	private final DataGenerator.PathProvider entryPath;
+	private final PackOutput.PathProvider entryPath;
 
-	public TrophyProvider(DataGenerator generator, String modid) {
+	public TrophyProvider(PackOutput output, String modid) {
 		this.modid = modid;
-		this.entryPath = generator.createPathProvider(DataGenerator.Target.DATA_PACK, "trophies");
+		this.entryPath = output.createPathProvider(PackOutput.Target.DATA_PACK, "trophies");
 	}
 
 	@Override
-	public void run(CachedOutput output) {
+	public CompletableFuture<?> run(CachedOutput output) {
 		Map<ResourceLocation, Trophy> map = Maps.newHashMap();
 		this.builder.clear();
 		this.createTrophies();
 		map.putAll(this.builder);
 
+		ImmutableList.Builder<CompletableFuture<?>> futuresBuilder = new ImmutableList.Builder<>();
+
 		map.forEach((resourceLocation, trophy) -> {
 			Path path = this.entryPath.json(resourceLocation);
-
-			try {
-				DataProvider.saveStable(output, TrophyReloadListener.serialize(trophy), path);
-			} catch (IOException ioexception) {
-				OpenBlocksTrophies.LOGGER.error("Couldn't save trophy entry {}", path, ioexception);
-			}
+			futuresBuilder.add(DataProvider.saveStable(output, TrophyReloadListener.serialize(trophy), path));
 		});
+		return CompletableFuture.allOf(futuresBuilder.build().toArray(CompletableFuture[]::new));
 	}
 
 	protected abstract void createTrophies();

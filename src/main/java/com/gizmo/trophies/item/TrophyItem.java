@@ -5,7 +5,6 @@ import com.gizmo.trophies.client.TrophyItemRenderer;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +12,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -27,13 +25,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class TrophyItem extends BlockItem {
 
 	public static final String ENTITY_TAG = "entity";
 	public static final String COOLDOWN_TAG = "cooldown";
+	public static final String CYCLING_TAG = "SpecialCycleVariant";
 
 	public TrophyItem(Block block, Properties properties) {
 		super(block, properties);
@@ -54,10 +54,22 @@ public class TrophyItem extends BlockItem {
 		return null;
 	}
 
-	public static ItemStack loadEntityToTrophy(EntityType<?> type) {
+	public static boolean hasCycleOnTrophy(@Nonnull ItemStack stack) {
+		if (stack.hasTag()) {
+			CompoundTag tag = BlockItem.getBlockEntityData(stack);
+			if (tag != null && tag.contains(TrophyItem.CYCLING_TAG)) {
+				return tag.getBoolean(TrophyItem.CYCLING_TAG);
+			}
+		}
+
+		return false;
+	}
+
+	public static ItemStack loadEntityToTrophy(EntityType<?> type, boolean cycling) {
 		ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
 		CompoundTag tag = new CompoundTag();
 		tag.putString(ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(type)).toString());
+		tag.putBoolean(TrophyItem.CYCLING_TAG, cycling);
 		stack.addTagElement("BlockEntityTag", tag);
 		return stack;
 	}
@@ -65,7 +77,7 @@ public class TrophyItem extends BlockItem {
 	@Override
 	public Component getName(ItemStack stack) {
 		Trophy trophy = getTrophy(stack);
-		if (trophy != null) {
+		if (trophy != null && !hasCycleOnTrophy(stack)) {
 			return Component.translatable("block.obtrophies.trophy.entity", trophy.type().getDescription().getString());
 		}
 		return super.getName(stack);
@@ -74,7 +86,7 @@ public class TrophyItem extends BlockItem {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
 		Trophy trophy = getTrophy(stack);
-		if (trophy != null) {
+		if (trophy != null && !hasCycleOnTrophy(stack)) {
 			tooltip.add(Component.translatable("item.obtrophies.trophy.modid", this.getModIdForTooltip(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type())).getNamespace())).withStyle(ChatFormatting.GRAY));
 		}
 	}
@@ -95,19 +107,6 @@ public class TrophyItem extends BlockItem {
 	@Nullable
 	public EquipmentSlot getEquipmentSlot(ItemStack stack) {
 		return EquipmentSlot.HEAD;
-	}
-
-	@Override
-	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stacks) {
-		if (this.allowedIn(tab)) {
-			if (!Trophy.getTrophies().isEmpty()) {
-				Map<ResourceLocation, Trophy> sortedTrophies = new TreeMap<>(Comparator.naturalOrder());
-				sortedTrophies.putAll(Trophy.getTrophies());
-				for (Map.Entry<ResourceLocation, Trophy> trophyEntry : sortedTrophies.entrySet()) {
-					stacks.add(loadEntityToTrophy(trophyEntry.getValue().type()));
-				}
-			}
-		}
 	}
 
 	@Override

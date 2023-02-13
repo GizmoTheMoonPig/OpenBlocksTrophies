@@ -11,7 +11,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -31,9 +32,13 @@ import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
+
+	private static List<ResourceLocation> keys = new ArrayList<>();
 
 	private static final LoadingCache<EntityContext<?>, Entity> ENTITY_CACHE = CacheBuilder.newBuilder().build(
 			new CacheLoader<>() {
@@ -47,8 +52,14 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 	public TrophyRenderer(BlockEntityRendererProvider.Context unused) {
 	}
 
-	public static void renderEntity(@Nullable TrophyBlockEntity be, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light) {
+	public static void renderEntity(@Nullable TrophyBlockEntity be, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light, boolean cycling) {
 		stack.pushPose();
+		if (keys.isEmpty() && !Trophy.getTrophies().isEmpty()) {
+			keys = Trophy.getTrophies().keySet().stream().toList();
+		}
+		if (cycling && !keys.isEmpty()) {
+			trophy = Trophy.getTrophies().get(keys.get((int) (level.getGameTime() / 20 % keys.size())));
+		}
 		Entity entity = fetchEntity(trophy.type(), level);
 		EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
 		boolean hitboxes = dispatcher.shouldRenderHitBoxes();
@@ -76,16 +87,16 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 					vec32 = vec32.normalize();
 					float f5 = (float) Math.acos(vec32.y());
 					float f6 = (float) Math.atan2(vec32.z(), vec32.x());
-					stack.mulPose(Vector3f.YP.rotationDegrees((Mth.HALF_PI - f6) * Mth.RAD_TO_DEG));
-					stack.mulPose(Vector3f.XP.rotationDegrees(f5 * (180F / (float) Math.PI) - 90.0F));
+					stack.mulPose(Axis.YP.rotationDegrees((Mth.HALF_PI - f6) * Mth.RAD_TO_DEG));
+					stack.mulPose(Axis.XP.rotationDegrees(f5 * (180F / (float) Math.PI) - 90.0F));
 				}
 			} else {
-				stack.mulPose(Vector3f.YP.rotationDegrees(getCorrectRotation(be.getBlockState().getValue(TrophyBlock.FACING).getOpposite())));
+				stack.mulPose(Axis.YP.rotationDegrees(getCorrectRotation(be.getBlockState().getValue(TrophyBlock.FACING).getOpposite())));
 			}
 		}
 
 		if (entity instanceof EnderDragon) {
-			stack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+			stack.mulPose(Axis.YP.rotationDegrees(180.0F));
 		}
 
 		stack.scale(0.4F, 0.4F, 0.4F);
@@ -98,9 +109,9 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		if (ModList.get().isLoaded("alexsmobs")) {
 			RenderLaviathan.renderWithoutShaking = true;
 			RenderMurmurBody.renderWithHead = true;
-			if (entity instanceof EntityLaviathan laviathan) {
-				laviathan.prevHeadHeight = 0.0F;
-				laviathan.setChillTime(0);
+			if (entity instanceof EntityLaviathan leviathan) {
+				leviathan.prevHeadHeight = 0.0F;
+				leviathan.setChillTime(0);
 			}
 		}
 
@@ -139,7 +150,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			if (!blockEntity.getBlockState().getValue(TrophyBlock.PEDESTAL)) {
 				stack.translate(0.0D, -0.25D, 0.0D);
 			}
-			renderEntity(blockEntity, blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light);
+			renderEntity(blockEntity, blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light, blockEntity.isCycling());
 			stack.popPose();
 		}
 	}

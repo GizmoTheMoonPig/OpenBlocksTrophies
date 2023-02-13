@@ -3,7 +3,7 @@ package com.gizmo.trophies.data;
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.behaviors.*;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -11,8 +11,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
 public class TrophyGenerator extends TrophyProvider {
-	public TrophyGenerator(DataGenerator generator) {
-		super(generator, OpenBlocksTrophies.MODID);
+	public TrophyGenerator(PackOutput output) {
+		super(output, OpenBlocksTrophies.MODID);
 	}
 
 	@Override
@@ -95,6 +95,7 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy(EntityType.WARDEN, 0.0D, 0.75F, new MobEffectBehavior(MobEffects.DARKNESS, 200, 0)));
 		this.makeTrophy(new Trophy(EntityType.WITHER, 0.0075D, -0.2D, 0.75F, null));
 		this.makeTrophy(new Trophy(EntityType.ENDER_DRAGON, 0.0075D, 0.0D, 0.25F, null));
+		this.makeTrophy(new Trophy(EntityType.CAMEL, 0.0D, 0.75F));
 	}
 
 	@Override

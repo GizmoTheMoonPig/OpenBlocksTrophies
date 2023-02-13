@@ -35,7 +35,7 @@ public class JEICompat implements IModPlugin {
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(TrophyItem.loadEntityToTrophy(EntityType.CHICKEN), TROPHY);
+		registration.addRecipeCatalyst(TrophyItem.loadEntityToTrophy(EntityType.CHICKEN, true), TROPHY);
 	}
 
 	@Override

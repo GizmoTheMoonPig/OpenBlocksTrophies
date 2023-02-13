@@ -18,6 +18,6 @@ public record TrophyInfoWrapper(Trophy trophy) implements IRecipeCategoryExtensi
 	}
 
 	public ItemStack getTrophyItem() {
-		return TrophyItem.loadEntityToTrophy(this.trophy().type());
+		return TrophyItem.loadEntityToTrophy(this.trophy().type(), false);
 	}
 }

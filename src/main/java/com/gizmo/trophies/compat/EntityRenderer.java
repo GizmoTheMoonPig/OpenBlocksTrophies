@@ -3,21 +3,18 @@ package com.gizmo.trophies.compat;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Quaternionf;
 import twilightforest.TwilightForestMod;
 
 import java.util.HashMap;
@@ -87,16 +84,16 @@ public class EntityRenderer {
 		PoseStack posestack1 = new PoseStack();
 		posestack1.translate(0.0D, 0.0D, 1000.0D);
 		if (entity instanceof EnderDragon) {
-			posestack1.mulPose(Vector3f.YP.rotationDegrees(180.0F));
-			posestack1.mulPose(Vector3f.XP.rotationDegrees(-30.0F));
+			posestack1.mulPose(Axis.YP.rotationDegrees(180.0F));
+			posestack1.mulPose(Axis.XP.rotationDegrees(-30.0F));
 		}
 		posestack1.scale((float) scale, (float) scale, (float) scale);
-		Quaternion quaternion = Vector3f.ZP.rotationDegrees(180.0F);
-		Quaternion quaternion1 = Vector3f.XP.rotationDegrees(20.0F);
+		Quaternionf quaternion = Axis.ZP.rotationDegrees(180.0F);
+		Quaternionf quaternion1 = Axis.XP.rotationDegrees(20.0F);
 		quaternion.mul(quaternion1);
 		posestack1.mulPose(quaternion);
-		posestack1.mulPose(Vector3f.XN.rotationDegrees(35.0F));
-		posestack1.mulPose(Vector3f.YN.rotationDegrees(145.0F));
+		posestack1.mulPose(Axis.XN.rotationDegrees(35.0F));
+		posestack1.mulPose(Axis.YN.rotationDegrees(145.0F));
 		float f2 = entity.yBodyRot;
 		float f3 = entity.getYRot();
 		float f4 = entity.getXRot();
@@ -109,7 +106,7 @@ public class EntityRenderer {
 		entity.yHeadRotO = entity.getYRot();
 		Lighting.setupForEntityInInventory();
 		EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-		quaternion1.conj();
+		quaternion1.conjugate();
 		dispatcher.overrideCameraOrientation(quaternion1);
 		boolean hitboxes = dispatcher.shouldRenderHitBoxes();
 		dispatcher.setRenderShadow(false);

@@ -1,7 +1,7 @@
 {
   "textures": {
-    "texture": "obtrophies:blocks/trophy",
-    "particle": "obtrophies:blocks/trophy"
+    "texture": "obtrophies:block/trophy",
+    "particle": "obtrophies:block/trophy"
   },
   "elements": [
     {

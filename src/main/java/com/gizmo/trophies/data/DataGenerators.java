@@ -10,6 +10,6 @@ public class DataGenerators {
 
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
-		event.getGenerator().addProvider(event.includeServer(), new TrophyGenerator(event.getGenerator()));
+		event.getGenerator().addProvider(event.includeServer(), new TrophyGenerator(event.getGenerator().getPackOutput()));
 	}
 }

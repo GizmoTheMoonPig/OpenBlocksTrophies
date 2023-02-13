@@ -38,7 +38,7 @@ public class TrophyExtraRendering {
 		RENDER_MAP.put(type, render);
 	}
 
-	public interface ExtraRender {
+	interface ExtraRender {
 		void createExtraRender(Entity entity);
 	}
 }

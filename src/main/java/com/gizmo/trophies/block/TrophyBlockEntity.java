@@ -21,6 +21,7 @@ public class TrophyBlockEntity extends BlockEntity {
 
 	private int cooldown = 0;
 	private Trophy trophy;
+	private boolean specialCycleVariant = false;
 
 	public TrophyBlockEntity(BlockPos pos, BlockState state) {
 		super(Registries.TROPHY_BE.get(), pos, state);
@@ -55,6 +56,17 @@ public class TrophyBlockEntity extends BlockEntity {
 			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getTrophy().type())).toString());
 		}
 		tag.putInt("cooldown", this.getCooldown());
+		if (this.specialCycleVariant) {
+			tag.putBoolean("SpecialCycleVariant", true);
+		}
+	}
+
+	public boolean isCycling() {
+		return this.specialCycleVariant;
+	}
+
+	public void setCycling(boolean cycling) {
+		this.specialCycleVariant = cycling;
 	}
 
 	@Override
@@ -64,6 +76,9 @@ public class TrophyBlockEntity extends BlockEntity {
 			this.setTrophy(Trophy.getTrophies().get(ResourceLocation.tryParse(tag.getString("entity"))));
 		}
 		this.setCooldown(tag.getInt("cooldown"));
+		if (tag.contains("SpecialCycleVariant")) {
+			this.specialCycleVariant = tag.getBoolean("SpecialCycleVariant");
+		}
 	}
 
 	@Override

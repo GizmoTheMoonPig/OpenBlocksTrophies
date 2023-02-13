@@ -86,6 +86,10 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 				if (tag != null && tag.contains(TrophyItem.COOLDOWN_TAG)) {
 					trophyBE.setCooldown(tag.getInt(TrophyItem.COOLDOWN_TAG));
 				}
+
+				if (tag != null && tag.contains(TrophyItem.CYCLING_TAG)) {
+					trophyBE.setCycling(tag.getBoolean(TrophyItem.CYCLING_TAG));
+				}
 			}
 		}
 	}
@@ -123,6 +127,9 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 			if (trophyBE.getCooldown() > 0) {
 				tag.putInt(TrophyItem.COOLDOWN_TAG, trophyBE.getCooldown());
 			}
+			if (trophyBE.isCycling()) {
+				tag.putBoolean(TrophyItem.CYCLING_TAG, true);
+			}
 			newStack.addTagElement("BlockEntityTag", tag);
 			drop.add(newStack);
 		}
@@ -135,6 +142,9 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		CompoundTag tag = new CompoundTag();
 		if (getter.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
 			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().type())).toString());
+			if (trophyBE.isCycling()) {
+				tag.putBoolean(TrophyItem.CYCLING_TAG, true);
+			}
 			newStack.addTagElement("BlockEntityTag", tag);
 		}
 		return newStack;

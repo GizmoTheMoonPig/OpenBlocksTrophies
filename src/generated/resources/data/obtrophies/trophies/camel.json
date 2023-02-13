@@ -1,0 +1,6 @@
+{
+  "drop_chance": 0.001,
+  "entity": "minecraft:camel",
+  "offset": 0.0,
+  "scale": 0.75
+}
