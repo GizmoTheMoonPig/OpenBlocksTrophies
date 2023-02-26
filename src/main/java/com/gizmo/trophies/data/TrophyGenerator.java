@@ -95,7 +95,8 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy(EntityType.WARDEN, 0.0D, 0.75F, new MobEffectBehavior(MobEffects.DARKNESS, 200, 0)));
 		this.makeTrophy(new Trophy(EntityType.WITHER, 0.0075D, -0.2D, 0.75F, null));
 		this.makeTrophy(new Trophy(EntityType.ENDER_DRAGON, 0.0075D, 0.0D, 0.25F, null));
-		this.makeTrophy(new Trophy(EntityType.CAMEL, 0.0D, 0.75F));
+		//TODO add this back once 1.20 drops, apparently it causes crashes if the feature flag isnt enabled
+		//this.makeTrophy(new Trophy(EntityType.CAMEL, 0.0D, 0.75F));
 	}
 
 	@Override
