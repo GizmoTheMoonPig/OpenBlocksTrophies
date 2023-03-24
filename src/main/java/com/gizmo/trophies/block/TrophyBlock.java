@@ -6,6 +6,7 @@ import com.gizmo.trophies.trophy.AmbientSoundFetcher;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -82,9 +83,12 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 			Trophy trophy = TrophyItem.getTrophy(stack);
 			if (trophy != null) {
 				trophyBE.setTrophy(trophy);
+				trophyBE.setTrophyName(stack.hasCustomHoverName() ? stack.getHoverName().getString() : "");
 				CompoundTag tag = BlockItem.getBlockEntityData(stack);
-				if (tag != null && tag.contains(TrophyItem.COOLDOWN_TAG)) {
-					trophyBE.setCooldown(tag.getInt(TrophyItem.COOLDOWN_TAG));
+				if (tag != null) {
+					if (tag.contains(TrophyItem.COOLDOWN_TAG)) {
+						trophyBE.setCooldown(tag.getInt(TrophyItem.COOLDOWN_TAG));
+					}
 				}
 			}
 		}
@@ -100,12 +104,12 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			Trophy trophy = trophyBE.getTrophy();
 			if (trophy != null) {
-				SoundEvent ambientSound = AmbientSoundFetcher.getAmbientSound(trophy.type(), level);
+				SoundEvent ambientSound = AmbientSoundFetcher.getAmbientSound(trophy.getType(), level);
 				if (ambientSound != null) {
 					level.playSound(null, pos, ambientSound, SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
 				}
-				if (trophyBE.getCooldown() <= 0 && trophy.behavior() != null) {
-					trophyBE.setCooldown(trophy.behavior().execute(trophyBE, (ServerPlayer) player));
+				if (trophyBE.getCooldown() <= 0 && trophy.getClickBehavior() != null) {
+					trophyBE.setCooldown(trophy.getClickBehavior().execute(trophyBE, (ServerPlayer) player));
 				}
 			}
 		}
@@ -119,7 +123,11 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		if (blockEntity instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
 			ItemStack newStack = new ItemStack(this);
 			CompoundTag tag = new CompoundTag();
-			tag.putString(TrophyItem.ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().type())).toString());
+			tag.putInt(TrophyItem.VARIANT_TAG, trophyBE.getVariant());
+			if (!trophyBE.getTrophyName().isEmpty()) {
+				newStack.setHoverName(Component.literal(trophyBE.getTrophyName()));
+			}
+			tag.putString(TrophyItem.ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().getType())).toString());
 			if (trophyBE.getCooldown() > 0) {
 				tag.putInt(TrophyItem.COOLDOWN_TAG, trophyBE.getCooldown());
 			}
@@ -134,7 +142,11 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		ItemStack newStack = new ItemStack(this);
 		CompoundTag tag = new CompoundTag();
 		if (getter.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
-			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().type())).toString());
+			tag.putInt(TrophyItem.VARIANT_TAG, trophyBE.getVariant());
+			if (!trophyBE.getTrophyName().isEmpty()) {
+				newStack.setHoverName(Component.literal(trophyBE.getTrophyName()));
+			}
+			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().getType())).toString());
 			newStack.addTagElement("BlockEntityTag", tag);
 		}
 		return newStack;

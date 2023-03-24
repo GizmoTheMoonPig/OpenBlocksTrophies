@@ -3,12 +3,7 @@ package com.gizmo.trophies.client;
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.Registries;
 import com.gizmo.trophies.block.TrophyBlock;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.animal.TropicalFish;
-import net.minecraft.world.entity.monster.ZombieVillager;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,15 +31,6 @@ public class ClientEvents {
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
-			TrophyExtraRendering.addExtraRenderForEntity(EntityType.ZOMBIE_VILLAGER, entity -> {
-				ZombieVillager villager = (ZombieVillager) entity;
-				villager.setVillagerData(villager.getVillagerData().setProfession(VillagerProfession.NONE));
-			});
-			TrophyExtraRendering.addExtraRenderForEntity(EntityType.TROPICAL_FISH, entity -> {
-				TropicalFish fish = (TropicalFish) entity;
-				fish.setVariant(calculateVariant(TropicalFish.Pattern.KOB, DyeColor.ORANGE, DyeColor.WHITE));
-			});
-
 			if (ModList.get().isLoaded("twilightforest")) {
 				TrophyExtraRendering.addExtraRenderForEntity(TFEntities.ARMORED_GIANT.get(), entity -> {
 					ArmoredGiant giant = (ArmoredGiant) entity;
@@ -67,10 +53,6 @@ public class ClientEvents {
 				});
 			}
 		});
-	}
-
-	private static int calculateVariant(TropicalFish.Pattern pattern, DyeColor base, DyeColor accent) {
-		return pattern.getBase() & 255 | (pattern.getIndex() & 255) << 8 | (base.getId() & 255) << 16 | (accent.getId() & 255) << 24;
 	}
 
 	@Mod.EventBusSubscriber(modid = OpenBlocksTrophies.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)

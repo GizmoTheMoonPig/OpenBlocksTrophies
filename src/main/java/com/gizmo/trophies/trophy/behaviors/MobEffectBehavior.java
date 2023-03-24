@@ -13,11 +13,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class MobEffectBehavior extends CustomBehavior {
 
-	private MobEffect effect;
-	private int time;
-	private int amplifier;
+	private final MobEffect effect;
+	private final int time;
+	private final int amplifier;
 
 	public MobEffectBehavior() {
+		this(null, 0, 0);
 	}
 
 	public MobEffectBehavior(MobEffect effect, int time, int amplifier) {

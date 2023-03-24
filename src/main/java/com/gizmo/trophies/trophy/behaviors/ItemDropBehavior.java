@@ -16,11 +16,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemDropBehavior extends CustomBehavior {
-	private Item itemToDrop;
-	private int cooldown;
-	private SoundEvent sound;
+	private final Item itemToDrop;
+	private final int cooldown;
+	private final SoundEvent sound;
 
 	public ItemDropBehavior() {
+		this(null, 0);
 	}
 
 	public ItemDropBehavior(Item drop, int cooldown) {

@@ -7,7 +7,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.npc.VillagerDataHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -23,12 +25,14 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Mod(OpenBlocksTrophies.MODID)
@@ -92,6 +96,7 @@ public class OpenBlocksTrophies {
 		event.enqueueWork(() -> {
 			CustomBehaviorRegistry.registerBehavior(new MobEffectBehavior());
 			CustomBehaviorRegistry.registerBehavior(new ItemDropBehavior());
+			CustomBehaviorRegistry.registerBehavior(new PullFromLootTableBehavior());
 			CustomBehaviorRegistry.registerBehavior(new ElderGuardianCurseBehavior());
 			CustomBehaviorRegistry.registerBehavior(new ExplosionBehavior());
 			CustomBehaviorRegistry.registerBehavior(new PlaceBlockBehavior());
@@ -117,13 +122,40 @@ public class OpenBlocksTrophies {
 		if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
 			Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
 			if (trophy != null) {
-				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.dropChance();
+				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.getDropChance();
 				double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
 				if (chance > 0.0D) {
-					event.getDrops().add(new ItemEntity(event.getEntity().getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.type())));
+					event.getDrops().add(new ItemEntity(event.getEntity().getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.getType(), this.fetchVariantIfAny(event.getEntity(), trophy))));
 				}
 			}
 		}
 	}
 
+	private int fetchVariantIfAny(LivingEntity entity, Trophy trophy) {
+		if (!trophy.getVariants(entity.getLevel().registryAccess()).isEmpty()) {
+			CompoundTag tag = new CompoundTag();
+			entity.addAdditionalSaveData(tag);
+			for (int i = 0; i < trophy.getVariants(entity.getLevel().registryAccess()).size(); i++) {
+				Map<String, String> variantKeys = trophy.getVariants(entity.getLevel().registryAccess()).get(i);
+				for (Map.Entry<String, String> entry : variantKeys.entrySet()) {
+					if (entity instanceof VillagerDataHolder villager) {
+						if (ForgeRegistries.VILLAGER_PROFESSIONS.getKey(villager.getVillagerData().getProfession()).toString().equals(entry.getValue())) {
+							return i;
+						}
+					} else {
+						if (tag.contains(entry.getKey())) {
+							if (StringUtils.isNumeric(entry.getValue()) && tag.getInt(entry.getKey()) == Integer.parseInt(entry.getValue())) {
+								return i;
+							} else if ((entry.getValue().equals("false") || entry.getValue().equals("true")) && tag.getBoolean(entry.getKey()) == Boolean.parseBoolean(entry.getValue())) {
+								return i;
+							} else if (tag.getString(entry.getKey()).equals(entry.getValue()) || tag.getString(entry.getKey()).equals(new ResourceLocation(entry.getValue()).toString())) {
+								return i;
+							}
+						}
+					}
+				}
+			}
+		}
+		return 0;
+	}
 }

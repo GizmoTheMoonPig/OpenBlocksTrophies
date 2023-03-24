@@ -19,10 +19,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 @SuppressWarnings("deprecation")
 public class PlaceBlockBehavior extends CustomBehavior {
 
-	private Block blockToPlace;
-	private boolean aroundTrophy;
+	private final Block blockToPlace;
+	private final boolean aroundTrophy;
 
 	public PlaceBlockBehavior() {
+		this(null, false);
 	}
 
 	public PlaceBlockBehavior(Block block, boolean placeAroundTrophy) {

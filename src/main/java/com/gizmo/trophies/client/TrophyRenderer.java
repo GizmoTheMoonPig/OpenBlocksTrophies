@@ -19,15 +19,25 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.npc.VillagerData;
+import net.minecraft.world.entity.npc.VillagerDataHolder;
+import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
@@ -47,9 +57,9 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 	public TrophyRenderer(BlockEntityRendererProvider.Context unused) {
 	}
 
-	public static void renderEntity(@Nullable TrophyBlockEntity be, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light) {
+	public static void renderEntity(@Nullable TrophyBlockEntity be, int variant, String name, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light) {
 		stack.pushPose();
-		Entity entity = fetchEntity(trophy.type(), level);
+		Entity entity = fetchEntity(trophy.getType(), level);
 		EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
 		boolean hitboxes = dispatcher.shouldRenderHitBoxes();
 		dispatcher.setRenderShadow(false);
@@ -62,9 +72,17 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		if (entity instanceof Mob mob) {
 			mob.setNoAi(true);
 		}
+		entity.setCustomName(!name.isEmpty() ? Component.literal(name) : null);
 		entity.setCustomNameVisible(false);
-		entity.setPos(pos.getX() + 0.5D, pos.getY() + 0.25D + trophy.verticalOffset(), pos.getZ() + 0.5D);
-		stack.translate(0.5F, 0.25D + trophy.verticalOffset(), 0.5F);
+		//tick named sheep so the jeb_ name easter egg works properly. Lucky us the sheep doesnt need the tickCount for anything animation related so this works well.
+		//I cant do this for every mob because mobs such as the blaze or pufferfish move when the tickCount is incremented, and I HATE moving trophies
+		if (entity instanceof Sheep && entity.hasCustomName()) {
+			entity.tickCount = (int) level.getLevelData().getGameTime();
+		} else {
+			entity.tickCount = 0;
+		}
+		entity.setPos(pos.getX() + 0.5D, pos.getY() + 0.25D + trophy.getVerticalOffset(), pos.getZ() + 0.5D);
+		stack.translate(0.5F, 0.25D + trophy.getVerticalOffset(), 0.5F);
 		if (be != null) {
 			//they watch
 			if (LocalDate.of(LocalDate.now().getYear(), 4, 1).equals(LocalDate.now())) {
@@ -89,9 +107,18 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		}
 
 		stack.scale(0.4F, 0.4F, 0.4F);
-		stack.scale(trophy.scale(), trophy.scale(), trophy.scale());
-		if (TrophyExtraRendering.getRenderMap().containsKey(trophy.type())) {
-			TrophyExtraRendering.getRenderForEntity(trophy.type()).createExtraRender(entity);
+		stack.scale(trophy.getScale(), trophy.getScale(), trophy.getScale());
+		if (TrophyExtraRendering.getRenderMap().containsKey(trophy.getType())) {
+			TrophyExtraRendering.getRenderForEntity(trophy.getType()).createExtraRender(entity);
+		}
+		if (!trophy.getVariants(Minecraft.getInstance().level.registryAccess()).isEmpty() && entity instanceof LivingEntity living) {
+			if (entity instanceof VillagerDataHolder villager) {
+				trophy.getVariants(Minecraft.getInstance().level.registryAccess()).get(variant).forEach((s, s2) -> villager.setVillagerData(new VillagerData(VillagerType.PLAINS, Objects.requireNonNull(Minecraft.getInstance().level.registryAccess().registryOrThrow(Registry.VILLAGER_PROFESSION_REGISTRY).get(ResourceLocation.tryParse(s2))), 1)));
+			} else {
+				CompoundTag tag = new CompoundTag();
+				trophy.getVariants(Minecraft.getInstance().level.registryAccess()).get(variant).forEach((s, s2) -> convertStringToProperPrimitive(tag, s, s2));
+				living.readAdditionalSaveData(tag);
+			}
 		}
 
 		//hate everything about this
@@ -114,6 +141,16 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		}
 
 		stack.popPose();
+	}
+
+	public static void convertStringToProperPrimitive(CompoundTag tag, String variantID, String primitive) {
+		if (StringUtils.isNumeric(primitive)) {
+			tag.putInt(variantID, Integer.parseInt(primitive));
+		} else if (primitive.equals("false") || primitive.equals("true")) {
+			tag.putBoolean(variantID, Boolean.parseBoolean(primitive));
+		} else {
+			tag.putString(variantID, primitive);
+		}
 	}
 
 	private static float getCorrectRotation(Direction direction) {
@@ -139,7 +176,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			if (!blockEntity.getBlockState().getValue(TrophyBlock.PEDESTAL)) {
 				stack.translate(0.0D, -0.25D, 0.0D);
 			}
-			renderEntity(blockEntity, blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light);
+			renderEntity(blockEntity, blockEntity.getVariant(), blockEntity.getTrophyName(), blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light);
 			stack.popPose();
 		}
 	}

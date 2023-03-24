@@ -1,11 +1,20 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": "minecraft:sweet_berries"
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": "minecraft:sweet_berries"
   },
   "drop_chance": 0.001,
   "entity": "minecraft:fox",
   "offset": 0.0,
-  "scale": 1.0
+  "scale": 1.0,
+  "variants": [
+    {
+      "Type": "red"
+    },
+    {
+      "Type": "snow"
+    }
+  ]
 }
+

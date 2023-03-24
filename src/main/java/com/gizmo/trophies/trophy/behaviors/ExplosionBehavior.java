@@ -12,10 +12,11 @@ import net.minecraft.world.level.Explosion;
 
 public class ExplosionBehavior extends CustomBehavior {
 
-	private float power;
-	private boolean destructive;
+	private final float power;
+	private final boolean destructive;
 
 	public ExplosionBehavior() {
+		this(0.0F, false);
 	}
 
 	public ExplosionBehavior(float power, boolean destructive) {

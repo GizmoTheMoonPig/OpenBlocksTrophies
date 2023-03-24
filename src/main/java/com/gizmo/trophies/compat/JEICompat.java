@@ -11,6 +11,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 
@@ -43,7 +44,13 @@ public class JEICompat implements IModPlugin {
 		List<TrophyInfoWrapper> trophies = new LinkedList<>();
 		if (!Trophy.getTrophies().isEmpty()) {
 			for (Map.Entry<ResourceLocation, Trophy> trophyEntry : Trophy.getTrophies().entrySet()) {
-				trophies.add(new TrophyInfoWrapper(trophyEntry.getValue()));
+				if (!trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).isEmpty()) {
+					for (int i = 0; i < trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).size(); i++) {
+						trophies.add(new TrophyInfoWrapper(trophyEntry.getValue(), i));
+					}
+				} else {
+					trophies.add(new TrophyInfoWrapper(trophyEntry.getValue(), 0));
+				}
 			}
 		}
 		registration.addRecipes(TROPHY, trophies);

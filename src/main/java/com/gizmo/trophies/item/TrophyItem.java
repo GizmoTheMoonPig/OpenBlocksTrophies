@@ -4,6 +4,7 @@ import com.gizmo.trophies.Registries;
 import com.gizmo.trophies.client.TrophyItemRenderer;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -34,6 +35,7 @@ public class TrophyItem extends BlockItem {
 
 	public static final String ENTITY_TAG = "entity";
 	public static final String COOLDOWN_TAG = "cooldown";
+	public static final String VARIANT_TAG = "VariantID";
 
 	public TrophyItem(Block block, Properties properties) {
 		super(block, properties);
@@ -55,18 +57,34 @@ public class TrophyItem extends BlockItem {
 	}
 
 	public static ItemStack loadEntityToTrophy(EntityType<?> type) {
+		return loadEntityToTrophy(type, 0);
+	}
+
+	public static ItemStack loadEntityToTrophy(EntityType<?> type, int variant) {
 		ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
 		CompoundTag tag = new CompoundTag();
+		tag.putInt("VariantID", variant);
 		tag.putString(ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(type)).toString());
 		stack.addTagElement("BlockEntityTag", tag);
 		return stack;
+	}
+
+	public static int getTrophyVariant(@Nonnull ItemStack stack) {
+		if (stack.hasTag()) {
+			CompoundTag tag = BlockItem.getBlockEntityData(stack);
+			if (tag != null && tag.contains(TrophyItem.VARIANT_TAG)) {
+				return tag.getInt(TrophyItem.VARIANT_TAG);
+			}
+		}
+
+		return 0;
 	}
 
 	@Override
 	public Component getName(ItemStack stack) {
 		Trophy trophy = getTrophy(stack);
 		if (trophy != null) {
-			return Component.translatable("block.obtrophies.trophy.entity", trophy.type().getDescription().getString());
+			return Component.translatable("block.obtrophies.trophy.entity", trophy.getType().getDescription().getString());
 		}
 		return super.getName(stack);
 	}
@@ -75,7 +93,14 @@ public class TrophyItem extends BlockItem {
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
 		Trophy trophy = getTrophy(stack);
 		if (trophy != null) {
-			tooltip.add(Component.translatable("item.obtrophies.trophy.modid", this.getModIdForTooltip(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type())).getNamespace())).withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.obtrophies.trophy.modid", this.getModIdForTooltip(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.getType())).getNamespace())).withStyle(ChatFormatting.GRAY));
+			if (flag.isAdvanced()) {
+				int variant = getTrophyVariant(stack);
+				if (level != null && !trophy.getVariants(level.registryAccess()).isEmpty() && trophy.getVariants(level.registryAccess()).size() >= variant) {
+					Map<String, String> variantDefiners = trophy.getVariants(level.registryAccess()).get(variant);
+					variantDefiners.forEach((key, value) -> tooltip.add(Component.translatable("\"%s\": \"%s\"", key, value).withStyle(ChatFormatting.GRAY)));
+				}
+			}
 		}
 	}
 
@@ -104,7 +129,13 @@ public class TrophyItem extends BlockItem {
 				Map<ResourceLocation, Trophy> sortedTrophies = new TreeMap<>(Comparator.naturalOrder());
 				sortedTrophies.putAll(Trophy.getTrophies());
 				for (Map.Entry<ResourceLocation, Trophy> trophyEntry : sortedTrophies.entrySet()) {
-					stacks.add(loadEntityToTrophy(trophyEntry.getValue().type()));
+					if (!trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).isEmpty()) {
+						for (int i = 0; i < trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).size(); i++) {
+							stacks.add(loadEntityToTrophy(trophyEntry.getValue().getType(), i));
+						}
+					} else {
+						stacks.add(loadEntityToTrophy(trophyEntry.getValue().getType()));
+					}
 				}
 			}
 		}

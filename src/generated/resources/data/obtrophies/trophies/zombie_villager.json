@@ -2,5 +2,9 @@
   "drop_chance": 0.001,
   "entity": "minecraft:zombie_villager",
   "offset": 0.0,
-  "scale": 1.0
+  "scale": 1.0,
+  "variant_registry": {
+    "key": "profession",
+    "registry": "minecraft:villager_profession"
+  }
 }

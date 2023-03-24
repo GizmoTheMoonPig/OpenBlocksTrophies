@@ -20,7 +20,9 @@ import java.util.Objects;
 public class TrophyBlockEntity extends BlockEntity {
 
 	private int cooldown = 0;
+	private int variant = 0;
 	private Trophy trophy;
+	private String trophyName = "";
 
 	public TrophyBlockEntity(BlockPos pos, BlockState state) {
 		super(Registries.TROPHY_BE.get(), pos, state);
@@ -43,6 +45,18 @@ public class TrophyBlockEntity extends BlockEntity {
 		return this.trophy;
 	}
 
+	public int getVariant() {
+		return this.variant;
+	}
+
+	public String getTrophyName() {
+		return this.trophyName;
+	}
+
+	public void setTrophyName(String trophyName) {
+		this.trophyName = trophyName;
+	}
+
 	public void setTrophy(Trophy trophy) {
 		this.trophy = trophy;
 		this.markUpdated();
@@ -52,9 +66,13 @@ public class TrophyBlockEntity extends BlockEntity {
 	protected void saveAdditional(CompoundTag tag) {
 		super.saveAdditional(tag);
 		if (this.getTrophy() != null) {
-			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getTrophy().type())).toString());
+			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getTrophy().getType())).toString());
 		}
 		tag.putInt("cooldown", this.getCooldown());
+		tag.putInt("VariantID", this.getVariant());
+		if (!this.getTrophyName().isEmpty()) {
+			tag.putString("CustomNameEntity", this.getTrophyName());
+		}
 	}
 
 	@Override
@@ -64,6 +82,10 @@ public class TrophyBlockEntity extends BlockEntity {
 			this.setTrophy(Trophy.getTrophies().get(ResourceLocation.tryParse(tag.getString("entity"))));
 		}
 		this.setCooldown(tag.getInt("cooldown"));
+		this.variant = tag.getInt("VariantID");
+		if (tag.contains("CustomNameEntity")) {
+			this.setTrophyName(tag.getString("CustomNameEntity"));
+		}
 	}
 
 	@Override

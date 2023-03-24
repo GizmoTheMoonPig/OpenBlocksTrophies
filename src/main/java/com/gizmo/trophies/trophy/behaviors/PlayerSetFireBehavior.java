@@ -10,9 +10,10 @@ import net.minecraft.util.GsonHelper;
 
 public class PlayerSetFireBehavior extends CustomBehavior {
 
-	private int time;
+	private final int time;
 
 	public PlayerSetFireBehavior() {
+		this(0);
 	}
 
 	public PlayerSetFireBehavior(int time) {
