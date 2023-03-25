@@ -2,5 +2,16 @@
   "drop_chance": 0.001,
   "entity": "alexsmobs:leafcutter_ant",
   "offset": 0.0,
-  "scale": 1.25
+  "scale": 1.25,
+  "variants": [
+	{
+	  "Leaf": "false"
+	},
+	{
+	  "Leaf": "true"
+	},
+	{
+	  "Queen": "true"
+	}
+  ]
 }

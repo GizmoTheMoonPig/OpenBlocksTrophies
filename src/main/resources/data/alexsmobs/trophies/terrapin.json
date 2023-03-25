@@ -2,5 +2,25 @@
   "drop_chance": 0.001,
   "entity": "alexsmobs:terrapin",
   "offset": 0.0,
-  "scale": 1.75
+  "scale": 1.75,
+  "variants": [
+	{
+	  "TurtleType": "0"
+	},
+	{
+	  "TurtleType": "1"
+	},
+	{
+	  "TurtleType": "2"
+	},
+	{
+	  "TurtleType": "3"
+	},
+	{
+	  "TurtleType": "4"
+	},
+	{
+	  "TurtleType": "5"
+	}
+  ]
 }

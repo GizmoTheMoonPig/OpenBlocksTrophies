@@ -2,5 +2,16 @@
   "drop_chance": 0.001,
   "entity": "alexsmobs:rain_frog",
   "offset": 0.0,
-  "scale": 1.5
+  "scale": 1.5,
+  "variants": [
+	{
+	  "Variant": "0"
+	},
+	{
+	  "Variant": "1"
+	},
+	{
+	  "Variant": "2"
+	}
+  ]
 }

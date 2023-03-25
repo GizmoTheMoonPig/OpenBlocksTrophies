@@ -2,5 +2,13 @@
   "drop_chance": 0.001,
   "entity": "alexsmobs:moose",
   "offset": 0.0,
-  "scale": 0.65
+  "scale": 0.65,
+  "variants": [
+	{
+	  "Antlered": "true"
+	},
+	{
+	  "Antlered": "false"
+	}
+  ]
 }

@@ -2,5 +2,13 @@
   "drop_chance": 0.001,
   "entity": "alexsmobs:skelewag",
   "offset": 0.0,
-  "scale": 0.6
+  "scale": 0.6,
+  "variants": [
+	{
+	  "Variant": "0"
+	},
+	{
+	  "Variant": "1"
+	}
+  ]
 }

@@ -7,5 +7,16 @@
   "drop_chance": 0.001,
   "entity": "twilightforest:dwarf_rabbit",
   "offset": 0.0,
-  "scale": 1.75
+  "scale": 1.75,
+  "variants": [
+	{
+	  "BunnyType": "twilightforest:brown"
+	},
+	{
+	  "BunnyType": "twilightforest:dutch"
+	},
+	{
+	  "BunnyType": "twilightforest:white"
+	}
+  ]
 }

@@ -2,5 +2,25 @@
   "drop_chance": 0.001,
   "entity": "extendedmushrooms:mushroom_sheep",
   "offset": 0.0,
-  "scale": 1.0
+  "scale": 1.0,
+  "variants": [
+	{
+	  "Mushroom": "0"
+	},
+	{
+	  "Mushroom": "1"
+	},
+	{
+	  "Mushroom": "2"
+	},
+	{
+	  "Mushroom": "3"
+	},
+	{
+	  "Mushroom": "4"
+	},
+	{
+	  "Mushroom": "5"
+	}
+  ]
 }

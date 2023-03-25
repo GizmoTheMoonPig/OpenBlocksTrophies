@@ -7,5 +7,19 @@
   "drop_chance": 0.001,
   "entity": "twilightforest:tiny_bird",
   "offset": 0.0,
-  "scale": 1.75
+  "scale": 1.75,
+  "variants": [
+	{
+	  "BirdType": "twilightforest:blue"
+	},
+	{
+	  "BirdType": "twilightforest:brown"
+	},
+	{
+	  "BirdType": "twilightforest:gold"
+	},
+	{
+	  "BirdType": "twilightforest:red"
+	}
+  ]
 }

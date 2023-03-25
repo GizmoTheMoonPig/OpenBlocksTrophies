@@ -2,5 +2,19 @@
   "drop_chance": 0.001,
   "entity": "alexsmobs:mantis_shrimp",
   "offset": 0.0,
-  "scale": 0.85
+  "scale": 0.85,
+  "variants": [
+	{
+	  "Variant": "0"
+	},
+	{
+	  "Variant": "1"
+	},
+	{
+	  "Variant": "2"
+	},
+	{
+	  "Variant": "3"
+	}
+  ]
 }

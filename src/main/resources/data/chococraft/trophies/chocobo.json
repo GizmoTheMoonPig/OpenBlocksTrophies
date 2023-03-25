@@ -2,5 +2,37 @@
   "drop_chance": 0.001,
   "entity": "chococraft:chocobo",
   "offset": 0.0,
-  "scale": 0.85
+  "scale": 0.85,
+  "variants": [
+	{
+	  "Color": "0"
+	},
+	{
+	  "Color": "1"
+	},
+	{
+	  "Color": "2"
+	},
+	{
+	  "Color": "3"
+	},
+	{
+	  "Color": "4"
+	},
+	{
+	  "Color": "5"
+	},
+	{
+	  "Color": "6"
+	},
+	{
+	  "Color": "7"
+	},
+	{
+	  "Color": "8"
+	},
+	{
+	  "Color": "9"
+	}
+  ]
 }

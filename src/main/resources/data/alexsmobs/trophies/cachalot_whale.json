@@ -2,5 +2,13 @@
   "drop_chance": 0.001,
   "entity": "alexsmobs:cachalot_whale",
   "offset": 0.0,
-  "scale": 0.1
+  "scale": 0.1,
+  "variants": [
+	{
+	  "Albino": "false"
+	},
+	{
+	  "Albino": "true"
+	}
+  ]
 }

@@ -2,5 +2,13 @@
   "drop_chance": 0.001,
   "entity": "alexsmobs:frilled_shark",
   "offset": 0.0,
-  "scale": 0.9
+  "scale": 0.9,
+  "variants": [
+	{
+	  "Depressurized": "false"
+	},
+	{
+	  "Depressurized": "true"
+	}
+  ]
 }

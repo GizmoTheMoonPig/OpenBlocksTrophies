@@ -2,5 +2,13 @@
   "drop_chance": 0.001,
   "entity": "alexsmobs:crimson_mosquito",
   "offset": 0.0,
-  "scale": 0.75
+  "scale": 0.75,
+  "variants": [
+	{
+	  "Sick": "false"
+	},
+	{
+	  "Sick": "true"
+	}
+  ]
 }
