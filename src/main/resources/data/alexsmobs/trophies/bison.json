@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "alexsmobs:bison_fur"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:bison",
   "offset": 0.0,

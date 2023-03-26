@@ -1,4 +1,15 @@
 {
+  "behavior": {
+	"type": "obtrophies:right_click_item",
+	"cooldown": 200,
+	"execute_behavior": {
+	  "type": "obtrophies:loot_table",
+	  "loot_table": "alexsmobs:gameplay/seal_reward",
+	  "rolls": 1
+	},
+	"item_to_use": "#minecraft:fishes",
+	"shrink_item_stack": true
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:seal",
   "offset": 0.0,

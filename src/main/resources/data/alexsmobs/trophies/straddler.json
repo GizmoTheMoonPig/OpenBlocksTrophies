@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "alexsmobs:straddlite"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:straddler",
   "offset": 0.0,

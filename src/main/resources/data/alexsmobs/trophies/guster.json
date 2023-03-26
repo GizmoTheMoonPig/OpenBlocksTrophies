@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 5000,
+	"item": "minecraft:sand"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:guster",
   "offset": 0.0,

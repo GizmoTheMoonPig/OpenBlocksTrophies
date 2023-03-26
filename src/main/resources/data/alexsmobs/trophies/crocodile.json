@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "alexsmobs:crocodile_scute"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:crocodile",
   "offset": 0.0,

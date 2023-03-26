@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 50000,
+	"item": "alexsmobs:moose_antler"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:moose",
   "offset": 0.0,

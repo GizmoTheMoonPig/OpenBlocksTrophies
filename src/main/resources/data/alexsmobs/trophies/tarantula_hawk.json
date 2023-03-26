@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "alexsmobs:tarantula_hawk_wing_fragment"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:tarantula_hawk",
   "offset": 0.0,

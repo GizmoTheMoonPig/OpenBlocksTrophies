@@ -1,4 +1,10 @@
 {
+  "behavior": {
+	"type": "obtrophies:mob_effect",
+	"amplifier": 0,
+	"effect": "alexsmobs:sunbird_blessing",
+	"time": 600
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:sunbird",
   "offset": 0.0,

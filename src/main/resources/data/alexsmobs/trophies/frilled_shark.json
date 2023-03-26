@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "alexsmobs:serrated_shark_tooth"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:frilled_shark",
   "offset": 0.0,

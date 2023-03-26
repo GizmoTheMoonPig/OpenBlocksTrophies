@@ -1,4 +1,10 @@
 {
+  "behavior": {
+	"type": "obtrophies:mob_effect",
+	"amplifier": 0,
+	"effect": "alexsmobs:ender_flu",
+	"time": 12000
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:enderiophage",
   "offset": 0.0,

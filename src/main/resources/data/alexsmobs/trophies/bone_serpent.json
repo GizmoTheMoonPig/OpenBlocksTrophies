@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "alexsmobs:bone_serpent_tooth"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:bone_serpent",
   "offset": 0.0,

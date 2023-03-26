@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 10000,
+	"item": "alexsmobs:maggot"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:fly",
   "offset": 0.0,

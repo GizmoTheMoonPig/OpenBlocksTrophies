@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 10000,
+	"item": "minecraft:feather"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:crow",
   "offset": 0.0,
