@@ -14,9 +14,12 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class ShootArrowBehavior extends CustomBehavior {
 
@@ -41,7 +44,7 @@ public class ShootArrowBehavior extends CustomBehavior {
 	public void serializeToJson(JsonObject object, JsonSerializationContext context) {
 		object.add("amount", context.serialize(this.amount));
 		if (this.arrowEffect != null) {
-			object.add("effect", context.serialize(ForgeRegistries.MOB_EFFECTS.getKey(this.arrowEffect).toString()));
+			object.add("effect", context.serialize(Objects.requireNonNull(ForgeRegistries.MOB_EFFECTS.getKey(this.arrowEffect)).toString()));
 		}
 	}
 
@@ -56,9 +59,9 @@ public class ShootArrowBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		BlockPos pos = block.getBlockPos();
-		Level level = block.getLevel();
+		Level level = player.getLevel();
 
 		for (int i = 0; i < this.amount; i++) {
 			Arrow arrow = new Arrow(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5D);

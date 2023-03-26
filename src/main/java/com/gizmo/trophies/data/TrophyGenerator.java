@@ -13,6 +13,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraftforge.common.Tags;
 
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class TrophyGenerator extends TrophyProvider {
 	protected void createTrophies() {
 		this.makeTrophy(new Trophy.Builder(EntityType.WOLF).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.CHICKEN).setScale(1.5F).setRightClickBehavior(new ItemDropBehavior(Items.EGG, 10000, SoundEvents.CHICKEN_EGG)).build());
-		this.makeTrophy(new Trophy.Builder(EntityType.COW).setRightClickBehavior(new ItemDropBehavior(Items.LEATHER, 20000)).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.COW).setRightClickBehavior(new ClickWithItemBehavior(Items.BUCKET, true, new ItemDropBehavior(Items.MILK_BUCKET), SoundEvents.COW_MILK)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.CREEPER).setRightClickBehavior(new ExplosionBehavior(2, false))
 				.addVariant("powered", "true")
 				.addVariant("powered", "false").build());
@@ -194,9 +195,9 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.RAVAGER).setScale(0.75F).setRightClickBehavior(new ItemDropBehavior(Items.SADDLE, 50000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.TRADER_LLAMA).setRightClickBehavior(new ShootLlamaSpitBehavior()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.WANDERING_TRADER).setRightClickBehavior(new ItemDropBehavior(Items.EMERALD, 10000, SoundEvents.WANDERING_TRADER_YES)).build());
-		this.makeTrophy(new Trophy.Builder(EntityType.BEE).setScale(1.5F).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.BEE).setScale(1.5F).setRightClickBehavior(new ClickWithItemBehavior(Items.GLASS_BOTTLE, true, new ItemDropBehavior(Items.HONEY_BOTTLE, 0), 20000, SoundEvents.BOTTLE_FILL)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.HOGLIN).setScale(0.85F).setRightClickBehavior(new ItemDropBehavior(Items.LEATHER, 20000)).build());
-		this.makeTrophy(new Trophy.Builder(EntityType.PIGLIN).setRightClickBehavior(new ItemDropBehavior(Items.GOLD_INGOT, 35000)).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.PIGLIN).setRightClickBehavior(new ClickWithItemBehavior(Tags.Items.INGOTS_GOLD, true, new PullFromLootTableBehavior(BuiltInLootTables.PIGLIN_BARTERING, 0), 200, SoundEvents.PIGLIN_ADMIRING_ITEM)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.STRIDER).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOGLIN).setScale(0.85F).setRightClickBehavior(new ItemDropBehavior(Items.ROTTEN_FLESH, 10000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.PIGLIN_BRUTE).setRightClickBehavior(new ItemDropBehavior(Items.GOLDEN_AXE, 20000)).build());
@@ -207,14 +208,14 @@ public class TrophyGenerator extends TrophyProvider {
 				.addVariant("Variant", "3")
 				.addVariant("Variant", "4").build());
 		this.makeTrophy(new Trophy.Builder(EntityType.GLOW_SQUID).setVerticalOffset(0.5D).setRightClickBehavior(new MobEffectBehavior(MobEffects.GLOWING, 200, 0)).build());
-		this.makeTrophy(new Trophy.Builder(EntityType.GOAT).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.GOAT).setRightClickBehavior(new ClickWithItemBehavior(Items.BUCKET, true, new ItemDropBehavior(Items.MILK_BUCKET), 0, SoundEvents.GOAT_MILK)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ALLAY).setScale(1.75F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.FROG).setScale(1.5F).setRightClickBehavior(new ItemDropBehavior(Items.SLIME_BALL, 20000))
 				.addRegistry("variant", Registry.FROG_VARIANT_REGISTRY).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.TADPOLE).setScale(2.0F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.WARDEN).setScale(0.75F).setRightClickBehavior(new MobEffectBehavior(MobEffects.DARKNESS, 200, 0)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.WITHER).setDropChance(0.0075D).setVerticalOffset(-0.2D).setScale(0.75F).build());
-		this.makeTrophy(new Trophy.Builder(EntityType.ENDER_DRAGON).setDropChance(0.0075D).setScale(0.25F).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.ENDER_DRAGON).setDropChance(0.0075D).setScale(0.25F).setRightClickBehavior(new ClickWithItemBehavior(Items.GLASS_BOTTLE, true, new ItemDropBehavior(Items.DRAGON_BREATH))).build());
 	}
 
 	@Override

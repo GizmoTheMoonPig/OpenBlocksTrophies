@@ -109,7 +109,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 					level.playSound(null, pos, ambientSound, SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
 				}
 				if (trophyBE.getCooldown() <= 0 && trophy.getClickBehavior() != null) {
-					trophyBE.setCooldown(trophy.getClickBehavior().execute(trophyBE, (ServerPlayer) player));
+					trophyBE.setCooldown(trophy.getClickBehavior().execute(trophyBE, (ServerPlayer) player, player.getItemInHand(hand)));
 				}
 			}
 		}

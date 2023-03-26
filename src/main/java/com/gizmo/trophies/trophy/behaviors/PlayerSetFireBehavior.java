@@ -7,6 +7,7 @@ import com.google.gson.JsonSerializationContext;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
 
 public class PlayerSetFireBehavior extends CustomBehavior {
 
@@ -36,7 +37,7 @@ public class PlayerSetFireBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		player.setSecondsOnFire(this.time);
 		return 0;
 	}

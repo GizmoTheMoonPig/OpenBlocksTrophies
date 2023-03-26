@@ -7,11 +7,15 @@ import com.google.gson.JsonSerializationContext;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.ItemHandlerHelper;
+
+import java.util.Objects;
 
 public class PullFromLootTableBehavior extends CustomBehavior {
 
@@ -20,7 +24,7 @@ public class PullFromLootTableBehavior extends CustomBehavior {
 	private final int cooldown;
 
 	public PullFromLootTableBehavior() {
-		this(null, 0);
+		this(BuiltInLootTables.EMPTY, 0);
 	}
 
 	public PullFromLootTableBehavior(ResourceLocation lootTable, int cooldown) {
@@ -42,19 +46,21 @@ public class PullFromLootTableBehavior extends CustomBehavior {
 	public void serializeToJson(JsonObject object, JsonSerializationContext context) {
 		object.add("loot_table", context.serialize(this.lootTable.toString()));
 		object.add("rolls", context.serialize(this.tableRolls));
-		object.add("cooldown", context.serialize(this.cooldown));
+		if (this.cooldown != 0) {
+			object.add("cooldown", context.serialize(this.cooldown));
+		}
 	}
 
 	@Override
 	public CustomBehavior fromJson(JsonObject object) {
 		ResourceLocation table = ResourceLocation.tryParse(GsonHelper.getAsString(object, "loot_table"));
 		int rolls = GsonHelper.getAsInt(object, "rolls", 1);
-		int cooldown = GsonHelper.getAsInt(object, "cooldown", 1000);
-		return new PullFromLootTableBehavior(table, rolls, cooldown);
+		int cooldown = GsonHelper.getAsInt(object, "cooldown", 0);
+		return new PullFromLootTableBehavior(Objects.requireNonNull(table), rolls, cooldown);
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		for (int i = 0; i < this.tableRolls; i++) {
 			LootContext.Builder builder = new LootContext.Builder(player.getLevel())
 					.withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(block.getBlockPos()))

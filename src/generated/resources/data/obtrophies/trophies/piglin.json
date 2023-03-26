@@ -1,8 +1,14 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 35000,
-	"item": "minecraft:gold_ingot"
+    "type": "obtrophies:right_click_item",
+    "execute_behavior": {
+      "type": "obtrophies:loot_table",
+      "loot_table": "minecraft:gameplay/piglin_bartering",
+      "rolls": 1
+    },
+    "item_to_use": "#forge:ingots/gold",
+    "shrink_item_stack": true,
+    "sound": "minecraft:entity.piglin.admiring_item"
   },
   "drop_chance": 0.001,
   "entity": "minecraft:piglin",

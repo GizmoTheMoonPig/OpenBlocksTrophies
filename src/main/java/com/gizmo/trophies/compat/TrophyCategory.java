@@ -28,6 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TrophyCategory implements IRecipeCategory<TrophyInfoWrapper> {
 	public static final int WIDTH = 116;
@@ -97,9 +98,9 @@ public class TrophyCategory implements IRecipeCategory<TrophyInfoWrapper> {
 		if (mouseX > 8 && mouseX < 43 && mouseY > 9 && mouseY < 44) {
 			components.add(recipe.getTrophyEntity().getDescription());
 			if (Minecraft.getInstance().options.advancedItemTooltips) {
-				components.add(Component.literal(ForgeRegistries.ENTITY_TYPES.getKey(recipe.getTrophyEntity()).toString()).withStyle(ChatFormatting.DARK_GRAY));
+				components.add(Component.literal(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(recipe.getTrophyEntity())).toString()).withStyle(ChatFormatting.DARK_GRAY));
 			}
-			components.add(Component.literal(this.getModIdForTooltip(ForgeRegistries.ENTITY_TYPES.getKey(recipe.getTrophyEntity()).getNamespace())).withStyle(ChatFormatting.BLUE, ChatFormatting.ITALIC));
+			components.add(Component.literal(this.getModIdForTooltip(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(recipe.getTrophyEntity())).getNamespace())).withStyle(ChatFormatting.BLUE, ChatFormatting.ITALIC));
 		}
 
 		if (mouseX > 51 && mouseX < 73 && mouseY > 19 && mouseY < 34 && !TrophyConfig.COMMON_CONFIG.anySourceDropsTrophies.get()) {

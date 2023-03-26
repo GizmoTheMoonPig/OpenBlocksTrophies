@@ -1,4 +1,13 @@
 {
+  "behavior": {
+    "type": "obtrophies:right_click_item",
+    "execute_behavior": {
+      "type": "obtrophies:item",
+      "item": "minecraft:dragon_breath"
+    },
+    "item_to_use": "minecraft:glass_bottle",
+    "shrink_item_stack": true
+  },
   "drop_chance": 0.0075,
   "entity": "minecraft:ender_dragon",
   "offset": 0.0,

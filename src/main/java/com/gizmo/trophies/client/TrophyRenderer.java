@@ -116,7 +116,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 				trophy.getVariants(Minecraft.getInstance().level.registryAccess()).get(variant).forEach((s, s2) -> villager.setVillagerData(new VillagerData(VillagerType.PLAINS, Objects.requireNonNull(Minecraft.getInstance().level.registryAccess().registryOrThrow(Registry.VILLAGER_PROFESSION_REGISTRY).get(ResourceLocation.tryParse(s2))), 1)));
 			} else {
 				CompoundTag tag = new CompoundTag();
-				trophy.getVariants(Minecraft.getInstance().level.registryAccess()).get(variant).forEach((s, s2) -> convertStringToProperPrimitive(tag, s, s2));
+				trophy.getVariants(Minecraft.getInstance().level.registryAccess()).get(Mth.clamp(variant, 0, trophy.getVariants(Minecraft.getInstance().level.registryAccess()).size() - 1)).forEach((s, s2) -> convertStringToProperPrimitive(tag, s, s2));
 				living.readAdditionalSaveData(tag);
 			}
 		}

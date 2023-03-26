@@ -142,16 +142,14 @@ public class Trophy {
 			JsonArray array = GsonHelper.getAsJsonArray(object, "variants");
 			array.forEach(jsonElement -> {
 				Map<String, String> variant = new HashMap<>();
-				jsonElement.getAsJsonObject().entrySet().forEach(entry -> {
-					variant.put(entry.getKey(), entry.getValue().getAsString());
-				});
+				jsonElement.getAsJsonObject().entrySet().forEach(entry -> variant.put(entry.getKey(), entry.getValue().getAsString()));
 				variants.add(variant);
 			});
 		} else if (object.has("variant_registry")) {
 			JsonObject vObject = GsonHelper.convertToJsonObject(object.get("variant_registry"), "variant_registry");
 			registry = Pair.of(GsonHelper.getAsString(vObject, "key"), ResourceKey.createRegistryKey(Objects.requireNonNull(ResourceLocation.tryParse(GsonHelper.getAsString(vObject, "registry")))));
 		}
-		return new Trophy(realEntity, dropChance, verticalOffset, scale, behavior, variants, registry);
+		return new Trophy(Objects.requireNonNull(realEntity), dropChance, verticalOffset, scale, behavior, variants, registry);
 	}
 
 	//right click behaviors are done entirely server-side, no need to send them to the client

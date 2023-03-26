@@ -9,7 +9,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
 
 public class MobEffectBehavior extends CustomBehavior {
 
@@ -18,7 +22,7 @@ public class MobEffectBehavior extends CustomBehavior {
 	private final int amplifier;
 
 	public MobEffectBehavior() {
-		this(null, 0, 0);
+		this(MobEffects.WITHER, 0, 0);
 	}
 
 	public MobEffectBehavior(MobEffect effect, int time, int amplifier) {
@@ -34,7 +38,7 @@ public class MobEffectBehavior extends CustomBehavior {
 
 	@Override
 	public void serializeToJson(JsonObject object, JsonSerializationContext context) {
-		object.add("effect", context.serialize(ForgeRegistries.MOB_EFFECTS.getKey(this.effect).toString()));
+		object.add("effect", context.serialize(Objects.requireNonNull(ForgeRegistries.MOB_EFFECTS.getKey(this.effect)).toString()));
 		object.add("time", context.serialize(this.time));
 		object.add("amplifier", context.serialize(this.amplifier));
 	}
@@ -44,11 +48,11 @@ public class MobEffectBehavior extends CustomBehavior {
 		MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(ResourceLocation.tryParse(GsonHelper.getAsString(object, "effect")));
 		int time = GsonHelper.getAsInt(object, "time", 100);
 		int amplifier = GsonHelper.getAsInt(object, "amplifier", 0);
-		return new MobEffectBehavior(effect, time, amplifier);
+		return new MobEffectBehavior(Objects.requireNonNull(effect), time, amplifier);
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		player.addEffect(new MobEffectInstance(this.effect, this.time, this.amplifier));
 		return this.time;
 	}

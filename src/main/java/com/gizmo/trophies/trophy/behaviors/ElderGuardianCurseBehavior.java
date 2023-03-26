@@ -7,6 +7,7 @@ import com.google.gson.JsonSerializationContext;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 
 public class ElderGuardianCurseBehavior extends CustomBehavior {
 
@@ -25,7 +26,7 @@ public class ElderGuardianCurseBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		player.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.GUARDIAN_ELDER_EFFECT, 1.0F));
 		return 100;
 	}

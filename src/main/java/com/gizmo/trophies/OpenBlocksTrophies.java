@@ -94,6 +94,7 @@ public class OpenBlocksTrophies {
 
 	public void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
+			CustomBehaviorRegistry.registerBehavior(new ClickWithItemBehavior());
 			CustomBehaviorRegistry.registerBehavior(new MobEffectBehavior());
 			CustomBehaviorRegistry.registerBehavior(new ItemDropBehavior());
 			CustomBehaviorRegistry.registerBehavior(new PullFromLootTableBehavior());

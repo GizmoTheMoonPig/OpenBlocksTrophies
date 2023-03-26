@@ -1,14 +1,14 @@
-// 1.19.2	2023-03-24T11:31:51.6211028	Default OpenBlocks Trophies
+// 1.19.2	2023-03-26T13:32:08.9516264	Default OpenBlocks Trophies
 0f37c153956695534854e0497319138a8ad470b9 data/obtrophies/trophies/allay.json
 e1557f9ed64088bf53883b68c7270b07118d484e data/obtrophies/trophies/axolotl.json
 a6e278d8cbd3535afd460decf84df8d5c06b5795 data/obtrophies/trophies/bat.json
-391be2ed40207138f3744c4dc87afbf37e0536fd data/obtrophies/trophies/bee.json
+c1f417c018ee18345b5b4e194b4e3b3c586dcc27 data/obtrophies/trophies/bee.json
 58226b778d215fbcc997df2ee65f382290f8a957 data/obtrophies/trophies/blaze.json
 3f2a8354816a0adbbace29b598876b95dfe063cc data/obtrophies/trophies/cat.json
 148bd5bac2e45754761514572c79c221ee994698 data/obtrophies/trophies/cave_spider.json
 6efec5a5ed5c1d326f509bb941580c6ab64bd378 data/obtrophies/trophies/chicken.json
 3fb73cddfe0039adb8f6ecbc4b51ff57600fd9bf data/obtrophies/trophies/cod.json
-1affea323294526e7fbc399cc67d504d538c1d5c data/obtrophies/trophies/cow.json
+eae4aa7d2e5e127c0cdca1c33e98481341689736 data/obtrophies/trophies/cow.json
 bb7a6e4dbb2616e93a4cc70a6362f104ba7440a0 data/obtrophies/trophies/creeper.json
 8a9bdb108f964ca05050b8fe542181c701eb8213 data/obtrophies/trophies/dolphin.json
 0d1dba2913ff53a6d5edd9668ece26ddd31133bf data/obtrophies/trophies/donkey.json
@@ -16,13 +16,13 @@ b4a6ac5275efe381c5baa39847ad494d38eff98b data/obtrophies/trophies/drowned.json
 bf1954c63a1525580c5ae94bba7b85f9bc452860 data/obtrophies/trophies/elder_guardian.json
 d4d93049c5f02587310d94052adba72d968ded86 data/obtrophies/trophies/enderman.json
 c37a27380cc0d8f9f641784d74bcdd434502520f data/obtrophies/trophies/endermite.json
-1f59a4fc913b46857e269e829f4a672fe2971a61 data/obtrophies/trophies/ender_dragon.json
+cf7e33fcb00b2b374080a6f73af3d3ee73ce7012 data/obtrophies/trophies/ender_dragon.json
 fcde8c22f8a2b81fbdc45a013f4fe13375c867b0 data/obtrophies/trophies/evoker.json
 d9763133029cbe9094d7155c0a4a0d439319ec24 data/obtrophies/trophies/fox.json
 8593ba219bb6ddceaabeee442756d83fe5b9701f data/obtrophies/trophies/frog.json
 65ca967c1abf8ff7dd3b6c4f88952de4aec01c86 data/obtrophies/trophies/ghast.json
 25e45f3ffaaedf052dab5ae9be5ef772343bc1e3 data/obtrophies/trophies/glow_squid.json
-7017b2e17d6d462005c7d49f07ae1cdb9a33184e data/obtrophies/trophies/goat.json
+d7a7427deb50ff4698a503402c81f916a7aa844b data/obtrophies/trophies/goat.json
 0e3b81d6e7e71767f5b24c8d4ab5ddd1f49709e8 data/obtrophies/trophies/guardian.json
 ec8df9075a913a93dd91800cb2258a3ab6c90c6c data/obtrophies/trophies/hoglin.json
 c606137c00e5130d7ef3d1b132344b7b223a30a8 data/obtrophies/trophies/horse.json
@@ -38,7 +38,7 @@ ffacf27d71728ca363d84e8f985a8d7edce2dfb9 data/obtrophies/trophies/ocelot.json
 b768f308ab52d20e02d20ff0efe31acdf8e9d97a data/obtrophies/trophies/parrot.json
 ceaabc56aaeb6cfc69fb0ed97f19ab5893660f54 data/obtrophies/trophies/phantom.json
 9da5f6c65073da1929bfe435cff48ff984b61444 data/obtrophies/trophies/pig.json
-6f818b665f90ece35e210f57d1160a26243cb9ce data/obtrophies/trophies/piglin.json
+684a53860aec6418e04f875d5b42bb44b591595a data/obtrophies/trophies/piglin.json
 134d15fb70f678572abd52f641096172464ece88 data/obtrophies/trophies/piglin_brute.json
 683d1848ba3138c0b0bd9ca2bbee5a8da96de801 data/obtrophies/trophies/pillager.json
 e77974981f007bc594678d92d47ea013b95a5419 data/obtrophies/trophies/polar_bear.json
