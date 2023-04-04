@@ -42,9 +42,11 @@ public class EntityRenderer {
 					entity = ENTITY_MAP.computeIfAbsent(type, t -> t.create(level));
 				}
 				if (entity instanceof LivingEntity livingEntity) {
-					CompoundTag tag = new CompoundTag();
-					variant.forEach((s, s2) -> TrophyRenderer.convertStringToProperPrimitive(tag, s, s2));
-					livingEntity.readAdditionalSaveData(tag);
+					if (!variant.isEmpty()) {
+						CompoundTag tag = new CompoundTag();
+						variant.forEach((s, s2) -> TrophyRenderer.convertStringToProperPrimitive(tag, s, s2));
+						livingEntity.readAdditionalSaveData(tag);
+					}
 					int scale = 16;
 					float height = entity.getBbHeight();
 					float width = entity.getBbWidth();

@@ -43,11 +43,11 @@ public class ClickWithItemBehavior extends CustomBehavior {
 	}
 
 	public ClickWithItemBehavior(Item clickedItem, boolean consumeStack, @Nullable CustomBehavior executeBehavior, int cooldown, @Nullable SoundEvent sound) {
-		this(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(clickedItem)).toString(), consumeStack, executeBehavior, 0, sound);
+		this(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(clickedItem)).toString(), consumeStack, executeBehavior, cooldown, sound);
 	}
 
 	public ClickWithItemBehavior(TagKey<Item> clickedItem, boolean consumeStack, @Nullable CustomBehavior executeBehavior, int cooldown, @Nullable SoundEvent sound) {
-		this("#" + Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(clickedItem).getKey().location().toString(), consumeStack, executeBehavior, 0, sound);
+		this("#" + Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(clickedItem).getKey().location(), consumeStack, executeBehavior, cooldown, sound);
 	}
 
 	private ClickWithItemBehavior(String clickedItem, boolean consumeStack, @Nullable CustomBehavior executeBehavior, int cooldown, @Nullable SoundEvent sound) {
