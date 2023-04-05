@@ -33,7 +33,7 @@ public class Registries {
 	public static final RegistryObject<BlockEntityType<TrophyBlockEntity>> TROPHY_BE = BLOCK_ENTITIES.register("trophy", () -> BlockEntityType.Builder.of(TrophyBlockEntity::new, TROPHY.get()).build(null));
 	public static final RegistryObject<Item> TROPHY_ITEM = ITEMS.register("trophy", () -> new TrophyItem(TROPHY.get(), new Item.Properties().fireResistant()));
 
-	public static final RegistryObject<Codec<AddQuestRamModifier>> ADD_SHADER = LOOT_MODIFIERS.register("add_quest_ram_trophy", () -> AddQuestRamModifier.CODEC);
+	public static final RegistryObject<Codec<AddQuestRamModifier>> ADD_QUEST_RAM_TROPHY = LOOT_MODIFIERS.register("add_quest_ram_trophy", () -> AddQuestRamModifier.CODEC);
 
 	public static class AddQuestRamModifier extends LootModifier {
 		public static final Codec<AddQuestRamModifier> CODEC = RecordCodecBuilder.create(inst -> LootModifier.codecStart(inst).apply(inst, AddQuestRamModifier::new));
