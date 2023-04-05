@@ -1,11 +1,34 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": "minecraft:carrot"
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": "minecraft:carrot"
   },
   "drop_chance": 0.001,
   "entity": "minecraft:rabbit",
   "offset": 0.0,
-  "scale": 2.0
+  "scale": 2.0,
+  "variants": [
+    {
+      "RabbitType": "0"
+    },
+    {
+      "RabbitType": "1"
+    },
+    {
+      "RabbitType": "2"
+    },
+    {
+      "RabbitType": "3"
+    },
+    {
+      "RabbitType": "4"
+    },
+    {
+      "RabbitType": "5"
+    },
+    {
+      "RabbitType": "6"
+    }
+  ]
 }

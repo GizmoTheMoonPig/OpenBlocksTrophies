@@ -1,11 +1,118 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": "minecraft:wheat"
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": "minecraft:wheat"
   },
   "drop_chance": 0.001,
   "entity": "minecraft:horse",
   "offset": 0.0,
-  "scale": 0.9
+  "scale": 0.9,
+  "variants": [
+    {
+      "Variant": "0"
+    },
+    {
+      "Variant": "1"
+    },
+    {
+      "Variant": "2"
+    },
+    {
+      "Variant": "3"
+    },
+    {
+      "Variant": "4"
+    },
+    {
+      "Variant": "5"
+    },
+    {
+      "Variant": "6"
+    },
+    {
+      "Variant": "256"
+    },
+    {
+      "Variant": "257"
+    },
+    {
+      "Variant": "258"
+    },
+    {
+      "Variant": "259"
+    },
+    {
+      "Variant": "260"
+    },
+    {
+      "Variant": "261"
+    },
+    {
+      "Variant": "262"
+    },
+    {
+      "Variant": "512"
+    },
+    {
+      "Variant": "513"
+    },
+    {
+      "Variant": "514"
+    },
+    {
+      "Variant": "515"
+    },
+    {
+      "Variant": "516"
+    },
+    {
+      "Variant": "517"
+    },
+    {
+      "Variant": "518"
+    },
+    {
+      "Variant": "768"
+    },
+    {
+      "Variant": "769"
+    },
+    {
+      "Variant": "770"
+    },
+    {
+      "Variant": "771"
+    },
+    {
+      "Variant": "772"
+    },
+    {
+      "Variant": "773"
+    },
+    {
+      "Variant": "774"
+    },
+    {
+      "Variant": "1024"
+    },
+    {
+      "Variant": "1025"
+    },
+    {
+      "Variant": "1026"
+    },
+    {
+      "Variant": "1027"
+    },
+    {
+      "Variant": "1028"
+    },
+    {
+      "Variant": "1029"
+    },
+    {
+      "Variant": "1030"
+    }
+  ]
 }

@@ -1,5 +1,6 @@
 package com.gizmo.trophies.compat;
 
+import com.gizmo.trophies.client.TrophyRenderer;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -7,27 +8,31 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.npc.VillagerData;
+import net.minecraft.world.entity.npc.VillagerDataHolder;
+import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import twilightforest.TwilightForestMod;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class EntityRenderer {
 
 	private static final Set<EntityType<?>> IGNORED_ENTITIES = new HashSet<>();
 	private static final Map<EntityType<?>, Entity> ENTITY_MAP = new HashMap<>();
 
-	public static void render(PoseStack stack, @Nullable EntityType<?> type, int x, int y) {
+	public static void render(PoseStack stack, @Nullable EntityType<?> type, int x, int y, Map<String, String> variant) {
 		if (type != null) {
 			Level level = Minecraft.getInstance().level;
 			if (level != null && !IGNORED_ENTITIES.contains(type)) {
@@ -40,6 +45,15 @@ public class EntityRenderer {
 					entity = ENTITY_MAP.computeIfAbsent(type, t -> t.create(level));
 				}
 				if (entity instanceof LivingEntity livingEntity) {
+					if (!variant.isEmpty()) {
+						if (entity instanceof VillagerDataHolder villager) {
+							variant.forEach((s, s2) -> villager.setVillagerData(new VillagerData(VillagerType.PLAINS, Objects.requireNonNull(Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.VILLAGER_PROFESSION).get(ResourceLocation.tryParse(s2))), 1)));
+						} else {
+							CompoundTag tag = new CompoundTag();
+							variant.forEach((s, s2) -> TrophyRenderer.convertStringToProperPrimitive(tag, s, s2));
+							livingEntity.readAdditionalSaveData(tag);
+						}
+					}
 					int scale = 16;
 					float height = entity.getBbHeight();
 					float width = entity.getBbWidth();

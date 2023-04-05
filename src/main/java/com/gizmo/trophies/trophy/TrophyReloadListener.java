@@ -13,19 +13,19 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
 
 	public static final Gson GSON = new GsonBuilder().registerTypeAdapter(Trophy.class, new Trophy.Serializer()).create();
-	private static final Map<ResourceLocation, Trophy> validTrophies = new HashMap<>();
+	private static final TreeMap<ResourceLocation, Trophy> validTrophies = new TreeMap<>();
 
 	public TrophyReloadListener() {
 		super(GSON, "trophies");
 	}
 
-	public static Map<ResourceLocation, Trophy> getValidTrophies() {
+	public static TreeMap<ResourceLocation, Trophy> getValidTrophies() {
 		return validTrophies;
 	}
 
@@ -43,8 +43,8 @@ public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
 					JsonObject object = GsonHelper.convertToJsonObject(jsonElement, "trophy");
 					Trophy trophy = Trophy.fromJson(object);
 					//only add entries if the entity exists, otherwise skip it
-					if (ForgeRegistries.ENTITY_TYPES.containsValue(trophy.type())) {
-						validTrophies.put(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type()), trophy);
+					if (ForgeRegistries.ENTITY_TYPES.containsValue(trophy.getType())) {
+						validTrophies.put(ForgeRegistries.ENTITY_TYPES.getKey(trophy.getType()), trophy);
 					}
 				} catch (Exception exception) {
 					OpenBlocksTrophies.LOGGER.error("Caught an error loading trophy config for {}! {}", resourceLocation, exception.getMessage());

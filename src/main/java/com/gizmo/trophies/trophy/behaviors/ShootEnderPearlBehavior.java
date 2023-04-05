@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class ShootEnderPearlBehavior extends CustomBehavior {
@@ -27,8 +28,8 @@ public class ShootEnderPearlBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
-		Level level = block.getLevel();
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
+		Level level = player.getLevel();
 		ThrownEnderpearl pearl = new ThrownEnderpearl(level, player);
 		BlockPos pos = block.getBlockPos();
 		pearl.setPos(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);

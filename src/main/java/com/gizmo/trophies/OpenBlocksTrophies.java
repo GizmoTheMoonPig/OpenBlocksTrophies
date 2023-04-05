@@ -3,11 +3,15 @@ package com.gizmo.trophies;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.behaviors.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.npc.VillagerDataHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
@@ -26,6 +30,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,6 +70,8 @@ public class OpenBlocksTrophies {
 
 	public void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
+			CustomBehaviorRegistry.registerBehavior(new ClickWithItemBehavior());
+			CustomBehaviorRegistry.registerBehavior(new PullFromLootTableBehavior());
 			CustomBehaviorRegistry.registerBehavior(new MobEffectBehavior());
 			CustomBehaviorRegistry.registerBehavior(new ItemDropBehavior());
 			CustomBehaviorRegistry.registerBehavior(new ElderGuardianCurseBehavior());
@@ -87,7 +94,7 @@ public class OpenBlocksTrophies {
 		event.registerCreativeModeTab(location("trophies"), builder -> builder
 				.title(Component.translatable("itemGroup.obtrophies"))
 				.icon(TrophyTabHelper::makeIcon)
-				.displayItems((flag, output, operator) -> TrophyTabHelper.getAllTrophies(output, flag))
+				.displayItems((params, output) -> TrophyTabHelper.getAllTrophies(output))
 		);
 	}
 
@@ -100,29 +107,61 @@ public class OpenBlocksTrophies {
 		if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
 			Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
 			if (trophy != null) {
-				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.dropChance();
+				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.getDropChance();
 				double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
 				if (chance > 0.0D) {
-					event.getDrops().add(new ItemEntity(event.getEntity().getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.type(), false)));
+					event.getDrops().add(new ItemEntity(event.getEntity().getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.getType(), this.fetchVariantIfAny(event.getEntity(), trophy), false)));
 				}
 			}
 		}
 	}
 
+	private int fetchVariantIfAny(LivingEntity entity, Trophy trophy) {
+		if (!trophy.getVariants(entity.getLevel().registryAccess()).isEmpty()) {
+			CompoundTag tag = new CompoundTag();
+			entity.addAdditionalSaveData(tag);
+			for (int i = 0; i < trophy.getVariants(entity.getLevel().registryAccess()).size(); i++) {
+				Map<String, String> variantKeys = trophy.getVariants(entity.getLevel().registryAccess()).get(i);
+				for (Map.Entry<String, String> entry : variantKeys.entrySet()) {
+					if (entity instanceof VillagerDataHolder villager) {
+						if (ForgeRegistries.VILLAGER_PROFESSIONS.getKey(villager.getVillagerData().getProfession()).toString().equals(entry.getValue())) {
+							return i;
+						}
+					} else {
+						if (tag.contains(entry.getKey())) {
+							if (StringUtils.isNumeric(entry.getValue()) && tag.getInt(entry.getKey()) == Integer.parseInt(entry.getValue())) {
+								return i;
+							} else if ((entry.getValue().equals("false") || entry.getValue().equals("true")) && tag.getBoolean(entry.getKey()) == Boolean.parseBoolean(entry.getValue())) {
+								return i;
+							} else if (tag.getString(entry.getKey()).equals(entry.getValue()) || tag.getString(entry.getKey()).equals(new ResourceLocation(entry.getValue()).toString())) {
+								return i;
+							}
+						}
+					}
+				}
+			}
+		}
+		return 0;
+	}
 
 	public static class TrophyTabHelper {
 
 		public static ItemStack makeIcon() {
-			return TrophyItem.loadEntityToTrophy(EntityType.CHICKEN, !Trophy.getTrophies().isEmpty());
+			return TrophyItem.loadEntityToTrophy(EntityType.CHICKEN, 0, !Trophy.getTrophies().isEmpty());
 		}
 
-		public static void getAllTrophies(CreativeModeTab.Output output, FeatureFlagSet flag) {
+		public static void getAllTrophies(CreativeModeTab.Output output) {
 			if (!Trophy.getTrophies().isEmpty()) {
 				Map<ResourceLocation, Trophy> sortedTrophies = new TreeMap<>(Comparator.naturalOrder());
 				sortedTrophies.putAll(Trophy.getTrophies());
 				for (Map.Entry<ResourceLocation, Trophy> trophyEntry : sortedTrophies.entrySet()) {
-					if (trophyEntry.getValue().type() == EntityType.CAMEL && !flag.contains(FeatureFlags.UPDATE_1_20)) continue;
-					output.accept(TrophyItem.loadEntityToTrophy(trophyEntry.getValue().type(), false));
+					if (!trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).isEmpty()) {
+						for (int i = 0; i < trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).size(); i++) {
+							output.accept(TrophyItem.loadEntityToTrophy(trophyEntry.getValue().getType(), i, false));
+						}
+					} else {
+						output.accept(TrophyItem.loadEntityToTrophy(trophyEntry.getValue().getType(), 0, false));
+					}
 				}
 			}
 		}

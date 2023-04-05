@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.LlamaSpit;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class ShootLlamaSpitBehavior extends CustomBehavior {
@@ -31,11 +32,11 @@ public class ShootLlamaSpitBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		BlockPos pos = block.getBlockPos();
-		Level level = block.getLevel();
+		Level level = player.getLevel();
 
-		LlamaSpit spit = new LlamaSpit(EntityType.LLAMA_SPIT, player.getLevel());
+		LlamaSpit spit = new LlamaSpit(EntityType.LLAMA_SPIT, level);
 		spit.setPos(pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5D);
 
 		double dX = player.getX() - (pos.getX() + 0.5F);
@@ -46,6 +47,6 @@ public class ShootLlamaSpitBehavior extends CustomBehavior {
 		level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.LLAMA_SPIT, SoundSource.NEUTRAL, 1.0F, 1.0F + (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F);
 		level.addFreshEntity(spit);
 
-		return 0;
+		return 10;
 	}
 }

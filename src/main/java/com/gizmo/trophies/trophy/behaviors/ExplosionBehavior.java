@@ -8,14 +8,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class ExplosionBehavior extends CustomBehavior {
 
-	private float power;
-	private boolean destructive;
+	private final float power;
+	private final boolean destructive;
 
 	public ExplosionBehavior() {
+		this(0.0F, false);
 	}
 
 	public ExplosionBehavior(float power, boolean destructive) {
@@ -42,7 +44,7 @@ public class ExplosionBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		BlockPos pos = block.getBlockPos();
 		block.getLevel().explode(player, pos.getX(), pos.getY(), pos.getZ(), this.power, this.destructive ? Level.ExplosionInteraction.BLOCK : Level.ExplosionInteraction.NONE);
 		return 0;

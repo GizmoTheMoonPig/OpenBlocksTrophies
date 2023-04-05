@@ -8,10 +8,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 public class TrophyItemRenderer extends BlockEntityWithoutLevelRenderer {
@@ -20,7 +20,7 @@ public class TrophyItemRenderer extends BlockEntityWithoutLevelRenderer {
 	}
 
 	@Override
-	public void renderByItem(ItemStack stack, ItemTransforms.TransformType type, PoseStack ms, MultiBufferSource source, int light, int overlay) {
+	public void renderByItem(ItemStack stack, ItemDisplayContext context, PoseStack ms, MultiBufferSource source, int light, int overlay) {
 		Item item = stack.getItem();
 		if (item instanceof TrophyItem) {
 			BakedModel base = Minecraft.getInstance().getBlockRenderer().getBlockModel(Registries.TROPHY.get().defaultBlockState());
@@ -28,8 +28,8 @@ public class TrophyItemRenderer extends BlockEntityWithoutLevelRenderer {
 
 			if (stack.hasTag()) {
 				Trophy trophy = TrophyItem.getTrophy(stack);
-				if (trophy != null) {
-					TrophyRenderer.renderEntity(null, Minecraft.getInstance().level, BlockPos.ZERO, trophy, ms, source, light, TrophyItem.hasCycleOnTrophy(stack));
+				if (trophy != null && Minecraft.getInstance().level != null) {
+					TrophyRenderer.renderEntity(null, TrophyItem.getTrophyVariant(stack), stack.hasCustomHoverName() ? stack.getHoverName().getString() : "", Minecraft.getInstance().level, BlockPos.ZERO, trophy, ms, source, light, TrophyItem.hasCycleOnTrophy(stack));
 				}
 			}
 		}

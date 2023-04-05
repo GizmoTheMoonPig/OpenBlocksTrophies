@@ -1,0 +1,20 @@
+{
+  "drop_chance": 0.001,
+  "entity": "rats:pirat",
+  "offset": 0.0,
+  "scale": 1.25,
+  "variants": [
+	{
+	  "ColorVariant": "rats:blue"
+	},
+	{
+	  "ColorVariant": "rats:brown"
+	},
+	{
+	  "ColorVariant": "rats:black"
+	},
+	{
+	  "ColorVariant": "rats:green"
+	}
+  ]
+}

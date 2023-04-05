@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 
 public abstract class CustomBehavior {
 
@@ -21,5 +22,5 @@ public abstract class CustomBehavior {
 
 	public abstract CustomBehavior fromJson(JsonObject object);
 
-	public abstract int execute(TrophyBlockEntity block, ServerPlayer player);
+	public abstract int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem);
 }

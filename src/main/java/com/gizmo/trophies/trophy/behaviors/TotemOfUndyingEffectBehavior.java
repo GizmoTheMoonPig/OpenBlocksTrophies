@@ -7,6 +7,7 @@ import com.google.gson.JsonSerializationContext;
 import net.minecraft.network.protocol.game.ClientboundEntityEventPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 
 public class TotemOfUndyingEffectBehavior extends CustomBehavior {
 
@@ -25,7 +26,7 @@ public class TotemOfUndyingEffectBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		player.connection.send(new ClientboundEntityEventPacket(player, (byte) 35));
 		return 100;
 	}

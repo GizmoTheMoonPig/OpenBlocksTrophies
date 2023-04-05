@@ -1,4 +1,14 @@
 {
+  "behavior": {
+    "type": "obtrophies:right_click_item",
+    "execute_behavior": {
+      "type": "obtrophies:item",
+      "item": "minecraft:milk_bucket"
+    },
+    "item_to_use": "minecraft:bucket",
+    "shrink_item_stack": true,
+    "sound": "minecraft:entity.goat.milk"
+  },
   "drop_chance": 0.001,
   "entity": "minecraft:goat",
   "offset": 0.0,

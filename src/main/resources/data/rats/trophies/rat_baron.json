@@ -1,0 +1,20 @@
+{
+  "drop_chance": 0.0075,
+  "entity": "rats:rat_baron",
+  "offset": 0.0,
+  "scale": 1.5,
+  "variants": [
+	{
+	  "ColorVariant": "rats:blue"
+	},
+	{
+	  "ColorVariant": "rats:brown"
+	},
+	{
+	  "ColorVariant": "rats:black"
+	},
+	{
+	  "ColorVariant": "rats:green"
+	}
+  ]
+}

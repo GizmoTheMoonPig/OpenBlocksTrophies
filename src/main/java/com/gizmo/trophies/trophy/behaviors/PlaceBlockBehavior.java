@@ -10,19 +10,24 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Objects;
+
 @SuppressWarnings("deprecation")
 public class PlaceBlockBehavior extends CustomBehavior {
 
-	private Block blockToPlace;
-	private boolean aroundTrophy;
+	private final Block blockToPlace;
+	private final boolean aroundTrophy;
 
 	public PlaceBlockBehavior() {
+		this(Blocks.AIR, false);
 	}
 
 	public PlaceBlockBehavior(Block block, boolean placeAroundTrophy) {
@@ -37,7 +42,7 @@ public class PlaceBlockBehavior extends CustomBehavior {
 
 	@Override
 	public void serializeToJson(JsonObject object, JsonSerializationContext context) {
-		object.add("block", context.serialize(ForgeRegistries.BLOCKS.getKey(this.blockToPlace).toString()));
+		object.add("block", context.serialize(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(this.blockToPlace)).toString()));
 		object.add("place_around_trophy", context.serialize(this.aroundTrophy));
 	}
 
@@ -45,11 +50,11 @@ public class PlaceBlockBehavior extends CustomBehavior {
 	public CustomBehavior fromJson(JsonObject object) {
 		Block block = ForgeRegistries.BLOCKS.getValue(ResourceLocation.tryParse(GsonHelper.getAsString(object, "block")));
 		boolean placeAround = GsonHelper.getAsBoolean(object, "place_around_trophy");
-		return new PlaceBlockBehavior(block, placeAround);
+		return new PlaceBlockBehavior(Objects.requireNonNull(block), placeAround);
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		BlockPos base = block.getBlockPos();
 		Level level = block.getLevel();
 		assert level != null;

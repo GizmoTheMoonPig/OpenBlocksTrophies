@@ -20,7 +20,9 @@ import java.util.Objects;
 public class TrophyBlockEntity extends BlockEntity {
 
 	private int cooldown = 0;
+	private int variant = 0;
 	private Trophy trophy;
+	private String trophyName = "";
 	private boolean specialCycleVariant = false;
 
 	public TrophyBlockEntity(BlockPos pos, BlockState state) {
@@ -49,15 +51,31 @@ public class TrophyBlockEntity extends BlockEntity {
 		this.markUpdated();
 	}
 
+	public int getVariant() {
+		return this.variant;
+	}
+
+	public String getTrophyName() {
+		return this.trophyName;
+	}
+
+	public void setTrophyName(String trophyName) {
+		this.trophyName = trophyName;
+	}
+
 	@Override
 	protected void saveAdditional(CompoundTag tag) {
 		super.saveAdditional(tag);
 		if (this.getTrophy() != null) {
-			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getTrophy().type())).toString());
+			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getTrophy().getType())).toString());
 		}
 		tag.putInt("cooldown", this.getCooldown());
 		if (this.specialCycleVariant) {
 			tag.putBoolean("SpecialCycleVariant", true);
+		}
+		tag.putInt("VariantID", this.getVariant());
+		if (!this.getTrophyName().isEmpty()) {
+			tag.putString("CustomNameEntity", this.getTrophyName());
 		}
 	}
 
@@ -78,6 +96,10 @@ public class TrophyBlockEntity extends BlockEntity {
 		this.setCooldown(tag.getInt("cooldown"));
 		if (tag.contains("SpecialCycleVariant")) {
 			this.specialCycleVariant = tag.getBoolean("SpecialCycleVariant");
+		}
+		this.variant = tag.getInt("VariantID");
+		if (tag.contains("CustomNameEntity")) {
+			this.setTrophyName(tag.getString("CustomNameEntity"));
 		}
 	}
 

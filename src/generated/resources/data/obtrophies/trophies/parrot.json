@@ -2,5 +2,22 @@
   "drop_chance": 0.001,
   "entity": "minecraft:parrot",
   "offset": 0.0,
-  "scale": 1.75
+  "scale": 1.75,
+  "variants": [
+    {
+      "Variant": "0"
+    },
+    {
+      "Variant": "1"
+    },
+    {
+      "Variant": "2"
+    },
+    {
+      "Variant": "3"
+    },
+    {
+      "Variant": "4"
+    }
+  ]
 }

@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -34,6 +35,7 @@ public class TrophyItem extends BlockItem {
 	public static final String ENTITY_TAG = "entity";
 	public static final String COOLDOWN_TAG = "cooldown";
 	public static final String CYCLING_TAG = "SpecialCycleVariant";
+	public static final String VARIANT_TAG = "VariantID";
 
 	public TrophyItem(Block block, Properties properties) {
 		super(block, properties);
@@ -65,20 +67,32 @@ public class TrophyItem extends BlockItem {
 		return false;
 	}
 
-	public static ItemStack loadEntityToTrophy(EntityType<?> type, boolean cycling) {
+	public static ItemStack loadEntityToTrophy(EntityType<?> type, int variant, boolean cycling) {
 		ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
 		CompoundTag tag = new CompoundTag();
 		tag.putString(ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(type)).toString());
+		tag.putInt(VARIANT_TAG, variant);
 		tag.putBoolean(TrophyItem.CYCLING_TAG, cycling);
 		stack.addTagElement("BlockEntityTag", tag);
 		return stack;
+	}
+
+	public static int getTrophyVariant(@Nonnull ItemStack stack) {
+		if (stack.hasTag()) {
+			CompoundTag tag = BlockItem.getBlockEntityData(stack);
+			if (tag != null && tag.contains(TrophyItem.VARIANT_TAG)) {
+				return tag.getInt(TrophyItem.VARIANT_TAG);
+			}
+		}
+
+		return 0;
 	}
 
 	@Override
 	public Component getName(ItemStack stack) {
 		Trophy trophy = getTrophy(stack);
 		if (trophy != null && !hasCycleOnTrophy(stack)) {
-			return Component.translatable("block.obtrophies.trophy.entity", trophy.type().getDescription().getString());
+			return Component.translatable("block.obtrophies.trophy.entity", trophy.getType().getDescription().getString());
 		}
 		return super.getName(stack);
 	}
@@ -87,7 +101,14 @@ public class TrophyItem extends BlockItem {
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
 		Trophy trophy = getTrophy(stack);
 		if (trophy != null && !hasCycleOnTrophy(stack)) {
-			tooltip.add(Component.translatable("item.obtrophies.trophy.modid", this.getModIdForTooltip(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type())).getNamespace())).withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.obtrophies.trophy.modid", this.getModIdForTooltip(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.getType())).getNamespace())).withStyle(ChatFormatting.GRAY));
+			if (flag.isAdvanced()) {
+				int variant = getTrophyVariant(stack);
+				if (level != null && !trophy.getVariants(level.registryAccess()).isEmpty() && trophy.getVariants(level.registryAccess()).size() >= variant) {
+					Map<String, String> variantDefiners = trophy.getVariants(level.registryAccess()).get(variant);
+					variantDefiners.forEach((key, value) -> tooltip.add(Component.translatable("\"%s\": \"%s\"", key, value).withStyle(ChatFormatting.GRAY)));
+				}
+			}
 		}
 	}
 

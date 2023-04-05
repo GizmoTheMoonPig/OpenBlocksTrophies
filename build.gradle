@@ -14,14 +14,14 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 
-version = '1.19.3-1.6.1'
+version = '1.19.4-2.0'
 group = 'com.gizmo.trophies'
 archivesBaseName = 'OpenBlocksTrophies'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: 'official', version: '1.19.3'
+    mappings channel: 'official', version: '1.19.4'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -94,16 +94,21 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+	maven {
+		url "https://modmaven.dev/"
+	}
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.3-44.1.16'
+    minecraft 'net.minecraftforge:forge:1.19.4-45.0.41'
 
-    implementation fg.deobf("mezz.jei:jei-1.19.3-forge:12.1.1.13")
-    implementation fg.deobf("curse.maven:jade-324717:4330163")
+    implementation fg.deobf("mezz.jei:jei-1.19.4-forge:13.1.0.2")
+    implementation fg.deobf("curse.maven:jade-324717:4439089")
 
-	compileOnly fg.deobf("curse.maven:the-twilight-forest-227639:4389089")
-	compileOnly fg.deobf("curse.maven:alexs-mobs-426558:4391893")
+	compileOnly fg.deobf("teamtwilight:twilightforest:4.2.1642:universal")
+	compileOnly fg.deobf("curse.maven:citadel-331936:4473245")
+	compileOnly fg.deobf("curse.maven:rats-323596:4474624")
+	//compileOnly fg.deobf("curse.maven:alexs-mobs-426558:4391893")
 }
 
 jar {

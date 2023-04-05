@@ -11,16 +11,24 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class ItemDropBehavior extends CustomBehavior {
-	private Item itemToDrop;
-	private int cooldown;
-	private SoundEvent sound;
+	private final Item itemToDrop;
+	private final int cooldown;
+	private final SoundEvent sound;
 
 	public ItemDropBehavior() {
+		this(Items.AIR, 0);
+	}
+
+	public ItemDropBehavior(Item drop) {
+		this(drop, 0, null);
 	}
 
 	public ItemDropBehavior(Item drop, int cooldown) {
@@ -40,17 +48,19 @@ public class ItemDropBehavior extends CustomBehavior {
 
 	@Override
 	public void serializeToJson(JsonObject object, JsonSerializationContext context) {
-		object.add("item", context.serialize(ForgeRegistries.ITEMS.getKey(this.itemToDrop).toString()));
-		object.add("cooldown", context.serialize(this.cooldown));
+		object.add("item", context.serialize(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this.itemToDrop)).toString()));
+		if (this.cooldown != 0) {
+			object.add("cooldown", context.serialize(this.cooldown));
+		}
 		if (this.sound != null) {
-			object.add("sound", context.serialize(ForgeRegistries.SOUND_EVENTS.getKey(this.sound).toString()));
+			object.add("sound", context.serialize(Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getKey(this.sound)).toString()));
 		}
 	}
 
 	@Override
 	public CustomBehavior fromJson(JsonObject object) {
 		Item item = GsonHelper.getAsItem(object, "item");
-		int cooldown = GsonHelper.getAsInt(object, "cooldown", 1000);
+		int cooldown = GsonHelper.getAsInt(object, "cooldown", 0);
 		SoundEvent sound = null;
 		if (object.has("sound")) {
 			sound = ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.tryParse(GsonHelper.getAsString(object, "sound")));
@@ -59,9 +69,9 @@ public class ItemDropBehavior extends CustomBehavior {
 	}
 
 	@Override
-	public int execute(TrophyBlockEntity block, ServerPlayer player) {
+	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		if (this.sound != null) {
-			player.getLevel().playSound(null, player.blockPosition(), this.sound, SoundSource.BLOCKS, 1.0F, (block.getLevel().getRandom().nextFloat() - block.getLevel().getRandom().nextFloat()) * 0.2F + 1.0F);
+			player.getLevel().playSound(null, player.blockPosition(), this.sound, SoundSource.BLOCKS, 1.0F, (player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.2F + 1.0F);
 		}
 		ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(this.itemToDrop).copy());
 		return this.cooldown;
