@@ -2,5 +2,13 @@
   "drop_chance": 0.001,
   "entity": "the_bumblezone:beehemoth",
   "offset": 0.0,
-  "scale": 1.0
+  "scale": 1.0,
+  "variants": [
+	{
+	  "queen": "false"
+	},
+	{
+	  "queen": "true"
+	}
+  ]
 }

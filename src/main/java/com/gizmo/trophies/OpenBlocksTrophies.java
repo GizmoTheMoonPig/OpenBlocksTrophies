@@ -112,6 +112,12 @@ public class OpenBlocksTrophies {
 					event.getEntity().drop(trophy, false);
 				}
 			}
+			if (event.getAdvancement().getId().equals(new ResourceLocation("the_bumblezone", "the_bumblezone/beehemoth/queen_beehemoth"))) {
+				ItemStack trophy = TrophyItem.loadEntityToTrophy(BzEntities.BEEHEMOTH.get(), 1, false);
+				if (event.getEntity().addItem(trophy)) {
+					event.getEntity().drop(trophy, false);
+				}
+			}
 		}
 	}
 
