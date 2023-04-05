@@ -3,6 +3,7 @@ package com.gizmo.trophies;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.behaviors.*;
+import com.telepathicgrunt.the_bumblezone.modinit.BzEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -13,8 +14,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.VillagerDataHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.flag.FeatureFlagSet;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -23,7 +22,9 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.player.AdvancementEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -35,7 +36,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Mod(OpenBlocksTrophies.MODID)
 public class OpenBlocksTrophies {
@@ -59,9 +62,12 @@ public class OpenBlocksTrophies {
 		MinecraftForge.EVENT_BUS.addListener(Trophy::reloadTrophies);
 		MinecraftForge.EVENT_BUS.addListener(Trophy::syncTrophiesToClient);
 
+		MinecraftForge.EVENT_BUS.addListener(this::grantBeeQueenViaDesireAdvancement);
+
 		Registries.BLOCKS.register(bus);
 		Registries.BLOCK_ENTITIES.register(bus);
 		Registries.ITEMS.register(bus);
+		Registries.LOOT_MODIFIERS.register(bus);
 	}
 
 	public static ResourceLocation location(String path) {
@@ -96,6 +102,17 @@ public class OpenBlocksTrophies {
 				.icon(TrophyTabHelper::makeIcon)
 				.displayItems((params, output) -> TrophyTabHelper.getAllTrophies(output))
 		);
+	}
+
+	public void grantBeeQueenViaDesireAdvancement(AdvancementEvent.AdvancementEarnEvent event) {
+		if (ModList.get().isLoaded("the_bumblezone")) {
+			if (event.getAdvancement().getId().equals(new ResourceLocation("the_bumblezone", "the_bumblezone/the_queens_desire/journeys_end"))) {
+				ItemStack trophy = TrophyItem.loadEntityToTrophy(BzEntities.BEE_QUEEN.get(), 0, false);
+				if (event.getEntity().addItem(trophy)) {
+					event.getEntity().drop(trophy, false);
+				}
+			}
+		}
 	}
 
 	public void maybeDropTrophy(LivingDropsEvent event) {
