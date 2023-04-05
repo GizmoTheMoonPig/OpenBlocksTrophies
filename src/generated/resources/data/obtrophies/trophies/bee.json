@@ -1,6 +1,7 @@
 {
   "behavior": {
     "type": "obtrophies:right_click_item",
+    "cooldown": 20000,
     "execute_behavior": {
       "type": "obtrophies:item",
       "item": "minecraft:honey_bottle"

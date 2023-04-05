@@ -1,6 +1,7 @@
 {
   "behavior": {
     "type": "obtrophies:right_click_item",
+    "cooldown": 200,
     "execute_behavior": {
       "type": "obtrophies:loot_table",
       "loot_table": "minecraft:gameplay/piglin_bartering",

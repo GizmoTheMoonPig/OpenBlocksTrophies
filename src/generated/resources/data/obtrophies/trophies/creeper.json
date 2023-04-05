@@ -10,10 +10,10 @@
   "scale": 1.0,
   "variants": [
     {
-      "powered": "true"
+      "powered": "false"
     },
     {
-      "powered": "false"
+      "powered": "true"
     }
   ]
 }

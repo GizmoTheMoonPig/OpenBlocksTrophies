@@ -10,6 +10,7 @@ public class DataGenerators {
 
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
+		event.getGenerator().addProvider(event.includeServer(), new LootModifierGenerator(event.getGenerator()));
 		event.getGenerator().addProvider(event.includeServer(), new TrophyGenerator(event.getGenerator()));
 	}
 }

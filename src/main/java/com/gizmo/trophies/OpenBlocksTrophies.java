@@ -3,6 +3,7 @@ package com.gizmo.trophies;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.behaviors.*;
+import com.telepathicgrunt.the_bumblezone.modinit.BzEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +19,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.player.AdvancementEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -83,9 +86,12 @@ public class OpenBlocksTrophies {
 		MinecraftForge.EVENT_BUS.addListener(Trophy::reloadTrophies);
 		MinecraftForge.EVENT_BUS.addListener(Trophy::syncTrophiesToClient);
 
+		MinecraftForge.EVENT_BUS.addListener(this::grantBeeQueenViaDesireAdvancement);
+
 		Registries.BLOCKS.register(bus);
 		Registries.BLOCK_ENTITIES.register(bus);
 		Registries.ITEMS.register(bus);
+		Registries.LOOT_MODIFIERS.register(bus);
 	}
 
 	public static ResourceLocation location(String path) {
@@ -112,6 +118,23 @@ public class OpenBlocksTrophies {
 
 	public void registerCommands(RegisterCommandsEvent event) {
 		TrophiesCommands.register(event.getDispatcher());
+	}
+
+	public void grantBeeQueenViaDesireAdvancement(AdvancementEvent.AdvancementEarnEvent event) {
+		if (ModList.get().isLoaded("the_bumblezone")) {
+			if (event.getAdvancement().getId().equals(new ResourceLocation("the_bumblezone", "the_bumblezone/the_queens_desire/journeys_end"))) {
+				ItemStack trophy = TrophyItem.loadEntityToTrophy(BzEntities.BEE_QUEEN.get());
+				if (event.getEntity().addItem(trophy)) {
+					event.getEntity().drop(trophy, false);
+				}
+			}
+			if (event.getAdvancement().getId().equals(new ResourceLocation("the_bumblezone", "the_bumblezone/beehemoth/queen_beehemoth"))) {
+				ItemStack trophy = TrophyItem.loadEntityToTrophy(BzEntities.BEEHEMOTH.get(), 1);
+				if (event.getEntity().addItem(trophy)) {
+					event.getEntity().drop(trophy, false);
+				}
+			}
+		}
 	}
 
 	public void maybeDropTrophy(LivingDropsEvent event) {
