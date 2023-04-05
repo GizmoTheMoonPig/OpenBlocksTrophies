@@ -1,6 +1,19 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 10000,
+	"item": "minecraft:ink_sac"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:giant_squid",
   "offset": 0.0,
-  "scale": 0.5
+  "scale": 0.5,
+  "variants": [
+	{
+	  "Blue": "false"
+	},
+	{
+	  "Blue": "true"
+	}
+  ]
 }

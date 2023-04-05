@@ -1,6 +1,19 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "alexsmobs:froststalker_horn"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:froststalker",
   "offset": 0.0,
-  "scale": 0.9
+  "scale": 0.9,
+  "variants": [
+	{
+	  "Spiked": "false"
+	},
+	{
+	  "Spiked": "true"
+	}
+  ]
 }

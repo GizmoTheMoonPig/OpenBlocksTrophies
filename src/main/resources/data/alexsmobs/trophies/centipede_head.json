@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "alexsmobs:centipede_leg"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:centipede_head",
   "offset": 0.0,

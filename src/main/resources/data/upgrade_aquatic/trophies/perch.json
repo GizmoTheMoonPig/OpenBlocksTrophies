@@ -1,6 +1,6 @@
 {
   "drop_chance": 0.001,
-  "entity": "quark:shiba",
+  "entity": "upgrade_aquatic:perch",
   "offset": 0.0,
   "scale": 1.0
 }

@@ -2,5 +2,16 @@
   "drop_chance": 0.001,
   "entity": "cnb:minipad",
   "offset": 0.0,
-  "scale": 1.5
+  "scale": 1.5,
+  "variants": [
+	{
+	  "MinipadType": "cnb:pink"
+	},
+	{
+	  "MinipadType": "cnb:light_pink"
+	},
+	{
+	  "MinipadType": "cnb:yellow"
+	}
+  ]
 }

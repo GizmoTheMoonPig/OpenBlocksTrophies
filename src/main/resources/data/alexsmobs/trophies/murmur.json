@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 50000,
+	"item": "alexsmobs:elastic_tendon"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:murmur",
   "offset": 0.0,

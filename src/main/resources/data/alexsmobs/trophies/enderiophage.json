@@ -1,6 +1,23 @@
 {
+  "behavior": {
+	"type": "obtrophies:mob_effect",
+	"amplifier": 0,
+	"effect": "alexsmobs:ender_flu",
+	"time": 12000
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:enderiophage",
   "offset": 0.0,
-  "scale": 1.0
+  "scale": 1.0,
+  "variants": [
+	{
+	  "Variant": "0"
+	},
+	{
+	  "Variant": "1"
+	},
+	{
+	  "Variant": "2"
+	}
+  ]
 }

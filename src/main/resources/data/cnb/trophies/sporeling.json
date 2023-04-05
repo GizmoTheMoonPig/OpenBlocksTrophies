@@ -2,5 +2,25 @@
   "drop_chance": 0.001,
   "entity": "cnb:sporeling",
   "offset": 0.0,
-  "scale": 1.5
+  "scale": 1.5,
+  "variants": [
+	{
+	  "SporelingType": "cnb:red_overworld"
+	},
+	{
+	  "SporelingType": "cnb:red_nether"
+	},
+	{
+	  "SporelingType": "cnb:brown_overworld"
+	},
+	{
+	  "SporelingType": "cnb:brown_nether"
+	},
+	{
+	  "SporelingType": "cnb:crimson_fungus"
+	},
+	{
+	  "SporelingType": "cnb:warped_fungus"
+	}
+  ]
 }

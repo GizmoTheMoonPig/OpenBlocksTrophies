@@ -2,5 +2,22 @@
   "drop_chance": 0.001,
   "entity": "cnb:lizard",
   "offset": 0.0,
-  "scale": 1.75
+  "scale": 1.75,
+  "variants": [
+	{
+	  "LizardType": "cnb:desert"
+	},
+	{
+	  "LizardType": "cnb:desert_2"
+	},
+	{
+	  "LizardType": "cnb:jungle"
+	},
+	{
+	  "LizardType": "cnb:jungle_2"
+	},
+	{
+	  "LizardType": "cnb:mushroom"
+	}
+  ]
 }

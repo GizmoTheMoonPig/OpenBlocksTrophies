@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "minecraft:tuff"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:rocky_roller",
   "offset": 0.0,

@@ -1,4 +1,14 @@
 {
+  "behavior": {
+	"type": "obtrophies:right_click_item",
+	"cooldown": 20000,
+	"execute_behavior": {
+	  "type": "obtrophies:item",
+	  "item": "alexsmobs:fish_oil"
+	},
+	"item_to_use": "minecraft:glass_bottle",
+	"shrink_item_stack": true
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:blobfish",
   "offset": 0.0,

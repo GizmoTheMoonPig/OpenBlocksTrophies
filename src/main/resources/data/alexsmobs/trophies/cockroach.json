@@ -1,6 +1,19 @@
 {
+  "behavior": {
+	"type": "obtrophies:item",
+	"cooldown": 20000,
+	"item": "alexsmobs:cockroach_wing_fragment"
+  },
   "drop_chance": 0.001,
   "entity": "alexsmobs:cockroach",
   "offset": 0.0,
-  "scale": 1.5
+  "scale": 1.5,
+  "variants": [
+	{
+	  "Maracas": "false"
+	},
+	{
+	  "Maracas": "true"
+	}
+  ]
 }
