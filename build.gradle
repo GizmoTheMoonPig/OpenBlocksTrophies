@@ -105,11 +105,11 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-1.19.4-forge:13.1.0.2")
     implementation fg.deobf("curse.maven:jade-324717:4439089")
 
-	compileOnly fg.deobf("teamtwilight:twilightforest:4.2.1642:universal")
+	compileOnly fg.deobf("teamtwilight:twilightforest:4.2.1664:universal")
 	compileOnly fg.deobf("curse.maven:citadel-331936:4473245")
-	compileOnly fg.deobf("curse.maven:rats-323596:4474624")
-	compileOnly fg.deobf("curse.maven:bumblezone-362479:4472853")
-	//compileOnly fg.deobf("curse.maven:alexs-mobs-426558:4391893")
+	compileOnly fg.deobf("curse.maven:rats-323596:4511024")
+	compileOnly fg.deobf("curse.maven:bumblezone-362479:4507366")
+	compileOnly fg.deobf("curse.maven:alexs-mobs-426558:4476475")
 }
 
 jar {

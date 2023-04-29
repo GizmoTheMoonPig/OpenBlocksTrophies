@@ -3,7 +3,6 @@ package com.gizmo.trophies;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.behaviors.*;
-import com.telepathicgrunt.the_bumblezone.modinit.BzEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -38,6 +37,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 @Mod(OpenBlocksTrophies.MODID)
@@ -107,13 +107,13 @@ public class OpenBlocksTrophies {
 	public void grantBeeQueenViaDesireAdvancement(AdvancementEvent.AdvancementEarnEvent event) {
 		if (ModList.get().isLoaded("the_bumblezone")) {
 			if (event.getAdvancement().getId().equals(new ResourceLocation("the_bumblezone", "the_bumblezone/the_queens_desire/journeys_end"))) {
-				ItemStack trophy = TrophyItem.loadEntityToTrophy(BzEntities.BEE_QUEEN.get(), 0, false);
+				ItemStack trophy = TrophyItem.loadEntityToTrophy(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("the_bumblezone", "bee_queen"))), 0, false);
 				if (event.getEntity().addItem(trophy)) {
 					event.getEntity().drop(trophy, false);
 				}
 			}
 			if (event.getAdvancement().getId().equals(new ResourceLocation("the_bumblezone", "the_bumblezone/beehemoth/queen_beehemoth"))) {
-				ItemStack trophy = TrophyItem.loadEntityToTrophy(BzEntities.BEEHEMOTH.get(), 1, false);
+				ItemStack trophy = TrophyItem.loadEntityToTrophy(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation("the_bumblezone", "beehemoth"))), 1, false);
 				if (event.getEntity().addItem(trophy)) {
 					event.getEntity().drop(trophy, false);
 				}
