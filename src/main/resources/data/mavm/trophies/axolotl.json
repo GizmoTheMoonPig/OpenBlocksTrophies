@@ -4,9 +4,9 @@
   "offset": 0.0,
   "scale": 1.25,
   "variants": [
-    {
-      "Variant": "mavm:lucia"
-    },
+	{
+	  "Variant": "mavm:lucia"
+	},
 	{
 	  "Variant": "mavm:wilder"
 	},
