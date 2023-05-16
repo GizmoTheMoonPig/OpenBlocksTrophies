@@ -4,6 +4,7 @@ import com.gizmo.trophies.Registries;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.AmbientSoundFetcher;
 import com.gizmo.trophies.trophy.Trophy;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -107,9 +108,9 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			Trophy trophy = trophyBE.getTrophy();
 			if (trophy != null) {
-				SoundEvent ambientSound = AmbientSoundFetcher.getAmbientSound(trophy.getType(), level);
-				if (ambientSound != null) {
-					level.playSound(null, pos, ambientSound, SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
+				Pair<SoundEvent, Float> soundData = AmbientSoundFetcher.getAmbientSoundAndPitch(trophy.getType(), level);
+				if (soundData.getFirst() != null) {
+					level.playSound(null, pos, soundData.getFirst(), SoundSource.BLOCKS, 1.0F, soundData.getSecond());
 				}
 				if (trophyBE.getCooldown() <= 0 && trophy.getClickBehavior() != null) {
 					trophyBE.setCooldown(trophy.getClickBehavior().execute(trophyBE, (ServerPlayer) player, player.getItemInHand(hand)));

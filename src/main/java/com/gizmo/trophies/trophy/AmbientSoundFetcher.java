@@ -1,8 +1,10 @@
 package com.gizmo.trophies.trophy;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
@@ -27,9 +29,10 @@ public class AmbientSoundFetcher {
 		handle_Mob_getAmbientSound = tmp_handle_Mob_getAmbientSound;
 	}
 
-	@Nullable
-	public static SoundEvent getAmbientSound(EntityType<?> type, Level level) {
+	//fetches both the ambient sound and voice pitch to avoid creating multiple entity instances per sound call
+	public static Pair<SoundEvent, Float> getAmbientSoundAndPitch(EntityType<?> type, Level level) {
 		SoundEvent sound = null;
+		float pitch = 1.0F;
 		Entity entity = type.create(level);
 		if (handle_Mob_getAmbientSound != null && entity instanceof Mob mob) {
 			try {
@@ -38,6 +41,9 @@ public class AmbientSoundFetcher {
 				//fail silently, doesn't matter as this method can be null
 			}
 		}
-		return sound;
+		if (entity instanceof LivingEntity living) {
+			pitch = living.getVoicePitch();
+		}
+		return Pair.of(sound, pitch);
 	}
 }
