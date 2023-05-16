@@ -1,0 +1,38 @@
+{
+  "drop_chance": 0.001,
+  "entity": "minecraft:axolotl",
+  "offset": 0.0,
+  "scale": 1.25,
+  "variants": [
+    {
+      "Variant": "mavm:lucia"
+    },
+	{
+	  "Variant": "mavm:wilder"
+	},
+	{
+	  "Variant": "mavm:golden"
+	},
+	{
+	  "Variant": "mavm:green"
+	},
+	{
+	  "Variant": "mavm:skulk"
+	},
+	{
+	  "Variant": "mavm:black"
+	},
+	{
+	  "Variant": "mavm:red"
+	},
+	{
+	  "Variant": "mavm:glowxolotl"
+	},
+	{
+	  "Variant": "mavm:white"
+	},
+	{
+	  "Variant": "mavm:cyanide"
+	}
+  ]
+}
