@@ -79,6 +79,12 @@ public class Trophy {
 		return this.variants;
 	}
 
+	public void mergeVariantsFromOtherTrophy(Trophy trophy) {
+		if (!trophy.variants.isEmpty()) {
+			this.variants.addAll(trophy.variants);
+		}
+	}
+
 	public static void reloadTrophies(AddReloadListenerEvent event) {
 		event.addListener(new TrophyReloadListener());
 	}
