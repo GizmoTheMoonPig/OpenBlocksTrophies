@@ -5,7 +5,7 @@
   "command.obtrophies.empty_list": "Trophy list is not populated!",
   "command.obtrophies.place": "Placed %s Trophies",
   "item.obtrophies.trophy.modid": "From: %s",
-  "itemGroup.obtrophies": "OpenBlocks Trophies",
+  "itemGroup.obtrophies": "Trophies",
   "gui.obtrophies.trophy_jei": "Trophy Drops",
   "gui.obtrophies.jei.drop_chance": "Chance: %s%%",
   "gui.obtrophies.jei.fake_player_drops": "(fake players count)",
