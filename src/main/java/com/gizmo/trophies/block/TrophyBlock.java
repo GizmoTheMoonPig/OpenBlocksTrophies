@@ -128,6 +128,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 			ItemStack newStack = new ItemStack(this);
 			CompoundTag tag = new CompoundTag();
 			tag.putString(TrophyItem.ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().getType())).toString());
+			tag.putInt(TrophyItem.VARIANT_TAG, trophyBE.getVariant());
 			if (trophyBE.getCooldown() > 0) {
 				tag.putInt(TrophyItem.COOLDOWN_TAG, trophyBE.getCooldown());
 			}
