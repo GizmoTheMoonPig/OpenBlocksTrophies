@@ -1,6 +1,6 @@
 package com.gizmo.trophies.block;
 
-import com.gizmo.trophies.Registries;
+import com.gizmo.trophies.TrophyRegistries;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.AmbientSoundFetcher;
 import com.gizmo.trophies.trophy.Trophy;
@@ -29,7 +29,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -121,7 +121,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 	}
 
 	@Override
-	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 		List<ItemStack> drop = new ArrayList<>();
 		BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
 		if (blockEntity instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
@@ -174,6 +174,6 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return level.isClientSide() ? null : createTickerHelper(type, Registries.TROPHY_BE.get(), (level1, pos, state1, blockEntity) -> TrophyBlockEntity.tick(blockEntity));
+		return level.isClientSide() ? null : createTickerHelper(type, TrophyRegistries.TROPHY_BE.get(), (level1, pos, state1, blockEntity) -> TrophyBlockEntity.tick(blockEntity));
 	}
 }

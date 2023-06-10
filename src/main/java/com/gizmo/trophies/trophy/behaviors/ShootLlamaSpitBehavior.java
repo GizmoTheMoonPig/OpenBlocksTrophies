@@ -34,7 +34,7 @@ public class ShootLlamaSpitBehavior extends CustomBehavior {
 	@Override
 	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		BlockPos pos = block.getBlockPos();
-		Level level = player.getLevel();
+		Level level = player.level();
 
 		LlamaSpit spit = new LlamaSpit(EntityType.LLAMA_SPIT, level);
 		spit.setPos(pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5D);

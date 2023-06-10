@@ -72,7 +72,12 @@ public class Trophy {
 			List<Map<String, String>> entries = new ArrayList<>();
 			Registry<?> registry = access.registryOrThrow(this.registry.right());
 			for (Map.Entry<?, ?> entry : registry.entrySet()) {
-				entries.add(Map.of(this.registry.left(), ((ResourceKey<?>)entry.getKey()).location().toString()));
+				try {
+					entries.add(Map.of(this.registry.left(), ((ResourceKey<?>) entry.getKey()).location().toString()));
+				} catch (ClassCastException e) {
+					OpenBlocksTrophies.LOGGER.error("Something went wrong when trying to fetch variants from a registry!");
+					e.printStackTrace();
+				}
 			}
 			return entries;
 		}

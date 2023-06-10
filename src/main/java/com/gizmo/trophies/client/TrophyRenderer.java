@@ -1,8 +1,5 @@
 package com.gizmo.trophies.client;
 
-import com.github.alexthe666.alexsmobs.client.render.RenderLaviathan;
-import com.github.alexthe666.alexsmobs.client.render.RenderMurmurBody;
-import com.github.alexthe666.alexsmobs.entity.EntityLaviathan;
 import com.gizmo.trophies.block.TrophyBlock;
 import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.gizmo.trophies.trophy.Trophy;
@@ -133,12 +130,12 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 
 		//hate everything about this
 		if (ModList.get().isLoaded("alexsmobs")) {
-			RenderLaviathan.renderWithoutShaking = true;
-			RenderMurmurBody.renderWithHead = true;
-			if (entity instanceof EntityLaviathan leviathan) {
-				leviathan.prevHeadHeight = 0.0F;
-				leviathan.setChillTime(0);
-			}
+//			RenderLaviathan.renderWithoutShaking = true;
+//			RenderMurmurBody.renderWithHead = true;
+//			if (entity instanceof EntityLaviathan leviathan) {
+//				leviathan.prevHeadHeight = 0.0F;
+//				leviathan.setChillTime(0);
+//			}
 		}
 
 		RenderSystem.runAsFancy(() -> dispatcher.render(entity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F, stack, source, light));
@@ -146,8 +143,8 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		dispatcher.setRenderHitBoxes(hitboxes);
 
 		if (ModList.get().isLoaded("alexsmobs")) {
-			RenderLaviathan.renderWithoutShaking = false;
-			RenderMurmurBody.renderWithHead = false;
+//			RenderLaviathan.renderWithoutShaking = false;
+//			RenderMurmurBody.renderWithHead = false;
 		}
 
 		stack.popPose();

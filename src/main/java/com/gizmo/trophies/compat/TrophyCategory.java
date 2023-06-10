@@ -2,7 +2,6 @@ package com.gizmo.trophies.compat;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.TrophyConfig;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -14,6 +13,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -70,25 +70,25 @@ public class TrophyCategory implements IRecipeCategory<TrophyInfoWrapper> {
 	}
 
 	@Override
-	public void draw(TrophyInfoWrapper recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-		EntityRenderer.render(stack, recipe.getTrophyEntity(), 25, 42, recipe.getTrophyVariant(Minecraft.getInstance().level.registryAccess()));
+	public void draw(TrophyInfoWrapper recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+		EntityRenderer.render(graphics.pose(), recipe.getTrophyEntity(), 25, 42, recipe.getTrophyVariant(Minecraft.getInstance().level.registryAccess()));
 
 		if (!TrophyConfig.COMMON_CONFIG.anySourceDropsTrophies.get()) {
 			if (TrophyConfig.COMMON_CONFIG.fakePlayersDropTrophies.get()) {
-				this.fakePlayerIcon.draw(stack, 54, 19);
+				this.fakePlayerIcon.draw(graphics, 54, 19);
 			} else {
-				this.playerIcon.draw(stack, 54, 19);
+				this.playerIcon.draw(graphics, 54, 19);
 			}
 		} else {
-			this.arrowIcon.draw(stack, 50, 19);
+			this.arrowIcon.draw(graphics, 50, 19);
 		}
 		if (mouseX > 8 && mouseX < 43 && mouseY > 9 && mouseY < 44) {
-			AbstractContainerScreen.renderSlotHighlight(stack, 10, 11, 0);
-			AbstractContainerScreen.renderSlotHighlight(stack, 26, 11, 0);
-			AbstractContainerScreen.renderSlotHighlight(stack, 10, 27, 0);
-			AbstractContainerScreen.renderSlotHighlight(stack, 26, 27, 0);
+			AbstractContainerScreen.renderSlotHighlight(graphics, 10, 11, 0);
+			AbstractContainerScreen.renderSlotHighlight(graphics, 26, 11, 0);
+			AbstractContainerScreen.renderSlotHighlight(graphics, 10, 27, 0);
+			AbstractContainerScreen.renderSlotHighlight(graphics, 26, 27, 0);
 		}
-		Minecraft.getInstance().font.draw(stack, Component.translatable("gui.obtrophies.jei.drop_chance", recipe.getTrophyDropPercentage()), 46, 45, 0xFF808080);
+		graphics.drawString(Minecraft.getInstance().font, Component.translatable("gui.obtrophies.jei.drop_chance", recipe.getTrophyDropPercentage()), 46, 45, 0xFF808080, false);
 	}
 
 	@Override

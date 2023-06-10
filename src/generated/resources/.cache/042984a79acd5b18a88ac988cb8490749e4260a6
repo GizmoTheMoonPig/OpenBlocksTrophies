@@ -1,9 +1,10 @@
-// 1.19.4	2023-04-04T22:20:38.4060596	Default OpenBlocks Trophies
+// 1.20	2023-06-09T20:13:38.1694615	Default OpenBlocks Trophies
 0f37c153956695534854e0497319138a8ad470b9 data/obtrophies/trophies/allay.json
 e1557f9ed64088bf53883b68c7270b07118d484e data/obtrophies/trophies/axolotl.json
 a6e278d8cbd3535afd460decf84df8d5c06b5795 data/obtrophies/trophies/bat.json
 c1f417c018ee18345b5b4e194b4e3b3c586dcc27 data/obtrophies/trophies/bee.json
 58226b778d215fbcc997df2ee65f382290f8a957 data/obtrophies/trophies/blaze.json
+9e3a63bdb9f50de87c303276f66610ba56fc22c8 data/obtrophies/trophies/camel.json
 3f2a8354816a0adbbace29b598876b95dfe063cc data/obtrophies/trophies/cat.json
 148bd5bac2e45754761514572c79c221ee994698 data/obtrophies/trophies/cave_spider.json
 6efec5a5ed5c1d326f509bb941580c6ab64bd378 data/obtrophies/trophies/chicken.json
@@ -52,6 +53,7 @@ e77974981f007bc594678d92d47ea013b95a5419 data/obtrophies/trophies/polar_bear.jso
 25b2ba16b28da7d34708752447b4269976f703ff data/obtrophies/trophies/skeleton.json
 8e43663feffaa40794b9537448fb3a4794449801 data/obtrophies/trophies/skeleton_horse.json
 c814d0a96253383290450755f603ff6e364d26d0 data/obtrophies/trophies/slime.json
+59565a00b2a7f0328ddb242d99246b09cb53b131 data/obtrophies/trophies/sniffer.json
 4b98628ad34628bf9f7c6f4da4a553b227fca526 data/obtrophies/trophies/snow_golem.json
 cb94b4780c64e0fa625db21e5567349946a2b89a data/obtrophies/trophies/spider.json
 c4c7364b10c3a892824111bc5242b2fecdb9d2e6 data/obtrophies/trophies/squid.json

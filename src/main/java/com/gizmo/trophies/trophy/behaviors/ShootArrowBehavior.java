@@ -59,7 +59,7 @@ public class ShootArrowBehavior extends CustomBehavior {
 	@Override
 	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		BlockPos pos = block.getBlockPos();
-		Level level = player.getLevel();
+		Level level = player.level();
 
 		for (int i = 0; i < this.amount; i++) {
 			Arrow arrow = new Arrow(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5D);

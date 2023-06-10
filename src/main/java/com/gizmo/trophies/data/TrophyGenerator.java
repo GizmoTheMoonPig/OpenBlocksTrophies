@@ -219,9 +219,9 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.WARDEN).setScale(0.75F).setRightClickBehavior(new MobEffectBehavior(MobEffects.DARKNESS, 200, 0)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.WITHER).setDropChance(0.0075D).setVerticalOffset(-0.2D).setScale(0.75F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ENDER_DRAGON).setDropChance(0.0075D).setScale(0.25F).setRightClickBehavior(new ClickWithItemBehavior(Items.GLASS_BOTTLE, true, new ItemDropBehavior(Items.DRAGON_BREATH))).build());
-		//TODO add these back once 1.20 drops, apparently they causes crashes if the feature flag isnt enabled
-		//this.makeTrophy(new Trophy.Builder(EntityType.CAMEL).setScale(0.75F).build());
-		//this.makeTrophy(new Trophy.Builder(EntityType.SNIFFER).setScale(0.5F).build());
+
+		this.makeTrophy(new Trophy.Builder(EntityType.CAMEL).setScale(0.75F).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.SNIFFER).setScale(0.5F).setRightClickBehavior(new PullFromLootTableBehavior(BuiltInLootTables.SNIFFER_DIGGING, 20000)).build());
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.gizmo.trophies.compat;
 
+import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.client.TrophyRenderer;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -11,7 +12,6 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,7 +23,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
-import twilightforest.TwilightForestMod;
 
 import java.util.*;
 
@@ -74,7 +73,7 @@ public class EntityRenderer {
 						modelView.popPose();
 						RenderSystem.applyModelViewMatrix();
 					} catch (Exception e) {
-						TwilightForestMod.LOGGER.error("Error drawing entity " + ForgeRegistries.ENTITY_TYPES.getKey(type), e);
+						OpenBlocksTrophies.LOGGER.error("Error drawing entity " + ForgeRegistries.ENTITY_TYPES.getKey(type), e);
 						IGNORED_ENTITIES.add(type);
 						ENTITY_MAP.remove(type);
 					}

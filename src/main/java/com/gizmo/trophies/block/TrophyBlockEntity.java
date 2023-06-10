@@ -1,6 +1,6 @@
 package com.gizmo.trophies.block;
 
-import com.gizmo.trophies.Registries;
+import com.gizmo.trophies.TrophyRegistries;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +26,7 @@ public class TrophyBlockEntity extends BlockEntity {
 	private boolean specialCycleVariant = false;
 
 	public TrophyBlockEntity(BlockPos pos, BlockState state) {
-		super(Registries.TROPHY_BE.get(), pos, state);
+		super(TrophyRegistries.TROPHY_BE.get(), pos, state);
 	}
 
 	public static void tick(TrophyBlockEntity be) {

@@ -1,6 +1,6 @@
 package com.gizmo.trophies.item;
 
-import com.gizmo.trophies.Registries;
+import com.gizmo.trophies.TrophyRegistries;
 import com.gizmo.trophies.client.TrophyItemRenderer;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.ChatFormatting;
@@ -68,7 +68,7 @@ public class TrophyItem extends BlockItem {
 	}
 
 	public static ItemStack loadEntityToTrophy(EntityType<?> type, int variant, boolean cycling) {
-		ItemStack stack = new ItemStack(Registries.TROPHY_ITEM.get());
+		ItemStack stack = new ItemStack(TrophyRegistries.TROPHY_ITEM.get());
 		CompoundTag tag = new CompoundTag();
 		tag.putString(ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(type)).toString());
 		tag.putInt(VARIANT_TAG, variant);

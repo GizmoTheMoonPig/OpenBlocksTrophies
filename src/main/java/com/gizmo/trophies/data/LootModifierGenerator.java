@@ -1,7 +1,7 @@
 package com.gizmo.trophies.data;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
-import com.gizmo.trophies.Registries;
+import com.gizmo.trophies.TrophyRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -15,6 +15,6 @@ public class LootModifierGenerator extends GlobalLootModifierProvider {
 
 	@Override
 	protected void start() {
-		add("quest_ram_trophy", new Registries.AddQuestRamModifier(new LootItemCondition[]{LootTableIdCondition.builder(new ResourceLocation("twilightforest", "entities/questing_ram_rewards")).build()}));
+		add("quest_ram_trophy", new TrophyRegistries.AddQuestRamModifier(new LootItemCondition[]{LootTableIdCondition.builder(new ResourceLocation("twilightforest", "entities/questing_ram_rewards")).build()}));
 	}
 }

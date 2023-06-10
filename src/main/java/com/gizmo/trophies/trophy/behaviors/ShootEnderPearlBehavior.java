@@ -29,7 +29,7 @@ public class ShootEnderPearlBehavior extends CustomBehavior {
 
 	@Override
 	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
-		Level level = player.getLevel();
+		Level level = player.level();
 		ThrownEnderpearl pearl = new ThrownEnderpearl(level, player);
 		BlockPos pos = block.getBlockPos();
 		pearl.setPos(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);

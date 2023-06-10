@@ -5,10 +5,11 @@ import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
@@ -57,12 +58,11 @@ public class PullFromLootTableBehavior extends CustomBehavior {
 	@Override
 	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		for (int i = 0; i < this.tableRolls; i++) {
-			LootContext.Builder builder = new LootContext.Builder(player.getLevel())
+			LootParams.Builder builder = new LootParams.Builder((ServerLevel) player.level())
 					.withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(block.getBlockPos()))
 					.withParameter(LootContextParams.THIS_ENTITY, player)
-					.withLuck(player.getLuck())
-					.withRandom(player.getRandom());
-			player.getLevel().getServer().getLootTables().get(this.lootTable)
+					.withLuck(player.getLuck());
+			player.level().getServer().getLootData().getLootTable(this.lootTable)
 					.getRandomItems(builder.create(LootContextParamSets.ADVANCEMENT_REWARD)) //use advancement reward just so we only need to provide the pos and player
 					.forEach(stack -> ItemHandlerHelper.giveItemToPlayer(player, stack.copy()));
 		}

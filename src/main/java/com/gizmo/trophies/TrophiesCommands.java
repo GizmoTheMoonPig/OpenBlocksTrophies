@@ -50,7 +50,7 @@ public class TrophiesCommands {
 		if (Trophy.getTrophies().isEmpty()) {
 			throw new SimpleCommandExceptionType(Component.translatable("command.obtrophies.empty_list").withStyle(ChatFormatting.RED)).create();
 		}
-		context.getSource().sendSuccess(Component.translatable("command.obtrophies.count", Trophy.getTrophies().size()), false);
+		context.getSource().sendSuccess(() -> Component.translatable("command.obtrophies.count", Trophy.getTrophies().size()), false);
 		return Command.SINGLE_SUCCESS;
 	}
 
@@ -74,13 +74,13 @@ public class TrophiesCommands {
 				int index = j + i * sideLength;
 				if (index > amount - 1) break;
 				BlockPos pos = context.getSource().getPlayer().blockPosition().offset(i, 0, j);
-				context.getSource().getLevel().setBlockAndUpdate(pos, Registries.TROPHY.get().defaultBlockState().setValue(TrophyBlock.FACING, Direction.WEST));
+				context.getSource().getLevel().setBlockAndUpdate(pos, TrophyRegistries.TROPHY.get().defaultBlockState().setValue(TrophyBlock.FACING, Direction.WEST));
 				if (context.getSource().getLevel().getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 					trophyBE.setTrophy(sortedTrophies.entrySet().stream().toList().get(index).getValue());
 				}
 			}
 		}
-		context.getSource().sendSuccess(Component.translatable("command.obtrophies.place", amount), false);
+		context.getSource().sendSuccess(() -> Component.translatable("command.obtrophies.place", amount), false);
 		return Command.SINGLE_SUCCESS;
 	}
 }

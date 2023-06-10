@@ -3,22 +3,17 @@ package com.gizmo.trophies;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.behaviors.*;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.VillagerDataHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.AdvancementEvent;
@@ -35,10 +30,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Comparator;
 import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
 
 @Mod(OpenBlocksTrophies.MODID)
 public class OpenBlocksTrophies {
@@ -56,7 +49,6 @@ public class OpenBlocksTrophies {
 
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::commonSetup);
-		bus.addListener(this::createTab);
 		MinecraftForge.EVENT_BUS.addListener(this::maybeDropTrophy);
 		MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
 		MinecraftForge.EVENT_BUS.addListener(Trophy::reloadTrophies);
@@ -64,10 +56,11 @@ public class OpenBlocksTrophies {
 
 		MinecraftForge.EVENT_BUS.addListener(this::grantBeeQueenViaDesireAdvancement);
 
-		Registries.BLOCKS.register(bus);
-		Registries.BLOCK_ENTITIES.register(bus);
-		Registries.ITEMS.register(bus);
-		Registries.LOOT_MODIFIERS.register(bus);
+		TrophyRegistries.BLOCKS.register(bus);
+		TrophyRegistries.BLOCK_ENTITIES.register(bus);
+		TrophyRegistries.ITEMS.register(bus);
+		TrophyRegistries.LOOT_MODIFIERS.register(bus);
+		TrophyRegistries.TABS.register(bus);
 	}
 
 	public static ResourceLocation location(String path) {
@@ -96,13 +89,7 @@ public class OpenBlocksTrophies {
 		TrophiesCommands.register(event.getDispatcher());
 	}
 
-	public void createTab(CreativeModeTabEvent.Register event) {
-		event.registerCreativeModeTab(location("trophies"), builder -> builder
-				.title(Component.translatable("itemGroup.obtrophies"))
-				.icon(TrophyTabHelper::makeIcon)
-				.displayItems((params, output) -> TrophyTabHelper.getAllTrophies(output))
-		);
-	}
+
 
 	public void grantBeeQueenViaDesireAdvancement(AdvancementEvent.AdvancementEarnEvent event) {
 		if (ModList.get().isLoaded("the_bumblezone")) {
@@ -133,18 +120,18 @@ public class OpenBlocksTrophies {
 				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.getDropChance();
 				double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
 				if (chance > 0.0D) {
-					event.getDrops().add(new ItemEntity(event.getEntity().getLevel(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.getType(), this.fetchVariantIfAny(event.getEntity(), trophy), false)));
+					event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.getType(), this.fetchVariantIfAny(event.getEntity(), trophy), false)));
 				}
 			}
 		}
 	}
 
 	private int fetchVariantIfAny(LivingEntity entity, Trophy trophy) {
-		if (!trophy.getVariants(entity.getLevel().registryAccess()).isEmpty()) {
+		if (!trophy.getVariants(entity.level().registryAccess()).isEmpty()) {
 			CompoundTag tag = new CompoundTag();
 			entity.addAdditionalSaveData(tag);
-			for (int i = 0; i < trophy.getVariants(entity.getLevel().registryAccess()).size(); i++) {
-				Map<String, String> variantKeys = trophy.getVariants(entity.getLevel().registryAccess()).get(i);
+			for (int i = 0; i < trophy.getVariants(entity.level().registryAccess()).size(); i++) {
+				Map<String, String> variantKeys = trophy.getVariants(entity.level().registryAccess()).get(i);
 				for (Map.Entry<String, String> entry : variantKeys.entrySet()) {
 					if (entity instanceof VillagerDataHolder villager) {
 						if (ForgeRegistries.VILLAGER_PROFESSIONS.getKey(villager.getVillagerData().getProfession()).toString().equals(entry.getValue())) {
@@ -165,28 +152,5 @@ public class OpenBlocksTrophies {
 			}
 		}
 		return 0;
-	}
-
-	public static class TrophyTabHelper {
-
-		public static ItemStack makeIcon() {
-			return TrophyItem.loadEntityToTrophy(EntityType.CHICKEN, 0, !Trophy.getTrophies().isEmpty());
-		}
-
-		public static void getAllTrophies(CreativeModeTab.Output output) {
-			if (!Trophy.getTrophies().isEmpty()) {
-				Map<ResourceLocation, Trophy> sortedTrophies = new TreeMap<>(Comparator.naturalOrder());
-				sortedTrophies.putAll(Trophy.getTrophies());
-				for (Map.Entry<ResourceLocation, Trophy> trophyEntry : sortedTrophies.entrySet()) {
-					if (!trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).isEmpty()) {
-						for (int i = 0; i < trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).size(); i++) {
-							output.accept(TrophyItem.loadEntityToTrophy(trophyEntry.getValue().getType(), i, false));
-						}
-					} else {
-						output.accept(TrophyItem.loadEntityToTrophy(trophyEntry.getValue().getType(), 0, false));
-					}
-				}
-			}
-		}
 	}
 }

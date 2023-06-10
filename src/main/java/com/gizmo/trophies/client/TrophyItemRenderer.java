@@ -1,6 +1,6 @@
 package com.gizmo.trophies.client;
 
-import com.gizmo.trophies.Registries;
+import com.gizmo.trophies.TrophyRegistries;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -23,7 +23,7 @@ public class TrophyItemRenderer extends BlockEntityWithoutLevelRenderer {
 	public void renderByItem(ItemStack stack, ItemDisplayContext context, PoseStack ms, MultiBufferSource source, int light, int overlay) {
 		Item item = stack.getItem();
 		if (item instanceof TrophyItem) {
-			BakedModel base = Minecraft.getInstance().getBlockRenderer().getBlockModel(Registries.TROPHY.get().defaultBlockState());
+			BakedModel base = Minecraft.getInstance().getBlockRenderer().getBlockModel(TrophyRegistries.TROPHY.get().defaultBlockState());
 			Minecraft.getInstance().getItemRenderer().renderModelLists(base, stack, light, overlay, ms, source.getBuffer(RenderType.solid()));
 
 			if (stack.hasTag()) {

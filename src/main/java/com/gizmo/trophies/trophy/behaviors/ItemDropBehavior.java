@@ -71,7 +71,7 @@ public class ItemDropBehavior extends CustomBehavior {
 	@Override
 	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		if (this.sound != null) {
-			player.getLevel().playSound(null, player.blockPosition(), this.sound, SoundSource.BLOCKS, 1.0F, (player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.2F + 1.0F);
+			player.level().playSound(null, player.blockPosition(), this.sound, SoundSource.BLOCKS, 1.0F, (player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.2F + 1.0F);
 		}
 		ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(this.itemToDrop).copy());
 		return this.cooldown;

@@ -120,7 +120,7 @@ public class ClickWithItemBehavior extends CustomBehavior {
 				usedItem.shrink(1);
 			}
 			if (this.sound != null) {
-				player.getLevel().playSound(null, player.blockPosition(), this.sound, SoundSource.BLOCKS, 1.0F, (player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.2F + 1.0F);
+				player.level().playSound(null, player.blockPosition(), this.sound, SoundSource.BLOCKS, 1.0F, (player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.2F + 1.0F);
 			}
 			return this.cooldown;
 		}
