@@ -1,7 +1,7 @@
 package com.gizmo.trophies.compat;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
-import com.gizmo.trophies.client.TrophyRenderer;
+import com.gizmo.trophies.client.EntityCache;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -9,78 +9,43 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.entity.npc.VillagerData;
-import net.minecraft.world.entity.npc.VillagerDataHolder;
-import net.minecraft.world.entity.npc.VillagerType;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 
-import java.util.*;
+import java.util.Map;
 
 public class EntityRenderer {
 
-	private static final Set<EntityType<?>> IGNORED_ENTITIES = new HashSet<>();
-	private static final Map<EntityType<?>, Entity> ENTITY_MAP = new HashMap<>();
-
 	public static void render(PoseStack stack, @Nullable EntityType<?> type, int x, int y, Map<String, String> variant) {
 		if (type != null) {
-			Level level = Minecraft.getInstance().level;
-			if (level != null && !IGNORED_ENTITIES.contains(type)) {
-				Entity entity;
-				// players cannot be created using the type, but we can use the client player
-				// side effect is it renders armor/items
-				if (type == EntityType.PLAYER) {
-					entity = Minecraft.getInstance().player;
-				} else {
-					entity = ENTITY_MAP.computeIfAbsent(type, t -> t.create(level));
+			LivingEntity entity = EntityCache.fetchEntity(type, Minecraft.getInstance().level, variant);
+			if (entity != null) {
+				int scale = 16;
+				float height = entity.getBbHeight();
+				float width = entity.getBbWidth();
+				if (height <= 0.5F && width < 0.75F) {
+					scale = (int) (Math.max(height, width) * 48);
+				} else if (height < 1.0F && width < 0.75F) {
+					scale = (int) (Math.max(height, width) * 32);
+				} else if (height > 2.0F) {
+					scale = (int) (32 / Math.max(height, width));
 				}
-				if (entity instanceof LivingEntity livingEntity) {
-					if (!variant.isEmpty()) {
-						if (entity instanceof VillagerDataHolder villager) {
-							variant.forEach((s, s2) -> villager.setVillagerData(new VillagerData(VillagerType.PLAINS, Objects.requireNonNull(Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.VILLAGER_PROFESSION).get(ResourceLocation.tryParse(s2))), 1)));
-						} else {
-							CompoundTag tag = new CompoundTag();
-							variant.forEach((s, s2) -> TrophyRenderer.convertStringToProperPrimitive(tag, s, s2));
-							livingEntity.readAdditionalSaveData(tag);
-						}
-					}
-					int scale = 16;
-					float height = entity.getBbHeight();
-					float width = entity.getBbWidth();
-					if (height <= 0.5F && width < 0.75F) {
-						scale = (int) (Math.max(height, width) * 48);
-					} else if (height < 1.0F && width < 0.75F) {
-						scale = (int) (Math.max(height, width) * 32);
-					} else if (height > 2.0F) {
-						scale = (int) (32 / Math.max(height, width));
-					}
 
-					// catch exceptions drawing the entity to be safe, any caught exceptions blacklist the entity
-					try {
-						PoseStack modelView = RenderSystem.getModelViewStack();
-						modelView.pushPose();
-						modelView.mulPoseMatrix(stack.last().pose());
-						renderTheEntity(x, y, scale, livingEntity);
-						modelView.popPose();
-						RenderSystem.applyModelViewMatrix();
-					} catch (Exception e) {
-						OpenBlocksTrophies.LOGGER.error("Error drawing entity " + ForgeRegistries.ENTITY_TYPES.getKey(type), e);
-						IGNORED_ENTITIES.add(type);
-						ENTITY_MAP.remove(type);
-					}
-				} else {
-					// not living, so might as well skip next time
-					IGNORED_ENTITIES.add(type);
-					ENTITY_MAP.remove(type);
+				// catch exceptions drawing the entity to be safe, any caught exceptions blacklist the entity
+				try {
+					PoseStack modelView = RenderSystem.getModelViewStack();
+					modelView.pushPose();
+					modelView.mulPoseMatrix(stack.last().pose());
+					renderTheEntity(x, y, scale, entity);
+					modelView.popPose();
+					RenderSystem.applyModelViewMatrix();
+				} catch (Exception e) {
+					OpenBlocksTrophies.LOGGER.error("Error drawing entity " + ForgeRegistries.ENTITY_TYPES.getKey(type), e);
+					EntityCache.addEntityToBlacklist(type);
 				}
 			}
 		}
@@ -125,7 +90,7 @@ public class EntityRenderer {
 		dispatcher.setRenderShadow(false);
 		dispatcher.setRenderHitBoxes(false);
 		MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-		RenderSystem.runAsFancy(() -> dispatcher.render(entity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, posestack1, multibuffersource$buffersource, 15728880));
+		RenderSystem.runAsFancy(() -> dispatcher.render(entity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F, posestack1, multibuffersource$buffersource, 15728880));
 		multibuffersource$buffersource.endBatch();
 		dispatcher.setRenderShadow(true);
 		dispatcher.setRenderHitBoxes(hitboxes);
