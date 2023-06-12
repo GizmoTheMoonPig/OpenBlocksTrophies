@@ -36,6 +36,10 @@ public class Trophy {
 	@Nullable
 	private final Pair<String, ResourceKey<? extends Registry<?>>> registry;
 
+	//TODO new items array: define items that go into slots
+	//example: head: "minecraft:iron_helmet" will add an iron helmet into the helmet slot.
+	//all slots, including hands, work
+	//kill off TrophyExtraRendering after implementing this
 	private Trophy(EntityType<?> type, double dropChance, double verticalOffset, float scale, @Nullable CustomBehavior behavior, List<Map<String, String>> variants, @Nullable Pair<String, ResourceKey<? extends Registry<?>>> registry) {
 		this.type = type;
 		this.dropChance = dropChance;
