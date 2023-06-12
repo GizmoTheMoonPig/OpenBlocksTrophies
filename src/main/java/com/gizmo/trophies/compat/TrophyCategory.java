@@ -19,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
@@ -120,7 +121,8 @@ public class TrophyCategory implements IRecipeCategory<TrophyInfoWrapper> {
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, TrophyInfoWrapper recipe, IFocusGroup focuses) {
-		builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(ForgeSpawnEggItem.fromEntityType(recipe.getTrophyEntity())));
+		SpawnEggItem egg = ForgeSpawnEggItem.fromEntityType(recipe.getTrophyEntity());
+		if (egg != null) builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(egg));
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 86, 19).addIngredient(VanillaTypes.ITEM_STACK, recipe.getTrophyItem());
 	}
 }
