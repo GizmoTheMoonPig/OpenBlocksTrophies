@@ -105,11 +105,11 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-${project.artifactor_minecraft_version}-forge:14.0.0.4")
     //implementation fg.deobf("curse.maven:jade-324717:4439089")
 
-//	compileOnly fg.deobf("teamtwilight:twilightforest:4.2.1664:universal")
-//	compileOnly fg.deobf("curse.maven:citadel-331936:4473245")
+	compileOnly fg.deobf("teamtwilight:twilightforest:4.3.1714:universal")
+	compileOnly fg.deobf("curse.maven:citadel-331936:4579078")
 //	compileOnly fg.deobf("curse.maven:rats-323596:4511024")
 //	compileOnly fg.deobf("curse.maven:bumblezone-362479:4507366")
-//	compileOnly fg.deobf("curse.maven:alexs-mobs-426558:4476475")
+	compileOnly fg.deobf("curse.maven:alexs-mobs-426558:4580894")
 }
 
 jar {
