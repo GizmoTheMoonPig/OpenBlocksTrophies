@@ -1,5 +1,12 @@
 package com.gizmo.trophies.client;
 
+import com.github.alexthe666.rats.registry.RatlantisEntityRegistry;
+import com.github.alexthe666.rats.registry.RatlantisItemRegistry;
+import com.github.alexthe666.rats.registry.RatsItemRegistry;
+import com.github.alexthe666.rats.server.entity.monster.GhostPirat;
+import com.github.alexthe666.rats.server.entity.monster.Pirat;
+import com.github.alexthe666.rats.server.entity.monster.boss.Dutchrat;
+import com.github.alexthe666.rats.server.entity.monster.boss.RatBaron;
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.TrophyRegistries;
 import com.gizmo.trophies.block.TrophyBlock;
@@ -52,27 +59,27 @@ public class ClientEvents {
 					guardian.setItemSlot(EquipmentSlot.CHEST, new ItemStack(TFItems.ARCTIC_CHESTPLATE.get()));
 				});
 			}
-//			if (ModList.get().isLoaded("rats")) {
-//				TrophyExtraRendering.addExtraRenderForEntity(RatlantisEntityRegistry.DUTCHRAT.get(), entity -> {
-//					Dutchrat pirat = (Dutchrat) entity;
-//					pirat.setItemSlot(EquipmentSlot.HEAD, new ItemStack(RatlantisItemRegistry.GHOST_PIRAT_HAT.get()));
-//				});
-//
-//				TrophyExtraRendering.addExtraRenderForEntity(RatlantisEntityRegistry.GHOST_PIRAT.get(), entity -> {
-//					GhostPirat pirat = (GhostPirat) entity;
-//					pirat.setItemSlot(EquipmentSlot.HEAD, new ItemStack(RatlantisItemRegistry.GHOST_PIRAT_HAT.get()));
-//				});
-//
-//				TrophyExtraRendering.addExtraRenderForEntity(RatlantisEntityRegistry.PIRAT.get(), entity -> {
-//					Pirat pirat = (Pirat) entity;
-//					pirat.setItemSlot(EquipmentSlot.HEAD, new ItemStack(RatsItemRegistry.PIRAT_HAT.get()));
-//				});
-//
-//				TrophyExtraRendering.addExtraRenderForEntity(RatlantisEntityRegistry.RAT_BARON.get(), entity -> {
-//					RatBaron baron = (RatBaron) entity;
-//					baron.setItemSlot(EquipmentSlot.HEAD, new ItemStack(RatlantisItemRegistry.AVIATOR_HAT.get()));
-//				});
-//			}
+			if (ModList.get().isLoaded("rats")) {
+				TrophyExtraRendering.addExtraRenderForEntity(RatlantisEntityRegistry.DUTCHRAT.get(), entity -> {
+					Dutchrat pirat = (Dutchrat) entity;
+					pirat.setItemSlot(EquipmentSlot.HEAD, new ItemStack(RatlantisItemRegistry.GHOST_PIRAT_HAT.get()));
+				});
+
+				TrophyExtraRendering.addExtraRenderForEntity(RatlantisEntityRegistry.GHOST_PIRAT.get(), entity -> {
+					GhostPirat pirat = (GhostPirat) entity;
+					pirat.setItemSlot(EquipmentSlot.HEAD, new ItemStack(RatlantisItemRegistry.GHOST_PIRAT_HAT.get()));
+				});
+
+				TrophyExtraRendering.addExtraRenderForEntity(RatlantisEntityRegistry.PIRAT.get(), entity -> {
+					Pirat pirat = (Pirat) entity;
+					pirat.setItemSlot(EquipmentSlot.HEAD, new ItemStack(RatsItemRegistry.PIRAT_HAT.get()));
+				});
+
+				TrophyExtraRendering.addExtraRenderForEntity(RatlantisEntityRegistry.RAT_BARON.get(), entity -> {
+					RatBaron baron = (RatBaron) entity;
+					baron.setItemSlot(EquipmentSlot.HEAD, new ItemStack(RatlantisItemRegistry.AVIATOR_HAT.get()));
+				});
+			}
 		});
 	}
 
