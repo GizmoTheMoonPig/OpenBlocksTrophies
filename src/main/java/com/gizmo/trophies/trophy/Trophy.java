@@ -103,12 +103,12 @@ public class Trophy {
 			if (event.getPlayer() != null) {
 				splitMap(getTrophies(), 50).forEach(splitMap -> {
 					TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), new SyncTrophyConfigsPacket(splitMap));
-					OpenBlocksTrophies.LOGGER.debug("sent a group of {} trophies to client", splitMap.size());
+					OpenBlocksTrophies.LOGGER.debug("sent a group of {} trophies to player {}", splitMap.size(), event.getPlayer().getDisplayName());
 				});
 			} else {
 				event.getPlayerList().getPlayers().forEach(player -> splitMap(getTrophies(), 50).forEach(splitMap -> {
 					TrophyNetworkHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new SyncTrophyConfigsPacket(splitMap));
-					OpenBlocksTrophies.LOGGER.debug("sent a group of {} trophies to player {}", splitMap.size(), event.getPlayer().getDisplayName());
+					OpenBlocksTrophies.LOGGER.debug("sent a group of {} trophies to all clients", splitMap.size());
 				}));
 			}
 		}
