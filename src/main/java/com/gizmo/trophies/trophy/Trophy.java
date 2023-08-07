@@ -107,8 +107,8 @@ public class Trophy {
 				});
 			} else {
 				event.getPlayerList().getPlayers().forEach(player -> splitMap(getTrophies(), 50).forEach(splitMap -> {
-					TrophyNetworkHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new SyncTrophyConfigsPacket(splitMap));
-					OpenBlocksTrophies.LOGGER.debug("sent a group of {} trophies to all clients", splitMap.size());
+					TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncTrophyConfigsPacket(splitMap));
+					OpenBlocksTrophies.LOGGER.debug("sent a group of {} trophies to player {}", splitMap.size(), event.getPlayer().getDisplayName());
 				}));
 			}
 		}
