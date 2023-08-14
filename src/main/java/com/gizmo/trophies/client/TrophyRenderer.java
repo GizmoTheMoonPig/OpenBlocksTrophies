@@ -18,7 +18,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
@@ -30,13 +29,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 
-	private static List<ResourceLocation> keys = new ArrayList<>();
+	private static final List<ResourceLocation> keys = new ArrayList<>();
 
 	public TrophyRenderer(BlockEntityRendererProvider.Context unused) {
 	}
@@ -44,12 +43,13 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 	public static void renderEntity(@Nullable TrophyBlockEntity be, int variant, String name, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light, boolean cycling) {
 		stack.pushPose();
 		if (keys.isEmpty() && !Trophy.getTrophies().isEmpty()) {
-			keys = Trophy.getTrophies().keySet().stream().toList();
+			keys.addAll(Trophy.getTrophies().keySet().stream().toList());
+			Collections.shuffle(keys);
 		}
 		if (cycling && !keys.isEmpty()) {
 			trophy = Trophy.getTrophies().get(keys.get((int) (level.getGameTime() / 20 % keys.size())));
 		}
-		List<Map<String, String>> variants = trophy.getVariants(Minecraft.getInstance().level.registryAccess());
+		List<Map<String, String>> variants = trophy.getVariants(level.registryAccess());
 		Entity entity = EntityCache.fetchEntity(trophy.getType(), level, variants.isEmpty() ? Map.of() : variants.get(variant));
 		if (entity != null) {
 			EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
@@ -137,16 +137,6 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			}
 			renderEntity(blockEntity, blockEntity.getVariant(), blockEntity.getTrophyName(), blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light, blockEntity.isCycling());
 			stack.popPose();
-		}
-	}
-
-	public record EntityContext<T extends Entity>(EntityType<T> type, Level level) {
-		public static <T extends Entity> EntityContext<T> of(EntityType<T> type, Level level) {
-			return new EntityContext<>(type, level);
-		}
-
-		public T createEntity() {
-			return Objects.requireNonNull(this.type.create(this.level));
 		}
 	}
 }
