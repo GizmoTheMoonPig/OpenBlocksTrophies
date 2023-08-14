@@ -73,7 +73,7 @@ public class TrophiesCommands {
 			for (int j = 0; j < sideLength; j++) {
 				int index = j + i * sideLength;
 				if (index > amount - 1) break;
-				BlockPos pos = context.getSource().getPlayer().blockPosition().offset(i, 0, j);
+				BlockPos pos = BlockPos.containing(context.getSource().getPosition()).offset(i, 0, j);
 				context.getSource().getLevel().setBlockAndUpdate(pos, TrophyRegistries.TROPHY.get().defaultBlockState().setValue(TrophyBlock.FACING, Direction.WEST));
 				if (context.getSource().getLevel().getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 					trophyBE.setTrophy(sortedTrophies.entrySet().stream().toList().get(index).getValue());
