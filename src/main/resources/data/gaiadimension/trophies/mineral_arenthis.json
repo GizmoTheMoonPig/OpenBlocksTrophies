@@ -1,0 +1,6 @@
+{
+  "drop_chance": 0.001,
+  "entity": "gaiadimension:mineral_arenthis",
+  "offset": 0.5,
+  "scale": 0.85
+}

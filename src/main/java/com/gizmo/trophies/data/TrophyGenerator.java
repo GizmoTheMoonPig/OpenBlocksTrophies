@@ -27,7 +27,7 @@ public class TrophyGenerator extends TrophyProvider {
 	//TODO rely on the mob's enums for variants if they have them instead of using magic numbers
 	@Override
 	protected void createTrophies() {
-		this.makeTrophy(new Trophy.Builder(EntityType.WOLF).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.WOLF).setScale(1.25F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.CHICKEN).setScale(1.5F).setRightClickBehavior(new ItemDropBehavior(Items.EGG, 10000, SoundEvents.CHICKEN_EGG)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.COW).setRightClickBehavior(new ClickWithItemBehavior(Items.BUCKET, true, new ItemDropBehavior(Items.MILK_BUCKET), SoundEvents.COW_MILK)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.CREEPER).setRightClickBehavior(new ExplosionBehavior(2, false))

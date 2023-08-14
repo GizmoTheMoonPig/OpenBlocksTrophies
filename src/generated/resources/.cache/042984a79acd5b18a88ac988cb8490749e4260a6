@@ -1,4 +1,4 @@
-// 1.20	2023-06-09T20:13:38.1694615	Default OpenBlocks Trophies
+// 1.20.1	2023-08-13T23:27:04.8836811	Default OpenBlocks Trophies
 0f37c153956695534854e0497319138a8ad470b9 data/obtrophies/trophies/allay.json
 e1557f9ed64088bf53883b68c7270b07118d484e data/obtrophies/trophies/axolotl.json
 a6e278d8cbd3535afd460decf84df8d5c06b5795 data/obtrophies/trophies/bat.json
@@ -71,7 +71,7 @@ f0a7e1d87dc3539b5610fc54b6a0900ca36dd9cd data/obtrophies/trophies/vindicator.jso
 902370ea231d43dc38f2c9ec19ccaabc789e1e8d data/obtrophies/trophies/witch.json
 829455038e8d5ad229fb24234abf6fc34acdb4c1 data/obtrophies/trophies/wither.json
 da85bcd695f2b9e885f9ea5eaca7b09217f633d5 data/obtrophies/trophies/wither_skeleton.json
-2e37425bab1d29a7124be46044fbd58684b89f0b data/obtrophies/trophies/wolf.json
+6ef22ef0572c46eaaf21bf259b98a866579f3dc3 data/obtrophies/trophies/wolf.json
 5288fb8e7113f795bf6edc253b4f74a2f9fc57b4 data/obtrophies/trophies/zoglin.json
 fdcc45736704daa0cc7fd54e54845e78694546a2 data/obtrophies/trophies/zombie.json
 f7341f66aa66497ff959f7146ea7e533c7a2f813 data/obtrophies/trophies/zombie_horse.json
