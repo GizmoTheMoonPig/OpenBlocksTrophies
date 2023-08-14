@@ -1,83 +1,52 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net/' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-    }
+plugins {
+	id 'eclipse'
+	id 'idea'
+	id 'maven-publish'
+	id 'net.neoforged.gradle' version '[6.0.18,6.2)'
 }
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'maven-publish'
-apply plugin: 'eclipse'
 
 version = "${project.minecraft_version}-${project.mod_version}." + (hasProperty("CIVersion") ? CIVersion : '0')
 group = 'com.gizmo.trophies'
-archivesBaseName = 'OpenBlocksTrophies'
+base {
+	archivesName = mod_name
+}
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
 	mappings channel: 'official', version: "${project.minecraft_version}"
-
+	copyIdeResources = true
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
-    runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'openblockstrophies'
+	runs {
+		configureEach {
+			workingDirectory project.file("run/${it.name}")
+			property 'forge.logging.console.level', 'debug'
 
-            mods {
-				"${project.modid}" {
-                    source sourceSets.main
-                }
-            }
-        }
+			mods {
+				"${modid}" {
+					source sourceSets.main
+				}
+			}
+		}
 
-        server {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'openblockstrophies'
+		client {
+			property 'forge.enabledGameTestNamespaces', modid
+		}
 
-            mods {
-				"${project.modid}" {
-                    source sourceSets.main
-                }
-            }
-        }
+		server {
+			property 'forge.enabledGameTestNamespaces', modid
+			args '--nogui'
+		}
 
-        gameTestServer {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'openblockstrophies'
+		gameTestServer {
+			property 'forge.enabledGameTestNamespaces', modid
+		}
 
-            mods {
-				"${project.modid}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', "${project.modid}", '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-				"${project.modid}" {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
+		data {
+			args '--mod', modid, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+		}
+	}
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
@@ -100,30 +69,31 @@ repositories {
 }
 
 dependencies {
-	minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+	minecraft "net.neoforged:forge:${project.minecraft_version}-${project.neo_version}"
 
-    implementation fg.deobf("mezz.jei:jei-${project.minecraft_version}-forge:14.0.0.4")
-    implementation fg.deobf("curse.maven:jade-324717:4439089")
+    implementation fg.deobf("mezz.jei:jei-${project.minecraft_version}-forge:15.2.0.25")
+    implementation fg.deobf("curse.maven:jade-324717:4681833")
 
-	compileOnly fg.deobf("teamtwilight:twilightforest:4.3.1714:universal")
-	compileOnly fg.deobf("curse.maven:citadel-331936:4579078")
-	implementation fg.deobf("curse.maven:rats-323596:4585538")
+	compileOnly fg.deobf("teamtwilight:twilightforest:4.3.1792:universal")
+	compileOnly fg.deobf("curse.maven:citadel-331936:4613231")
+	compileOnly fg.deobf("curse.maven:rats-323596:4608071")
 //	compileOnly fg.deobf("curse.maven:bumblezone-362479:4507366")
 	compileOnly fg.deobf("curse.maven:alexs-mobs-426558:4580894")
 }
 
-jar {
+tasks.named('jar', Jar).configure {
     manifest {
         attributes([
-                "Specification-Title"     : "OpenBlocks Trophies",
+                "Specification-Title"     : mod_name,
                 "Specification-Vendor"    : "GizmoTheMoonPig",
                 "Specification-Version"   : "1",
-                "Implementation-Title"    : "OpenBlocksTrophies",
+                "Implementation-Title"    : mod_name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "GizmoTheMoonPig",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
+	finalizedBy 'reobfJar'
 }
 
 def secrets = new Properties()
@@ -170,9 +140,10 @@ publishing {
 	}
 }
 
-task sourceJar(type: Jar, dependsOn: 'classes') {
+tasks.register('sourceJar', Jar) {
+	dependsOn 'classes'
 	from sourceSets.main.allSource
-	classifier = 'sources'
+	archiveClassifier = 'sources'
 }
 
 tasks.withType(JavaCompile).configureEach {
