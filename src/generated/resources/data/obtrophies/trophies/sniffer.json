@@ -2,11 +2,8 @@
   "behavior": {
     "type": "obtrophies:loot_table",
     "cooldown": 20000,
-    "loot_table": "minecraft:gameplay/sniffer_digging",
-    "rolls": 1
+    "loot_table": "minecraft:gameplay/sniffer_digging"
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:sniffer",
-  "offset": 0.0,
   "scale": 0.5
 }

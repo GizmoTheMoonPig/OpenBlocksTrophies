@@ -9,6 +9,7 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
@@ -16,13 +17,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 
-import java.util.Map;
+import java.util.Optional;
 
 public class EntityRenderer {
 
-	public static void render(PoseStack stack, @Nullable EntityType<?> type, int x, int y, Map<String, String> variant) {
+	public static void render(PoseStack stack, @Nullable EntityType<?> type, int x, int y, @Nullable CompoundTag variant, Optional<CompoundTag> defaultVariant) {
 		if (type != null) {
-			LivingEntity entity = EntityCache.fetchEntity(type, Minecraft.getInstance().level, variant);
+			LivingEntity entity = EntityCache.fetchEntity(type, Minecraft.getInstance().level, variant, defaultVariant);
 			if (entity != null) {
 				int scale = 16;
 				float height = entity.getBbHeight();

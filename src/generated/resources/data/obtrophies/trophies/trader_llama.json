@@ -1,9 +1,6 @@
 {
   "behavior": {
-	"type": "obtrophies:llama_spit"
+    "type": "obtrophies:llama_spit"
   },
-  "drop_chance": 0.001,
-  "entity": "minecraft:trader_llama",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "minecraft:trader_llama"
 }

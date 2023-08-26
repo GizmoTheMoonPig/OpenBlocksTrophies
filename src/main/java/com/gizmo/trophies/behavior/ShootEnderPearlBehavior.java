@@ -1,30 +1,20 @@
-package com.gizmo.trophies.trophy.behaviors;
+package com.gizmo.trophies.behavior;
 
-import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.block.TrophyBlockEntity;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
+import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class ShootEnderPearlBehavior extends CustomBehavior {
+public record ShootEnderPearlBehavior() implements CustomBehavior {
+
+	public static final Codec<ShootEnderPearlBehavior> CODEC = Codec.unit(ShootEnderPearlBehavior::new);
 
 	@Override
-	public ResourceLocation getType() {
-		return OpenBlocksTrophies.location("ender_pearl");
-	}
-
-	@Override
-	public void serializeToJson(JsonObject object, JsonSerializationContext context) {
-	}
-
-	@Override
-	public CustomBehavior fromJson(JsonObject object) {
-		return new ShootEnderPearlBehavior();
+	public CustomBehaviorType getType() {
+		return CustomTrophyBehaviors.ENDER_PEARL.get();
 	}
 
 	@Override

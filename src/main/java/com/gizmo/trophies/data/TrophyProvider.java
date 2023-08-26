@@ -1,9 +1,10 @@
 package com.gizmo.trophies.data;
 
+import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.trophy.Trophy;
-import com.gizmo.trophies.trophy.TrophyReloadListener;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -35,10 +36,10 @@ public abstract class TrophyProvider implements DataProvider {
 
 		ImmutableList.Builder<CompletableFuture<?>> futuresBuilder = new ImmutableList.Builder<>();
 
-		map.forEach((resourceLocation, trophy) -> {
-			Path path = this.entryPath.json(resourceLocation);
-			futuresBuilder.add(DataProvider.saveStable(output, TrophyReloadListener.serialize(trophy), path));
-		});
+		for (Map.Entry<ResourceLocation, Trophy> entry : map.entrySet()) {
+			Path path = this.entryPath.json(entry.getKey());
+			futuresBuilder.add(DataProvider.saveStable(output, Trophy.CODEC.encodeStart(JsonOps.INSTANCE, entry.getValue()).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path));
+		};
 		return CompletableFuture.allOf(futuresBuilder.build().toArray(CompletableFuture[]::new));
 	}
 
@@ -50,7 +51,7 @@ public abstract class TrophyProvider implements DataProvider {
 	 * @param trophy the trophy you want to make. A trophy takes the entity type at the very minimum. You can also specify the scale, vertical offset, drop chance, and custom right click behavior.
 	 */
 	protected void makeTrophy(Trophy trophy) {
-		this.builder.putIfAbsent(new ResourceLocation(this.modid, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.getType())).getPath()), trophy);
+		this.builder.putIfAbsent(new ResourceLocation(this.modid, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type())).getPath()), trophy);
 	}
 
 	@Override

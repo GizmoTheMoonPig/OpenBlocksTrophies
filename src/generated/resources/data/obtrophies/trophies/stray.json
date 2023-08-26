@@ -1,11 +1,7 @@
 {
   "behavior": {
-	"type": "obtrophies:arrow",
-	"amount": 1,
-	"effect": "minecraft:slowness"
+    "type": "obtrophies:arrow",
+    "effect": "minecraft:slowness"
   },
-  "drop_chance": 0.001,
-  "entity": "minecraft:stray",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "minecraft:stray"
 }

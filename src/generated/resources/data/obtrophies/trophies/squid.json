@@ -1,11 +1,14 @@
 {
   "behavior": {
-	"type": "obtrophies:place_block",
-	"block": "minecraft:water",
-	"place_around_trophy": false
+    "type": "obtrophies:place_block",
+    "block": {
+      "Name": "minecraft:water",
+      "Properties": {
+        "level": "0"
+      }
+    },
+    "method": "above"
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:squid",
-  "offset": 0.5,
-  "scale": 1.0
+  "offset": 0.5
 }

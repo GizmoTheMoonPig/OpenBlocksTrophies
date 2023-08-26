@@ -2,14 +2,11 @@
   "behavior": {
     "type": "obtrophies:loot_table",
     "cooldown": 20000,
-    "loot_table": "minecraft:gameplay/cat_morning_gift",
-    "rolls": 1
+    "loot_table": "minecraft:gameplay/cat_morning_gift"
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:cat",
-  "offset": 0.0,
   "scale": 1.25,
-  "variant_registry": {
+  "variants": {
     "key": "variant",
     "registry": "minecraft:cat_variant"
   }

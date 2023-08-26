@@ -1,23 +1,21 @@
 {
-  "drop_chance": 0.001,
   "entity": "minecraft:axolotl",
-  "offset": 0.0,
   "scale": 1.25,
   "variants": [
     {
-      "Variant": "0"
+      "Variant": 0
     },
     {
-      "Variant": "1"
+      "Variant": 1
     },
     {
-      "Variant": "2"
+      "Variant": 2
     },
     {
-      "Variant": "3"
+      "Variant": 3
     },
     {
-      "Variant": "4"
+      "Variant": 4
     }
   ]
 }

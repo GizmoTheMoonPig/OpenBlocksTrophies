@@ -1,19 +1,21 @@
 {
   "behavior": {
     "type": "obtrophies:place_block",
-    "block": "minecraft:snow",
-    "place_around_trophy": true
+    "block": {
+      "Name": "minecraft:snow",
+      "Properties": {
+        "layers": "1"
+      }
+    },
+    "method": "around"
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:snow_golem",
-  "offset": 0.0,
-  "scale": 1.0,
   "variants": [
     {
-      "Pumpkin": "true"
+      "Pumpkin": 1
     },
     {
-      "Pumpkin": "false"
+      "Pumpkin": 0
     }
   ]
 }

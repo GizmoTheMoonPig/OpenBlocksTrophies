@@ -1,13 +1,12 @@
 {
   "behavior": {
     "type": "obtrophies:place_block",
-    "block": "minecraft:red_mushroom",
-    "place_around_trophy": true
+    "block": {
+      "Name": "minecraft:red_mushroom"
+    },
+    "method": "around"
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:mooshroom",
-  "offset": 0.0,
-  "scale": 1.0,
   "variants": [
     {
       "Type": "red"

@@ -108,12 +108,12 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			Trophy trophy = trophyBE.getTrophy();
 			if (trophy != null) {
-				Pair<SoundEvent, Float> soundData = AmbientSoundFetcher.getAmbientSoundAndPitch(trophy.getType(), level);
+				Pair<SoundEvent, Float> soundData = AmbientSoundFetcher.getAmbientSoundAndPitch(trophy.type(), level);
 				if (soundData.getFirst() != null) {
 					level.playSound(null, pos, soundData.getFirst(), SoundSource.BLOCKS, 1.0F, soundData.getSecond());
 				}
-				if (trophyBE.getCooldown() <= 0 && trophy.getClickBehavior() != null) {
-					trophyBE.setCooldown(trophy.getClickBehavior().execute(trophyBE, (ServerPlayer) player, player.getItemInHand(hand)));
+				if (trophyBE.getCooldown() <= 0 && trophy.clickBehavior().isPresent()) {
+					trophyBE.setCooldown(trophy.clickBehavior().get().execute(trophyBE, (ServerPlayer) player, player.getItemInHand(hand)));
 				}
 			}
 		}
@@ -127,7 +127,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		if (blockEntity instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
 			ItemStack newStack = new ItemStack(this);
 			CompoundTag tag = new CompoundTag();
-			tag.putString(TrophyItem.ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().getType())).toString());
+			tag.putString(TrophyItem.ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().type())).toString());
 			tag.putInt(TrophyItem.VARIANT_TAG, trophyBE.getVariant());
 			if (trophyBE.getCooldown() > 0) {
 				tag.putInt(TrophyItem.COOLDOWN_TAG, trophyBE.getCooldown());
@@ -146,7 +146,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		ItemStack newStack = new ItemStack(this);
 		CompoundTag tag = new CompoundTag();
 		if (getter.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
-			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().getType())).toString());
+			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().type())).toString());
 			if (trophyBE.isCycling()) {
 				tag.putBoolean(TrophyItem.CYCLING_TAG, true);
 			}

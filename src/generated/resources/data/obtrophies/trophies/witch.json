@@ -1,12 +1,10 @@
 {
   "behavior": {
-	"type": "obtrophies:mob_effect",
-	"amplifier": 1,
-	"effect": "minecraft:blindness",
-	"time": 70
+    "type": "obtrophies:mob_effect",
+    "amplifier": 1,
+    "effect": "minecraft:blindness",
+    "time": 70
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:witch",
-  "offset": 0.0,
   "scale": 0.9
 }

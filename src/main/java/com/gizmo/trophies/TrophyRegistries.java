@@ -45,7 +45,7 @@ public class TrophyRegistries {
 			.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
 			.withSearchBar()
 			.icon(TrophyTabHelper::makeIcon)
-			.displayItems((params, output) -> TrophyTabHelper.getAllTrophies(output))
+			.displayItems((params, output) -> TrophyTabHelper.getAllTrophies(output, params.holders()))
 			.build()
 	);
 

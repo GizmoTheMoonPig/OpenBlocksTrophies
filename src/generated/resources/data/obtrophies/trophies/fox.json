@@ -2,12 +2,12 @@
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 20000,
-    "item": "minecraft:sweet_berries"
+    "item": {
+      "Count": 1,
+      "id": "minecraft:sweet_berries"
+    }
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:fox",
-  "offset": 0.0,
-  "scale": 1.0,
   "variants": [
     {
       "Type": "red"

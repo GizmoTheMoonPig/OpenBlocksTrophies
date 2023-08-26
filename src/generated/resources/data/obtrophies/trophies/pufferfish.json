@@ -5,19 +5,17 @@
     "effect": "minecraft:nausea",
     "time": 100
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:pufferfish",
-  "offset": 0.0,
   "scale": 2.0,
   "variants": [
     {
-      "PuffState": "0"
+      "PuffState": 0
     },
     {
-      "PuffState": "1"
+      "PuffState": 1
     },
     {
-      "PuffState": "2"
+      "PuffState": 2
     }
   ]
 }

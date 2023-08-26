@@ -26,7 +26,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -92,7 +91,7 @@ public class TrophyItem extends BlockItem {
 	public Component getName(ItemStack stack) {
 		Trophy trophy = getTrophy(stack);
 		if (trophy != null && !hasCycleOnTrophy(stack)) {
-			return Component.translatable("block.obtrophies.trophy.entity", trophy.getType().getDescription().getString());
+			return Component.translatable("block.obtrophies.trophy.entity", trophy.type().getDescription().getString());
 		}
 		return super.getName(stack);
 	}
@@ -101,12 +100,12 @@ public class TrophyItem extends BlockItem {
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
 		Trophy trophy = getTrophy(stack);
 		if (trophy != null && !hasCycleOnTrophy(stack)) {
-			tooltip.add(Component.translatable("item.obtrophies.trophy.modid", this.getModIdForTooltip(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.getType())).getNamespace())).withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.obtrophies.trophy.modid", this.getModIdForTooltip(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type())).getNamespace())).withStyle(ChatFormatting.GRAY));
 			if (flag.isAdvanced()) {
 				int variant = getTrophyVariant(stack);
-				if (level != null && !trophy.getVariants(level.registryAccess()).isEmpty() && trophy.getVariants(level.registryAccess()).size() >= variant) {
-					Map<String, String> variantDefiners = trophy.getVariants(level.registryAccess()).get(variant);
-					variantDefiners.forEach((key, value) -> tooltip.add(Component.translatable("\"%s\": \"%s\"", key, value).withStyle(ChatFormatting.GRAY)));
+				if (level != null && !trophy.getVariants(level.registryAccess()).isEmpty() && variant < trophy.getVariants(level.registryAccess()).size()) {
+					CompoundTag tag = trophy.getVariants(level.registryAccess()).get(variant);
+					tag.getAllKeys().forEach(s -> tooltip.add(Component.translatable("\"%s\": \"%s\"", s, Objects.requireNonNull(tag.get(s)).getAsString()).withStyle(ChatFormatting.GRAY)));
 				}
 			}
 		}

@@ -2,22 +2,20 @@
   "behavior": {
     "type": "obtrophies:llama_spit"
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:llama",
-  "offset": 0.0,
   "scale": 0.9,
   "variants": [
     {
-      "Variant": "0"
+      "Variant": 0
     },
     {
-      "Variant": "1"
+      "Variant": 1
     },
     {
-      "Variant": "2"
+      "Variant": 2
     },
     {
-      "Variant": "3"
+      "Variant": 3
     }
   ]
 }

@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": "minecraft:porkchop"
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:porkchop"
+    }
   },
-  "drop_chance": 0.001,
-  "entity": "minecraft:pig",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "minecraft:pig"
 }

@@ -72,7 +72,7 @@ public class TrophyCategory implements IRecipeCategory<TrophyInfoWrapper> {
 
 	@Override
 	public void draw(TrophyInfoWrapper recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-		EntityRenderer.render(graphics.pose(), recipe.getTrophyEntity(), 25, 42, recipe.getTrophyVariant(Minecraft.getInstance().level.registryAccess()));
+		EntityRenderer.render(graphics.pose(), recipe.getTrophyEntity(), 25, 42, recipe.getTrophyVariant(), recipe.getDefaultTrophyVariant());
 
 		if (!TrophyConfig.COMMON_CONFIG.anySourceDropsTrophies.get()) {
 			if (TrophyConfig.COMMON_CONFIG.fakePlayersDropTrophies.get()) {

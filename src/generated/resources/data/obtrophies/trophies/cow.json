@@ -3,14 +3,19 @@
     "type": "obtrophies:right_click_item",
     "execute_behavior": {
       "type": "obtrophies:item",
-      "item": "minecraft:milk_bucket"
+      "item": {
+        "Count": 1,
+        "id": "minecraft:milk_bucket"
+      }
     },
-    "item_to_use": "minecraft:bucket",
+    "item_to_use": {
+      "Count": 1,
+      "id": "minecraft:bucket"
+    },
     "shrink_item_stack": true,
-    "sound": "minecraft:entity.cow.milk"
+    "sound": {
+      "sound_id": "minecraft:entity.cow.milk"
+    }
   },
-  "drop_chance": 0.001,
-  "entity": "minecraft:cow",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "minecraft:cow"
 }

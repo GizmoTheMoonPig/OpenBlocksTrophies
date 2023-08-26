@@ -18,20 +18,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 
@@ -47,34 +44,26 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			Collections.shuffle(keys);
 		}
 		if (cycling && !keys.isEmpty()) {
-			trophy = Trophy.getTrophies().get(keys.get((int) (level.getGameTime() / 20 % keys.size())));
+			trophy = Trophy.getTrophies().get(keys.get((int) ((level.getGameTime() + Minecraft.getInstance().getPartialTick()) / 20 % keys.size())));
 		}
-		List<Map<String, String>> variants = trophy.getVariants(level.registryAccess());
-		Entity entity = EntityCache.fetchEntity(trophy.getType(), level, variants.isEmpty() ? Map.of() : variants.get(variant));
+		List<CompoundTag> variants = trophy.getVariants(level.registryAccess());
+		Entity entity = EntityCache.fetchEntity(trophy.type(), level, variant < variants.size() ? variants.get(variant) : null, trophy.defaultData());
 		if (entity != null) {
 			EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
 			boolean hitboxes = dispatcher.shouldRenderHitBoxes();
 			dispatcher.setRenderShadow(false);
 			dispatcher.setRenderHitBoxes(false);
-			entity.setYRot(0.0F);
-			entity.setYHeadRot(0.0F);
-			entity.setYBodyRot(0.0F);
-			entity.setOnGround(true);
-			entity.hasImpulse = false;
-			if (entity instanceof Mob mob) {
-				mob.setNoAi(true);
-			}
 			entity.setCustomName(!name.isEmpty() ? Component.literal(name) : null);
 			entity.setCustomNameVisible(false);
-			//tick named sheep so the jeb_ name easter egg works properly. Lucky us the sheep doesnt need the tickCount for anything animation related so this works well.
-			//I cant do this for every mob because mobs such as the blaze or pufferfish move when the tickCount is incremented, and I HATE moving trophies
+			//tick named sheep so the jeb_ name Easter Egg works properly. Lucky us the sheep doesn't need the tickCount for anything animation related so this works well.
+			//I can't do this for every mob because mobs such as the blaze or pufferfish move when the tickCount is incremented, and I HATE moving trophies
 			if (entity instanceof Sheep && entity.hasCustomName()) {
 				entity.tickCount = (int) level.getLevelData().getGameTime();
 			} else {
 				entity.tickCount = 0;
 			}
-			entity.setPos(pos.getX() + 0.5D, pos.getY() + 0.25D + trophy.getVerticalOffset(), pos.getZ() + 0.5D);
-			stack.translate(0.5F, 0.25D + trophy.getVerticalOffset(), 0.5F);
+			entity.setPos(pos.getX() + 0.5D, pos.getY() + 0.25D + trophy.verticalOffset(), pos.getZ() + 0.5D);
+			stack.translate(0.5F, 0.25D + trophy.verticalOffset(), 0.5F);
 			if (be != null) {
 				//they watch
 				if (LocalDate.of(LocalDate.now().getYear(), 4, 1).equals(LocalDate.now())) {
@@ -99,7 +88,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			}
 
 			stack.scale(0.4F, 0.4F, 0.4F);
-			stack.scale(trophy.getScale(), trophy.getScale(), trophy.getScale());
+			stack.scale(trophy.scale(), trophy.scale(), trophy.scale());
 
 			RenderSystem.runAsFancy(() -> dispatcher.render(entity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F, stack, source, light));
 			dispatcher.setRenderShadow(true);
@@ -107,16 +96,6 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		}
 
 		stack.popPose();
-	}
-
-	public static void convertStringToProperPrimitive(CompoundTag tag, String variantID, String primitive) {
-		if (StringUtils.isNumeric(primitive)) {
-			tag.putInt(variantID, Integer.parseInt(primitive));
-		} else if (primitive.equals("false") || primitive.equals("true")) {
-			tag.putBoolean(variantID, Boolean.parseBoolean(primitive));
-		} else {
-			tag.putString(variantID, primitive);
-		}
 	}
 
 	private static float getCorrectRotation(Direction direction) {

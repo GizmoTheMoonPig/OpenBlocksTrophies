@@ -4,30 +4,37 @@ import com.gizmo.trophies.TrophyConfig;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
+import java.util.Optional;
 
 public record TrophyInfoWrapper(Trophy trophy, int variant) implements IRecipeCategoryExtension {
 
 	public EntityType<?> getTrophyEntity() {
-		return this.trophy().getType();
+		return this.trophy().type();
 	}
 
 	public double getTrophyDropPercentage() {
-		return (TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : this.trophy().getDropChance()) * 100;
+		return (TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : this.trophy().dropChance()) * 100;
 	}
 
 	public ItemStack getTrophyItem() {
-		return TrophyItem.loadEntityToTrophy(this.trophy().getType(), this.variant(), false);
+		return TrophyItem.loadEntityToTrophy(this.trophy().type(), this.variant(), false);
 	}
 
-	public Map<String, String> getTrophyVariant(RegistryAccess access) {
-		if (!this.trophy().getVariants(access).isEmpty()) {
-			return this.trophy().getVariants(access).get(this.variant());
+	@Nullable
+	public CompoundTag getTrophyVariant() {
+		if (!this.trophy().getVariants(Minecraft.getInstance().level.registryAccess()).isEmpty()) {
+			return this.trophy().getVariants(Minecraft.getInstance().level.registryAccess()).get(this.variant());
 		}
-		return Map.of();
+		return null;
+	}
+
+	public Optional<CompoundTag> getDefaultTrophyVariant() {
+		return this.trophy().defaultData();
 	}
 }

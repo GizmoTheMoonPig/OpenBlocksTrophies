@@ -55,6 +55,10 @@ public class TrophyBlockEntity extends BlockEntity {
 		return this.variant;
 	}
 
+	public void setVariant(int variant) {
+		this.variant = variant;
+	}
+
 	public String getTrophyName() {
 		return this.trophyName;
 	}
@@ -67,7 +71,7 @@ public class TrophyBlockEntity extends BlockEntity {
 	protected void saveAdditional(CompoundTag tag) {
 		super.saveAdditional(tag);
 		if (this.getTrophy() != null) {
-			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getTrophy().getType())).toString());
+			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getTrophy().type())).toString());
 		}
 		tag.putInt("cooldown", this.getCooldown());
 		if (this.specialCycleVariant) {

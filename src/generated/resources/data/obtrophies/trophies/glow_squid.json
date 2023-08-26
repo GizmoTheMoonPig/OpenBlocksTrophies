@@ -1,12 +1,10 @@
 {
   "behavior": {
-	"type": "obtrophies:mob_effect",
-	"amplifier": 0,
-	"effect": "minecraft:glowing",
-	"time": 200
+    "type": "obtrophies:mob_effect",
+    "amplifier": 0,
+    "effect": "minecraft:glowing",
+    "time": 200
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:glow_squid",
-  "offset": 0.5,
-  "scale": 1.0
+  "offset": 0.5
 }

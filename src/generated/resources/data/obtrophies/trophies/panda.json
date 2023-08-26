@@ -2,20 +2,17 @@
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 20000,
-    "item": "minecraft:bamboo"
+    "item": {
+      "Count": 1,
+      "id": "minecraft:bamboo"
+    }
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:panda",
-  "offset": 0.0,
   "scale": 0.75,
   "variants": [
     {
       "HiddenGene": "normal",
       "MainGene": "normal"
-    },
-    {
-      "HiddenGene": "aggressive",
-      "MainGene": "aggressive"
     },
     {
       "HiddenGene": "lazy",
@@ -28,6 +25,10 @@
     {
       "HiddenGene": "playful",
       "MainGene": "playful"
+    },
+    {
+      "HiddenGene": "aggressive",
+      "MainGene": "aggressive"
     },
     {
       "HiddenGene": "weak",

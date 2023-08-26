@@ -1,18 +1,21 @@
 package com.gizmo.trophies.trophy;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
+import com.gizmo.trophies.behavior.CustomBehavior;
+import com.gizmo.trophies.behavior.CustomTrophyBehaviors;
 import com.gizmo.trophies.SyncTrophyConfigsPacket;
 import com.gizmo.trophies.TrophyNetworkHandler;
-import com.gizmo.trophies.trophy.behaviors.CustomBehavior;
-import com.gizmo.trophies.trophy.behaviors.CustomBehaviorRegistry;
-import com.google.gson.*;
-import it.unimi.dsi.fastutil.Pair;
+import com.mojang.datafixers.util.Either;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.Util;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
@@ -21,78 +24,19 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Type;
 import java.util.*;
 
-public class Trophy {
+public record Trophy(EntityType<?> type, double dropChance, double verticalOffset, float scale, Optional<CustomBehavior> clickBehavior, Either<Pair<String, ResourceLocation>, List<CompoundTag>> variants, Optional<CompoundTag> defaultData) {
 
-	private final EntityType<?> type;
-	private final double dropChance;
-	private final double verticalOffset;
-	private final float scale;
-	@Nullable
-	private final CustomBehavior clickBehavior;
-	private final List<Map<String, String>> variants;
-	@Nullable
-	private final Pair<String, ResourceKey<? extends Registry<?>>> registry;
-
-	//TODO new items array: define items that go into slots
-	//example: head: "minecraft:iron_helmet" will add an iron helmet into the helmet slot.
-	//all slots, including hands, work
-	//kill off TrophyExtraRendering after implementing this
-	private Trophy(EntityType<?> type, double dropChance, double verticalOffset, float scale, @Nullable CustomBehavior behavior, List<Map<String, String>> variants, @Nullable Pair<String, ResourceKey<? extends Registry<?>>> registry) {
-		this.type = type;
-		this.dropChance = dropChance;
-		this.verticalOffset = verticalOffset;
-		this.scale = scale;
-		this.clickBehavior = behavior;
-		this.variants = variants;
-		this.registry = registry;
-	}
-
-	public EntityType<?> getType() {
-		return this.type;
-	}
-
-	public float getScale() {
-		return this.scale;
-	}
-
-	public double getDropChance() {
-		return this.dropChance;
-	}
-
-	public double getVerticalOffset() {
-		return this.verticalOffset;
-	}
-
-	@Nullable
-	public CustomBehavior getClickBehavior() {
-		return this.clickBehavior;
-	}
-
-	public List<Map<String, String>> getVariants(@Nullable RegistryAccess access) {
-		if (this.registry != null && access != null) {
-			List<Map<String, String>> entries = new ArrayList<>();
-			Registry<?> registry = access.registryOrThrow(this.registry.right());
-			for (Map.Entry<?, ?> entry : registry.entrySet()) {
-				try {
-					entries.add(Map.of(this.registry.left(), ((ResourceKey<?>) entry.getKey()).location().toString()));
-				} catch (ClassCastException e) {
-					OpenBlocksTrophies.LOGGER.error("Something went wrong when trying to fetch variants from a registry!");
-					e.printStackTrace();
-				}
-			}
-			return entries;
-		}
-		return this.variants;
-	}
-
-	public void mergeVariantsFromOtherTrophy(Trophy trophy) {
-		if (!trophy.variants.isEmpty()) {
-			this.variants.addAll(trophy.variants);
-		}
-	}
+	public static final Codec<Trophy> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+			ForgeRegistries.ENTITY_TYPES.getCodec().fieldOf("entity").forGetter(Trophy::type),
+			Codec.DOUBLE.optionalFieldOf("drop_chance", 0.001D).forGetter(Trophy::dropChance),
+			Codec.DOUBLE.optionalFieldOf("offset", 0.0D).forGetter(Trophy::verticalOffset),
+			Codec.FLOAT.optionalFieldOf("scale", 1.0F).forGetter(Trophy::scale),
+			CustomTrophyBehaviors.CODEC.optionalFieldOf("behavior").forGetter(Trophy::clickBehavior),
+			Codec.either(Codec.pair(Codec.STRING.fieldOf("key").codec(), ResourceLocation.CODEC.fieldOf("registry").codec()), CompoundTag.CODEC.listOf()).optionalFieldOf("variants", Either.right(new ArrayList<>())).forGetter(Trophy::variants),
+			CompoundTag.CODEC.optionalFieldOf("default_variant").forGetter(Trophy::defaultData)
+	).apply(instance, Trophy::new));
 
 	public static void reloadTrophies(AddReloadListenerEvent event) {
 		event.addListener(new TrophyReloadListener());
@@ -101,133 +45,55 @@ public class Trophy {
 	public static void syncTrophiesToClient(OnDatapackSyncEvent event) {
 		if (FMLEnvironment.dist.isDedicatedServer()) {
 			if (event.getPlayer() != null) {
-				splitMap(getTrophies(), 50).forEach(splitMap -> {
-					TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), new SyncTrophyConfigsPacket(splitMap));
-					OpenBlocksTrophies.LOGGER.debug("sent a group of {} trophies to player {}", splitMap.size(), event.getPlayer().getDisplayName());
-				});
+				TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), new SyncTrophyConfigsPacket(getTrophies()));
 			} else {
-				event.getPlayerList().getPlayers().forEach(player -> splitMap(getTrophies(), 50).forEach(splitMap -> {
-					TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncTrophyConfigsPacket(splitMap));
-					OpenBlocksTrophies.LOGGER.debug("sent a group of {} trophies to player {}", splitMap.size(), event.getPlayer().getDisplayName());
-				}));
+				event.getPlayerList().getPlayers().forEach(player -> TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncTrophyConfigsPacket(getTrophies())));
 			}
 		}
 	}
 
-	private static <K, V> List<SortedMap<K, V>> splitMap(TreeMap<K, V> map, int size) {
-		List<K> keys = new ArrayList<>(map.keySet());
-		List<SortedMap<K, V>> parts = new ArrayList<>();
-		final int listSize = map.size();
-		for (int i = 0; i < listSize; i += size) {
-			if (i + size < listSize) {
-				parts.add(map.subMap(keys.get(i), keys.get(i + size)));
-			} else {
-				parts.add(map.tailMap(keys.get(i)));
+	public List<CompoundTag> getVariants(@Nullable RegistryAccess access) {
+		if (this.variants.left().isPresent() && access != null) {
+			List<CompoundTag> entries = new ArrayList<>();
+			Pair<String, ResourceLocation> registryVariant = this.variants.left().get();
+			Registry<?> registry = access.registryOrThrow(ResourceKey.createRegistryKey(registryVariant.getSecond()));
+			for (Map.Entry<? extends ResourceKey<?>, ?> entry : registry.entrySet()) {
+				try {
+					entries.add(Util.make(new CompoundTag(), tag -> tag.putString(registryVariant.getFirst(), entry.getKey().location().toString())));
+				} catch (ClassCastException e) {
+					OpenBlocksTrophies.LOGGER.error("Something went wrong when trying to fetch variants from a registry!");
+					e.printStackTrace();
+				}
 			}
+			return entries;
 		}
-		return parts;
+		return this.variants.right().orElse(new ArrayList<>());
+	}
+
+	//used for the creative tab since I dont have access to registryaccess
+	public List<CompoundTag> getVariants(HolderLookup.Provider access) {
+		if (this.variants.left().isPresent()) {
+			List<CompoundTag> entries = new ArrayList<>();
+			Pair<String, ResourceLocation> registryVariant = this.variants.left().get();
+			HolderLookup<?> registry = access.lookupOrThrow(ResourceKey.createRegistryKey(registryVariant.getSecond()));
+			for (ResourceKey<?> entry : registry.listElementIds().toList()) {
+				try {
+					CompoundTag formattedTag = Util.make(new CompoundTag(), tag -> tag.putString(registryVariant.getFirst(), entry.location().toString()));
+					if (!entries.contains(formattedTag)) {
+						entries.add(formattedTag);
+					}
+				} catch (ClassCastException e) {
+					OpenBlocksTrophies.LOGGER.error("Something went wrong when trying to fetch variants from a registry!");
+					e.printStackTrace();
+				}
+			}
+			return entries;
+		}
+		return this.variants.right().orElse(new ArrayList<>());
 	}
 
 	public static TreeMap<ResourceLocation, Trophy> getTrophies() {
 		return TrophyReloadListener.getValidTrophies();
-	}
-
-	public static Trophy fromJson(JsonObject object) {
-		String entityType = GsonHelper.getAsString(object, "entity");
-		if (ForgeRegistries.ENTITY_TYPES.getValue(ResourceLocation.tryParse(entityType)) == null) {
-			throw new JsonParseException("Entity" + entityType + " defined in Trophy config does not exist!");
-		}
-		EntityType<?> realEntity = ForgeRegistries.ENTITY_TYPES.getValue(ResourceLocation.tryParse(entityType));
-		double dropChance = GsonHelper.getAsDouble(object, "drop_chance", 0.001D);
-		double verticalOffset = GsonHelper.getAsDouble(object, "offset", 0.0D);
-		float scale = GsonHelper.getAsFloat(object, "scale", 1.0F);
-		CustomBehavior behavior = null;
-		if (object.has("behavior")) {
-			try {
-				JsonObject bObject = GsonHelper.convertToJsonObject(object.get("behavior"), "behavior");
-				CustomBehavior fetchedBehavior = CustomBehaviorRegistry.getBehavior(Objects.requireNonNull(ResourceLocation.tryParse(GsonHelper.getAsString(bObject, "type"))));
-				behavior = fetchedBehavior.fromJson(bObject);
-			} catch (Exception e) {
-				OpenBlocksTrophies.LOGGER.error("Could not fetch custom behavior for trophy {}, setting to null", entityType, e);
-			}
-		}
-		Pair<String, ResourceKey<? extends Registry<?>>> registry = null;
-		List<Map<String, String>> variants = new ArrayList<>();
-		if (object.has("variants")) {
-			JsonArray array = GsonHelper.getAsJsonArray(object, "variants");
-			array.forEach(jsonElement -> {
-				Map<String, String> variant = new HashMap<>();
-				jsonElement.getAsJsonObject().entrySet().forEach(entry -> variant.put(entry.getKey(), entry.getValue().getAsString()));
-				variants.add(variant);
-			});
-		} else if (object.has("variant_registry")) {
-			JsonObject vObject = GsonHelper.convertToJsonObject(object.get("variant_registry"), "variant_registry");
-			registry = Pair.of(GsonHelper.getAsString(vObject, "key"), ResourceKey.createRegistryKey(Objects.requireNonNull(ResourceLocation.tryParse(GsonHelper.getAsString(vObject, "registry")))));
-		}
-		return new Trophy(Objects.requireNonNull(realEntity), dropChance, verticalOffset, scale, behavior, variants, registry);
-	}
-
-	//right click behaviors are done entirely server-side, no need to send them to the client
-	public static Trophy fromNetwork(FriendlyByteBuf buf) {
-		return new Trophy(buf.readRegistryId(), buf.readDouble(), buf.readDouble(), buf.readFloat(), null, buf.readList(buf1 -> buf1.readMap(FriendlyByteBuf::readUtf, FriendlyByteBuf::readUtf)), handleRegistryPair(buf.readUtf(), buf.readUtf()));
-	}
-
-	@Nullable
-	private static Pair<String, ResourceKey<? extends Registry<?>>> handleRegistryPair(String key, String registry) {
-		return key.isEmpty() || registry.isEmpty() ? null : Pair.of(key, ResourceKey.createRegistryKey(Objects.requireNonNull(ResourceLocation.tryParse(registry))));
-	}
-
-	public void toNetwork(FriendlyByteBuf buf) {
-		buf.writeRegistryId(ForgeRegistries.ENTITY_TYPES, this.type);
-		buf.writeDouble(this.dropChance);
-		buf.writeDouble(this.verticalOffset);
-		buf.writeFloat(this.scale);
-		buf.writeCollection(this.variants, (buf1, stringStringMap) -> buf1.writeMap(stringStringMap, FriendlyByteBuf::writeUtf, FriendlyByteBuf::writeUtf));
-		buf.writeUtf(this.registry != null ? this.registry.left() : "");
-		buf.writeUtf(this.registry != null ? this.registry.right().location().toString() : "");
-	}
-
-	public static class Serializer implements JsonSerializer<Trophy>, JsonDeserializer<Trophy> {
-
-		@Override
-		public Trophy deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
-			JsonObject object = GsonHelper.convertToJsonObject(json, "trophy");
-			return Trophy.fromJson(object);
-		}
-
-		@Override
-		public JsonElement serialize(Trophy trophy, Type type, JsonSerializationContext context) {
-			JsonObject jsonobject = new JsonObject();
-			jsonobject.add("entity", context.serialize(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type)).toString()));
-			jsonobject.add("drop_chance", context.serialize(trophy.dropChance));
-			jsonobject.add("offset", context.serialize(trophy.verticalOffset));
-			jsonobject.add("scale", context.serialize(trophy.scale));
-			if (trophy.clickBehavior != null) {
-				jsonobject.add("behavior", trophy.clickBehavior.serializeBehavior(context));
-			}
-
-			if (!trophy.variants.isEmpty()) {
-				JsonArray array = new JsonArray();
-				trophy.variants.forEach(map -> {
-					List<Pair<String, String>> variants = map.entrySet().stream()
-							.map(e -> Pair.of(e.getKey(), e.getValue()))
-							.sorted(Comparator.comparing(Pair::left)) // Compare only the variant names
-							.toList();
-
-					JsonObject entryObject = new JsonObject();
-					variants.forEach(entry -> entryObject.add(entry.left(), context.serialize(entry.right())));
-					array.add(entryObject);
-				});
-
-				jsonobject.add("variants", array);
-			} else if (trophy.registry != null) {
-				JsonObject object = new JsonObject();
-				object.add("key", context.serialize(trophy.registry.left()));
-				object.add("registry", context.serialize(trophy.registry.right().location().toString()));
-				jsonobject.add("variant_registry", object);
-			}
-			return jsonobject;
-		}
 	}
 
 	public static class Builder {
@@ -237,12 +103,25 @@ public class Trophy {
 		private float scale = 1.0F;
 		@Nullable
 		private CustomBehavior clickBehavior = null;
-		private final List<Map<String, String>> variants = new ArrayList<>();
 		@Nullable
-		private Pair<String, ResourceKey<? extends Registry<?>>> registry = null;
+		private Pair<String, ResourceLocation> registryVariant;
+		private List<CompoundTag> variants = new ArrayList<>();
+		@Nullable
+		private CompoundTag defaultVariant = null;
 
 		public Builder(EntityType<?> type) {
 			this.type = type;
+		}
+
+		public Builder copyFrom(Trophy trophy) {
+			this.dropChance = trophy.dropChance();
+			this.verticalOffset = trophy.verticalOffset();
+			this.scale = trophy.scale();
+			this.clickBehavior = trophy.clickBehavior().orElse(null);
+			this.registryVariant = trophy.variants().left().orElse(null);
+			this.variants = trophy.variants().right().orElse(new ArrayList<>());
+			this.defaultVariant = trophy.defaultData().orElse(null);
+			return this;
 		}
 
 		public Trophy.Builder setDropChance(double chance) {
@@ -266,22 +145,62 @@ public class Trophy {
 		}
 
 		public Trophy.Builder addVariant(String variantId, String value) {
-			this.variants.add(Map.of(variantId, value));
+			CompoundTag tag = new CompoundTag();
+			tag.putString(variantId, value);
+			this.variants.add(tag);
 			return this;
 		}
 
-		public Trophy.Builder addVariant(Map<String, String> variant) {
+		public Trophy.Builder addVariant(String variantId, int value) {
+			CompoundTag tag = new CompoundTag();
+			tag.putInt(variantId, value);
+			this.variants.add(tag);
+			return this;
+		}
+
+		public Trophy.Builder addVariant(String variantId, float value) {
+			CompoundTag tag = new CompoundTag();
+			tag.putFloat(variantId, value);
+			this.variants.add(tag);
+			return this;
+		}
+
+		public Trophy.Builder addVariant(String variantId, double value) {
+			CompoundTag tag = new CompoundTag();
+			tag.putDouble(variantId, value);
+			this.variants.add(tag);
+			return this;
+		}
+
+		public Trophy.Builder addVariant(String variantId, boolean value) {
+			CompoundTag tag = new CompoundTag();
+			tag.putBoolean(variantId, value);
+			this.variants.add(tag);
+			return this;
+		}
+
+		public Trophy.Builder addVariant(CompoundTag variant) {
 			this.variants.add(variant);
 			return this;
 		}
 
-		public Trophy.Builder addRegistry(String identifier, ResourceKey<? extends Registry<?>> registry) {
-			this.registry = Pair.of(identifier, registry);
+		public Trophy.Builder addVariants(List<CompoundTag> variant) {
+			this.variants.addAll(variant);
+			return this;
+		}
+
+		public Trophy.Builder addRegistryVariant(String key, ResourceLocation registryName) {
+			this.registryVariant = Pair.of(key, registryName);
+			return this;
+		}
+
+		public Trophy.Builder addDefaultVariant(CompoundTag variant) {
+			this.defaultVariant = variant;
 			return this;
 		}
 
 		public Trophy build() {
-			return new Trophy(this.type, this.dropChance, this.verticalOffset, this.scale, this.clickBehavior, this.variants, this.registry);
+			return new Trophy(this.type, this.dropChance, this.verticalOffset, this.scale, Optional.ofNullable(this.clickBehavior), this.registryVariant != null ? Either.left(this.registryVariant) : Either.right(this.variants) , Optional.ofNullable(this.defaultVariant));
 		}
 	}
 }

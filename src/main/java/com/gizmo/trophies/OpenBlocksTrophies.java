@@ -1,9 +1,9 @@
 package com.gizmo.trophies;
 
+import com.gizmo.trophies.behavior.CustomTrophyBehaviors;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
-import com.gizmo.trophies.trophy.behaviors.*;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,12 +25,10 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Map;
 import java.util.Objects;
 
 @Mod(OpenBlocksTrophies.MODID)
@@ -61,6 +59,8 @@ public class OpenBlocksTrophies {
 		TrophyRegistries.ITEMS.register(bus);
 		TrophyRegistries.LOOT_MODIFIERS.register(bus);
 		TrophyRegistries.TABS.register(bus);
+
+		CustomTrophyBehaviors.CUSTOM_BEHAVIORS.register(bus);
 	}
 
 	public static ResourceLocation location(String path) {
@@ -68,28 +68,12 @@ public class OpenBlocksTrophies {
 	}
 
 	public void commonSetup(FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-			CustomBehaviorRegistry.registerBehavior(new ClickWithItemBehavior());
-			CustomBehaviorRegistry.registerBehavior(new PullFromLootTableBehavior());
-			CustomBehaviorRegistry.registerBehavior(new MobEffectBehavior());
-			CustomBehaviorRegistry.registerBehavior(new ItemDropBehavior());
-			CustomBehaviorRegistry.registerBehavior(new ElderGuardianCurseBehavior());
-			CustomBehaviorRegistry.registerBehavior(new ExplosionBehavior());
-			CustomBehaviorRegistry.registerBehavior(new PlaceBlockBehavior());
-			CustomBehaviorRegistry.registerBehavior(new PlayerSetFireBehavior());
-			CustomBehaviorRegistry.registerBehavior(new ShootArrowBehavior());
-			CustomBehaviorRegistry.registerBehavior(new ShootEnderPearlBehavior());
-			CustomBehaviorRegistry.registerBehavior(new ShootLlamaSpitBehavior());
-			CustomBehaviorRegistry.registerBehavior(new TotemOfUndyingEffectBehavior());
-		});
 		TrophyNetworkHandler.init();
 	}
 
 	public void registerCommands(RegisterCommandsEvent event) {
 		TrophiesCommands.register(event.getDispatcher());
 	}
-
-
 
 	public void grantBeeQueenViaDesireAdvancement(AdvancementEvent.AdvancementEarnEvent event) {
 		if (ModList.get().isLoaded("the_bumblezone")) {
@@ -117,10 +101,10 @@ public class OpenBlocksTrophies {
 		if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
 			Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
 			if (trophy != null) {
-				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.getDropChance();
+				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.dropChance();
 				double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
 				if (chance > 0.0D) {
-					event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.getType(), this.fetchVariantIfAny(event.getEntity(), trophy), false)));
+					event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.type(), this.fetchVariantIfAny(event.getEntity(), trophy), false)));
 				}
 			}
 		}
@@ -131,21 +115,24 @@ public class OpenBlocksTrophies {
 			CompoundTag tag = new CompoundTag();
 			entity.addAdditionalSaveData(tag);
 			for (int i = 0; i < trophy.getVariants(entity.level().registryAccess()).size(); i++) {
-				Map<String, String> variantKeys = trophy.getVariants(entity.level().registryAccess()).get(i);
-				for (Map.Entry<String, String> entry : variantKeys.entrySet()) {
+				CompoundTag variantKeys = trophy.getVariants(entity.level().registryAccess()).get(i);
+				for (String s : variantKeys.getAllKeys()) {
 					if (entity instanceof VillagerDataHolder villager) {
-						if (ForgeRegistries.VILLAGER_PROFESSIONS.getKey(villager.getVillagerData().getProfession()).toString().equals(entry.getValue())) {
+						if (ForgeRegistries.VILLAGER_PROFESSIONS.getKey(villager.getVillagerData().getProfession()).toString().equals(variantKeys.getString(s))) {
 							return i;
 						}
 					} else {
-						if (tag.contains(entry.getKey())) {
-							if (StringUtils.isNumeric(entry.getValue()) && tag.getInt(entry.getKey()) == Integer.parseInt(entry.getValue())) {
-								return i;
-							} else if ((entry.getValue().equals("false") || entry.getValue().equals("true")) && tag.getBoolean(entry.getKey()) == Boolean.parseBoolean(entry.getValue())) {
-								return i;
-							} else if (tag.getString(entry.getKey()).equals(entry.getValue()) || tag.getString(entry.getKey()).equals(new ResourceLocation(entry.getValue()).toString())) {
+						Tag tagVer = tag.get(s);
+						Tag variantVer = variantKeys.get(s);
+						if (variantVer instanceof NumericTag num) {
+							//most values save as bytes in the json, but sometimes they also be things like shorts.
+							//we'll compare both numbers to long as they should always match this way.
+							//comparing to int is gonna cause issues for floats and doubles
+							if (tagVer instanceof NumericTag number && number.getAsLong() == num.getAsLong()) {
 								return i;
 							}
+						} else if (Objects.equals(tagVer, variantVer)) {
+							return i;
 						}
 					}
 				}

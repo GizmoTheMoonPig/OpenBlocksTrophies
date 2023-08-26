@@ -18,11 +18,11 @@ public class SyncTrophyConfigsPacket {
 	}
 
 	public SyncTrophyConfigsPacket(FriendlyByteBuf buf) {
-		this.map = buf.readMap(FriendlyByteBuf::readResourceLocation, Trophy::fromNetwork);
+		this.map = buf.readMap(FriendlyByteBuf::readResourceLocation, buf1 -> buf1.readJsonWithCodec(Trophy.CODEC));
 	}
 
 	public void encode(FriendlyByteBuf buf) {
-		buf.writeMap(this.map, FriendlyByteBuf::writeResourceLocation, (buf1, trophy) -> trophy.toNetwork(buf1));
+		buf.writeMap(this.map, FriendlyByteBuf::writeResourceLocation, (buf1, trophy) -> buf1.writeJsonWithCodec(Trophy.CODEC, trophy));
 	}
 
 	public static class Handler {

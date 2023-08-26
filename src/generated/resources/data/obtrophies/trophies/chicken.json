@@ -1,12 +1,15 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 10000,
-	"item": "minecraft:egg",
-	"sound": "minecraft:entity.chicken.egg"
+    "type": "obtrophies:item",
+    "cooldown": 10000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:egg"
+    },
+    "sound": {
+      "sound_id": "minecraft:entity.chicken.egg"
+    }
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:chicken",
-  "offset": 0.0,
   "scale": 1.5
 }

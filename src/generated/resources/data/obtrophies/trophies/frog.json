@@ -2,13 +2,14 @@
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 20000,
-    "item": "minecraft:slime_ball"
+    "item": {
+      "Count": 1,
+      "id": "minecraft:slime_ball"
+    }
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:frog",
-  "offset": 0.0,
   "scale": 1.5,
-  "variant_registry": {
+  "variants": {
     "key": "variant",
     "registry": "minecraft:frog_variant"
   }

@@ -5,6 +5,23 @@ plugins {
 	id 'net.neoforged.gradle' version '[6.0.18,6.2)'
 }
 
+def secrets = new Properties()
+def secretsFile = file('secrets.properties');
+if (secretsFile.exists()) {
+	secretsFile.withInputStream {
+		stream -> secrets.load(stream)
+	}
+
+	fileTree("secrets").matching {
+		include "**/*.properties"
+	}.each {
+		File file ->
+			file.withInputStream {
+				stream -> secrets.load(stream)
+			}
+	}
+}
+
 version = "${project.minecraft_version}-${project.mod_version}." + (hasProperty("CIVersion") ? CIVersion : '0')
 group = 'com.gizmo.trophies'
 base {
@@ -22,6 +39,7 @@ minecraft {
 		configureEach {
 			workingDirectory project.file("run/${it.name}")
 			property 'forge.logging.console.level', 'debug'
+			property 'mixin.env.disableRefMap', 'true'
 
 			mods {
 				"${modid}" {
@@ -31,19 +49,24 @@ minecraft {
 		}
 
 		client {
+			taskName "Minecraft_Client_${project.minecraft_version}"
 			property 'forge.enabledGameTestNamespaces', modid
+			args '--username', secrets.getProperty("username")?: 'Dev', secrets.getProperty("uuid") ? '--uuid' : '', secrets.getProperty("uuid")?: ''
 		}
 
 		server {
+			taskName "Minecraft_Server_${project.minecraft_version}"
 			property 'forge.enabledGameTestNamespaces', modid
 			args '--nogui'
 		}
 
 		gameTestServer {
+			taskName "Minecraft_GameTestServer_${project.minecraft_version}"
 			property 'forge.enabledGameTestNamespaces', modid
 		}
 
 		data {
+			taskName "Minecraft_Data_${project.minecraft_version}"
 			args '--mod', modid, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 		}
 	}
@@ -72,13 +95,7 @@ dependencies {
 	minecraft "net.neoforged:forge:${project.minecraft_version}-${project.neo_version}"
 
     implementation fg.deobf("mezz.jei:jei-${project.minecraft_version}-forge:15.2.0.25")
-    implementation fg.deobf("curse.maven:jade-324717:4681833")
-
-	compileOnly fg.deobf("teamtwilight:twilightforest:4.3.1792:universal")
-	compileOnly fg.deobf("curse.maven:citadel-331936:4613231")
-	compileOnly fg.deobf("curse.maven:rats-323596:4608071")
-//	compileOnly fg.deobf("curse.maven:bumblezone-362479:4507366")
-	compileOnly fg.deobf("curse.maven:alexs-mobs-426558:4580894")
+    implementation fg.deobf("curse.maven:jade-324717:4711195")
 }
 
 tasks.named('jar', Jar).configure {
@@ -94,23 +111,6 @@ tasks.named('jar', Jar).configure {
         ])
     }
 	finalizedBy 'reobfJar'
-}
-
-def secrets = new Properties()
-def secretsFile = file('secrets.properties');
-if (secretsFile.exists()) {
-	secretsFile.withInputStream {
-		stream -> secrets.load(stream)
-	}
-
-	fileTree("secrets").matching {
-		include "**/*.properties"
-	}.each {
-		File file ->
-			file.withInputStream {
-				stream -> secrets.load(stream)
-			}
-	}
 }
 
 jar.finalizedBy('reobfJar')

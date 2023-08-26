@@ -1,11 +1,8 @@
-package com.gizmo.trophies.trophy.behaviors;
+package com.gizmo.trophies.behavior;
 
-import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.block.TrophyBlockEntity;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
+import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,20 +12,13 @@ import net.minecraft.world.entity.projectile.LlamaSpit;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class ShootLlamaSpitBehavior extends CustomBehavior {
+public record ShootLlamaSpitBehavior() implements CustomBehavior {
+
+	public static final Codec<ShootLlamaSpitBehavior> CODEC = Codec.unit(ShootLlamaSpitBehavior::new);
 
 	@Override
-	public ResourceLocation getType() {
-		return OpenBlocksTrophies.location("llama_spit");
-	}
-
-	@Override
-	public void serializeToJson(JsonObject object, JsonSerializationContext context) {
-	}
-
-	@Override
-	public CustomBehavior fromJson(JsonObject object) {
-		return new ShootLlamaSpitBehavior();
+	public CustomBehaviorType getType() {
+		return CustomTrophyBehaviors.LLAMA_SPIT.get();
 	}
 
 	@Override

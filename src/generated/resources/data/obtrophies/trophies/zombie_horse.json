@@ -1,11 +1,12 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": "minecraft:rotten_flesh"
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:rotten_flesh"
+    }
   },
-  "drop_chance": 0.001,
   "entity": "minecraft:zombie_horse",
-  "offset": 0.0,
   "scale": 0.9
 }
