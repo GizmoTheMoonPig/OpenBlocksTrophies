@@ -1,14 +1,11 @@
 {
-  "drop_chance": 0.001,
   "entity": "quark:foxhound",
-  "offset": 0.0,
-  "scale": 1.0,
   "variants": [
 	{
-	  "IsBlue": "false"
+	  "IsBlue": false
 	},
 	{
-	  "IsBlue": "true"
+	  "IsBlue": true
 	}
   ]
 }

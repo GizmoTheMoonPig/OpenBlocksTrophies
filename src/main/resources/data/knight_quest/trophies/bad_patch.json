@@ -1,6 +1,3 @@
 {
-  "drop_chance": 0.001,
-  "entity": "knight_quest:kq_bad_patch_active",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "knight_quest:kq_bad_patch_active"
 }

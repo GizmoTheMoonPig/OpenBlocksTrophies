@@ -1,11 +1,12 @@
 {
   "behavior": {
 	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": "minecraft:netherite_ingot"
+	"cooldown": 50000,
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:netherite_scrap"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "ornamental:netherite_golem",
-  "offset": 0.0,
   "scale": 0.75
 }

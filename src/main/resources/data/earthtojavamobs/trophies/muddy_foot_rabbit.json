@@ -1,6 +1,4 @@
 {
-  "drop_chance": 0.001,
   "entity": "earthtojavamobs:muddy_foot_rabbit",
-  "offset": 0.0,
   "scale": 2.0
 }

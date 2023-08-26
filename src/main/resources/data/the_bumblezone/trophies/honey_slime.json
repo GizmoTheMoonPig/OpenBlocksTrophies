@@ -2,10 +2,10 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:sugar"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:sugar"
+	}
   },
-  "drop_chance": 0.001,
-  "entity": "the_bumblezone:honey_slime",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "the_bumblezone:honey_slime"
 }

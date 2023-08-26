@@ -5,16 +5,14 @@
 	"effect": "alexsmobs:tigers_blessing",
 	"time": 12000
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:tiger",
-  "offset": 0.0,
   "scale": 0.9,
   "variants": [
 	{
-	  "White": "false"
+	  "White": false
 	},
 	{
-	  "White": "true"
+	  "White": true
 	}
   ]
 }

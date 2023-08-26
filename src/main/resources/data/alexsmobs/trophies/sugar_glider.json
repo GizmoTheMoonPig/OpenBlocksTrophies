@@ -7,11 +7,9 @@
 	  "loot_table": "alexsmobs:gameplay/sugar_glider_reward",
 	  "rolls": 1
 	},
-	"item_to_use": "#minecraft:leaves",
+	"item_to_use": "minecraft:leaves",
 	"shrink_item_stack": true
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:sugar_glider",
-  "offset": 0.0,
   "scale": 1.5
 }

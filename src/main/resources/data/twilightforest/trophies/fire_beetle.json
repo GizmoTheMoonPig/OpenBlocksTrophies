@@ -3,8 +3,5 @@
 	"type": "obtrophies:set_fire",
 	"seconds": 5
   },
-  "drop_chance": 0.001,
-  "entity": "twilightforest:fire_beetle",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "twilightforest:fire_beetle"
 }

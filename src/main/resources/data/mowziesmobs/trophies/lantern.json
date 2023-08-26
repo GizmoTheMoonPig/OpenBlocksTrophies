@@ -1,6 +1,4 @@
 {
   "drop_chance": 0.01,
-  "entity": "mowziesmobs:lantern",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "mowziesmobs:lantern"
 }

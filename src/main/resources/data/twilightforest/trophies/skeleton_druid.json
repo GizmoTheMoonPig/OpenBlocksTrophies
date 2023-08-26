@@ -2,10 +2,10 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:golden_hoe"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:golden_hoe"
+	}
   },
-  "drop_chance": 0.001,
-  "entity": "twilightforest:skeleton_druid",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "twilightforest:skeleton_druid"
 }

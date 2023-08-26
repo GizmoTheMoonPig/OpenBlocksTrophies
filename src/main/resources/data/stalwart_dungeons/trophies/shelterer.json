@@ -1,6 +1,5 @@
 {
   "drop_chance": 0.0075,
   "entity": "stalwart_dungeons:shelterer",
-  "offset": 0.0,
   "scale": 0.5
 }

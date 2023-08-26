@@ -3,28 +3,32 @@
 	"type": "obtrophies:right_click_item",
 	"execute_behavior": {
 	  "type": "obtrophies:item",
-	  "item": "alexsmobs:banana_peel"
+	  "item": {
+		"Count": 1,
+		"id": "alexsmobs:banana_peel"
+	  }
 	},
-	"item_to_use": "alexsmobs:banana",
+	"item_to_use": {
+	  "Count": 1,
+	  "id": "alexsmobs:banana"
+	},
 	"shrink_item_stack": true,
 	"sound": "minecraft:item.bottle.fill"
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:capuchin_monkey",
-  "offset": 0.0,
   "scale": 1.5,
   "variants": [
 	{
-	  "Variant": "0"
+	  "Variant": 0
 	},
 	{
-	  "Variant": "1"
+	  "Variant": 1
 	},
 	{
-	  "Variant": "2"
+	  "Variant": 2
 	},
 	{
-	  "Variant": "3"
+	  "Variant": 3
 	}
   ]
 }

@@ -1,6 +1,16 @@
 {
   "drop_chance": 0.0075,
   "entity": "rats:dutchrat",
-  "offset": 0.0,
-  "scale": 0.8
+  "scale": 0.8,
+  "default_variant": {
+	"ArmorItems": [
+	  {},
+	  {},
+	  {},
+	  {
+		"Count": 1,
+		"id": "rats:ghost_pirat_hat"
+	  }
+	]
+  }
 }

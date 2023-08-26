@@ -1,14 +1,11 @@
 {
-  "drop_chance": 0.001,
   "entity": "alexsmobs:gorilla",
-  "offset": 0.0,
-  "scale": 1.0,
   "variants": [
 	{
-	  "Silverback": "false"
+	  "Silverback": false
 	},
 	{
-	  "Silverback": "true"
+	  "Silverback": true
 	}
   ]
 }

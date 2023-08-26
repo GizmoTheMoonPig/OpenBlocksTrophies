@@ -2,24 +2,25 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 10000,
-	"item": "alexsmobs:banana_slug_slime"
+	"item": {
+	  "Count": 1,
+	  "id": "alexsmobs:banana_slug_slime"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:banana_slug",
-  "offset": 0.0,
   "scale": 1.5,
   "variants": [
 	{
-	  "Variant": "0"
+	  "Variant": 0
 	},
 	{
-	  "Variant": "1"
+	  "Variant": 1
 	},
 	{
-	  "Variant": "2"
+	  "Variant": 2
 	},
 	{
-	  "Variant": "3"
+	  "Variant": 3
 	}
   ]
 }

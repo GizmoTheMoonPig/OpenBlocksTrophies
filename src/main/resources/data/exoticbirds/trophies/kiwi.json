@@ -1,6 +1,4 @@
 {
-  "drop_chance": 0.001,
   "entity": "exoticbirds:kiwi",
-  "offset": 0.0,
   "scale": 1.5
 }

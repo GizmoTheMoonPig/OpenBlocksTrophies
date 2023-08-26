@@ -1,0 +1,18 @@
+{
+  "entity": "untamedwilds:hippo",
+  "scale": 0.9,
+  "default_variant": {
+	"Size": 1.0
+  },
+  "variants": [
+	{
+	  "Skin": 0
+	},
+	{
+	  "Skin": 1
+	},
+	{
+	  "Skin": 2
+	}
+  ]
+}

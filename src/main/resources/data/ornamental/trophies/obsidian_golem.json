@@ -2,10 +2,11 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:obsidian"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:obsidian"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "ornamental:obsidian_golem",
-  "offset": 0.0,
   "scale": 0.9
 }

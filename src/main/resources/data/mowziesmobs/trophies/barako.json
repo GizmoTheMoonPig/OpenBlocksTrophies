@@ -1,6 +1,5 @@
 {
-  "drop_chance": 0.075,
+  "drop_chance": 0.0075,
   "entity": "mowziesmobs:barako",
-  "offset": 0.0,
   "scale": 0.9
 }

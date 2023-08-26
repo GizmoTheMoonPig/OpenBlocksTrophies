@@ -1,6 +1,4 @@
 {
-  "drop_chance": 0.001,
   "entity": "deeperdarker:sculk_leech",
-  "offset": 0.0,
   "scale": 2.75
 }

@@ -1,6 +1,3 @@
 {
-  "drop_chance": 0.001,
-  "entity": "savage_and_ravage:executioner",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "savage_and_ravage:executioner"
 }

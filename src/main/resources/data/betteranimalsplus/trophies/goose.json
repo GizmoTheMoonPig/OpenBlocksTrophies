@@ -1,6 +1,4 @@
 {
-  "drop_chance": 0.001,
   "entity": "betteranimalsplus:goose",
-  "offset": 0.0,
   "scale": 1.25
 }

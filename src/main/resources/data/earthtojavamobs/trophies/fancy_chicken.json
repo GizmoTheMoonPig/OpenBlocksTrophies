@@ -1,6 +1,4 @@
 {
-  "drop_chance": 0.001,
   "entity": "earthtojavamobs:fancy_chicken",
-  "offset": 0.0,
   "scale": 1.5
 }

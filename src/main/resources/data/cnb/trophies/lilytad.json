@@ -1,8 +1,5 @@
 {
-  "drop_chance": 0.001,
   "entity": "cnb:lilytad",
-  "offset": 0.0,
-  "scale": 1.0,
   "variants": [
 	{
 	  "LilytadType": "cnb:pink"

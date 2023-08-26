@@ -2,5 +2,22 @@
   "drop_chance": 0.0075,
   "entity": "twilightforest:knight_phantom",
   "offset": -0.1,
-  "scale": 1.0
+  "default_variant": {
+	"ArmorItems": [
+	  {},
+	  {},
+	  {
+		"Count": 1,
+		"id": "twilightforest:phantom_chestplate"
+	  },
+	  {
+		"Count": 1,
+		"id": "twilightforest:phantom_helmet"
+	  }
+	],
+	"HandItems": [
+	  {},
+	  {}
+	]
+  }
 }

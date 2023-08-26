@@ -1,6 +1,18 @@
 {
-  "drop_chance": 0.001,
   "entity": "twilightforest:snow_guardian",
   "offset": -0.1,
-  "scale": 1.0
+  "default_variant": {
+	"ArmorItems": [
+	  {},
+	  {},
+	  {
+		"Count": 1,
+		"id": "twilightforest:arctic_chestplate"
+	  },
+	  {
+		"Count": 1,
+		"id": "twilightforest:arctic_helmet"
+	  }
+	]
+  }
 }

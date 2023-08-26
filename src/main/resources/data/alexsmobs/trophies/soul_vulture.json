@@ -2,10 +2,10 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "alexsmobs:soul_heart"
+	"item": {
+	  "Count": 1,
+	  "id": "alexsmobs:soul_heart"
+	}
   },
-  "drop_chance": 0.001,
-  "entity": "alexsmobs:soul_vulture",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "alexsmobs:soul_vulture"
 }

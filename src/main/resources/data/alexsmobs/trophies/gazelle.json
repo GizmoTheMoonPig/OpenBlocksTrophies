@@ -2,10 +2,10 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "alexsmobs:gazelle_horn"
+	"item": {
+	  "Count": 1,
+	  "id": "alexsmobs:gazelle_horn"
+	}
   },
-  "drop_chance": 0.001,
-  "entity": "alexsmobs:gazelle",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "alexsmobs:gazelle"
 }

@@ -1,6 +1,4 @@
 {
-  "drop_chance": 0.001,
   "entity": "takesapillage:clay_golem",
-  "offset": 0.0,
   "scale": 0.85
 }

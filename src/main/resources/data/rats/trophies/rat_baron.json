@@ -1,8 +1,18 @@
 {
   "drop_chance": 0.0075,
   "entity": "rats:rat_baron",
-  "offset": 0.0,
   "scale": 1.5,
+  "default_variant": {
+	"ArmorItems": [
+	  {},
+	  {},
+	  {},
+	  {
+		"Count": 1,
+		"id": "rats:aviator_hat"
+	  }
+	]
+  },
   "variants": [
 	{
 	  "ColorVariant": "rats:blue"

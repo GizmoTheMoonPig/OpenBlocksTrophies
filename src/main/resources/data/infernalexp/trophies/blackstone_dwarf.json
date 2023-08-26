@@ -1,6 +1,4 @@
 {
-  "drop_chance": 0.001,
   "entity": "infernalexp:blackstone_dwarf",
-  "offset": 0.0,
   "scale": 0.75
 }

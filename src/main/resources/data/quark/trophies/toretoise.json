@@ -1,26 +1,24 @@
 {
-  "drop_chance": 0.001,
   "entity": "quark:toretoise",
-  "offset": 0.0,
   "scale": 0.7,
   "variants": [
 	{
-	  "oreType": "0"
+	  "oreType": 0
 	},
 	{
-	  "oreType": "1"
+	  "oreType": 1
 	},
 	{
-	  "oreType": "2"
+	  "oreType": 2
 	},
 	{
-	  "oreType": "3"
+	  "oreType": 3
 	},
 	{
-	  "oreType": "4"
+	  "oreType": 4
 	},
 	{
-	  "oreType": "5"
+	  "oreType": 5
 	}
   ]
 }

@@ -1,6 +1,4 @@
 {
-  "drop_chance": 0.001,
   "entity": "deeperdarker:sculk_centipede",
-  "offset": 0.0,
   "scale": 0.5
 }

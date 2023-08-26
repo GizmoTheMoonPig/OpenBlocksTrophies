@@ -2,10 +2,10 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:blue_ice"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:blue_ice"
+	}
   },
-  "drop_chance": 0.001,
-  "entity": "ornamental:blue_ice_golem",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "ornamental:blue_ice_golem"
 }

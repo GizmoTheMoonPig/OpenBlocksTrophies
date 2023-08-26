@@ -2,18 +2,19 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "alexsmobs:shed_snake_skin"
+	"item": {
+	  "Count": 1,
+	  "id": "alexsmobs:shed_snake_skin"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:anaconda",
-  "offset": 0.0,
   "scale": 1.25,
   "variants": [
 	{
-	  "Yellow": "false"
+	  "Yellow": false
 	},
 	{
-	  "Yellow": "true"
+	  "Yellow": true
 	}
   ]
 }

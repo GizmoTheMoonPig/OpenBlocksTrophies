@@ -1,0 +1,15 @@
+{
+  "entity": "untamedwilds:sunfish",
+  "scale": 0.75,
+  "default_variant": {
+	"Size": 1.0
+  },
+  "variants": [
+	{
+	  "Variant": 0
+	},
+	{
+	  "Variant": 1
+	}
+  ]
+}

@@ -2,10 +2,11 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 10000,
-	"item": "alexsmobs:acacia_blossom"
+	"item": {
+	  "Count": 1,
+	  "id": "alexsmobs:acacia_blossom"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:elephant",
-  "offset": 0.0,
   "scale": 0.4
 }

@@ -4,13 +4,17 @@
 	"cooldown": 5000,
 	"execute_behavior": {
 	  "type": "obtrophies:item",
-	  "item": "alexsmobs:stink_bottle"
+	  "item": {
+		"Count": 1,
+		"id": "alexsmobs:stink_bottle"
+	  }
 	},
-	"item_to_use": "minecraft:glass_bottle",
+	"item_to_use": {
+	  "Count": 1,
+	  "id": "minecraft:glass_bottle"
+	},
 	"shrink_item_stack": true
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:skunk",
-  "offset": 0.0,
   "scale": 1.25
 }

@@ -1,6 +1,5 @@
 {
   "drop_chance": 1.0,
   "entity": "witherstormmod:wither_storm",
-  "offset": 0.0,
   "scale": 0.6
 }

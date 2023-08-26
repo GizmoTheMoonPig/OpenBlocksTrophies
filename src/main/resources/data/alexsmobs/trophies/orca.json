@@ -5,22 +5,20 @@
 	"effect": "alexsmobs:orcas_might",
 	"time": 12000
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:orca",
-  "offset": 0.0,
   "scale": 0.4,
   "variants": [
 	{
-	  "Variant": "0"
+	  "Variant": 0
 	},
 	{
-	  "Variant": "1"
+	  "Variant": 1
 	},
 	{
-	  "Variant": "2"
+	  "Variant": 2
 	},
 	{
-	  "Variant": "3"
+	  "Variant": 3
 	}
   ]
 }

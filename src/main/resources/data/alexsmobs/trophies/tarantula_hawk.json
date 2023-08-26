@@ -2,18 +2,19 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "alexsmobs:tarantula_hawk_wing_fragment"
+	"item": {
+	  "Count": 1,
+	  "id": "alexsmobs:tarantula_hawk_wing_fragment"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:tarantula_hawk",
-  "offset": 0.0,
   "scale": 0.8,
   "variants": [
 	{
-	  "Nether": "false"
+	  "Nether": false
 	},
 	{
-	  "Nether": "true"
+	  "Nether": true
 	}
   ]
 }

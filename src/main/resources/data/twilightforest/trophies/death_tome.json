@@ -2,10 +2,10 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:paper"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:paper"
+	}
   },
-  "drop_chance": 0.001,
-  "entity": "twilightforest:death_tome",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "twilightforest:death_tome"
 }

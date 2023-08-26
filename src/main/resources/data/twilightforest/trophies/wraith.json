@@ -2,10 +2,10 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:glowstone_dust"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:glowstone_dust"
+	}
   },
-  "drop_chance": 0.001,
-  "entity": "twilightforest:wraith",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "twilightforest:wraith"
 }

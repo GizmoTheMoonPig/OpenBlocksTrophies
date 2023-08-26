@@ -2,10 +2,10 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:slime_ball"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:slime_ball"
+	}
   },
-  "drop_chance": 0.001,
-  "entity": "twilightforest:slime_beetle",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "twilightforest:slime_beetle"
 }

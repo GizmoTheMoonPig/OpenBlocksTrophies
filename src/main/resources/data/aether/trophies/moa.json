@@ -1,17 +1,7 @@
 {
-  "drop_chance": 0.001,
   "entity": "aether:moa",
-  "offset": 0.0,
-  "scale": 1.0,
-  "variants": [
-	{
-	  "MoaType": "aether:blue"
-	},
-	{
-	  "MoaType": "aether:white"
-	},
-	{
-	  "MoaType": "aether:black"
-	}
-  ]
+  "variants": {
+	"key": "MoaType",
+	"registry": "aether:moa_type"
+  }
 }

@@ -2,24 +2,15 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:feather"
-  },
-  "drop_chance": 0.001,
-  "entity": "twilightforest:tiny_bird",
-  "offset": 0.0,
-  "scale": 1.75,
-  "variants": [
-	{
-	  "BirdType": "twilightforest:blue"
-	},
-	{
-	  "BirdType": "twilightforest:brown"
-	},
-	{
-	  "BirdType": "twilightforest:gold"
-	},
-	{
-	  "BirdType": "twilightforest:red"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:feather"
 	}
-  ]
+  },
+  "entity": "twilightforest:tiny_bird",
+  "scale": 1.75,
+  "variants": {
+	"key": "BirdType",
+	"registry": "twilightforest:tiny_bird_variant"
+  }
 }

@@ -2,21 +2,21 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "alexsmobs:emu_egg"
+	"item": {
+	  "Count": 1,
+	  "id": "alexsmobs:emu_egg"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:emu",
-  "offset": 0.0,
-  "scale": 1.0,
   "variants": [
 	{
-	  "Variant": "0"
+	  "Variant": 0
 	},
 	{
-	  "Variant": "1"
+	  "Variant": 1
 	},
 	{
-	  "Variant": "2"
+	  "Variant": 2
 	}
   ]
 }

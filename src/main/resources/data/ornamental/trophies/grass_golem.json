@@ -2,10 +2,11 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:grass_block"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:grass_block"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "ornamental:grass_golem",
-  "offset": 0.0,
   "scale": 1.25
 }

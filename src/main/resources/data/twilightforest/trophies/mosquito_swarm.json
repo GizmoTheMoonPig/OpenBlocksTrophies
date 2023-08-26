@@ -5,8 +5,5 @@
 	"time": 200,
 	"amplifier": 1
   },
-  "drop_chance": 0.001,
-  "entity": "twilightforest:mosquito_swarm",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "twilightforest:mosquito_swarm"
 }

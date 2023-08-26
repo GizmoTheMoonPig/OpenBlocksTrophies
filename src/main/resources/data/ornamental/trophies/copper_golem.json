@@ -2,10 +2,11 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:copper_ingot"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:copper_ingot"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "ornamental:copper_golem",
-  "offset": 0.0,
   "scale": 0.75
 }

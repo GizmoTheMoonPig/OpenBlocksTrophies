@@ -1,6 +1,4 @@
 {
   "drop_chance": 0.0075,
-  "entity": "aether:valkyrie_queen",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "aether:valkyrie_queen"
 }

@@ -1,7 +1,5 @@
 {
-  "drop_chance": 0.001,
   "entity": "rats:rat",
-  "offset": 0.0,
   "scale": 1.5,
   "variants": [
 	{

@@ -2,18 +2,19 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "alexsmobs:fish_bones"
+	"item": {
+	  "Count": 1,
+	  "id": "alexsmobs:fish_bones"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:skelewag",
-  "offset": 0.0,
   "scale": 0.6,
   "variants": [
 	{
-	  "Variant": "0"
+	  "Variant": 0
 	},
 	{
-	  "Variant": "1"
+	  "Variant": 1
 	}
   ]
 }

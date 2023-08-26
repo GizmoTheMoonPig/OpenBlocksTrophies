@@ -2,10 +2,11 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "alexsmobs:straddlite"
+	"item": {
+	  "Count": 1,
+	  "id": "alexsmobs:straddlite"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:straddler",
-  "offset": 0.0,
   "scale": 0.65
 }

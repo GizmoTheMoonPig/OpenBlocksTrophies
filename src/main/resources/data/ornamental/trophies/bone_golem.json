@@ -2,10 +2,11 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:bone_block"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:bone_block"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "ornamental:bone_golem",
-  "offset": 0.0,
   "scale": 0.75
 }

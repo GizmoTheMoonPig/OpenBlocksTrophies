@@ -2,9 +2,11 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "alexsmobs:shark_tooth"
+	"item": {
+	  "Count": 1,
+	  "id": "alexsmobs:shark_tooth"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:hammerhead_shark",
   "offset": 0.05,
   "scale": 0.5

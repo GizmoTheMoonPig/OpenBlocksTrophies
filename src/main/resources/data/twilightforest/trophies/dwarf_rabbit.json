@@ -2,21 +2,15 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:rabbit_hide"
-  },
-  "drop_chance": 0.001,
-  "entity": "twilightforest:dwarf_rabbit",
-  "offset": 0.0,
-  "scale": 1.75,
-  "variants": [
-	{
-	  "BunnyType": "twilightforest:brown"
-	},
-	{
-	  "BunnyType": "twilightforest:dutch"
-	},
-	{
-	  "BunnyType": "twilightforest:white"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:rabbit_hide"
 	}
-  ]
+  },
+  "entity": "twilightforest:dwarf_rabbit",
+  "scale": 1.75,
+  "variants": {
+	"key": "BunnyType",
+	"registry": "twilightforest:dwarf_rabbit_variant"
+  }
 }

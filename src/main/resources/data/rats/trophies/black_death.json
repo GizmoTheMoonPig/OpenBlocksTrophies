@@ -1,6 +1,4 @@
 {
   "drop_chance": 0.0075,
-  "entity": "rats:black_death",
-  "offset": 0.0,
-  "scale": 1.0
+  "entity": "rats:black_death"
 }

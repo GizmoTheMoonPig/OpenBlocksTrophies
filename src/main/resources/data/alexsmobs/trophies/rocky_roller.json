@@ -2,10 +2,11 @@
   "behavior": {
 	"type": "obtrophies:item",
 	"cooldown": 20000,
-	"item": "minecraft:tuff"
+	"item": {
+	  "Count": 1,
+	  "id": "minecraft:tuff"
+	}
   },
-  "drop_chance": 0.001,
   "entity": "alexsmobs:rocky_roller",
-  "offset": 0.0,
   "scale": 0.9
 }

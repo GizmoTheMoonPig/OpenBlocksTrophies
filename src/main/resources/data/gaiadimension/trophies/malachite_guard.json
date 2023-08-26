@@ -1,11 +1,10 @@
 {
   "drop_chance": 0.0075,
   "entity": "gaiadimension:malachite_guard",
-  "offset": 0.0,
   "scale": 0.7,
   "variants": [
 	{
-	  "Phase": "1"
+	  "Phase": 1
 	}
   ]
 }
