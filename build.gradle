@@ -6,7 +6,7 @@ plugins {
 }
 
 def secrets = new Properties()
-def secretsFile = file('secrets.properties');
+def secretsFile = file('secrets.properties')
 if (secretsFile.exists()) {
 	secretsFile.withInputStream {
 		stream -> secrets.load(stream)
