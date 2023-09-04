@@ -1,9 +1,10 @@
 {
-  "type": "obtrophies:add_quest_ram_trophy",
+  "type": "obtrophies:add_trophy",
   "conditions": [
     {
       "condition": "forge:loot_table_id",
       "loot_table_id": "twilightforest:entities/questing_ram_rewards"
     }
-  ]
+  ],
+  "entity": "twilightforest:quest_ram"
 }

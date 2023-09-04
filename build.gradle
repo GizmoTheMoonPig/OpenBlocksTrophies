@@ -96,6 +96,7 @@ dependencies {
 
     implementation fg.deobf("mezz.jei:jei-${project.minecraft_version}-forge:15.2.0.25")
     implementation fg.deobf("curse.maven:jade-324717:4711195")
+	runtimeOnly fg.deobf("teamtwilight:twilightforest:4.3.1834:universal")
 }
 
 tasks.named('jar', Jar).configure {
