@@ -58,7 +58,7 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.SPIDER).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.CAVE_SPIDER).setRightClickBehavior(new MobEffectBehavior(MobEffects.POISON, 200, 3)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SLIME).setScale(1.25F).build());
-		this.makeTrophy(new Trophy.Builder(EntityType.GHAST).setVerticalOffset(0.3D).setScale(0.25F).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.GHAST).setVerticalOffset(0.35D).setScale(0.25F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ENDERMAN).setScale(0.75F).setRightClickBehavior(new ShootEnderPearlBehavior()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.MAGMA_CUBE).setScale(1.25F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SQUID).setVerticalOffset(0.5D).setRightClickBehavior(new PlaceBlockBehavior(Blocks.WATER, PlaceBlockBehavior.PlacementMethod.ABOVE)).build());

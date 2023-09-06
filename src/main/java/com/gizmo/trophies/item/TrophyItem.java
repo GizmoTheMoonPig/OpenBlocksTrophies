@@ -68,12 +68,22 @@ public class TrophyItem extends BlockItem {
 
 	public static ItemStack loadEntityToTrophy(EntityType<?> type, int variant, boolean cycling) {
 		ItemStack stack = new ItemStack(TrophyRegistries.TROPHY_ITEM.get());
-		CompoundTag tag = new CompoundTag();
-		tag.putString(ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(type)).toString());
-		tag.putInt(VARIANT_TAG, variant);
-		tag.putBoolean(TrophyItem.CYCLING_TAG, cycling);
-		stack.addTagElement("BlockEntityTag", tag);
+		stack.setTag(createTrophyTag(type, variant, cycling));
 		return stack;
+	}
+
+	public static CompoundTag createTrophyTag(EntityType<?> type, int variant, boolean cycling) {
+		CompoundTag tag = new CompoundTag();
+		CompoundTag beTag = new CompoundTag();
+		beTag.putString(ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(type)).toString());
+		if (variant > -1) {
+			beTag.putInt(VARIANT_TAG, variant);
+		}
+		if (cycling) {
+			beTag.putBoolean(TrophyItem.CYCLING_TAG, true);
+		}
+		tag.put("BlockEntityTag", beTag);
+		return tag;
 	}
 
 	public static int getTrophyVariant(@Nonnull ItemStack stack) {

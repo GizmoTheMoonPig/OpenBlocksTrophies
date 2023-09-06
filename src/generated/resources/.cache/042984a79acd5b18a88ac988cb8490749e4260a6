@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-25T21:43:31.4689094	Default OpenBlocks Trophies
+// 1.20.1	2023-09-06T08:00:49.8352487	Default OpenBlocks Trophies
 9ab48ee8361c93363b4976c209fa1eeacccad979 data/obtrophies/trophies/allay.json
 c45d1f7de3ba0cf03fbdc5c3aca99690527bed43 data/obtrophies/trophies/axolotl.json
 3df29d1128e7a5368d0f36b3dd5d00b195b8202c data/obtrophies/trophies/bat.json
@@ -21,7 +21,7 @@ f884e13a6ccc05375421e1ff2e894e4792954789 data/obtrophies/trophies/donkey.json
 12c304967d90d192e46dbee362046b7e7632666c data/obtrophies/trophies/evoker.json
 d0d827262f7ce2f334c43970cb12c89dfdc92fe7 data/obtrophies/trophies/fox.json
 66e839c1bfc3a64d4983897df4fdd0868140cfff data/obtrophies/trophies/frog.json
-5563a8e984c75f2909a18c937fab3ac5d54083ba data/obtrophies/trophies/ghast.json
+63bfa0cb59c96d5716e69fc219c5388f1db87985 data/obtrophies/trophies/ghast.json
 86d4c51cea798114ccd8ffe196ede711ae31ec78 data/obtrophies/trophies/glow_squid.json
 de945366760e620320ca90a60f40d4a838c8c9ed data/obtrophies/trophies/goat.json
 c4707b20e819db00c19c955a3be6c4e946123436 data/obtrophies/trophies/guardian.json

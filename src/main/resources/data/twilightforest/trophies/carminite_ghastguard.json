@@ -8,5 +8,6 @@
 	}
   },
   "entity": "twilightforest:carminite_ghastguard",
-  "scale": 0.25
+  "scale": 0.25,
+  "offset": 0.05
 }
