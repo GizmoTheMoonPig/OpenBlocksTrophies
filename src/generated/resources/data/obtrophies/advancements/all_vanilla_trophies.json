@@ -1,0 +1,1240 @@
+{
+  "parent": "obtrophies:one_trophy",
+  "criteria": {
+    "has_allay_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:allay\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_axolotl_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:axolotl\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_bat_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:bat\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_bee_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:bee\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_blaze_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:blaze\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_camel_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:camel\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_cat_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:cat\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_cave_spider_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:cave_spider\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chicken_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:chicken\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_cod_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:cod\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_cow_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:cow\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_creeper_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:creeper\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_dolphin_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:dolphin\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_donkey_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:donkey\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_drowned_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:drowned\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_elder_guardian_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:elder_guardian\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ender_dragon_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:ender_dragon\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_enderman_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:enderman\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_endermite_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:endermite\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_evoker_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:evoker\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_fox_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:fox\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_frog_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:frog\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ghast_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:ghast\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_glow_squid_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:glow_squid\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_goat_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:goat\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_guardian_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:guardian\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_hoglin_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:hoglin\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_horse_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:horse\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_husk_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:husk\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_golem_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:iron_golem\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_llama_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:llama\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_magma_cube_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:magma_cube\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_mooshroom_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:mooshroom\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_mule_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:mule\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ocelot_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:ocelot\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_panda_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:panda\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_parrot_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:parrot\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_phantom_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:phantom\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_pig_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:pig\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_piglin_brute_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:piglin_brute\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_piglin_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:piglin\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_pillager_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:pillager\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_polar_bear_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:polar_bear\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_pufferfish_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:pufferfish\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_rabbit_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:rabbit\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ravager_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:ravager\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_salmon_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:salmon\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_sheep_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:sheep\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_shulker_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:shulker\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_silverfish_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:silverfish\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_skeleton_horse_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:skeleton_horse\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_skeleton_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:skeleton\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_slime_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:slime\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_sniffer_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:sniffer\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_snow_golem_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:snow_golem\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_spider_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:spider\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_squid_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:squid\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stray_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:stray\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_strider_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:strider\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tadpole_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:tadpole\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_trader_llama_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:trader_llama\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tropical_fish_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:tropical_fish\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_turtle_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:turtle\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_vex_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:vex\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_villager_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:villager\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_vindicator_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:vindicator\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wandering_trader_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:wandering_trader\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_warden_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:warden\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_witch_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:witch\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wither_skeleton_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:wither_skeleton\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wither_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:wither\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wolf_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:wolf\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_zoglin_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:zoglin\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_zombie_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:zombie\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_zombie_villager_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:zombie_villager\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_zombified_piglin_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:zombified_piglin\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.obtrophies.all_vanilla.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "obtrophies:trophy",
+      "nbt": "{BlockEntityTag:{VariantID:0,entity:\"minecraft:fox\"}}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.obtrophies.all_vanilla.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_allay_trophy"
+    ],
+    [
+      "has_axolotl_trophy"
+    ],
+    [
+      "has_bat_trophy"
+    ],
+    [
+      "has_bee_trophy"
+    ],
+    [
+      "has_blaze_trophy"
+    ],
+    [
+      "has_camel_trophy"
+    ],
+    [
+      "has_cat_trophy"
+    ],
+    [
+      "has_cave_spider_trophy"
+    ],
+    [
+      "has_chicken_trophy"
+    ],
+    [
+      "has_cod_trophy"
+    ],
+    [
+      "has_cow_trophy"
+    ],
+    [
+      "has_creeper_trophy"
+    ],
+    [
+      "has_dolphin_trophy"
+    ],
+    [
+      "has_donkey_trophy"
+    ],
+    [
+      "has_drowned_trophy"
+    ],
+    [
+      "has_elder_guardian_trophy"
+    ],
+    [
+      "has_ender_dragon_trophy"
+    ],
+    [
+      "has_enderman_trophy"
+    ],
+    [
+      "has_endermite_trophy"
+    ],
+    [
+      "has_evoker_trophy"
+    ],
+    [
+      "has_fox_trophy"
+    ],
+    [
+      "has_frog_trophy"
+    ],
+    [
+      "has_ghast_trophy"
+    ],
+    [
+      "has_glow_squid_trophy"
+    ],
+    [
+      "has_goat_trophy"
+    ],
+    [
+      "has_guardian_trophy"
+    ],
+    [
+      "has_hoglin_trophy"
+    ],
+    [
+      "has_horse_trophy"
+    ],
+    [
+      "has_husk_trophy"
+    ],
+    [
+      "has_iron_golem_trophy"
+    ],
+    [
+      "has_llama_trophy"
+    ],
+    [
+      "has_magma_cube_trophy"
+    ],
+    [
+      "has_mooshroom_trophy"
+    ],
+    [
+      "has_mule_trophy"
+    ],
+    [
+      "has_ocelot_trophy"
+    ],
+    [
+      "has_panda_trophy"
+    ],
+    [
+      "has_parrot_trophy"
+    ],
+    [
+      "has_phantom_trophy"
+    ],
+    [
+      "has_pig_trophy"
+    ],
+    [
+      "has_piglin_trophy"
+    ],
+    [
+      "has_piglin_brute_trophy"
+    ],
+    [
+      "has_pillager_trophy"
+    ],
+    [
+      "has_polar_bear_trophy"
+    ],
+    [
+      "has_pufferfish_trophy"
+    ],
+    [
+      "has_rabbit_trophy"
+    ],
+    [
+      "has_ravager_trophy"
+    ],
+    [
+      "has_salmon_trophy"
+    ],
+    [
+      "has_sheep_trophy"
+    ],
+    [
+      "has_shulker_trophy"
+    ],
+    [
+      "has_silverfish_trophy"
+    ],
+    [
+      "has_skeleton_trophy"
+    ],
+    [
+      "has_skeleton_horse_trophy"
+    ],
+    [
+      "has_slime_trophy"
+    ],
+    [
+      "has_sniffer_trophy"
+    ],
+    [
+      "has_snow_golem_trophy"
+    ],
+    [
+      "has_spider_trophy"
+    ],
+    [
+      "has_squid_trophy"
+    ],
+    [
+      "has_stray_trophy"
+    ],
+    [
+      "has_strider_trophy"
+    ],
+    [
+      "has_tadpole_trophy"
+    ],
+    [
+      "has_trader_llama_trophy"
+    ],
+    [
+      "has_tropical_fish_trophy"
+    ],
+    [
+      "has_turtle_trophy"
+    ],
+    [
+      "has_vex_trophy"
+    ],
+    [
+      "has_villager_trophy"
+    ],
+    [
+      "has_vindicator_trophy"
+    ],
+    [
+      "has_wandering_trader_trophy"
+    ],
+    [
+      "has_warden_trophy"
+    ],
+    [
+      "has_witch_trophy"
+    ],
+    [
+      "has_wither_trophy"
+    ],
+    [
+      "has_wither_skeleton_trophy"
+    ],
+    [
+      "has_wolf_trophy"
+    ],
+    [
+      "has_zoglin_trophy"
+    ],
+    [
+      "has_zombie_trophy"
+    ],
+    [
+      "has_zombie_villager_trophy"
+    ],
+    [
+      "has_zombified_piglin_trophy"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

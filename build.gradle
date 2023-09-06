@@ -96,7 +96,9 @@ dependencies {
 
     implementation fg.deobf("mezz.jei:jei-${project.minecraft_version}-forge:15.2.0.25")
     implementation fg.deobf("curse.maven:jade-324717:4711195")
-	runtimeOnly fg.deobf("teamtwilight:twilightforest:4.3.1834:universal")
+
+	runtimeOnly fg.deobf("teamtwilight:twilightforest:4.3.1844:universal")
+	runtimeOnly fg.deobf("curse.maven:better-advancements-272515:4631253")
 }
 
 tasks.named('jar', Jar).configure {
@@ -113,8 +115,6 @@ tasks.named('jar', Jar).configure {
     }
 	finalizedBy 'reobfJar'
 }
-
-jar.finalizedBy('reobfJar')
 
 def mavenUser = hasProperty("CIMUser") ? CIMUser : secrets.getProperty("maven_username")
 def mavenToken = hasProperty("CIMToken") ? CIMToken : secrets.getProperty("maven_password")

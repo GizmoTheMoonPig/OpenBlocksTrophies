@@ -1,0 +1,40 @@
+{
+  "parent": "obtrophies:one_trophy",
+  "criteria": {
+    "has_blue_axolotl_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{VariantID:4,entity:\"minecraft:axolotl\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.obtrophies.rarest_trophy.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "obtrophies:trophy",
+      "nbt": "{BlockEntityTag:{VariantID:4,entity:\"minecraft:axolotl\"}}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.obtrophies.rarest_trophy.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_blue_axolotl_trophy"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

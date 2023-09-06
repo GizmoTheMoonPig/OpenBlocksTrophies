@@ -1,0 +1,124 @@
+{
+  "parent": "obtrophies:one_trophy",
+  "criteria": {
+    "has_dragon_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:ender_dragon\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_elder_guardian_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:elder_guardian\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_evoker_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:evoker\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_piglin_brute_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:piglin_brute\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ravager_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:ravager\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_warden_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:warden\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wither_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ],
+            "nbt": "{BlockEntityTag:{entity:\"minecraft:wither\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.obtrophies.boss_trophy.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "obtrophies:trophy",
+      "nbt": "{BlockEntityTag:{VariantID:0,entity:\"minecraft:warden\"}}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.obtrophies.boss_trophy.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_wither_trophy",
+      "has_dragon_trophy",
+      "has_elder_guardian_trophy",
+      "has_evoker_trophy",
+      "has_warden_trophy",
+      "has_ravager_trophy",
+      "has_piglin_brute_trophy"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

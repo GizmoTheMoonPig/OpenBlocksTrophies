@@ -1,0 +1,39 @@
+{
+  "criteria": {
+    "has_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/block/dark_prismarine.png",
+    "description": {
+      "translate": "advancement.obtrophies.root.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "obtrophies:trophy",
+      "nbt": "{BlockEntityTag:{VariantID:0,entity:\"minecraft:chicken\"}}"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.obtrophies.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_trophy"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

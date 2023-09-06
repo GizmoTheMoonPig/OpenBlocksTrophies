@@ -1,0 +1,39 @@
+{
+  "parent": "obtrophies:root",
+  "criteria": {
+    "has_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "obtrophies:trophy"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.obtrophies.one_trophy.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "obtrophies:trophy",
+      "nbt": "{BlockEntityTag:{SpecialCycleVariant:1b,VariantID:0,entity:\"minecraft:chicken\"}}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.obtrophies.one_trophy.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_trophy"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

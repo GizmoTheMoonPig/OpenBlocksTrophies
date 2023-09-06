@@ -21,7 +21,7 @@ public class DataGenerators {
 	public static void gatherData(GatherDataEvent event) {
 		event.getGenerator().addProvider(event.includeServer(), new LootModifierGenerator(event.getGenerator().getPackOutput()));
 		event.getGenerator().addProvider(event.includeServer(), new TrophyGenerator(event.getGenerator().getPackOutput()));
-
+		event.getGenerator().addProvider(event.includeServer(), new TrophyAdvancementProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
 		event.getGenerator().addProvider(true, new PackMetadataGenerator(event.getGenerator().getPackOutput()).add(PackMetadataSection.TYPE, new PackMetadataSection(
 				Component.literal("Trophy Resources"),
 				DetectedVersion.BUILT_IN.getPackVersion(PackType.CLIENT_RESOURCES),
