@@ -54,6 +54,9 @@ public class EntityCache {
 				}
 				if (!tag.isEmpty()) {
 					living.readAdditionalSaveData(tag);
+					if (entity instanceof Mob mob) {
+						mob.setNoAi(true);
+					}
 				}
 				return living;
 			} else {

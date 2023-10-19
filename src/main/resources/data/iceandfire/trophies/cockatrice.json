@@ -1,0 +1,12 @@
+{
+  "entity": "iceandfire:cockatrice",
+  "scale": 0.75,
+  "variants": [
+	{
+	  "Hen": false
+	},
+	{
+	  "Hen": true
+	}
+  ]
+}

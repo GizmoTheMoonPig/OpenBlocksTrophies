@@ -1,0 +1,24 @@
+{
+  "entity": "iceandfire:hippocampus",
+  "scale": 0.65,
+  "variants": [
+	{
+	  "Variant": 0
+	},
+	{
+	  "Variant": 1
+	},
+	{
+	  "Variant": 2
+	},
+	{
+	  "Variant": 3
+	},
+	{
+	  "Variant": 4
+	},
+	{
+	  "Variant": 5
+	}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "entity": "iceandfire:myrmex_sentinel",
+  "scale": 0.75,
+  "default_variant": {
+	"GrowthStage": 2
+  },
+  "variants": [
+	{
+	  "Variant": false
+	},
+	{
+	  "Variant": true
+	}
+  ]
+}
