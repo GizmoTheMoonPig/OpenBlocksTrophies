@@ -1,0 +1,22 @@
+{
+  "entity": "alexscaves:vallumraptor",
+  "scale": 0.9,
+  "variants": [
+	{
+	  "Retro": false,
+	  "Elder": true
+	},
+	{
+	  "Retro": true,
+	  "Elder": true
+	},
+	{
+	  "Retro": false,
+	  "Elder": false
+	},
+	{
+	  "Retro": true,
+	  "Elder": false
+	}
+  ]
+}

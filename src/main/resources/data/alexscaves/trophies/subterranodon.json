@@ -1,0 +1,12 @@
+{
+  "entity": "alexscaves:subterranodon",
+  "scale": 0.8,
+  "variants": [
+	{
+	  "Retro": false
+	},
+	{
+	  "Retro": true
+	}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "entity": "alexscaves:relicheirus",
+  "scale": 0.4,
+  "variants": [
+	{
+	  "Retro": false
+	},
+	{
+	  "Retro": true
+	}
+  ]
+}

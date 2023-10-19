@@ -1,0 +1,12 @@
+{
+  "entity": "alexscaves:grottoceratops",
+  "scale": 0.5,
+  "variants": [
+	{
+	  "Retro": false
+	},
+	{
+	  "Retro": true
+	}
+  ]
+}
