@@ -1,0 +1,15 @@
+{
+  "drop_chance": 0.0075,
+  "entity": "voidscape:null_servant",
+  "variants": [
+	{
+	  "augment": 0
+	},
+	{
+	  "augment": 1
+	},
+	{
+	  "augment": 2
+	}
+  ]
+}
