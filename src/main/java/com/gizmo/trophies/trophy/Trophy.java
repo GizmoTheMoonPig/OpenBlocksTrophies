@@ -43,12 +43,14 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 	}
 
 	public static void syncTrophiesToClient(OnDatapackSyncEvent event) {
-		if (FMLEnvironment.dist.isDedicatedServer()) {
-			if (event.getPlayer() != null) {
-				TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), new SyncTrophyConfigsPacket(getTrophies()));
-			} else {
-				event.getPlayerList().getPlayers().forEach(player -> TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncTrophyConfigsPacket(getTrophies())));
-			}
+		if (event.getPlayer() != null) {
+			TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), new SyncTrophyConfigsPacket(getTrophies()));
+			OpenBlocksTrophies.LOGGER.debug("Sent {} trophy configs to {} from server.", getTrophies().size(), event.getPlayer().getDisplayName().getString());
+		} else {
+			event.getPlayerList().getPlayers().forEach(player -> {
+				TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncTrophyConfigsPacket(getTrophies()));
+				OpenBlocksTrophies.LOGGER.debug("Sent {} trophy configs to {} from server.", getTrophies().size(), player.getDisplayName().getString());
+			});
 		}
 	}
 

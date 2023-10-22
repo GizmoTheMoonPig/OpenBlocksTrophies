@@ -32,6 +32,7 @@ public class SyncTrophyConfigsPacket {
 				@Override
 				public void run() {
 					TrophyReloadListener.getValidTrophies().putAll(message.map);
+					OpenBlocksTrophies.LOGGER.debug("Received {} trophy configs from server.", message.map.size());
 				}
 			});
 			ctx.get().setPacketHandled(true);
