@@ -1,4 +1,5 @@
 {
   "drop_chance": 0.0075,
-  "entity": "voidscape:corrupted_pawn"
+  "entity": "voidscape:corrupted_pawn",
+  "scale": 0.8
 }
