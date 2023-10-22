@@ -71,13 +71,15 @@ public record PlaceBlockBehavior(BlockState placedBlock, PlacementMethod placeme
 	}
 
 	private void placeBlock(Level level, BlockPos pos) {
-		if (this.placedBlock().getBlock() instanceof SnowLayerBlock layer) {
-			int layers = level.getRandom().nextInt(8) + 1;
-			level.setBlockAndUpdate(pos, layer.defaultBlockState().setValue(SnowLayerBlock.LAYERS, layers));
-		} else if (this.placedBlock().getBlock() instanceof LiquidBlock liquid && liquid.getFluid().getFluidType().isVaporizedOnPlacement(level, pos, null)) {
-			level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F);
-		} else if (level.getBlockState(pos).canBeReplaced() && this.placedBlock().canSurvive(level, pos)) {
-			level.setBlockAndUpdate(pos, this.placedBlock());
+		if (level.getBlockState(pos).canBeReplaced() && this.placedBlock().canSurvive(level, pos)) {
+			if (this.placedBlock().getBlock() instanceof SnowLayerBlock layer) {
+				int layers = level.getRandom().nextInt(8) + 1;
+				level.setBlockAndUpdate(pos, layer.defaultBlockState().setValue(SnowLayerBlock.LAYERS, layers));
+			} else if (this.placedBlock().getBlock() instanceof LiquidBlock liquid && liquid.getFluid().getFluidType().isVaporizedOnPlacement(level, pos, null)) {
+				level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F);
+			} else {
+				level.setBlockAndUpdate(pos, this.placedBlock());
+			}
 		}
 	}
 
