@@ -1,5 +1,5 @@
 {
-  "entity": "naturalist:butterfly",
+  "entity": "meadow:wooly_cow",
   "variants": [
 	{
 	  "Variant": 0
@@ -9,12 +9,6 @@
 	},
 	{
 	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	},
-	{
-	  "Variant": 4
 	}
   ]
 }

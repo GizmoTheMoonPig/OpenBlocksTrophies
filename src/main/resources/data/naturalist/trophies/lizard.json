@@ -1,5 +1,9 @@
 {
-  "entity": "naturalist:butterfly",
+  "entity": "naturalist:lizard",
+  "scale": 1.5,
+  "default_variant": {
+	"HasTail": true
+  },
   "variants": [
 	{
 	  "Variant": 0
@@ -12,9 +16,6 @@
 	},
 	{
 	  "Variant": 3
-	},
-	{
-	  "Variant": 4
 	}
   ]
-}
+},

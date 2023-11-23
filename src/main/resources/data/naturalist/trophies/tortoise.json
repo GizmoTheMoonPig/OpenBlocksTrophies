@@ -1,5 +1,7 @@
 {
-  "entity": "naturalist:butterfly",
+  "entity": "naturalist:tortoise",
+  "scale": 0.9,
+
   "variants": [
 	{
 	  "Variant": 0
@@ -9,12 +11,6 @@
 	},
 	{
 	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	},
-	{
-	  "Variant": 4
 	}
   ]
 }
