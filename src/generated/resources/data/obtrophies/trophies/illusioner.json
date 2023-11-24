@@ -1,7 +1,6 @@
 {
   "behavior": {
     "type": "obtrophies:mob_effect",
-    "amplifier": 1,
     "effect": "minecraft:blindness",
     "time": 100
   },

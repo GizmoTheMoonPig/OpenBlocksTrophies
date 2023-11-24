@@ -21,6 +21,7 @@
   "command.obtrophies.place": "Placed %s Trophies",
   "command.obtrophies.trophy_made": "Trophy stub made for entity %s",
   "item.obtrophies.trophy.modid": "From: %s",
+  "item.obtrophies.trophy.variant": "\"%s\": \"%s\"",
   "itemGroup.obtrophies": "Trophies",
   "gui.obtrophies.trophy_jei": "Trophy Drops",
   "gui.obtrophies.jei.drop_chance": "Chance: %s%%",

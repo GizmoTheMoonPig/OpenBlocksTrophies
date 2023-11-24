@@ -1,4 +1,9 @@
 {
+  "behavior": {
+	"type": "obtrophies:mob_effect",
+	"effect": "alexscaves:irradiated",
+	"time": 100
+  },
   "entity": "alexscaves:brainiac",
   "scale": 0.8
 }

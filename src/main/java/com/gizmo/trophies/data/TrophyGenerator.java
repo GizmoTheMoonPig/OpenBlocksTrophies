@@ -33,7 +33,7 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOMBIFIED_PIGLIN).setRightClickBehavior(new ItemDropBehavior(Items.GOLD_NUGGET, 20000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.BAT).setVerticalOffset(-0.3D).setScale(2.0F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOMBIE).build());
-		this.makeTrophy(new Trophy.Builder(EntityType.WITCH).setScale(0.9F).setRightClickBehavior(new MobEffectBehavior(MobEffects.BLINDNESS, 70, 1)).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.WITCH).setScale(0.9F).setRightClickBehavior(new MobEffectBehavior(MobEffects.BLINDNESS, 70, 0)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.VILLAGER).addRegistryVariant("profession", Registries.VILLAGER_PROFESSION.location()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.OCELOT).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SHEEP)
@@ -56,7 +56,7 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.BLAZE).setRightClickBehavior(new PlayerSetFireBehavior(4)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SILVERFISH).setScale(1.5F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SPIDER).build());
-		this.makeTrophy(new Trophy.Builder(EntityType.CAVE_SPIDER).setRightClickBehavior(new MobEffectBehavior(MobEffects.POISON, 200, 3)).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.CAVE_SPIDER).setRightClickBehavior(new MobEffectBehavior(MobEffects.POISON, 200, 0)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SLIME).setScale(1.25F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.GHAST).setVerticalOffset(0.35D).setScale(0.25F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ENDERMAN).setScale(0.75F).setRightClickBehavior(new ShootEnderPearlBehavior()).build());
@@ -81,7 +81,7 @@ public class TrophyGenerator extends TrophyProvider {
 				.addVariant("RabbitType", Rabbit.Variant.SALT.ordinal())
 				.addVariant("RabbitType", Rabbit.Variant.EVIL.ordinal()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.POLAR_BEAR).setRightClickBehavior(new ItemDropBehavior(Items.COD, 20000)).build());
-		this.makeTrophy(new Trophy.Builder(EntityType.SHULKER).setRightClickBehavior(new MobEffectBehavior(MobEffects.LEVITATION, 100, 1)).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.SHULKER).setRightClickBehavior(new MobEffectBehavior(MobEffects.LEVITATION, 100, 0)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.HORSE).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.WHEAT, 20000))
 				.addVariant("Variant", 0)
 				.addVariant("Variant", 1)
@@ -143,7 +143,7 @@ public class TrophyGenerator extends TrophyProvider {
 				.addVariant("Variant", 2)
 				.addVariant("Variant", 3)
 				.addVariant("Variant", 4).build());
-		this.makeTrophy(new Trophy.Builder(EntityType.ILLUSIONER).setRightClickBehavior(new MobEffectBehavior(MobEffects.BLINDNESS, 100, 1)).build());
+		this.makeTrophy(new Trophy.Builder(EntityType.ILLUSIONER).setRightClickBehavior(new MobEffectBehavior(MobEffects.BLINDNESS, 100, 0)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.COD).setScale(1.75F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SALMON).setScale(1.25F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.TROPICAL_FISH).setScale(2.0F)

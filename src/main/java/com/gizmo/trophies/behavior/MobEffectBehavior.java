@@ -14,7 +14,7 @@ public record MobEffectBehavior(MobEffect effect, int time, int amplifier) imple
 	public static final Codec<MobEffectBehavior> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			ForgeRegistries.MOB_EFFECTS.getCodec().fieldOf("effect").forGetter(MobEffectBehavior::effect),
 			Codec.INT.fieldOf("time").forGetter(MobEffectBehavior::time),
-			Codec.INT.fieldOf("amplifier").forGetter(MobEffectBehavior::amplifier)
+			Codec.INT.optionalFieldOf("amplifier", 0).forGetter(MobEffectBehavior::amplifier)
 	).apply(instance, MobEffectBehavior::new));
 
 	@Override

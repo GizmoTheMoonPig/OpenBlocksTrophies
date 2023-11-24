@@ -81,9 +81,8 @@ public class TrophiesCommands {
 	public static int getRegistryKeys(CommandContext<CommandSourceStack> context, String registryName) throws CommandSyntaxException {
 		try {
 			ResourceKey<? extends Registry<?>> key = ResourceKey.createRegistryKey(ResourceLocation.tryParse(registryName));
-			context.getSource().registryAccess().registryOrThrow(key).entrySet().forEach(entry -> {
-				context.getSource().sendSystemMessage(Component.literal(entry.getKey().location() + ": " + entry.getValue().toString()));
-			});
+			context.getSource().registryAccess().registryOrThrow(key).entrySet().forEach(entry ->
+					context.getSource().sendSystemMessage(Component.literal(entry.getKey().location() + ": " + entry.getValue().toString())));
 			context.getSource().sendSystemMessage(Component.literal("Registry Size: " + context.getSource().registryAccess().registryOrThrow(key).entrySet().size()));
 		} catch (Exception e) {
 			throw new SimpleCommandExceptionType(Component.literal(e.getMessage())).create();

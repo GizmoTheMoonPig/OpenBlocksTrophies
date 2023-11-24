@@ -1,7 +1,6 @@
 {
   "behavior": {
     "type": "obtrophies:mob_effect",
-    "amplifier": 3,
     "effect": "minecraft:poison",
     "time": 200
   },

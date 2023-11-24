@@ -3,8 +3,6 @@ package com.gizmo.trophies.trophy;
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.behavior.CustomBehavior;
 import com.gizmo.trophies.behavior.CustomTrophyBehaviors;
-import com.gizmo.trophies.SyncTrophyConfigsPacket;
-import com.gizmo.trophies.TrophyNetworkHandler;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
@@ -17,10 +15,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.OnDatapackSyncEvent;
-import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,31 +22,19 @@ import java.util.*;
 
 public record Trophy(EntityType<?> type, double dropChance, double verticalOffset, float scale, Optional<CustomBehavior> clickBehavior, Either<Pair<String, ResourceLocation>, List<CompoundTag>> variants, Optional<CompoundTag> defaultData) {
 
+	public static final double DEFAULT_DROP_CHANCE = 0.001D;
+	public static final double BOSS_DROP_CHANCE = 0.0075D;
+
+	//TODO add condition support in 1.20.2+
 	public static final Codec<Trophy> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			ForgeRegistries.ENTITY_TYPES.getCodec().fieldOf("entity").forGetter(Trophy::type),
-			Codec.DOUBLE.optionalFieldOf("drop_chance", 0.001D).forGetter(Trophy::dropChance),
+			Codec.DOUBLE.optionalFieldOf("drop_chance", DEFAULT_DROP_CHANCE).forGetter(Trophy::dropChance),
 			Codec.DOUBLE.optionalFieldOf("offset", 0.0D).forGetter(Trophy::verticalOffset),
 			Codec.FLOAT.optionalFieldOf("scale", 1.0F).forGetter(Trophy::scale),
 			CustomTrophyBehaviors.CODEC.optionalFieldOf("behavior").forGetter(Trophy::clickBehavior),
 			Codec.either(Codec.pair(Codec.STRING.fieldOf("key").codec(), ResourceLocation.CODEC.fieldOf("registry").codec()), CompoundTag.CODEC.listOf()).optionalFieldOf("variants", Either.right(new ArrayList<>())).forGetter(Trophy::variants),
 			CompoundTag.CODEC.optionalFieldOf("default_variant").forGetter(Trophy::defaultData)
 	).apply(instance, Trophy::new));
-
-	public static void reloadTrophies(AddReloadListenerEvent event) {
-		event.addListener(new TrophyReloadListener());
-	}
-
-	public static void syncTrophiesToClient(OnDatapackSyncEvent event) {
-		if (event.getPlayer() != null) {
-			TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), new SyncTrophyConfigsPacket(getTrophies()));
-			OpenBlocksTrophies.LOGGER.debug("Sent {} trophy configs to {} from server.", getTrophies().size(), event.getPlayer().getDisplayName().getString());
-		} else {
-			event.getPlayerList().getPlayers().forEach(player -> {
-				TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncTrophyConfigsPacket(getTrophies()));
-				OpenBlocksTrophies.LOGGER.debug("Sent {} trophy configs to {} from server.", getTrophies().size(), player.getDisplayName().getString());
-			});
-		}
-	}
 
 	public List<CompoundTag> getVariants(@Nullable RegistryAccess access) {
 		if (this.variants.left().isPresent() && access != null) {
@@ -72,7 +54,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 		return this.variants.right().orElse(new ArrayList<>());
 	}
 
-	//used for the creative tab since I dont have access to registryaccess
+	//used for the creative tab since I don't have access to RegistryAccess there
 	public List<CompoundTag> getVariants(HolderLookup.Provider access) {
 		if (this.variants.left().isPresent()) {
 			List<CompoundTag> entries = new ArrayList<>();
@@ -98,6 +80,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 		return TrophyReloadListener.getValidTrophies();
 	}
 
+	@SuppressWarnings("unused")
 	public static class Builder {
 		private final EntityType<?> type;
 		private double dropChance = 0.001D;
@@ -121,7 +104,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 			this.scale = trophy.scale();
 			this.clickBehavior = trophy.clickBehavior().orElse(null);
 			this.registryVariant = trophy.variants().left().orElse(null);
-			this.variants = trophy.variants().right().orElse(new ArrayList<>());
+			this.variants = new ArrayList<>(trophy.variants().right().orElse(new ArrayList<>()));
 			this.defaultVariant = trophy.defaultData().orElse(null);
 			return this;
 		}

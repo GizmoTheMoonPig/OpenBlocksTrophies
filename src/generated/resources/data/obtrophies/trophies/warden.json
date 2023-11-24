@@ -1,7 +1,6 @@
 {
   "behavior": {
     "type": "obtrophies:mob_effect",
-    "amplifier": 0,
     "effect": "minecraft:darkness",
     "time": 200
   },

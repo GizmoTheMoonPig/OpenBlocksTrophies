@@ -1,12 +1,4 @@
 {
-  "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:crocodile_scute"
-	}
-  },
   "entity": "alexsmobs:crocodile",
   "scale": 0.5,
   "variants": [

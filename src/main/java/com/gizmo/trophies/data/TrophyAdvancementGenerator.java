@@ -36,7 +36,7 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 				.addCriterion("has_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(TrophyRegistries.TROPHY_ITEM.get()))
 				.save(consumer, "obtrophies:one_trophy");
 
-		Advancement bossTrophy = Advancement.Builder.advancement().parent(oneTrophy).display(
+		Advancement.Builder.advancement().parent(oneTrophy).display(
 						TrophyItem.loadEntityToTrophy(EntityType.WARDEN, 0, false),
 						Component.translatable("advancement.obtrophies.boss_trophy.title"),
 						Component.translatable("advancement.obtrophies.boss_trophy.desc"),
@@ -51,7 +51,7 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 				.requirements(RequirementsStrategy.OR)
 				.save(consumer, "obtrophies:boss_trophy");
 
-		Advancement rarestTrophy = Advancement.Builder.advancement().parent(oneTrophy).display(
+		Advancement.Builder.advancement().parent(oneTrophy).display(
 						TrophyItem.loadEntityToTrophy(EntityType.AXOLOTL, 4, false),
 						Component.translatable("advancement.obtrophies.rarest_trophy.title"),
 						Component.translatable("advancement.obtrophies.rarest_trophy.desc"),
@@ -59,7 +59,7 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 				.addCriterion("has_blue_axolotl_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.AXOLOTL, 4, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.save(consumer, "obtrophies:rarest_trophy");
 
-		Advancement allHorseTrophies = Advancement.Builder.advancement().parent(oneTrophy).display(
+		Advancement.Builder.advancement().parent(oneTrophy).display(
 						TrophyItem.loadEntityToTrophy(EntityType.HORSE, 12, false),
 						Component.translatable("advancement.obtrophies.all_horse_trophies.title"),
 						Component.translatable("advancement.obtrophies.all_horse_trophies.desc"),
@@ -102,7 +102,7 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 				.requirements(RequirementsStrategy.AND)
 				.save(consumer, "obtrophies:all_horse_trophies");
 
-		Advancement allfishTrophies = Advancement.Builder.advancement().parent(oneTrophy).display(
+		Advancement.Builder.advancement().parent(oneTrophy).display(
 						TrophyItem.loadEntityToTrophy(EntityType.TROPICAL_FISH, 2, false),
 						Component.translatable("advancement.obtrophies.all_fish_trophies.title"),
 						Component.translatable("advancement.obtrophies.all_fish_trophies.desc"),
@@ -132,7 +132,7 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 				.requirements(RequirementsStrategy.AND)
 				.save(consumer, "obtrophies:all_fish_trophies");
 
-		Advancement vanillaTrophies = Advancement.Builder.advancement().parent(oneTrophy).display(
+		Advancement.Builder.advancement().parent(oneTrophy).display(
 						TrophyItem.loadEntityToTrophy(EntityType.FOX, 0, false),
 						Component.translatable("advancement.obtrophies.all_vanilla.title"),
 						Component.translatable("advancement.obtrophies.all_vanilla.desc"),

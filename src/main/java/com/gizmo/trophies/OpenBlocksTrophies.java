@@ -3,6 +3,7 @@ package com.gizmo.trophies;
 import com.gizmo.trophies.behavior.CustomTrophyBehaviors;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
+import com.gizmo.trophies.trophy.TrophyReloadListener;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -15,6 +16,8 @@ import net.minecraft.world.level.GameRules;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.AdvancementEvent;
@@ -25,6 +28,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
@@ -50,8 +54,8 @@ public class OpenBlocksTrophies {
 		bus.addListener(this::commonSetup);
 		MinecraftForge.EVENT_BUS.addListener(this::maybeDropTrophy);
 		MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
-		MinecraftForge.EVENT_BUS.addListener(Trophy::reloadTrophies);
-		MinecraftForge.EVENT_BUS.addListener(Trophy::syncTrophiesToClient);
+		MinecraftForge.EVENT_BUS.addListener(this::reloadTrophies);
+		MinecraftForge.EVENT_BUS.addListener(this::syncTrophiesToClient);
 
 		MinecraftForge.EVENT_BUS.addListener(this::grantBeeQueenViaDesireAdvancement);
 
@@ -70,6 +74,22 @@ public class OpenBlocksTrophies {
 
 	public void commonSetup(FMLCommonSetupEvent event) {
 		TrophyNetworkHandler.init();
+	}
+
+	public void reloadTrophies(AddReloadListenerEvent event) {
+		event.addListener(new TrophyReloadListener());
+	}
+
+	public void syncTrophiesToClient(OnDatapackSyncEvent event) {
+		if (event.getPlayer() != null) {
+			TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), new SyncTrophyConfigsPacket(Trophy.getTrophies()));
+			OpenBlocksTrophies.LOGGER.debug("Sent {} trophy configs to {} from server.", Trophy.getTrophies().size(), event.getPlayer().getDisplayName().getString());
+		} else {
+			event.getPlayerList().getPlayers().forEach(player -> {
+				TrophyNetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncTrophyConfigsPacket(Trophy.getTrophies()));
+				OpenBlocksTrophies.LOGGER.debug("Sent {} trophy configs to {} from server.", Trophy.getTrophies().size(), player.getDisplayName().getString());
+			});
+		}
 	}
 
 	public void registerCommands(RegisterCommandsEvent event) {
@@ -96,7 +116,7 @@ public class OpenBlocksTrophies {
 	public void maybeDropTrophy(LivingDropsEvent event) {
 		//follow gamerules and mob drop requirements
 		if (!event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT) || !event.getEntity().shouldDropLoot()) return;
-		//dont drop trophies if the config doesnt allow this source to
+		//don't drop trophies if the config doesn't allow this source to
 		if (!(event.getSource().getEntity() instanceof Player) && !TrophyConfig.COMMON_CONFIG.anySourceDropsTrophies.get())
 			return;
 		if (event.getSource().getEntity() instanceof FakePlayer && !TrophyConfig.COMMON_CONFIG.fakePlayersDropTrophies.get())
@@ -131,7 +151,7 @@ public class OpenBlocksTrophies {
 						if (variantVer instanceof NumericTag num) {
 							//most values save as bytes in the json, but sometimes they also be things like shorts.
 							//we'll compare both numbers to long as they should always match this way.
-							//comparing to int is gonna cause issues for floats and doubles
+							//comparing to int is going to cause issues for floats and doubles
 							if (tagVer instanceof NumericTag number && number.getAsLong() == num.getAsLong()) {
 								return i;
 							}

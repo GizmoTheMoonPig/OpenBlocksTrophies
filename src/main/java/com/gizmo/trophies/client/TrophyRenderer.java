@@ -3,6 +3,7 @@ package com.gizmo.trophies.client;
 import com.gizmo.trophies.block.TrophyBlock;
 import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.gizmo.trophies.trophy.Trophy;
+import com.mojang.blaze3d.Blaze3D;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -44,7 +45,9 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			Collections.shuffle(keys);
 		}
 		if (cycling && !keys.isEmpty()) {
-			trophy = Trophy.getTrophies().get(keys.get((int) ((level.getGameTime() + Minecraft.getInstance().getPartialTick()) / 20 % keys.size())));
+			//use GLFW time to allow trophies to cycle in the advancements screen
+			//level.getGameTime doesn't increment when the game is paused
+			trophy = Trophy.getTrophies().get(keys.get((int) (Blaze3D.getTime() % keys.size())));
 		}
 		List<CompoundTag> variants = trophy.getVariants(level.registryAccess());
 		Entity entity = EntityCache.fetchEntity(trophy.type(), level, variant < variants.size() ? variants.get(variant) : null, trophy.defaultData());

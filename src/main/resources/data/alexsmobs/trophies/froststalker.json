@@ -1,12 +1,4 @@
 {
-  "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:froststalker_horn"
-	}
-  },
   "entity": "alexsmobs:froststalker",
   "scale": 0.9,
   "variants": [

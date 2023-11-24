@@ -1,12 +1,4 @@
 {
-  "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 10000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:banana_slug_slime"
-	}
-  },
   "entity": "alexsmobs:banana_slug",
   "scale": 1.5,
   "variants": [

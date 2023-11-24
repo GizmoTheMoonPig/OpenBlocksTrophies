@@ -1,10 +1,10 @@
 {
   "behavior": {
 	"type": "obtrophies:item",
-	"cooldown": 10000,
+	"cooldown": 50000,
 	"item": {
 	  "Count": 1,
-	  "id": "minecraft:ink_sac"
+	  "id": "alexsmobs:lost_tentacle"
 	}
   },
   "entity": "alexsmobs:giant_squid",

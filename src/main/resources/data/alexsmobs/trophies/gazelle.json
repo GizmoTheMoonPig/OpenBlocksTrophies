@@ -1,11 +1,3 @@
 {
-  "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:gazelle_horn"
-	}
-  },
   "entity": "alexsmobs:gazelle"
 }

@@ -12,8 +12,7 @@
 	  "Count": 1,
 	  "id": "alexsmobs:banana"
 	},
-	"shrink_item_stack": true,
-	"sound": "minecraft:item.bottle.fill"
+	"shrink_item_stack": true
   },
   "entity": "alexsmobs:capuchin_monkey",
   "scale": 1.5,

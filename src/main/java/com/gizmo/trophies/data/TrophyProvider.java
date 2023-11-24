@@ -39,7 +39,7 @@ public abstract class TrophyProvider implements DataProvider {
 		for (Map.Entry<ResourceLocation, Trophy> entry : map.entrySet()) {
 			Path path = this.entryPath.json(entry.getKey());
 			futuresBuilder.add(DataProvider.saveStable(output, Trophy.CODEC.encodeStart(JsonOps.INSTANCE, entry.getValue()).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path));
-		};
+		}
 		return CompletableFuture.allOf(futuresBuilder.build().toArray(CompletableFuture[]::new));
 	}
 

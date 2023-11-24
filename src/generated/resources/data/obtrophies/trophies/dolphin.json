@@ -1,7 +1,6 @@
 {
   "behavior": {
     "type": "obtrophies:mob_effect",
-    "amplifier": 0,
     "effect": "minecraft:dolphins_grace",
     "time": 300
   },

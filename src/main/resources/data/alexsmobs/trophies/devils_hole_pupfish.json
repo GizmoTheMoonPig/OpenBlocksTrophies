@@ -1,11 +1,8 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
+	"type": "obtrophies:loot_table",
 	"cooldown": 10000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:slime_ball"
-	}
+	"loot_table": "alexsmobs:gameplay/pupfish_reward"
   },
   "entity": "alexsmobs:devils_hole_pupfish",
   "scale": 1.25
