@@ -4,11 +4,16 @@ import com.gizmo.trophies.behavior.CustomTrophyBehaviors;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.TrophyReloadListener;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NumericTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.npc.VillagerDataHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -49,6 +54,11 @@ public class OpenBlocksTrophies {
 			ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, specPair.getRight());
 			TrophyConfig.COMMON_CONFIG = specPair.getLeft();
 		}
+		{
+			final Pair<TrophyConfig.ClientConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(TrophyConfig.ClientConfig::new);
+			ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, specPair.getRight());
+			TrophyConfig.CLIENT_CONFIG = specPair.getLeft();
+		}
 
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::commonSetup);
@@ -63,6 +73,7 @@ public class OpenBlocksTrophies {
 		TrophyRegistries.BLOCK_ENTITIES.register(bus);
 		TrophyRegistries.ITEMS.register(bus);
 		TrophyRegistries.LOOT_MODIFIERS.register(bus);
+		TrophyRegistries.SOUNDS.register(bus);
 		TrophyRegistries.TABS.register(bus);
 
 		CustomTrophyBehaviors.CUSTOM_BEHAVIORS.register(bus);
@@ -115,20 +126,44 @@ public class OpenBlocksTrophies {
 
 	public void maybeDropTrophy(LivingDropsEvent event) {
 		//follow gamerules and mob drop requirements
-		if (!event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT) || !event.getEntity().shouldDropLoot()) return;
-		//don't drop trophies if the config doesn't allow this source to
-		if (!(event.getSource().getEntity() instanceof Player) && !TrophyConfig.COMMON_CONFIG.anySourceDropsTrophies.get())
-			return;
-		if (event.getSource().getEntity() instanceof FakePlayer && !TrophyConfig.COMMON_CONFIG.fakePlayersDropTrophies.get())
+		if (!event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT) || !event.getEntity().shouldDropLoot())
 			return;
 
-		if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
-			Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
-			if (trophy != null) {
-				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.dropChance();
-				double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
-				if (chance > 0.0D) {
-					event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.type(), this.fetchVariantIfAny(event.getEntity(), trophy), false)));
+		//players are a bit special.
+		//charged creepers can make players drop trophies, and player trophies come loaded with the dead player's name
+		if (event.getEntity() instanceof Player player) {
+			double dropChance;
+			if (event.getSource().getEntity() instanceof Creeper creeper && creeper.isPowered() && TrophyConfig.COMMON_CONFIG.playerChargedCreeperDropChance.get() > 0.0D) {
+				dropChance = TrophyConfig.COMMON_CONFIG.playerChargedCreeperDropChance.get() - TROPHY_RANDOM.nextDouble();
+			} else {
+				//don't drop trophies if the config doesn't allow this source to
+				if (!(event.getSource().getEntity() instanceof Player) && !TrophyConfig.COMMON_CONFIG.anySourceDropsTrophies.get())
+					return;
+				if (event.getSource().getEntity() instanceof FakePlayer && !TrophyConfig.COMMON_CONFIG.fakePlayersDropTrophies.get())
+					return;
+				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : Trophy.getTrophies().getOrDefault(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.PLAYER), new Trophy.Builder(EntityType.PLAYER).build()).dropChance();
+				dropChance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
+			}
+			if (dropChance > 0.0D) {
+				ItemStack stack = TrophyItem.loadEntityToTrophy(EntityType.PLAYER, 0, false);
+				stack.setHoverName(Component.literal(player.getDisplayName().getString()));
+				event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack));
+			}
+		} else {
+			//don't drop trophies if the config doesn't allow this source to
+			if (!(event.getSource().getEntity() instanceof Player) && !TrophyConfig.COMMON_CONFIG.anySourceDropsTrophies.get())
+				return;
+			if (event.getSource().getEntity() instanceof FakePlayer && !TrophyConfig.COMMON_CONFIG.fakePlayersDropTrophies.get())
+				return;
+
+			if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
+				Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
+				if (trophy != null) {
+					double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.dropChance();
+					double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
+					if (chance > 0.0D) {
+						event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.type(), this.fetchVariantIfAny(event.getEntity(), trophy), false)));
+					}
 				}
 			}
 		}

@@ -1,0 +1,22 @@
+{
+  "providers": [
+	{
+	  "type": "bitmap",
+	  "file": "obtrophies:misc\/think115.png",
+	  "ascent": 8,
+	  "height": 12,
+	  "chars": [
+		"\uE115"
+	  ]
+	},
+	{
+	  "type": "bitmap",
+	  "file": "obtrophies:misc\/mojang.png",
+	  "ascent": 8,
+	  "height": 10,
+	  "chars": [
+		"\uF56E"
+	  ]
+	}
+  ]
+}

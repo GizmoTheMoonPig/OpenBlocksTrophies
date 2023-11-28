@@ -7,12 +7,14 @@ import com.gizmo.trophies.trophy.Trophy;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -49,6 +51,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 	public static final BooleanProperty PEDESTAL = BooleanProperty.create("pedestal");
 	private static final VoxelShape PEDESTAL_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 4.0D, 13.0D);
 	private static final VoxelShape NO_PEDESTAL_SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 12.0D, 12.0D);
+	private static final VoxelShape PLAYER_SHAPE = Block.box(5.0D, 4.0D, 5.0D, 11.0D, 16.0D, 11.0D);
 
 	public TrophyBlock(Properties properties) {
 		super(properties);
@@ -73,6 +76,11 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
+		if (getter.getBlockEntity(pos) instanceof TrophyBlockEntity trophy) {
+			if (trophy.getTrophy() != null && trophy.getTrophy().type() == EntityType.PLAYER) {
+				return state.getValue(PEDESTAL) ? Shapes.or(PEDESTAL_SHAPE, PLAYER_SHAPE) : NO_PEDESTAL_SHAPE;
+			}
+		}
 		return state.getValue(PEDESTAL) ? PEDESTAL_SHAPE : NO_PEDESTAL_SHAPE;
 	}
 
@@ -108,12 +116,16 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			Trophy trophy = trophyBE.getTrophy();
 			if (trophy != null) {
-				Pair<SoundEvent, Float> soundData = AmbientSoundFetcher.getAmbientSoundAndPitch(trophy.type(), level);
-				if (soundData.getFirst() != null) {
-					level.playSound(null, pos, soundData.getFirst(), SoundSource.BLOCKS, 1.0F, soundData.getSecond());
-				}
-				if (trophyBE.getCooldown() <= 0 && trophy.clickBehavior().isPresent()) {
-					trophyBE.setCooldown(trophy.clickBehavior().get().execute(trophyBE, (ServerPlayer) player, player.getItemInHand(hand)));
+				if (trophy.type() == EntityType.PLAYER) {
+					level.playSound(null, pos, TrophyRegistries.OOF.get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
+				} else {
+					Pair<SoundEvent, Float> soundData = AmbientSoundFetcher.getAmbientSoundAndPitch(trophy.type(), level);
+					if (soundData.getFirst() != null) {
+						level.playSound(null, pos, soundData.getFirst(), SoundSource.BLOCKS, 1.0F, soundData.getSecond());
+					}
+					if (trophyBE.getCooldown() <= 0 && trophy.clickBehavior().isPresent()) {
+						trophyBE.setCooldown(trophy.clickBehavior().get().execute(trophyBE, (ServerPlayer) player, player.getItemInHand(hand)));
+					}
 				}
 			}
 		}
@@ -151,6 +163,9 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 				tag.putBoolean(TrophyItem.CYCLING_TAG, true);
 			}
 			newStack.addTagElement("BlockEntityTag", tag);
+			if (!trophyBE.getTrophyName().isEmpty()) {
+				newStack.setHoverName(Component.literal(trophyBE.getTrophyName()));
+			}
 		}
 		return newStack;
 	}

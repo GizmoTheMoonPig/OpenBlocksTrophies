@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-23T23:53:09.3357241	Default OpenBlocks Trophies
+// 1.20.1	2023-11-26T23:16:54.1623763	Default OpenBlocks Trophies
 9ab48ee8361c93363b4976c209fa1eeacccad979 data/obtrophies/trophies/allay.json
 c45d1f7de3ba0cf03fbdc5c3aca99690527bed43 data/obtrophies/trophies/axolotl.json
 3df29d1128e7a5368d0f36b3dd5d00b195b8202c data/obtrophies/trophies/bat.json
@@ -42,6 +42,7 @@ c5a20f8a5cb1d45b32a2385b30c12c09ab3d93b0 data/obtrophies/trophies/parrot.json
 1787c8d3f6115d8e1d62ee0c9cbf653fa6144715 data/obtrophies/trophies/piglin.json
 f9d52bbb998ccb40e82bb2c04bb3ea1ca370854b data/obtrophies/trophies/piglin_brute.json
 bac2c04d1a1d2beb2b3eb9076ed3e3c6c9e55596 data/obtrophies/trophies/pillager.json
+37ad8e07ca9b9b3cf5a1f66c0707df826aa950c2 data/obtrophies/trophies/player.json
 604d9a39504b219b3aefc0162e1c85692dfc33f0 data/obtrophies/trophies/polar_bear.json
 4779ab50cd2a4e7a4055b0860d0142f561b581af data/obtrophies/trophies/pufferfish.json
 185d3c163a44927061d64ee91cb06a612b36d69b data/obtrophies/trophies/rabbit.json

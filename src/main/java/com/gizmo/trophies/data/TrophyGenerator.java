@@ -23,6 +23,7 @@ public class TrophyGenerator extends TrophyProvider {
 
 	@Override
 	protected void createTrophies() {
+		this.makeTrophy(new Trophy.Builder(EntityType.PLAYER).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.WOLF).setScale(1.25F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.CHICKEN).setScale(1.5F).setRightClickBehavior(new ItemDropBehavior(Items.EGG, 10000, SoundEvents.CHICKEN_EGG)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.COW).setRightClickBehavior(new ClickWithItemBehavior(Items.BUCKET, true, new ItemDropBehavior(Items.MILK_BUCKET), SoundEvents.COW_MILK)).build());

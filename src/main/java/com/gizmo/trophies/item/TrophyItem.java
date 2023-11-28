@@ -11,7 +11,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -104,9 +103,9 @@ public class TrophyItem extends BlockItem {
 	public Rarity getRarity(ItemStack stack) {
 		Trophy trophy = getTrophy(stack);
 		if (trophy != null) {
-			if (trophy.type().is(Tags.EntityTypes.BOSSES) || trophy.dropChance() >= Trophy.BOSS_DROP_CHANCE) {
+			if (trophy.type() == EntityType.PLAYER) {
 				return Rarity.EPIC;
-			} else if (trophy.type().getCategory() == MobCategory.MONSTER) {
+			} else if (trophy.type().is(Tags.EntityTypes.BOSSES) || trophy.dropChance() >= Trophy.BOSS_DROP_CHANCE) {
 				return Rarity.RARE;
 			} else {
 				return Rarity.UNCOMMON;

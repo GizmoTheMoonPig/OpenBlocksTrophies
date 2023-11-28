@@ -4,14 +4,34 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class TrophyConfig {
 
+	public static ClientConfig CLIENT_CONFIG;
 	public static CommonConfig COMMON_CONFIG;
+
+	public static class ClientConfig {
+		public final ForgeConfigSpec.BooleanValue playersRenderNames;
+		public final ForgeConfigSpec.BooleanValue renderNameColorsAndIcons;
+
+		public ClientConfig(ForgeConfigSpec.Builder builder) {
+			this.playersRenderNames = builder.
+					translation("obtrophies.config.players_render_names").
+					comment("If true, player trophies will render their names over their head similar to how players do.").
+					define("player_trophies_render_names", true);
+
+			this.renderNameColorsAndIcons = builder.
+					translation("obtrophies.config.render_name_gizmos").
+					comment("""
+							If true, some player trophies will render with special icons or name colors.
+							If you find this to be too distracting for some reason, you can turn this off to keep the names plainly formatted.""").
+					define("render_player_trophy_name_decorators", true);
+		}
+	}
 
 	public static class CommonConfig {
 
 		public final ForgeConfigSpec.BooleanValue fakePlayersDropTrophies;
 		public final ForgeConfigSpec.BooleanValue anySourceDropsTrophies;
 		public final ForgeConfigSpec.DoubleValue dropChanceOverride;
-
+		public final ForgeConfigSpec.DoubleValue playerChargedCreeperDropChance;
 
 		public CommonConfig(ForgeConfigSpec.Builder builder) {
 			this.fakePlayersDropTrophies = builder.
@@ -33,8 +53,18 @@ public class TrophyConfig {
 					comment("""
 							The chance a trophy will drop from its respective mob.
 							All trophy drop chances are defined in their trophy json, but if you want to override that chance without going through and changing every json this is for you.
-							Set this value to -1 to disable.""").
+							This value works as a percentage (number * 100), so 0.2 would be a 20% chance for example.
+							Set this value to any negative number to disable the override.""").
 					defineInRange("trophy_drop_override", -1.0D, -1.0D, 1.0D);
+
+			this.playerChargedCreeperDropChance = builder.
+					translation("obtrophies.config.player_creeper_chance").
+					comment("""
+							The chance a player will drop a trophy when killed by a charged creeper.
+							This config mostly exists for singleplayer worlds where getting a player kill on a player is rather difficult.
+							This value works as a percentage (number * 100), so 0.2 would be a 20% chance for example.
+							Set this value to 0.0 to disable drops from charged creeper kills.""").
+					defineInRange("charged_creeper_player_trophy_chance", 0.2D, 0.0D, 1.0D);
 		}
 	}
 }
