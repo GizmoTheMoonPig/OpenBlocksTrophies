@@ -20,6 +20,7 @@
   "command.obtrophies.mod_not_loaded": "Mod %s does not exist!",
   "command.obtrophies.place": "Placed %s Trophies",
   "command.obtrophies.trophy_made": "Trophy stub made for entity %s",
+  "command.obtrophies.trophies_made": "Sucessfully made %s trophy configs!",
   "item.obtrophies.trophy.modid": "From: %s",
   "item.obtrophies.trophy.variant": "\"%s\": \"%s\"",
   "itemGroup.obtrophies": "Trophies",

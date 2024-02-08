@@ -6,6 +6,9 @@ import com.gizmo.trophies.trophy.Trophy;
 import com.google.common.collect.Maps;
 import com.google.common.hash.Hashing;
 import com.google.common.hash.HashingOutputStream;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
@@ -15,10 +18,12 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.mojang.serialization.JsonOps;
+import net.jodah.typetools.TypeResolver;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -26,13 +31,17 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.forgespi.language.IModInfo;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -51,12 +60,18 @@ public class TrophiesCommands {
 		dispatcher.register(Commands.literal("obtrophies")
 				.then(Commands.literal("debug").requires(cs -> cs.hasPermission(3))
 						.then(Commands.literal("dumpRegistry")
-								.then(Commands.argument("registry", StringArgumentType.string())
-										.executes(context -> getRegistryKeys(context, StringArgumentType.getString(context, "dumpRegistry")))))
+								.then(Commands.argument("registry", ResourceLocationArgument.id())
+										.suggests((context, builder) -> SharedSuggestionProvider.suggestResource(getAllRegistries(context.getSource().getLevel()), builder))
+										.then(Commands.argument("dumpToFile", BoolArgumentType.bool())
+												.executes(context -> forEachRegistry(context, ResourceLocationArgument.getId(context, "registry"), BoolArgumentType.getBool(context, "dumpToFile"))))))
 						.then(Commands.literal("makeTemplatesFor")
 								.then(Commands.argument("modid", StringArgumentType.string())
 										.suggests((context, builder) -> SharedSuggestionProvider.suggest(getLoadedModIds(), builder))
-										.executes(context -> writeTrophiesForMod(context, StringArgumentType.getString(context, "modid"))))))
+										.executes(context -> writeTrophiesForMod(context, StringArgumentType.getString(context, "modid"), true, false))
+										.then(Commands.argument("check_existing_trophies", BoolArgumentType.bool())
+												.executes(context -> writeTrophiesForMod(context, StringArgumentType.getString(context, "modid"), BoolArgumentType.getBool(context, "check_existing_trophies"), false))
+												.then(Commands.argument("print_entities", BoolArgumentType.bool())
+														.executes(context -> writeTrophiesForMod(context, StringArgumentType.getString(context, "modid"), BoolArgumentType.getBool(context, "check_existing_trophies"), BoolArgumentType.getBool(context, "print_entities"))))))))
 				.then(Commands.literal("count")
 						.executes(TrophiesCommands::count))
 				.then(Commands.literal("placetrophies")
@@ -74,20 +89,43 @@ public class TrophiesCommands {
 		for (IModInfo info : ModList.get().getMods()) {
 			modids.add(info.getModId());
 		}
+		modids.add(0, "all");
 		Collections.sort(modids);
 		return modids;
 	}
 
-	public static int getRegistryKeys(CommandContext<CommandSourceStack> context, String registryName) throws CommandSyntaxException {
-		try {
-			ResourceKey<? extends Registry<?>> key = ResourceKey.createRegistryKey(ResourceLocation.tryParse(registryName));
-			context.getSource().registryAccess().registryOrThrow(key).entrySet().forEach(entry ->
-					context.getSource().sendSystemMessage(Component.literal(entry.getKey().location() + ": " + entry.getValue().toString())));
-			context.getSource().sendSystemMessage(Component.literal("Registry Size: " + context.getSource().registryAccess().registryOrThrow(key).entrySet().size()));
-		} catch (Exception e) {
-			throw new SimpleCommandExceptionType(Component.literal(e.getMessage())).create();
+	public static List<ResourceLocation> getAllRegistries(ServerLevel level) {
+		List<ResourceLocation> registries = new ArrayList<>(level.registryAccess().registries().map(registryEntry -> registryEntry.key().location()).toList());
+		registries.add(0, new ResourceLocation("", "all"));
+		return registries;
+	}
+
+	public static int forEachRegistry(CommandContext<CommandSourceStack> context, ResourceLocation registryName, boolean dumpToFile) {
+		if (registryName.toString().equals("all")) {
+			getAllRegistries(context.getSource().getLevel()).forEach(location -> getRegistryKeys(context, location, dumpToFile));
+		} else {
+			getRegistryKeys(context, registryName, dumpToFile);
 		}
+
 		return Command.SINGLE_SUCCESS;
+	}
+
+	public static void getRegistryKeys(CommandContext<CommandSourceStack> context, ResourceLocation registryName, boolean dumpToFile) {
+		ResourceKey<? extends Registry<?>> key = ResourceKey.createRegistryKey(registryName);
+		if (dumpToFile) {
+			Path path = context.getSource().getLevel().getServer().getWorldPath(LevelResource.GENERATED_DIR).resolve("registries").resolve(registryName.getNamespace()).resolve(registryName.getPath() + ".json").normalize();
+			JsonObject object = new JsonObject();
+			JsonArray registryArray = new JsonArray();
+			context.getSource().registryAccess().registryOrThrow(key).entrySet().forEach(entry -> {
+				registryArray.add(entry.getKey().location().toString());
+			});
+			object.add("entries", registryArray);
+			writeToFile(object, path);
+		} else {
+			context.getSource().registryAccess().registryOrThrow(key).entrySet().forEach(entry ->
+					context.getSource().sendSystemMessage(Component.literal(entry.getKey().location().toString())));
+			context.getSource().sendSystemMessage(Component.literal("Registry Size: " + context.getSource().registryAccess().registryOrThrow(key).entrySet().size()));
+		}
 	}
 
 
@@ -144,36 +182,64 @@ public class TrophiesCommands {
 		}
 	}
 
-	private static int writeTrophiesForMod(CommandContext<CommandSourceStack> context, String modid) throws CommandSyntaxException {
-		if (!ModList.get().isLoaded(modid)) {
+	private static int writeTrophiesForMod(CommandContext<CommandSourceStack> context, String modid, boolean checkExistingConfigs, boolean printEachEntity) throws CommandSyntaxException {
+		if (!modid.equals("all") && !ModList.get().isLoaded(modid)) {
 			throw new SimpleCommandExceptionType(Component.translatable("command.obtrophies.mod_not_loaded", modid).withStyle(ChatFormatting.RED)).create();
 		}
-
-		for (EntityType<?> entity : BuiltInRegistries.ENTITY_TYPE.stream().filter(type -> BuiltInRegistries.ENTITY_TYPE.getKey(type).getNamespace().equals(modid)).toList()) {
-			ResourceLocation entityName = BuiltInRegistries.ENTITY_TYPE.getKey(entity);
-			Path path = context.getSource().getLevel().getServer().getWorldPath(LevelResource.GENERATED_DIR).resolve(modid).resolve(entityName.getPath() + ".json").normalize();
-			Trophy.Builder dummy = new Trophy.Builder(entity);
-			if (entity.is(Tags.EntityTypes.BOSSES)) dummy.setDropChance(0.0075D);
-			if (entity.getHeight() > 0.0F) dummy.setScale(Float.parseFloat(FORMAT.format(Math.min(2.0F, 2.0F / entity.getHeight()))));
-			try {
-				ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
-				HashingOutputStream hashingoutputstream = new HashingOutputStream(Hashing.sha256(), bytearrayoutputstream);
-
-				try (JsonWriter jsonwriter = new JsonWriter(new OutputStreamWriter(hashingoutputstream, StandardCharsets.UTF_8))) {
-					jsonwriter.setSerializeNulls(false);
-					jsonwriter.setIndent("  ");
-					GsonHelper.writeValue(jsonwriter, Trophy.CODEC.encodeStart(JsonOps.INSTANCE, dummy.build()).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), Comparator.naturalOrder());
+		int successfulFilesMade = 0;
+		for (EntityType<?> entity : BuiltInRegistries.ENTITY_TYPE.stream().filter(type -> (modid.equals("all") || BuiltInRegistries.ENTITY_TYPE.getKey(type).getNamespace().equals(modid)) && checkExistingConfigs != Trophy.getTrophies().containsKey(BuiltInRegistries.ENTITY_TYPE.getKey(type))).toList()) {
+			Class<?> instance = getEntityClass(entity);
+			if (instance != null && Mob.class.isAssignableFrom(instance)) {
+				ResourceLocation entityName = BuiltInRegistries.ENTITY_TYPE.getKey(entity);
+				Path path = context.getSource().getLevel().getServer().getWorldPath(LevelResource.GENERATED_DIR).resolve(entityName.getNamespace()).resolve("trophies").resolve(entityName.getPath() + ".json").normalize();
+				Trophy.Builder dummy = new Trophy.Builder(entity);
+				if (entity.is(Tags.EntityTypes.BOSSES)) dummy.setDropChance(0.0075D);
+				if (entity.getHeight() > 0.0F)
+					dummy.setScale(Float.parseFloat(FORMAT.format(Math.min(2.0F, 2.0F / entity.getHeight()))));
+				if (writeToFile(Trophy.CODEC.encodeStart(JsonOps.INSTANCE, dummy.build()).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path)) {
+					if (printEachEntity) {
+						context.getSource().sendSuccess(() -> Component.translatable("command.obtrophies.trophy_made", entityName.toString()), false);
+					}
+					successfulFilesMade++;
 				}
-
-				if (!Files.exists(path)) {
-					Files.createDirectories(path.getParent());
-					Files.write(path, bytearrayoutputstream.toByteArray());
-					context.getSource().sendSuccess(() -> Component.translatable("command.obtrophies.trophy_made", entityName.toString()), false);
-				}
-			} catch (IOException ioexception) {
-				OpenBlocksTrophies.LOGGER.error("Failed to save file to {}", path, ioexception);
 			}
 		}
+		int totalFiles = successfulFilesMade;
+		context.getSource().sendSuccess(() -> Component.translatable("command.obtrophies.trophies_made", totalFiles), false);
 		return Command.SINGLE_SUCCESS;
+	}
+
+	private static boolean writeToFile(JsonElement element, Path path) {
+		try {
+			ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
+			HashingOutputStream hashingoutputstream = new HashingOutputStream(Hashing.sha256(), bytearrayoutputstream);
+
+			try (JsonWriter jsonwriter = new JsonWriter(new OutputStreamWriter(hashingoutputstream, StandardCharsets.UTF_8))) {
+				jsonwriter.setSerializeNulls(false);
+				jsonwriter.setIndent("  ");
+				GsonHelper.writeValue(jsonwriter, element, Comparator.naturalOrder());
+			}
+
+			if (!Files.exists(path)) {
+				Files.createDirectories(path.getParent());
+				Files.write(path, bytearrayoutputstream.toByteArray());
+				return true;
+			}
+		} catch (IOException ioexception) {
+			OpenBlocksTrophies.LOGGER.error("Failed to save file to {}", path, ioexception);
+		}
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Nullable
+	//this is actual insanity
+	private static <T extends Entity> Class<T> getEntityClass(EntityType<T> type) {
+		final Class<T> entityClass = (Class<T>) TypeResolver.resolveRawArgument(EntityType.EntityFactory.class, type.factory.getClass());
+		if ((Class<?>) entityClass == TypeResolver.Unknown.class) {
+			OpenBlocksTrophies.LOGGER.error("Couldn't resolve entity class provided for entity {}", type.getDescriptionId());
+			return null;
+		}
+		return entityClass;
 	}
 }
