@@ -24,7 +24,7 @@ public class PlayerTrophyModel extends PlayerModel<Player> {
 	}
 
 	@Override
-	public void setupAnim(Player player, float p_103396_, float p_103397_, float p_103398_, float p_103399_, float p_103400_) {
+	public void setupAnim(Player player, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch) {
 
 	}
 }

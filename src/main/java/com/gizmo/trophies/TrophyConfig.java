@@ -1,6 +1,6 @@
 package com.gizmo.trophies;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class TrophyConfig {
 
@@ -8,10 +8,10 @@ public class TrophyConfig {
 	public static CommonConfig COMMON_CONFIG;
 
 	public static class ClientConfig {
-		public final ForgeConfigSpec.BooleanValue playersRenderNames;
-		public final ForgeConfigSpec.BooleanValue renderNameColorsAndIcons;
+		public final ModConfigSpec.BooleanValue playersRenderNames;
+		public final ModConfigSpec.BooleanValue renderNameColorsAndIcons;
 
-		public ClientConfig(ForgeConfigSpec.Builder builder) {
+		public ClientConfig(ModConfigSpec.Builder builder) {
 			this.playersRenderNames = builder.
 					translation("obtrophies.config.players_render_names").
 					comment("If true, player trophies will render their names over their head similar to how players do.").
@@ -28,12 +28,12 @@ public class TrophyConfig {
 
 	public static class CommonConfig {
 
-		public final ForgeConfigSpec.BooleanValue fakePlayersDropTrophies;
-		public final ForgeConfigSpec.BooleanValue anySourceDropsTrophies;
-		public final ForgeConfigSpec.DoubleValue dropChanceOverride;
-		public final ForgeConfigSpec.DoubleValue playerChargedCreeperDropChance;
+		public final ModConfigSpec.BooleanValue fakePlayersDropTrophies;
+		public final ModConfigSpec.BooleanValue anySourceDropsTrophies;
+		public final ModConfigSpec.DoubleValue dropChanceOverride;
+		public final ModConfigSpec.DoubleValue playerChargedCreeperDropChance;
 
-		public CommonConfig(ForgeConfigSpec.Builder builder) {
+		public CommonConfig(ModConfigSpec.Builder builder) {
 			this.fakePlayersDropTrophies = builder.
 					translation("obtrophies.config.fake_player_drops").
 					comment("""

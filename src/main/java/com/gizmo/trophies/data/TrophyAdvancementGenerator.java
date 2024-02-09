@@ -3,36 +3,38 @@ package com.gizmo.trophies.data;
 import com.gizmo.trophies.TrophyRegistries;
 import com.gizmo.trophies.item.TrophyItem;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.FrameType;
-import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.ForgeAdvancementProvider;
+import net.neoforged.neoforge.common.data.AdvancementProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.function.Consumer;
 
-public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.AdvancementGenerator {
+public class TrophyAdvancementGenerator implements AdvancementProvider.AdvancementGenerator {
+
 	@Override
-	public void generate(HolderLookup.Provider registries, Consumer<Advancement> consumer, ExistingFileHelper helper) {
-		Advancement root = Advancement.Builder.advancement().display(
+	public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> consumer, ExistingFileHelper helper) {
+		AdvancementHolder root = Advancement.Builder.advancement().display(
 				TrophyItem.loadEntityToTrophy(EntityType.CHICKEN, 0, false),
 				Component.translatable("advancement.obtrophies.root.title"),
 				Component.translatable("advancement.obtrophies.root.desc"),
 				new ResourceLocation("textures/block/dark_prismarine.png"),
-				FrameType.TASK, false, false, false)
+				AdvancementType.TASK, false, false, false)
 				.addCriterion("has_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(TrophyRegistries.TROPHY_ITEM.get()))
 				.save(consumer, "obtrophies:root");
 
-		Advancement oneTrophy = Advancement.Builder.advancement().parent(root).display(
+		AdvancementHolder oneTrophy = Advancement.Builder.advancement().parent(root).display(
 						TrophyItem.loadEntityToTrophy(EntityType.CHICKEN, 0, true),
 						Component.translatable("advancement.obtrophies.one_trophy.title"),
 						Component.translatable("advancement.obtrophies.one_trophy.desc"),
-						null, FrameType.GOAL, true, true, false)
+						null, AdvancementType.GOAL, true, true, false)
 				.addCriterion("has_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(TrophyRegistries.TROPHY_ITEM.get()))
 				.save(consumer, "obtrophies:one_trophy");
 
@@ -40,7 +42,7 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 						TrophyItem.loadEntityToTrophy(EntityType.WARDEN, 0, false),
 						Component.translatable("advancement.obtrophies.boss_trophy.title"),
 						Component.translatable("advancement.obtrophies.boss_trophy.desc"),
-						null, FrameType.CHALLENGE, true, true, false)
+						null, AdvancementType.CHALLENGE, true, true, false)
 				.addCriterion("has_wither_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.WITHER, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_dragon_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.ENDER_DRAGON, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_elder_guardian_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.ELDER_GUARDIAN, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
@@ -48,14 +50,14 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 				.addCriterion("has_warden_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.WARDEN, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_ravager_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.RAVAGER, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_piglin_brute_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.PIGLIN_BRUTE, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
-				.requirements(RequirementsStrategy.OR)
+				.requirements(AdvancementRequirements.Strategy.OR)
 				.save(consumer, "obtrophies:boss_trophy");
 
 		Advancement.Builder.advancement().parent(oneTrophy).display(
 						TrophyItem.loadEntityToTrophy(EntityType.AXOLOTL, 4, false),
 						Component.translatable("advancement.obtrophies.rarest_trophy.title"),
 						Component.translatable("advancement.obtrophies.rarest_trophy.desc"),
-						null, FrameType.CHALLENGE, true, true, false)
+						null, AdvancementType.CHALLENGE, true, true, false)
 				.addCriterion("has_blue_axolotl_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.AXOLOTL, 4, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.save(consumer, "obtrophies:rarest_trophy");
 
@@ -63,7 +65,7 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 						TrophyItem.loadEntityToTrophy(EntityType.HORSE, 12, false),
 						Component.translatable("advancement.obtrophies.all_horse_trophies.title"),
 						Component.translatable("advancement.obtrophies.all_horse_trophies.desc"),
-						null, FrameType.CHALLENGE, true, true, false)
+						null, AdvancementType.CHALLENGE, true, true, false)
 				.addCriterion("has_horse_trophy_1", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.HORSE, 0, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_horse_trophy_2", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.HORSE, 1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_horse_trophy_3", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.HORSE, 2, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
@@ -99,14 +101,14 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 				.addCriterion("has_horse_trophy_33", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.HORSE, 32, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_horse_trophy_34", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.HORSE, 33, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_horse_trophy_35", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.HORSE, 34, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
-				.requirements(RequirementsStrategy.AND)
+				.requirements(AdvancementRequirements.Strategy.AND)
 				.save(consumer, "obtrophies:all_horse_trophies");
 
 		Advancement.Builder.advancement().parent(oneTrophy).display(
 						TrophyItem.loadEntityToTrophy(EntityType.TROPICAL_FISH, 2, false),
 						Component.translatable("advancement.obtrophies.all_fish_trophies.title"),
 						Component.translatable("advancement.obtrophies.all_fish_trophies.desc"),
-						null, FrameType.CHALLENGE, true, true, false)
+						null, AdvancementType.CHALLENGE, true, true, false)
 				.addCriterion("has_fish_trophy_1", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.TROPICAL_FISH, 0, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_fish_trophy_2", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.TROPICAL_FISH, 1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_fish_trophy_3", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.TROPICAL_FISH, 2, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
@@ -129,14 +131,14 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 				.addCriterion("has_fish_trophy_20", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.TROPICAL_FISH, 19, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_fish_trophy_21", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.TROPICAL_FISH, 20, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_fish_trophy_22", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.TROPICAL_FISH, 21, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
-				.requirements(RequirementsStrategy.AND)
+				.requirements(AdvancementRequirements.Strategy.AND)
 				.save(consumer, "obtrophies:all_fish_trophies");
 
 		Advancement.Builder.advancement().parent(oneTrophy).display(
 						TrophyItem.loadEntityToTrophy(EntityType.FOX, 0, false),
 						Component.translatable("advancement.obtrophies.all_vanilla.title"),
 						Component.translatable("advancement.obtrophies.all_vanilla.desc"),
-						null, FrameType.CHALLENGE, true, true, false)
+						null, AdvancementType.CHALLENGE, true, true, false)
 				.addCriterion("has_allay_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.ALLAY, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_axolotl_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.AXOLOTL, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_bat_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.BAT, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
@@ -213,7 +215,7 @@ public class TrophyAdvancementGenerator implements ForgeAdvancementProvider.Adva
 				.addCriterion("has_zombie_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.ZOMBIE, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_zombie_villager_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.ZOMBIE_VILLAGER, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
 				.addCriterion("has_zombified_piglin_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasNbt(TrophyItem.createTrophyTag(EntityType.ZOMBIFIED_PIGLIN, -1, false)).of(TrophyRegistries.TROPHY_ITEM.get()).build()))
-				.requirements(RequirementsStrategy.AND)
+				.requirements(AdvancementRequirements.Strategy.AND)
 				.save(consumer, "obtrophies:all_vanilla_trophies");
 	}
 }

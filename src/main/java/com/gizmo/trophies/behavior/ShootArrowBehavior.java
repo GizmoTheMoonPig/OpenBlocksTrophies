@@ -4,6 +4,7 @@ import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -12,8 +13,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -22,7 +23,7 @@ public record ShootArrowBehavior(int amount, Optional<MobEffect> effect) impleme
 
 	public static final Codec<ShootArrowBehavior> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			Codec.INT.optionalFieldOf("amount", 1).forGetter(ShootArrowBehavior::amount),
-			ForgeRegistries.MOB_EFFECTS.getCodec().optionalFieldOf("effect").orElse(null).forGetter(ShootArrowBehavior::effect)
+			BuiltInRegistries.MOB_EFFECT.byNameCodec().optionalFieldOf("effect").orElse(null).forGetter(ShootArrowBehavior::effect)
 	).apply(instance, ShootArrowBehavior::new));
 
 	public ShootArrowBehavior(int amount, @Nullable MobEffect effect) {
@@ -44,7 +45,7 @@ public record ShootArrowBehavior(int amount, Optional<MobEffect> effect) impleme
 		Level level = player.level();
 
 		for (int i = 0; i < this.amount(); i++) {
-			Arrow arrow = new Arrow(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5D);
+			Arrow arrow = new Arrow(level, pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5D, new ItemStack(Items.ARROW));
 			arrow.setBaseDamage(0.1D);
 			arrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 			if (this.effect().isPresent()) arrow.addEffect(new MobEffectInstance(this.effect().get()));

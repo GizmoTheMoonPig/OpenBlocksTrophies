@@ -1,7 +1,7 @@
 {
   "entity.obtrophies.player.oof": {
 	"sounds": [
-	  "obtrophies:oof"
+	  "minecraft:random/classic_hurt"
 	]
   }
 }

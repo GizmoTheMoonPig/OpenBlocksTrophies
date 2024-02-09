@@ -5,7 +5,9 @@ import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.AmbientSoundFetcher;
 import com.gizmo.trophies.trophy.Trophy;
 import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -38,7 +41,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -47,6 +49,7 @@ import java.util.Objects;
 
 @SuppressWarnings({"deprecation", "unchecked"})
 public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlock {
+	public static final MapCodec<TrophyBlock> CODEC = simpleCodec(TrophyBlock::new);
 
 	public static final BooleanProperty PEDESTAL = BooleanProperty.create("pedestal");
 	private static final VoxelShape PEDESTAL_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 4.0D, 13.0D);
@@ -56,6 +59,11 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 	public TrophyBlock(Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.getStateDefinition().any().setValue(PEDESTAL, true));
+	}
+
+	@Override
+	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+		return CODEC;
 	}
 
 	@Nullable
@@ -139,7 +147,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 		if (blockEntity instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
 			ItemStack newStack = new ItemStack(this);
 			CompoundTag tag = new CompoundTag();
-			tag.putString(TrophyItem.ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().type())).toString());
+			tag.putString(TrophyItem.ENTITY_TAG, Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(trophyBE.getTrophy().type())).toString());
 			tag.putInt(TrophyItem.VARIANT_TAG, trophyBE.getVariant());
 			if (trophyBE.getCooldown() > 0) {
 				tag.putInt(TrophyItem.COOLDOWN_TAG, trophyBE.getCooldown());
@@ -154,11 +162,11 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter getter, BlockPos pos, Player player) {
+	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader reader, BlockPos pos, Player player) {
 		ItemStack newStack = new ItemStack(this);
 		CompoundTag tag = new CompoundTag();
-		if (getter.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
-			tag.putString("entity", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophyBE.getTrophy().type())).toString());
+		if (reader.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE && trophyBE.getTrophy() != null) {
+			tag.putString("entity", Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(trophyBE.getTrophy().type())).toString());
 			if (trophyBE.isCycling()) {
 				tag.putBoolean(TrophyItem.CYCLING_TAG, true);
 			}

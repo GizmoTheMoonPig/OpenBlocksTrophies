@@ -15,16 +15,16 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.forgespi.language.IModInfo;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforgespi.language.IModInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -98,9 +98,9 @@ public class TrophyCategory implements IRecipeCategory<TrophyInfoWrapper> {
 		if (mouseX > 8 && mouseX < 43 && mouseY > 9 && mouseY < 44) {
 			components.add(recipe.getTrophyEntity().getDescription());
 			if (Minecraft.getInstance().options.advancedItemTooltips) {
-				components.add(Component.literal(ForgeRegistries.ENTITY_TYPES.getKey(recipe.getTrophyEntity()).toString()).withStyle(ChatFormatting.DARK_GRAY));
+				components.add(Component.literal(BuiltInRegistries.ENTITY_TYPE.getKey(recipe.getTrophyEntity()).toString()).withStyle(ChatFormatting.DARK_GRAY));
 			}
-			components.add(Component.literal(this.getModIdForTooltip(ForgeRegistries.ENTITY_TYPES.getKey(recipe.getTrophyEntity()).getNamespace())).withStyle(ChatFormatting.BLUE, ChatFormatting.ITALIC));
+			components.add(Component.literal(this.getModIdForTooltip(BuiltInRegistries.ENTITY_TYPE.getKey(recipe.getTrophyEntity()).getNamespace())).withStyle(ChatFormatting.BLUE, ChatFormatting.ITALIC));
 		}
 
 		if (mouseX > 51 && mouseX < 73 && mouseY > 19 && mouseY < 34 && !TrophyConfig.COMMON_CONFIG.anySourceDropsTrophies.get()) {
@@ -121,7 +121,7 @@ public class TrophyCategory implements IRecipeCategory<TrophyInfoWrapper> {
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, TrophyInfoWrapper recipe, IFocusGroup focuses) {
-		SpawnEggItem egg = ForgeSpawnEggItem.fromEntityType(recipe.getTrophyEntity());
+		SpawnEggItem egg = DeferredSpawnEggItem.byId(recipe.getTrophyEntity());
 		if (egg != null) builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(new ItemStack(egg));
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 86, 19).addIngredient(VanillaTypes.ITEM_STACK, recipe.getTrophyItem());
 	}

@@ -7,7 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import net.neoforged.fml.util.ObfuscationReflectionHelper;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 
 public class AmbientSoundFetcher {
 	private static final MethodHandles.Lookup LOOKUP = MethodHandles.lookup();
-	private static final Method Mob_getAmbientSound = ObfuscationReflectionHelper.findMethod(Mob.class, "m_7515_");
+	private static final Method Mob_getAmbientSound = ObfuscationReflectionHelper.findMethod(Mob.class, "getAmbientSound");
 	private static final MethodHandle handle_Mob_getAmbientSound;
 
 	static {

@@ -5,6 +5,7 @@ import com.gizmo.trophies.client.TrophyItemRenderer;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -17,12 +18,11 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.forgespi.language.IModInfo;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforgespi.language.IModInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,7 +77,7 @@ public class TrophyItem extends BlockItem {
 	public static CompoundTag createTrophyTag(EntityType<?> type, int variant, boolean cycling) {
 		CompoundTag tag = new CompoundTag();
 		CompoundTag beTag = new CompoundTag();
-		beTag.putString(ENTITY_TAG, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(type)).toString());
+		beTag.putString(ENTITY_TAG, Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(type)).toString());
 		if (variant > -1) {
 			beTag.putInt(VARIANT_TAG, variant);
 		}
@@ -127,7 +127,7 @@ public class TrophyItem extends BlockItem {
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
 		Trophy trophy = getTrophy(stack);
 		if (trophy != null && !hasCycleOnTrophy(stack)) {
-			tooltip.add(Component.translatable("item.obtrophies.trophy.modid", this.getModIdForTooltip(Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type())).getNamespace())).withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.obtrophies.trophy.modid", this.getModIdForTooltip(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(trophy.type())).getNamespace())).withStyle(ChatFormatting.GRAY));
 			if (flag.isAdvanced()) {
 				int variant = getTrophyVariant(stack);
 				if (level != null && !trophy.getVariants(level.registryAccess()).isEmpty() && variant < trophy.getVariants(level.registryAccess()).size()) {

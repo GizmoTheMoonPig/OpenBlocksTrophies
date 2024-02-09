@@ -20,7 +20,7 @@ public record ClickWithItemBehavior(Either<ItemStack, TagKey<Item>> ingredient, 
 	public static final Codec<ClickWithItemBehavior> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			Codec.either(ItemStack.CODEC, TagKey.codec(Registries.ITEM)).fieldOf("item_to_use").forGetter(ClickWithItemBehavior::ingredient),
 			Codec.BOOL.fieldOf("shrink_item_stack").forGetter(ClickWithItemBehavior::consumeStack),
-			CustomTrophyBehaviors.CODEC.optionalFieldOf("execute_behavior").forGetter(ClickWithItemBehavior::behavior),
+			CustomBehaviorType.DISPATCH_CODEC.optionalFieldOf("execute_behavior").forGetter(ClickWithItemBehavior::behavior),
 			Codec.INT.optionalFieldOf("cooldown", 0).forGetter(ClickWithItemBehavior::cooldown),
 			SoundEvent.DIRECT_CODEC.optionalFieldOf("sound").forGetter(ClickWithItemBehavior::sound)
 	).apply(instance, ClickWithItemBehavior::new));

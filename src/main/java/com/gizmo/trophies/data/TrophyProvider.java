@@ -5,11 +5,11 @@ import com.gizmo.trophies.trophy.Trophy;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.mojang.serialization.JsonOps;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.nio.file.Path;
 import java.util.Map;
@@ -48,10 +48,10 @@ public abstract class TrophyProvider implements DataProvider {
 	/**
 	 * Datagen a trophy here!
 	 *
-	 * @param trophy the trophy you want to make. A trophy takes the entity type at the very minimum. You can also specify the scale, vertical offset, drop chance, and custom right click behavior.
+	 * @param trophy the trophy you want to make. A trophy takes the entity type at the very minimum. You can also specify the scale, vertical offset, drop chance, custom right click behavior, and NBT variants the trophy may have.
 	 */
 	protected void makeTrophy(Trophy trophy) {
-		this.builder.putIfAbsent(new ResourceLocation(this.modid, Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(trophy.type())).getPath()), trophy);
+		this.builder.putIfAbsent(new ResourceLocation(this.modid, Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(trophy.type())).getPath()), trophy);
 	}
 
 	@Override

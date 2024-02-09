@@ -2,6 +2,7 @@ package com.gizmo.trophies.trophy;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.behavior.CustomBehavior;
+import com.gizmo.trophies.behavior.CustomBehaviorType;
 import com.gizmo.trophies.behavior.CustomTrophyBehaviors;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
@@ -11,11 +12,11 @@ import net.minecraft.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -27,11 +28,11 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 
 	//TODO add condition support in 1.20.2+
 	public static final Codec<Trophy> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			ForgeRegistries.ENTITY_TYPES.getCodec().fieldOf("entity").forGetter(Trophy::type),
+			BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(Trophy::type),
 			Codec.DOUBLE.optionalFieldOf("drop_chance", DEFAULT_DROP_CHANCE).forGetter(Trophy::dropChance),
 			Codec.DOUBLE.optionalFieldOf("offset", 0.0D).forGetter(Trophy::verticalOffset),
 			Codec.FLOAT.optionalFieldOf("scale", 1.0F).forGetter(Trophy::scale),
-			CustomTrophyBehaviors.CODEC.optionalFieldOf("behavior").forGetter(Trophy::clickBehavior),
+			CustomBehaviorType.DISPATCH_CODEC.optionalFieldOf("behavior").forGetter(Trophy::clickBehavior),
 			Codec.either(Codec.pair(Codec.STRING.fieldOf("key").codec(), ResourceLocation.CODEC.fieldOf("registry").codec()), CompoundTag.CODEC.listOf()).optionalFieldOf("variants", Either.right(new ArrayList<>())).forGetter(Trophy::variants),
 			CompoundTag.CODEC.optionalFieldOf("default_variant").forGetter(Trophy::defaultData)
 	).apply(instance, Trophy::new));

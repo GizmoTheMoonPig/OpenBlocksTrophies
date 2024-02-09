@@ -5,12 +5,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -37,13 +37,13 @@ public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
 			if (ModList.get().isLoaded(resourceLocation.getNamespace())) {
 				try {
 					Trophy trophy = Trophy.CODEC.parse(JsonOps.INSTANCE, jsonElement).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow();
-					ResourceLocation mob = ForgeRegistries.ENTITY_TYPES.getKey(trophy.type());
+					ResourceLocation mob = BuiltInRegistries.ENTITY_TYPE.getKey(trophy.type());
 					if (validTrophies.containsKey(mob)) {
 						Trophy existing = validTrophies.get(mob);
 						//create a new trophy with the combined variants. Since we now use a record for the trophy, the variant list is final and cant be modified using `add`.
 						Trophy combinedTrophy = new Trophy.Builder(existing.type()).copyFrom(existing).addVariants(trophy.variants().right().orElse(new ArrayList<>())).build();
-						validTrophies.put(ForgeRegistries.ENTITY_TYPES.getKey(combinedTrophy.type()), combinedTrophy);
-					} else if (ForgeRegistries.ENTITY_TYPES.containsValue(trophy.type())) {
+						validTrophies.put(BuiltInRegistries.ENTITY_TYPE.getKey(combinedTrophy.type()), combinedTrophy);
+					} else if (BuiltInRegistries.ENTITY_TYPE.containsValue(trophy.type())) {
 						validTrophies.put(mob, trophy);
 					}
 				} catch (Exception exception) {

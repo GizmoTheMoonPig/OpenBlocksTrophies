@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +28,6 @@ import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
@@ -51,7 +51,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 	public static void renderEntity(@Nullable TrophyBlockEntity be, int variant, String name, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light, boolean cycling, PlayerTrophyModel normalTrophy, PlayerTrophyModel slimTrophy) {
 		stack.pushPose();
 		if (KEYS.isEmpty() && !Trophy.getTrophies().isEmpty()) {
-			KEYS.addAll(Trophy.getTrophies().keySet().stream().filter(location -> !location.equals(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.PLAYER))).toList());
+			KEYS.addAll(Trophy.getTrophies().keySet().stream().filter(location -> !location.equals(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.PLAYER))).toList());
 			Collections.shuffle(KEYS);
 		}
 		if (trophy.type() == EntityType.PLAYER) {

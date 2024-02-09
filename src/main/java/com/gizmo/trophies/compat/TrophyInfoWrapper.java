@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public record TrophyInfoWrapper(Trophy trophy, int variant) implements IRecipeCategoryExtension {
+public record TrophyInfoWrapper(Trophy trophy, int variant) implements IRecipeCategoryExtension<TrophyInfoWrapper> {
 
 	public EntityType<?> getTrophyEntity() {
 		return this.trophy().type();

@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[46,)"
+loaderVersion = "[1,)"
 license = "MIT"
 issueTrackerURL = "https://github.com/GizmoTheMoonPig/OpenBlocksTrophies/issues"
 
@@ -16,22 +16,15 @@ Brings back the trophies from Openblocks.
 '''
 
 [[dependencies.obtrophies]]
-modId = "forge"
-mandatory = true
-versionRange = "[46,)"
+modId = "neoforge"
+type = "required"
+versionRange = "[1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.obtrophies]]
 modId = "minecraft"
-mandatory = true
-versionRange = "[1.20,1.21)"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.obtrophies]]
-modId = "twilightforest"
-mandatory = false
-versionRange = "[4.3.1821,)"
+type = "required"
+versionRange = "[1.20.4]"
 ordering = "NONE"
 side = "BOTH"
