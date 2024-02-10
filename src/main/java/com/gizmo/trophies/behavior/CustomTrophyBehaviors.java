@@ -1,8 +1,6 @@
 package com.gizmo.trophies.behavior;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
-import com.mojang.serialization.Codec;
-import net.minecraft.util.ExtraCodecs;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 

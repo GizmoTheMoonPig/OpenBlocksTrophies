@@ -1,6 +1,6 @@
 package com.gizmo.trophies.compat;
 
-import com.gizmo.trophies.TrophyConfig;
+import com.gizmo.trophies.misc.TrophyConfig;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;

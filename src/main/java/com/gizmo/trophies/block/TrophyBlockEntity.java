@@ -1,6 +1,6 @@
 package com.gizmo.trophies.block;
 
-import com.gizmo.trophies.TrophyRegistries;
+import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -1,10 +1,9 @@
-package com.gizmo.trophies;
+package com.gizmo.trophies.misc;
 
+import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.block.TrophyBlock;
 import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.gizmo.trophies.item.TrophyItem;
-import com.gizmo.trophies.trophy.AddTrophyModifier;
-import com.gizmo.trophies.trophy.TrophyTabHelper;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -43,7 +42,7 @@ public class TrophyRegistries {
 			.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
 			.withSearchBar()
 			.icon(TrophyTabHelper::makeIcon)
-			.displayItems((params, output) -> TrophyTabHelper.getAllTrophies(output, params.holders()))
+			.displayItems((params, output) -> TrophyTabHelper.getAllTrophies(output, params.holders(), params.enabledFeatures()))
 			.build()
 	);
 }

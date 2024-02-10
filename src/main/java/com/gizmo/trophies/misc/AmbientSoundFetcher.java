@@ -1,4 +1,4 @@
-package com.gizmo.trophies.trophy;
+package com.gizmo.trophies.misc;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.sounds.SoundEvent;

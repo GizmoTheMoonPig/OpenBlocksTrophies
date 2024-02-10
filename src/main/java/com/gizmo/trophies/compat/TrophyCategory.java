@@ -1,7 +1,7 @@
 package com.gizmo.trophies.compat;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
-import com.gizmo.trophies.TrophyConfig;
+import com.gizmo.trophies.misc.TrophyConfig;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

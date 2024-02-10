@@ -1,4 +1,4 @@
-package com.gizmo.trophies.trophy;
+package com.gizmo.trophies.misc;
 
 import com.gizmo.trophies.item.TrophyItem;
 import com.mojang.serialization.Codec;

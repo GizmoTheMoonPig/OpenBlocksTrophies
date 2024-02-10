@@ -1,8 +1,8 @@
 package com.gizmo.trophies.client;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
-import com.gizmo.trophies.TrophyConfig;
-import com.gizmo.trophies.TrophyRegistries;
+import com.gizmo.trophies.misc.TrophyConfig;
+import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.block.TrophyBlock;
 import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;

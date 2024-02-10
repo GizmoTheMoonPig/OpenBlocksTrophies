@@ -1,7 +1,7 @@
 package com.gizmo.trophies.data;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
-import com.gizmo.trophies.trophy.AddTrophyModifier;
+import com.gizmo.trophies.misc.AddTrophyModifier;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;

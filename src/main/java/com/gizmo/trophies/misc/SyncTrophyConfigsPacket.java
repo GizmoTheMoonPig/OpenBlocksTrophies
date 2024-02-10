@@ -1,5 +1,6 @@
-package com.gizmo.trophies;
+package com.gizmo.trophies.misc;
 
+import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.TrophyReloadListener;
 import net.minecraft.network.FriendlyByteBuf;

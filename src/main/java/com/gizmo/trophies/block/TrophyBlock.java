@@ -1,8 +1,8 @@
 package com.gizmo.trophies.block;
 
-import com.gizmo.trophies.TrophyRegistries;
+import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.item.TrophyItem;
-import com.gizmo.trophies.trophy.AmbientSoundFetcher;
+import com.gizmo.trophies.misc.AmbientSoundFetcher;
 import com.gizmo.trophies.trophy.Trophy;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.MapCodec;

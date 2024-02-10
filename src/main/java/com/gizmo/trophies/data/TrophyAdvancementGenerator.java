@@ -1,6 +1,6 @@
 package com.gizmo.trophies.data;
 
-import com.gizmo.trophies.TrophyRegistries;
+import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.item.TrophyItem;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;

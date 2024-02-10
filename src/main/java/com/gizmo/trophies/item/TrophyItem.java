@@ -1,6 +1,6 @@
 package com.gizmo.trophies.item;
 
-import com.gizmo.trophies.TrophyRegistries;
+import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.client.TrophyItemRenderer;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.ChatFormatting;

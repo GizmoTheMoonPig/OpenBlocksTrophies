@@ -1,5 +1,6 @@
-package com.gizmo.trophies;
+package com.gizmo.trophies.misc;
 
+import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.block.TrophyBlock;
 import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.gizmo.trophies.trophy.Trophy;
@@ -116,9 +117,7 @@ public class TrophiesCommands {
 			Path path = context.getSource().getLevel().getServer().getWorldPath(LevelResource.GENERATED_DIR).resolve("registries").resolve(registryName.getNamespace()).resolve(registryName.getPath() + ".json").normalize();
 			JsonObject object = new JsonObject();
 			JsonArray registryArray = new JsonArray();
-			context.getSource().registryAccess().registryOrThrow(key).entrySet().forEach(entry -> {
-				registryArray.add(entry.getKey().location().toString());
-			});
+			context.getSource().registryAccess().registryOrThrow(key).entrySet().forEach(entry -> registryArray.add(entry.getKey().location().toString()));
 			object.add("entries", registryArray);
 			writeToFile(object, path);
 		} else {

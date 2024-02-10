@@ -1,4 +1,4 @@
-package com.gizmo.trophies;
+package com.gizmo.trophies.misc;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 

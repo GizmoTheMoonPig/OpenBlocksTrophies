@@ -1,7 +1,7 @@
 package com.gizmo.trophies.compat;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
-import com.gizmo.trophies.TrophyRegistries;
+import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import mezz.jei.api.IModPlugin;

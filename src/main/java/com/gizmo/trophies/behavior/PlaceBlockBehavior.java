@@ -15,6 +15,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
 
 import java.util.Locale;
 
@@ -75,7 +77,7 @@ public record PlaceBlockBehavior(BlockState placedBlock, PlacementMethod placeme
 			if (this.placedBlock().getBlock() instanceof SnowLayerBlock layer) {
 				int layers = level.getRandom().nextInt(8) + 1;
 				level.setBlockAndUpdate(pos, layer.defaultBlockState().setValue(SnowLayerBlock.LAYERS, layers));
-			} else if (this.placedBlock().getBlock() instanceof LiquidBlock liquid && liquid.getFluid().getFluidType().isVaporizedOnPlacement(level, pos, null)) {
+			} else if (this.placedBlock().getBlock() instanceof LiquidBlock liquid && liquid.getFluid().getFluidType().isVaporizedOnPlacement(level, pos, new FluidStack(liquid.getFluid(), FluidType.BUCKET_VOLUME))) {
 				level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F);
 			} else {
 				level.setBlockAndUpdate(pos, this.placedBlock());

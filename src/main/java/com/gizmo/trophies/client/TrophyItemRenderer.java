@@ -1,6 +1,6 @@
 package com.gizmo.trophies.client;
 
-import com.gizmo.trophies.TrophyRegistries;
+import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import com.mojang.blaze3d.vertex.PoseStack;
