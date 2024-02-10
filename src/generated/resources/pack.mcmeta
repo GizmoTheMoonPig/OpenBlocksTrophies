@@ -1,8 +1,10 @@
 {
   "pack": {
-    "description": {
-      "text": "Trophy Resources"
-    },
-    "pack_format": 15
+    "description": "Trophy Resources",
+    "pack_format": 22,
+    "supported_formats": [
+      0,
+      2147483647
+    ]
   }
 }

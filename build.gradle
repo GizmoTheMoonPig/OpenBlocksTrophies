@@ -96,6 +96,7 @@ dependencies {
 	compileOnly "dev.emi:emi-neoforge:${project.emi_version}+${project.minecraft_version}"
 
 	compileOnly "curse.maven:jade-324717:4980188"
+	runtimeOnly "teamtwilight:twilightforest:4.4.2166:universal"
 
 	//minecraft
 	implementation "net.neoforged:neoforge:${project.neo_version}"

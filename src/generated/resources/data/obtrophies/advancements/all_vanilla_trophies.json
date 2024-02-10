@@ -991,17 +991,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.obtrophies.all_vanilla.desc"
     },
     "frame": "challenge",
-    "hidden": false,
     "icon": {
       "item": "obtrophies:trophy",
       "nbt": "{BlockEntityTag:{VariantID:0,entity:\"minecraft:fox\"}}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancement.obtrophies.all_vanilla.title"
     }

@@ -2,7 +2,7 @@
   "type": "obtrophies:add_trophy",
   "conditions": [
     {
-      "condition": "forge:loot_table_id",
+      "condition": "neoforge:loot_table_id",
       "loot_table_id": "twilightforest:entities/questing_ram_rewards"
     }
   ],

@@ -94,17 +94,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.obtrophies.boss_trophy.desc"
     },
     "frame": "challenge",
-    "hidden": false,
     "icon": {
       "item": "obtrophies:trophy",
       "nbt": "{BlockEntityTag:{VariantID:0,entity:\"minecraft:warden\"}}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancement.obtrophies.boss_trophy.title"
     }

@@ -19,8 +19,6 @@
     "description": {
       "translate": "advancement.obtrophies.root.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "obtrophies:trophy",
       "nbt": "{BlockEntityTag:{VariantID:0,entity:\"minecraft:chicken\"}}"

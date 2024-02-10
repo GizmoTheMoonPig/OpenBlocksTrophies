@@ -458,17 +458,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.obtrophies.all_horse_trophies.desc"
     },
     "frame": "challenge",
-    "hidden": false,
     "icon": {
       "item": "obtrophies:trophy",
       "nbt": "{BlockEntityTag:{VariantID:12,entity:\"minecraft:horse\"}}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancement.obtrophies.all_horse_trophies.title"
     }

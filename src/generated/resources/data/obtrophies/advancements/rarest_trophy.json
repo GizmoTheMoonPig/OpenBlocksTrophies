@@ -16,17 +16,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.obtrophies.rarest_trophy.desc"
     },
     "frame": "challenge",
-    "hidden": false,
     "icon": {
       "item": "obtrophies:trophy",
       "nbt": "{BlockEntityTag:{VariantID:4,entity:\"minecraft:axolotl\"}}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancement.obtrophies.rarest_trophy.title"
     }

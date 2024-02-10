@@ -289,17 +289,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.obtrophies.all_fish_trophies.desc"
     },
     "frame": "challenge",
-    "hidden": false,
     "icon": {
       "item": "obtrophies:trophy",
       "nbt": "{BlockEntityTag:{VariantID:2,entity:\"minecraft:tropical_fish\"}}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancement.obtrophies.all_fish_trophies.title"
     }
