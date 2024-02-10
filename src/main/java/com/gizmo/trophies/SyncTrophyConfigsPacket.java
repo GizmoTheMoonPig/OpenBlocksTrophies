@@ -14,12 +14,12 @@ public record SyncTrophyConfigsPacket(Map<ResourceLocation, Trophy> trophies) im
 	public static final ResourceLocation ID = OpenBlocksTrophies.location("sync_trophy_configs");
 
 	public SyncTrophyConfigsPacket(FriendlyByteBuf buf) {
-		this(buf.readMap(FriendlyByteBuf::readResourceLocation, buf1 -> buf1.readJsonWithCodec(Trophy.CODEC)));
+		this(buf.readMap(FriendlyByteBuf::readResourceLocation, buf1 -> buf1.readJsonWithCodec(Trophy.BASE_CODEC)));
 	}
 
 	@Override
 	public void write(FriendlyByteBuf buf) {
-		buf.writeMap(this.trophies(), FriendlyByteBuf::writeResourceLocation, (buf1, trophy) -> buf1.writeJsonWithCodec(Trophy.CODEC, trophy));
+		buf.writeMap(this.trophies(), FriendlyByteBuf::writeResourceLocation, (buf1, trophy) -> buf1.writeJsonWithCodec(Trophy.BASE_CODEC, trophy));
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package com.gizmo.trophies.trophy;
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.behavior.CustomBehavior;
 import com.gizmo.trophies.behavior.CustomBehaviorType;
-import com.gizmo.trophies.behavior.CustomTrophyBehaviors;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
@@ -17,6 +16,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.neoforged.neoforge.common.conditions.ConditionalOps;
+import net.neoforged.neoforge.common.conditions.ICondition;
+import net.neoforged.neoforge.common.conditions.WithConditions;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -26,8 +28,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 	public static final double DEFAULT_DROP_CHANCE = 0.001D;
 	public static final double BOSS_DROP_CHANCE = 0.0075D;
 
-	//TODO add condition support in 1.20.2+
-	public static final Codec<Trophy> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	public static final Codec<Trophy> BASE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(Trophy::type),
 			Codec.DOUBLE.optionalFieldOf("drop_chance", DEFAULT_DROP_CHANCE).forGetter(Trophy::dropChance),
 			Codec.DOUBLE.optionalFieldOf("offset", 0.0D).forGetter(Trophy::verticalOffset),
@@ -36,6 +37,8 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 			Codec.either(Codec.pair(Codec.STRING.fieldOf("key").codec(), ResourceLocation.CODEC.fieldOf("registry").codec()), CompoundTag.CODEC.listOf()).optionalFieldOf("variants", Either.right(new ArrayList<>())).forGetter(Trophy::variants),
 			CompoundTag.CODEC.optionalFieldOf("default_variant").forGetter(Trophy::defaultData)
 	).apply(instance, Trophy::new));
+
+	public static final Codec<Optional<WithConditions<Trophy>>> CODEC = ConditionalOps.createConditionalCodecWithConditions(BASE_CODEC);
 
 	public List<CompoundTag> getVariants(@Nullable RegistryAccess access) {
 		if (this.variants.left().isPresent() && access != null) {
@@ -94,6 +97,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 		private List<CompoundTag> variants = new ArrayList<>();
 		@Nullable
 		private CompoundTag defaultVariant = null;
+		public List<ICondition> conditions = new ArrayList<>();
 
 		public Builder(EntityType<?> type) {
 			this.type = type;
@@ -185,8 +189,13 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 			return this;
 		}
 
+		public Trophy.Builder addCondition(ICondition condition) {
+			this.conditions.add(condition);
+			return this;
+		}
+
 		public Trophy build() {
-			return new Trophy(this.type, this.dropChance, this.verticalOffset, this.scale, Optional.ofNullable(this.clickBehavior), this.registryVariant != null ? Either.left(this.registryVariant) : Either.right(this.variants) , Optional.ofNullable(this.defaultVariant));
+			return new Trophy(this.type, this.dropChance, this.verticalOffset, this.scale, Optional.ofNullable(this.clickBehavior), (this.registryVariant != null ? Either.left(this.registryVariant) : Either.right(this.variants)), Optional.ofNullable(this.defaultVariant));
 		}
 	}
 }

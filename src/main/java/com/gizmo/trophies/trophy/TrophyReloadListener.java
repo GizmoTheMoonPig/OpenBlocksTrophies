@@ -11,9 +11,11 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.conditions.WithConditions;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 
 public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
@@ -36,15 +38,20 @@ public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
 			//check if the mod is loaded first. Since we read trophies before knowing the entity, any behaviors that are modded or use modded items will spit out an error.
 			if (ModList.get().isLoaded(resourceLocation.getNamespace())) {
 				try {
-					Trophy trophy = Trophy.CODEC.parse(JsonOps.INSTANCE, jsonElement).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow();
-					ResourceLocation mob = BuiltInRegistries.ENTITY_TYPE.getKey(trophy.type());
-					if (validTrophies.containsKey(mob)) {
-						Trophy existing = validTrophies.get(mob);
-						//create a new trophy with the combined variants. Since we now use a record for the trophy, the variant list is final and cant be modified using `add`.
-						Trophy combinedTrophy = new Trophy.Builder(existing.type()).copyFrom(existing).addVariants(trophy.variants().right().orElse(new ArrayList<>())).build();
-						validTrophies.put(BuiltInRegistries.ENTITY_TYPE.getKey(combinedTrophy.type()), combinedTrophy);
-					} else if (BuiltInRegistries.ENTITY_TYPE.containsValue(trophy.type())) {
-						validTrophies.put(mob, trophy);
+					Optional<WithConditions<Trophy>> conditionedTrophy = Trophy.CODEC.parse(JsonOps.INSTANCE, jsonElement).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow();
+					if (conditionedTrophy.isPresent()) {
+						Trophy trophy = conditionedTrophy.get().carrier();
+						ResourceLocation mob = BuiltInRegistries.ENTITY_TYPE.getKey(trophy.type());
+						if (validTrophies.containsKey(mob)) {
+							Trophy existing = validTrophies.get(mob);
+							//create a new trophy with the combined variants. Since we now use a record for the trophy, the variant list is final and cant be modified using `add`.
+							Trophy combinedTrophy = new Trophy.Builder(existing.type()).copyFrom(existing).addVariants(trophy.variants().right().orElse(new ArrayList<>())).build();
+							validTrophies.put(BuiltInRegistries.ENTITY_TYPE.getKey(combinedTrophy.type()), combinedTrophy);
+						} else if (BuiltInRegistries.ENTITY_TYPE.containsValue(trophy.type())) {
+							validTrophies.put(mob, trophy);
+						}
+					} else {
+						OpenBlocksTrophies.LOGGER.debug("Skipped loading trophy {} as its conditions were not met", resourceLocation);
 					}
 				} catch (Exception exception) {
 					OpenBlocksTrophies.LOGGER.error("Caught an error loading trophy config for {}!", resourceLocation, exception);

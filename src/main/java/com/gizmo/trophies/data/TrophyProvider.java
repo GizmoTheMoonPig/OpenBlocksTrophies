@@ -10,15 +10,17 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.common.conditions.WithConditions;
 
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public abstract class TrophyProvider implements DataProvider {
 
-	protected final Map<ResourceLocation, Trophy> builder = Maps.newLinkedHashMap();
+	protected final Map<ResourceLocation, Trophy.Builder> builder = Maps.newLinkedHashMap();
 	private final String modid;
 	private final PackOutput.PathProvider entryPath;
 
@@ -29,16 +31,16 @@ public abstract class TrophyProvider implements DataProvider {
 
 	@Override
 	public CompletableFuture<?> run(CachedOutput output) {
-		Map<ResourceLocation, Trophy> map = Maps.newHashMap();
+		Map<ResourceLocation, Trophy.Builder> map = Maps.newHashMap();
 		this.builder.clear();
 		this.createTrophies();
 		map.putAll(this.builder);
 
 		ImmutableList.Builder<CompletableFuture<?>> futuresBuilder = new ImmutableList.Builder<>();
 
-		for (Map.Entry<ResourceLocation, Trophy> entry : map.entrySet()) {
+		for (Map.Entry<ResourceLocation, Trophy.Builder> entry : map.entrySet()) {
 			Path path = this.entryPath.json(entry.getKey());
-			futuresBuilder.add(DataProvider.saveStable(output, Trophy.CODEC.encodeStart(JsonOps.INSTANCE, entry.getValue()).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path));
+			futuresBuilder.add(DataProvider.saveStable(output, Trophy.CODEC.encodeStart(JsonOps.INSTANCE, Optional.of(new WithConditions<>(entry.getValue().conditions, entry.getValue().build()))).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path));
 		}
 		return CompletableFuture.allOf(futuresBuilder.build().toArray(CompletableFuture[]::new));
 	}
@@ -50,8 +52,8 @@ public abstract class TrophyProvider implements DataProvider {
 	 *
 	 * @param trophy the trophy you want to make. A trophy takes the entity type at the very minimum. You can also specify the scale, vertical offset, drop chance, custom right click behavior, and NBT variants the trophy may have.
 	 */
-	protected void makeTrophy(Trophy trophy) {
-		this.builder.putIfAbsent(new ResourceLocation(this.modid, Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(trophy.type())).getPath()), trophy);
+	protected void makeTrophy(Trophy.Builder trophy) {
+		this.builder.putIfAbsent(new ResourceLocation(this.modid, Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(trophy.build().type())).getPath()), trophy);
 	}
 
 	@Override

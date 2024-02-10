@@ -3,6 +3,21 @@
   "scale": 1.25,
   "variants": [
 	{
+	  "Variant": "minecraft:lucy"
+	},
+	{
+	  "Variant": "minecraft:wild"
+	},
+	{
+	  "Variant": "minecraft:gold"
+	},
+	{
+	  "Variant": "minecraft:cyan"
+	},
+	{
+	  "Variant": "minecraft:blue"
+	},
+	{
 	  "Variant": "mavm:lucia"
 	},
 	{
