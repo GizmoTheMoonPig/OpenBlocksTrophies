@@ -1,42 +1,8 @@
 {
   "entity": "rats:tamed_rat",
   "scale": 1.5,
-  "variants": [
-	{
-	  "ColorVariant": "rats:blue"
-	},
-	{
-	  "ColorVariant": "rats:brown"
-	},
-	{
-	  "ColorVariant": "rats:black"
-	},
-	{
-	  "ColorVariant": "rats:green"
-	},
-	{
-	  "ColorVariant": "rats:albino"
-	},
-	{
-	  "ColorVariant": "rats:brown_undercoat"
-	},
-	{
-	  "ColorVariant": "rats:hooded"
-	},
-	{
-	  "ColorVariant": "rats:brown_hooded"
-	},
-	{
-	  "ColorVariant": "rats:gray_hooded"
-	},
-	{
-	  "ColorVariant": "rats:yellow_hooded"
-	},
-	{
-	  "ColorVariant": "rats:siamese"
-	},
-	{
-	  "ColorVariant": "rats:white"
-	}
-  ]
+  "variants": {
+	"key": "ColorVariant",
+	"registry": "rats:rat_variant"
+  }
 }

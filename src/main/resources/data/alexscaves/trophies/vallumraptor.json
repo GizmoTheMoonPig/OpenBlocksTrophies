@@ -3,19 +3,27 @@
   "scale": 0.9,
   "variants": [
 	{
-	  "Retro": false,
+	  "AltSkin": 0,
 	  "Elder": true
 	},
 	{
-	  "Retro": true,
+	  "AltSkin": 1,
 	  "Elder": true
 	},
 	{
-	  "Retro": false,
+	  "AltSkin": 2,
+	  "Elder": true
+	},
+	{
+	  "AltSkin": 0,
 	  "Elder": false
 	},
 	{
-	  "Retro": true,
+	  "AltSkin": 1,
+	  "Elder": false
+	},
+	{
+	  "AltSkin": 2,
 	  "Elder": false
 	}
   ]

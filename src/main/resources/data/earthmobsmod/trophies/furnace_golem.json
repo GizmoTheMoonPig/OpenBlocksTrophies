@@ -1,3 +1,4 @@
 {
-  "entity": "earthmobsmod:furnace_golem"
+  "entity": "earthmobsmod:furnace_golem",
+  "scale": 0.9
 }
