@@ -141,8 +141,8 @@ public class OpenBlocksTrophies {
 					return;
 				if (event.getSource().getEntity() instanceof FakePlayer && !TrophyConfig.COMMON_CONFIG.fakePlayersDropTrophies.get())
 					return;
-				double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : Trophy.getTrophies().getOrDefault(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.PLAYER), new Trophy.Builder(EntityType.PLAYER).build()).dropChance();
-				dropChance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
+				Trophy trophy = Trophy.getTrophies().getOrDefault(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.PLAYER), new Trophy.Builder(EntityType.PLAYER).build());
+				dropChance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * getTrophyDropChance(trophy)) - TROPHY_RANDOM.nextDouble();
 			}
 			if (dropChance > 0.0D) {
 				ItemStack stack = TrophyItem.loadEntityToTrophy(EntityType.PLAYER, 0, false);
@@ -159,8 +159,7 @@ public class OpenBlocksTrophies {
 			if (Trophy.getTrophies().containsKey(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {
 				Trophy trophy = Trophy.getTrophies().get(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()));
 				if (trophy != null) {
-					double trophyDropChance = TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.dropChance();
-					double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * trophyDropChance) - TROPHY_RANDOM.nextDouble();
+					double chance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * getTrophyDropChance(trophy)) - TROPHY_RANDOM.nextDouble();
 					if (chance > 0.0D) {
 						event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadEntityToTrophy(trophy.type(), this.fetchVariantIfAny(event.getEntity(), trophy), false)));
 					}
@@ -198,5 +197,9 @@ public class OpenBlocksTrophies {
 			}
 		}
 		return 0;
+	}
+
+	public static double getTrophyDropChance(Trophy trophy) {
+		return TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : trophy.dropChance();
 	}
 }
