@@ -1,6 +1,6 @@
 package com.gizmo.trophies.compat;
 
-import com.gizmo.trophies.misc.TrophyConfig;
+import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
@@ -19,7 +19,7 @@ public record TrophyInfoWrapper(Trophy trophy, int variant) implements IRecipeCa
 	}
 
 	public double getTrophyDropPercentage() {
-		return (TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() >= 0.0D ? TrophyConfig.COMMON_CONFIG.dropChanceOverride.get() : this.trophy().dropChance()) * 100;
+		return OpenBlocksTrophies.getTrophyDropChance(this.trophy()) * 100;
 	}
 
 	public ItemStack getTrophyItem() {

@@ -44,7 +44,7 @@ public class JEICompat implements IModPlugin {
 		List<TrophyInfoWrapper> trophies = new LinkedList<>();
 		if (!Trophy.getTrophies().isEmpty()) {
 			for (Map.Entry<ResourceLocation, Trophy> trophyEntry : Trophy.getTrophies().entrySet()) {
-				if (trophyEntry.getValue().type() == EntityType.PLAYER) continue;
+				if (trophyEntry.getValue().type() == EntityType.PLAYER || OpenBlocksTrophies.getTrophyDropChance(trophyEntry.getValue()) <= 0.0D) continue;
 				if (!trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).isEmpty()) {
 					for (int i = 0; i < trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).size(); i++) {
 						trophies.add(new TrophyInfoWrapper(trophyEntry.getValue(), i));

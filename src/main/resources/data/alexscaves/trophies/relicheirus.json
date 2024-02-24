@@ -3,10 +3,13 @@
   "scale": 0.4,
   "variants": [
 	{
-	  "Retro": false
+	  "AltSkin": 0
 	},
 	{
-	  "Retro": true
+	  "AltSkin": 1
+	},
+	{
+	  "AltSkin": 2
 	}
   ]
 }

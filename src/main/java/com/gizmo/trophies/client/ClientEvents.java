@@ -30,6 +30,7 @@ import org.joml.Matrix4f;
 import java.util.Locale;
 
 public class ClientEvents {
+
 	public static final ModelLayerLocation PLAYER_TROPHY = new ModelLayerLocation(OpenBlocksTrophies.location("player_trophy"), "main");
 	public static final ModelLayerLocation SLIM_PLAYER_TROPHY = new ModelLayerLocation(OpenBlocksTrophies.location("slim_player_trophy"), "main");
 

@@ -1,7 +1,7 @@
 {
   "behavior": {
 	"type": "obtrophies:right_click_item",
-	"cooldown": 1000,
+	"cooldown": 40,
 	"execute_behavior": {
 	  "type": "obtrophies:loot_table",
 	  "cooldown": 20000,
