@@ -10,7 +10,7 @@
   "entity": "twilightforest:dwarf_rabbit",
   "scale": 1.75,
   "variants": {
-	"key": "BunnyType",
+	"key": "variant",
 	"registry": "twilightforest:dwarf_rabbit_variant"
   }
 }
