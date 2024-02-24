@@ -1,8 +1,7 @@
 package com.gizmo.trophies.client;
 
-import com.gizmo.trophies.OpenBlocksTrophies;
-import com.gizmo.trophies.TrophyRegistries;
 import com.gizmo.trophies.item.TrophyItem;
+import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -16,16 +15,14 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.CreativeModeTabSearchRegistry;
-import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.client.CreativeModeTabSearchRegistry;
+import net.neoforged.neoforge.client.event.ScreenEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-@Mod.EventBusSubscriber(modid = OpenBlocksTrophies.MODID, value = Dist.CLIENT)
 public class CreativeModeVariantToggle {
 
 	private static CreativeModeTab lastTab = CreativeModeTabs.getDefaultTab();
@@ -34,8 +31,12 @@ public class CreativeModeVariantToggle {
 	private static int guiCenterX = 0;
 	private static int guiCenterY = 0;
 
-	@SubscribeEvent
-	public static void addVariantButton(ScreenEvent.Init.Post event) {
+	public static void setupButton() {
+		NeoForge.EVENT_BUS.addListener(CreativeModeVariantToggle::addVariantButton);
+		NeoForge.EVENT_BUS.addListener(CreativeModeVariantToggle::setupVariantButton);
+	}
+
+	private static void addVariantButton(ScreenEvent.Init.Post event) {
 		if (event.getScreen() instanceof CreativeModeInventoryScreen creativeScreen) {
 			guiCenterX = creativeScreen.getGuiLeft();
 			guiCenterY = creativeScreen.getGuiTop();
@@ -51,8 +52,7 @@ public class CreativeModeVariantToggle {
 		}
 	}
 
-	@SubscribeEvent
-	public static void setupVariantButton(ScreenEvent.Render.Post event) {
+	private static void setupVariantButton(ScreenEvent.Render.Post event) {
 		if (event.getScreen() instanceof CreativeModeInventoryScreen creativeScreen) {
 			guiCenterX = creativeScreen.getGuiLeft();
 			guiCenterY = creativeScreen.getGuiTop();

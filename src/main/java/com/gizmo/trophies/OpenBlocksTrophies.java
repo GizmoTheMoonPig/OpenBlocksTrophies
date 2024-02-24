@@ -3,6 +3,7 @@ package com.gizmo.trophies;
 import com.gizmo.trophies.behavior.CustomBehaviorType;
 import com.gizmo.trophies.behavior.CustomTrophyBehaviors;
 import com.gizmo.trophies.client.ClientEvents;
+import com.gizmo.trophies.client.CreativeModeVariantToggle;
 import com.gizmo.trophies.data.LootModifierGenerator;
 import com.gizmo.trophies.data.TrophyAdvancementProvider;
 import com.gizmo.trophies.data.TrophyGenerator;
@@ -86,6 +87,7 @@ public class OpenBlocksTrophies {
 
 		if (dist.isClient()) {
 			ClientEvents.init(bus);
+			CreativeModeVariantToggle.setupButton();
 		}
 
 		bus.addListener(this::gatherData);
@@ -175,7 +177,7 @@ public class OpenBlocksTrophies {
 					return;
 				if (event.getSource().getEntity() instanceof FakePlayer && !TrophyConfig.COMMON_CONFIG.fakePlayersDropTrophies.get())
 					return;
-				Trophy trophy = Trophy.getTrophies().getOrDefault(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.PLAYER), new Trophy.Builder(EntityType.PLAYER).build());
+				Trophy trophy = Trophy.getTrophies().getOrDefault(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.PLAYER), new Trophy.Builder(EntityType.PLAYER).build());
 				dropChance = ((event.getLootingLevel() + (TROPHY_RANDOM.nextDouble() / 4)) * getTrophyDropChance(trophy)) - TROPHY_RANDOM.nextDouble();
 			}
 			if (dropChance > 0.0D) {
