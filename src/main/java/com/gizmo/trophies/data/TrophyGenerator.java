@@ -34,7 +34,7 @@ public class TrophyGenerator extends TrophyProvider {
 				.addVariant("powered", true));
 		this.makeTrophy(new Trophy.Builder(EntityType.SKELETON).setRightClickBehavior(new ShootArrowBehavior()));
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOMBIFIED_PIGLIN).setRightClickBehavior(new ItemDropBehavior(Items.GOLD_NUGGET, 20000)));
-		this.makeTrophy(new Trophy.Builder(EntityType.BAT).setVerticalOffset(-0.3D).setScale(2.0F));
+		this.makeTrophy(new Trophy.Builder(EntityType.BAT).setScale(1.4F));
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOMBIE));
 		this.makeTrophy(new Trophy.Builder(EntityType.WITCH).setScale(0.9F).setRightClickBehavior(new MobEffectBehavior(MobEffects.BLINDNESS, 70, 0)));
 		this.makeTrophy(new Trophy.Builder(EntityType.VILLAGER).addRegistryVariant("profession", Registries.VILLAGER_PROFESSION.location()));
