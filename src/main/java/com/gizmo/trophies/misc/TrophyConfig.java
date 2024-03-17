@@ -30,6 +30,7 @@ public class TrophyConfig {
 
 		public final ModConfigSpec.BooleanValue fakePlayersDropTrophies;
 		public final ModConfigSpec.BooleanValue anySourceDropsTrophies;
+		public final ModConfigSpec.BooleanValue rightClickEffectOverride;
 		public final ModConfigSpec.DoubleValue dropChanceOverride;
 		public final ModConfigSpec.DoubleValue playerChargedCreeperDropChance;
 
@@ -47,6 +48,14 @@ public class TrophyConfig {
 							If true, allows trophies to drop whenever a mob dies. This can be to fall damage, another mob, etc.
 							Basically, a kill doesnt have to count as a player kill for a trophy to drop.""").
 					define("any_kill_drops", false);
+
+			this.rightClickEffectOverride = builder.
+					translation("obtrophies.config.right_click_override").
+					comment("""
+							If true, certain trophies will not do special things when right clicked.
+							This can already be changed per trophy with a datapack, but this config option remains for those who want to disable all right click behaviors for every trophy.
+							Note that this will not affect mobs playing sounds when right clicked, just behaviors like the squid spawning water or rabbits dropping carrots.""").
+					define("right_click_override", false);
 
 			this.dropChanceOverride = builder.
 					translation("obtrophies.config.drop_chance").
