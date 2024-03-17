@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:piglin",
   "behavior": {
     "type": "obtrophies:right_click_item",
     "cooldown": 200,
@@ -12,6 +13,5 @@
     "sound": {
       "sound_id": "minecraft:entity.piglin.admiring_item"
     }
-  },
-  "entity": "minecraft:piglin"
+  }
 }

@@ -1,6 +1,6 @@
 {
+  "entity": "minecraft:pillager",
   "behavior": {
     "type": "obtrophies:arrow"
-  },
-  "entity": "minecraft:pillager"
+  }
 }

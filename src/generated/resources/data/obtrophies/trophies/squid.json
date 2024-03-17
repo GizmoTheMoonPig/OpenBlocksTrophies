@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:squid",
   "behavior": {
     "type": "obtrophies:place_block",
     "block": {
@@ -9,6 +10,5 @@
     },
     "method": "above"
   },
-  "entity": "minecraft:squid",
   "offset": 0.5
 }

@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:polar_bear",
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 20000,
@@ -6,6 +7,5 @@
       "Count": 1,
       "id": "minecraft:cod"
     }
-  },
-  "entity": "minecraft:polar_bear"
+  }
 }

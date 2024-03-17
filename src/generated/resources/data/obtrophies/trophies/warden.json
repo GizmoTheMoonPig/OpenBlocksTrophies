@@ -1,9 +1,9 @@
 {
+  "entity": "minecraft:warden",
   "behavior": {
     "type": "obtrophies:mob_effect",
     "effect": "minecraft:darkness",
     "time": 200
   },
-  "entity": "minecraft:warden",
   "scale": 0.75
 }

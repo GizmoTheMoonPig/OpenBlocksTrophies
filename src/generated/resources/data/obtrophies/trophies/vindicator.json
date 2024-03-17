@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:vindicator",
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 20000,
@@ -9,6 +10,5 @@
         "Damage": 0
       }
     }
-  },
-  "entity": "minecraft:vindicator"
+  }
 }

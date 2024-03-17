@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:drowned",
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 50000,
@@ -6,6 +7,5 @@
       "Count": 1,
       "id": "minecraft:nautilus_shell"
     }
-  },
-  "entity": "minecraft:drowned"
+  }
 }

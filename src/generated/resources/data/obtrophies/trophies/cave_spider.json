@@ -1,8 +1,8 @@
 {
+  "entity": "minecraft:cave_spider",
   "behavior": {
     "type": "obtrophies:mob_effect",
     "effect": "minecraft:poison",
     "time": 200
-  },
-  "entity": "minecraft:cave_spider"
+  }
 }

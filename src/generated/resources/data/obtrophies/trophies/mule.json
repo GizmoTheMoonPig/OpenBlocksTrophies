@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:mule",
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 20000,
@@ -7,6 +8,5 @@
       "id": "minecraft:wheat"
     }
   },
-  "entity": "minecraft:mule",
   "scale": 0.9
 }

@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:phantom",
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 20000,
@@ -6,6 +7,5 @@
       "Count": 1,
       "id": "minecraft:phantom_membrane"
     }
-  },
-  "entity": "minecraft:phantom"
+  }
 }

@@ -1,7 +1,7 @@
 {
+  "entity": "minecraft:elder_guardian",
   "behavior": {
     "type": "obtrophies:guardian_curse"
   },
-  "entity": "minecraft:elder_guardian",
   "scale": 0.5
 }

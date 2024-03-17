@@ -1,6 +1,6 @@
 {
+  "entity": "minecraft:skeleton",
   "behavior": {
     "type": "obtrophies:arrow"
-  },
-  "entity": "minecraft:skeleton"
+  }
 }

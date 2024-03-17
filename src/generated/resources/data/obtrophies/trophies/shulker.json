@@ -1,8 +1,8 @@
 {
+  "entity": "minecraft:shulker",
   "behavior": {
     "type": "obtrophies:mob_effect",
     "effect": "minecraft:levitation",
     "time": 100
-  },
-  "entity": "minecraft:shulker"
+  }
 }

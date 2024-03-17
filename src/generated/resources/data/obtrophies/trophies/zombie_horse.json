@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:zombie_horse",
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 20000,
@@ -7,6 +8,5 @@
       "id": "minecraft:rotten_flesh"
     }
   },
-  "entity": "minecraft:zombie_horse",
   "scale": 0.9
 }

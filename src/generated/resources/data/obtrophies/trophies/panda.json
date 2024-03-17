@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:panda",
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 20000,
@@ -7,7 +8,6 @@
       "id": "minecraft:bamboo"
     }
   },
-  "entity": "minecraft:panda",
   "scale": 0.75,
   "variants": [
     {

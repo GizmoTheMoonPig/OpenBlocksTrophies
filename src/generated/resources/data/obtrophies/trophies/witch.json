@@ -1,9 +1,9 @@
 {
+  "entity": "minecraft:witch",
   "behavior": {
     "type": "obtrophies:mob_effect",
     "effect": "minecraft:blindness",
     "time": 70
   },
-  "entity": "minecraft:witch",
   "scale": 0.9
 }

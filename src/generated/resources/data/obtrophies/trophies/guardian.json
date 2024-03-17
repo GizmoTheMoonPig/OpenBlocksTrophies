@@ -1,6 +1,6 @@
 {
+  "entity": "minecraft:guardian",
   "behavior": {
     "type": "obtrophies:guardian_curse"
-  },
-  "entity": "minecraft:guardian"
+  }
 }

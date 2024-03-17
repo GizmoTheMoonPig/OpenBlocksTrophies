@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:wandering_trader",
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 10000,
@@ -9,6 +10,5 @@
     "sound": {
       "sound_id": "minecraft:entity.wandering_trader.yes"
     }
-  },
-  "entity": "minecraft:wandering_trader"
+  }
 }

@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:zoglin",
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 10000,
@@ -7,6 +8,5 @@
       "id": "minecraft:rotten_flesh"
     }
   },
-  "entity": "minecraft:zoglin",
   "scale": 0.85
 }

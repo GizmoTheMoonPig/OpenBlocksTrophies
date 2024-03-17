@@ -1,8 +1,8 @@
 {
+  "entity": "minecraft:llama",
   "behavior": {
     "type": "obtrophies:llama_spit"
   },
-  "entity": "minecraft:llama",
   "scale": 0.9,
   "variants": [
     {

@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:ender_dragon",
   "behavior": {
     "type": "obtrophies:right_click_item",
     "execute_behavior": {
@@ -15,6 +16,5 @@
     "shrink_item_stack": true
   },
   "drop_chance": 0.0075,
-  "entity": "minecraft:ender_dragon",
   "scale": 0.25
 }

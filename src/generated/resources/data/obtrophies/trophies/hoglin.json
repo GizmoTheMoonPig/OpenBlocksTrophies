@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:hoglin",
   "behavior": {
     "type": "obtrophies:item",
     "cooldown": 20000,
@@ -7,6 +8,5 @@
       "id": "minecraft:leather"
     }
   },
-  "entity": "minecraft:hoglin",
   "scale": 0.85
 }

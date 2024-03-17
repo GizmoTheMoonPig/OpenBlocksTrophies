@@ -23,12 +23,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public record Trophy(EntityType<?> type, double dropChance, double verticalOffset, float scale, Optional<CustomBehavior> clickBehavior, Either<Pair<String, ResourceLocation>, List<CompoundTag>> variants, Optional<CompoundTag> defaultData) {
+public record Trophy(boolean replace, EntityType<?> type, double dropChance, double verticalOffset, float scale, Optional<CustomBehavior> clickBehavior, Either<Pair<String, ResourceLocation>, List<CompoundTag>> variants, Optional<CompoundTag> defaultData) {
 
 	public static final double DEFAULT_DROP_CHANCE = 0.001D;
 	public static final double BOSS_DROP_CHANCE = 0.0075D;
 
 	public static final Codec<Trophy> BASE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+			Codec.BOOL.optionalFieldOf("replace", false).forGetter(Trophy::replace),
 			BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(Trophy::type),
 			Codec.DOUBLE.optionalFieldOf("drop_chance", DEFAULT_DROP_CHANCE).forGetter(Trophy::dropChance),
 			Codec.DOUBLE.optionalFieldOf("offset", 0.0D).forGetter(Trophy::verticalOffset),
@@ -86,6 +87,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 
 	@SuppressWarnings("unused")
 	public static class Builder {
+		private boolean replace;
 		private final EntityType<?> type;
 		private double dropChance = 0.001D;
 		private double verticalOffset = 0.0D;
@@ -111,6 +113,11 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 			this.registryVariant = trophy.variants().left().orElse(null);
 			this.variants = new ArrayList<>(trophy.variants().right().orElse(new ArrayList<>()));
 			this.defaultVariant = trophy.defaultData().orElse(null);
+			return this;
+		}
+
+		public Trophy.Builder replace() {
+			this.replace = true;
 			return this;
 		}
 
@@ -195,7 +202,7 @@ public record Trophy(EntityType<?> type, double dropChance, double verticalOffse
 		}
 
 		public Trophy build() {
-			return new Trophy(this.type, this.dropChance, this.verticalOffset, this.scale, Optional.ofNullable(this.clickBehavior), (this.registryVariant != null ? Either.left(this.registryVariant) : Either.right(this.variants)), Optional.ofNullable(this.defaultVariant));
+			return new Trophy(this.replace, this.type, this.dropChance, this.verticalOffset, this.scale, Optional.ofNullable(this.clickBehavior), (this.registryVariant != null ? Either.left(this.registryVariant) : Either.right(this.variants)), Optional.ofNullable(this.defaultVariant));
 		}
 	}
 }

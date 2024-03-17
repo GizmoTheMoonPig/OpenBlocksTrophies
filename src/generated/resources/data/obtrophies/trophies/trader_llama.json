@@ -1,6 +1,6 @@
 {
+  "entity": "minecraft:trader_llama",
   "behavior": {
     "type": "obtrophies:llama_spit"
-  },
-  "entity": "minecraft:trader_llama"
+  }
 }

@@ -1,4 +1,5 @@
 {
+  "entity": "minecraft:snow_golem",
   "behavior": {
     "type": "obtrophies:place_block",
     "block": {
@@ -9,7 +10,6 @@
     },
     "method": "around"
   },
-  "entity": "minecraft:snow_golem",
   "variants": [
     {
       "Pumpkin": 1

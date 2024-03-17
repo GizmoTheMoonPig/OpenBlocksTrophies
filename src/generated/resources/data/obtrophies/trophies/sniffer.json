@@ -1,9 +1,9 @@
 {
+  "entity": "minecraft:sniffer",
   "behavior": {
     "type": "obtrophies:loot_table",
     "cooldown": 20000,
     "loot_table": "minecraft:gameplay/sniffer_digging"
   },
-  "entity": "minecraft:sniffer",
   "scale": 0.5
 }

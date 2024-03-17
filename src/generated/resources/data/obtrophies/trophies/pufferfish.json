@@ -1,10 +1,10 @@
 {
+  "entity": "minecraft:pufferfish",
   "behavior": {
     "type": "obtrophies:mob_effect",
     "effect": "minecraft:nausea",
     "time": 100
   },
-  "entity": "minecraft:pufferfish",
   "scale": 2.0,
   "variants": [
     {
