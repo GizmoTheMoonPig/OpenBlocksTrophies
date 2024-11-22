@@ -10,6 +10,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.animal.horse.Markings;
+import net.minecraft.world.entity.animal.horse.Variant;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -28,8 +33,8 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.CHICKEN).setScale(1.5F).setRightClickBehavior(new ItemDropBehavior(Items.EGG, 10000, SoundEvents.CHICKEN_EGG)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.COW).setRightClickBehavior(new ClickWithItemBehavior(Items.BUCKET, true, new ItemDropBehavior(Items.MILK_BUCKET), SoundEvents.COW_MILK)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.CREEPER).setRightClickBehavior(new ExplosionBehavior(2, false))
-				.addVariant("powered", false)
-				.addVariant("powered", true).build());
+			.addVariant("powered", false)
+			.addVariant("powered", true).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SKELETON).setRightClickBehavior(new ShootArrowBehavior()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOMBIFIED_PIGLIN).setRightClickBehavior(new ItemDropBehavior(Items.GOLD_NUGGET, 20000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.BAT).setVerticalOffset(-0.3D).setScale(2.0F).build());
@@ -38,22 +43,22 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.VILLAGER).addRegistryVariant("profession", Registries.VILLAGER_PROFESSION.location()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.OCELOT).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SHEEP)
-				.addVariant("Color", DyeColor.WHITE.getId())
-				.addVariant("Color", DyeColor.ORANGE.getId())
-				.addVariant("Color", DyeColor.MAGENTA.getId())
-				.addVariant("Color", DyeColor.LIGHT_BLUE.getId())
-				.addVariant("Color", DyeColor.YELLOW.getId())
-				.addVariant("Color", DyeColor.LIME.getId())
-				.addVariant("Color", DyeColor.PINK.getId())
-				.addVariant("Color", DyeColor.GRAY.getId())
-				.addVariant("Color", DyeColor.LIGHT_GRAY.getId())
-				.addVariant("Color", DyeColor.CYAN.getId())
-				.addVariant("Color", DyeColor.PURPLE.getId())
-				.addVariant("Color", DyeColor.BLUE.getId())
-				.addVariant("Color", DyeColor.BROWN.getId())
-				.addVariant("Color", DyeColor.GREEN.getId())
-				.addVariant("Color", DyeColor.RED.getId())
-				.addVariant("Color", DyeColor.BLACK.getId()).build());
+			.addVariant("Color", DyeColor.WHITE.getId())
+			.addVariant("Color", DyeColor.ORANGE.getId())
+			.addVariant("Color", DyeColor.MAGENTA.getId())
+			.addVariant("Color", DyeColor.LIGHT_BLUE.getId())
+			.addVariant("Color", DyeColor.YELLOW.getId())
+			.addVariant("Color", DyeColor.LIME.getId())
+			.addVariant("Color", DyeColor.PINK.getId())
+			.addVariant("Color", DyeColor.GRAY.getId())
+			.addVariant("Color", DyeColor.LIGHT_GRAY.getId())
+			.addVariant("Color", DyeColor.CYAN.getId())
+			.addVariant("Color", DyeColor.PURPLE.getId())
+			.addVariant("Color", DyeColor.BLUE.getId())
+			.addVariant("Color", DyeColor.BROWN.getId())
+			.addVariant("Color", DyeColor.GREEN.getId())
+			.addVariant("Color", DyeColor.RED.getId())
+			.addVariant("Color", DyeColor.BLACK.getId()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.BLAZE).setRightClickBehavior(new PlayerSetFireBehavior(4)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SILVERFISH).setScale(1.5F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SPIDER).build());
@@ -64,70 +69,70 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.MAGMA_CUBE).setScale(1.25F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SQUID).setVerticalOffset(0.5D).setRightClickBehavior(new PlaceBlockBehavior(Blocks.WATER, PlaceBlockBehavior.PlacementMethod.ABOVE)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.MOOSHROOM).setRightClickBehavior(new PlaceBlockBehavior(Blocks.RED_MUSHROOM, PlaceBlockBehavior.PlacementMethod.AROUND))
-				.addVariant("Type", MushroomCow.MushroomType.RED.getSerializedName())
-				.addVariant("Type", MushroomCow.MushroomType.BROWN.getSerializedName()).build());
+			.addVariant("Type", MushroomCow.MushroomType.RED.getSerializedName())
+			.addVariant("Type", MushroomCow.MushroomType.BROWN.getSerializedName()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.IRON_GOLEM).setScale(0.75F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SNOW_GOLEM).setRightClickBehavior(new PlaceBlockBehavior(Blocks.SNOW, PlaceBlockBehavior.PlacementMethod.AROUND))
-				.addVariant("Pumpkin", true)
-				.addVariant("Pumpkin", false).build());
+			.addVariant("Pumpkin", true)
+			.addVariant("Pumpkin", false).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.PIG).setRightClickBehavior(new ItemDropBehavior(Items.PORKCHOP, 20000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ENDERMITE).setScale(1.5F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.GUARDIAN).setRightClickBehavior(new ElderGuardianCurseBehavior()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.RABBIT).setScale(2.0F).setRightClickBehavior(new ItemDropBehavior(Items.CARROT, 20000))
-				.addVariant("RabbitType", Rabbit.Variant.BROWN.ordinal())
-				.addVariant("RabbitType", Rabbit.Variant.WHITE.ordinal())
-				.addVariant("RabbitType", Rabbit.Variant.BLACK.ordinal())
-				.addVariant("RabbitType", Rabbit.Variant.WHITE_SPLOTCHED.ordinal())
-				.addVariant("RabbitType", Rabbit.Variant.GOLD.ordinal())
-				.addVariant("RabbitType", Rabbit.Variant.SALT.ordinal())
-				.addVariant("RabbitType", Rabbit.Variant.EVIL.ordinal()).build());
+			.addVariant("RabbitType", Rabbit.Variant.BROWN.id())
+			.addVariant("RabbitType", Rabbit.Variant.WHITE.id())
+			.addVariant("RabbitType", Rabbit.Variant.BLACK.id())
+			.addVariant("RabbitType", Rabbit.Variant.WHITE_SPLOTCHED.id())
+			.addVariant("RabbitType", Rabbit.Variant.GOLD.id())
+			.addVariant("RabbitType", Rabbit.Variant.SALT.id())
+			.addVariant("RabbitType", Rabbit.Variant.EVIL.id()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.POLAR_BEAR).setRightClickBehavior(new ItemDropBehavior(Items.COD, 20000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SHULKER).setRightClickBehavior(new MobEffectBehavior(MobEffects.LEVITATION, 100, 0)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.HORSE).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.WHEAT, 20000))
-				.addVariant("Variant", 0)
-				.addVariant("Variant", 1)
-				.addVariant("Variant", 2)
-				.addVariant("Variant", 3)
-				.addVariant("Variant", 4)
-				.addVariant("Variant", 5)
-				.addVariant("Variant", 6)
-				.addVariant("Variant", 256)
-				.addVariant("Variant", 257)
-				.addVariant("Variant", 258)
-				.addVariant("Variant", 259)
-				.addVariant("Variant", 260)
-				.addVariant("Variant", 261)
-				.addVariant("Variant", 262)
-				.addVariant("Variant", 512)
-				.addVariant("Variant", 513)
-				.addVariant("Variant", 514)
-				.addVariant("Variant", 515)
-				.addVariant("Variant", 516)
-				.addVariant("Variant", 517)
-				.addVariant("Variant", 518)
-				.addVariant("Variant", 768)
-				.addVariant("Variant", 769)
-				.addVariant("Variant", 770)
-				.addVariant("Variant", 771)
-				.addVariant("Variant", 772)
-				.addVariant("Variant", 773)
-				.addVariant("Variant", 774)
-				.addVariant("Variant", 1024)
-				.addVariant("Variant", 1025)
-				.addVariant("Variant", 1026)
-				.addVariant("Variant", 1027)
-				.addVariant("Variant", 1028)
-				.addVariant("Variant", 1029)
-				.addVariant("Variant", 1030).build());
+			.addVariant("Variant", this.setHorseVariant(Variant.WHITE, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.CREAMY, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.CHESTNUT, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.BROWN, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.BLACK, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.GRAY, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.DARK_BROWN, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.WHITE, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.CREAMY, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.CHESTNUT, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.BROWN, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.BLACK, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.GRAY, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.DARK_BROWN, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.WHITE, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.CREAMY, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.CHESTNUT, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.BROWN, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.BLACK, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.GRAY, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.DARK_BROWN, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.WHITE, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.CREAMY, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.CHESTNUT, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.BROWN, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.BLACK, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.GRAY, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.DARK_BROWN, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.WHITE, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.CREAMY, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.CHESTNUT, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.BROWN, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.BLACK, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.GRAY, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.DARK_BROWN, Markings.BLACK_DOTS)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SKELETON_HORSE).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.BONE, 20000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOMBIE_HORSE).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.ROTTEN_FLESH, 20000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.DONKEY).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.WHEAT, 20000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.MULE).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.WHEAT, 20000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.LLAMA).setScale(0.9F).setRightClickBehavior(new ShootLlamaSpitBehavior())
-				.addVariant("Variant", 0)
-				.addVariant("Variant", 1)
-				.addVariant("Variant", 2)
-				.addVariant("Variant", 3).build());
+			.addVariant("Variant", Llama.Variant.CREAMY.getId())
+			.addVariant("Variant", Llama.Variant.WHITE.getId())
+			.addVariant("Variant", Llama.Variant.BROWN.getId())
+			.addVariant("Variant", Llama.Variant.GRAY.getId()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ELDER_GUARDIAN).setScale(0.5F).setRightClickBehavior(new ElderGuardianCurseBehavior()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.WITHER_SKELETON).setRightClickBehavior(new ItemDropBehavior(Items.WITHER_SKELETON_SKULL, 50000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.STRAY).setRightClickBehavior(new ShootArrowBehavior(1, MobEffects.MOVEMENT_SLOWDOWN)).build());
@@ -139,57 +144,57 @@ public class TrophyGenerator extends TrophyProvider {
 
 		//newbies - 1.12+ mobs
 		this.makeTrophy(new Trophy.Builder(EntityType.PARROT).setScale(1.75F)
-				.addVariant("Variant", 0)
-				.addVariant("Variant", 1)
-				.addVariant("Variant", 2)
-				.addVariant("Variant", 3)
-				.addVariant("Variant", 4).build());
+			.addVariant("Variant", Parrot.Variant.RED_BLUE.getId())
+			.addVariant("Variant", Parrot.Variant.BLUE.getId())
+			.addVariant("Variant", Parrot.Variant.GREEN.getId())
+			.addVariant("Variant", Parrot.Variant.YELLOW_BLUE.getId())
+			.addVariant("Variant", Parrot.Variant.GRAY.getId()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ILLUSIONER).setRightClickBehavior(new MobEffectBehavior(MobEffects.BLINDNESS, 100, 0)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.COD).setScale(1.75F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.SALMON).setScale(1.25F).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.TROPICAL_FISH).setScale(2.0F)
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.KOB, DyeColor.ORANGE, DyeColor.WHITE))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SUNSTREAK, DyeColor.GRAY, DyeColor.WHITE))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.KOB, DyeColor.RED, DyeColor.WHITE))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.BLOCKFISH, DyeColor.RED, DyeColor.WHITE))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.BETTY, DyeColor.RED, DyeColor.WHITE))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.CLAYFISH, DyeColor.WHITE, DyeColor.ORANGE))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.BRINELY, DyeColor.LIME, DyeColor.LIGHT_BLUE))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SPOTTY, DyeColor.PINK, DyeColor.LIGHT_BLUE))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.FLOPPER, DyeColor.WHITE, DyeColor.YELLOW))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SPOTTY, DyeColor.WHITE, DyeColor.YELLOW))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.FLOPPER, DyeColor.YELLOW, DyeColor.YELLOW))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.DASHER, DyeColor.CYAN, DyeColor.YELLOW))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.BLOCKFISH, DyeColor.PURPLE, DyeColor.YELLOW))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.DASHER, DyeColor.CYAN, DyeColor.PINK))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.GLITTER, DyeColor.WHITE, DyeColor.GRAY))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.CLAYFISH, DyeColor.WHITE, DyeColor.GRAY))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.STRIPEY, DyeColor.ORANGE, DyeColor.GRAY))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.FLOPPER, DyeColor.GRAY, DyeColor.GRAY))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SUNSTREAK, DyeColor.BLUE, DyeColor.GRAY))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.FLOPPER, DyeColor.GRAY, DyeColor.BLUE))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.CLAYFISH, DyeColor.WHITE, DyeColor.RED))
-				.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SNOOPER, DyeColor.GRAY, DyeColor.RED)).build());
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.KOB, DyeColor.ORANGE, DyeColor.WHITE))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SUNSTREAK, DyeColor.GRAY, DyeColor.WHITE))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.KOB, DyeColor.RED, DyeColor.WHITE))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.BLOCKFISH, DyeColor.RED, DyeColor.WHITE))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.BETTY, DyeColor.RED, DyeColor.WHITE))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.CLAYFISH, DyeColor.WHITE, DyeColor.ORANGE))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.BRINELY, DyeColor.LIME, DyeColor.LIGHT_BLUE))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SPOTTY, DyeColor.PINK, DyeColor.LIGHT_BLUE))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.FLOPPER, DyeColor.WHITE, DyeColor.YELLOW))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SPOTTY, DyeColor.WHITE, DyeColor.YELLOW))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.FLOPPER, DyeColor.YELLOW, DyeColor.YELLOW))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.DASHER, DyeColor.CYAN, DyeColor.YELLOW))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.BLOCKFISH, DyeColor.PURPLE, DyeColor.YELLOW))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.DASHER, DyeColor.CYAN, DyeColor.PINK))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.GLITTER, DyeColor.WHITE, DyeColor.GRAY))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.CLAYFISH, DyeColor.WHITE, DyeColor.GRAY))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.STRIPEY, DyeColor.ORANGE, DyeColor.GRAY))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.FLOPPER, DyeColor.GRAY, DyeColor.GRAY))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SUNSTREAK, DyeColor.BLUE, DyeColor.GRAY))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.FLOPPER, DyeColor.GRAY, DyeColor.BLUE))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.CLAYFISH, DyeColor.WHITE, DyeColor.RED))
+			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SNOOPER, DyeColor.GRAY, DyeColor.RED)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.PUFFERFISH).setScale(2.0F).setRightClickBehavior(new MobEffectBehavior(MobEffects.CONFUSION, 100, 0))
-				.addVariant("PuffState", 0)
-				.addVariant("PuffState", 1)
-				.addVariant("PuffState", 2).build());
+			.addVariant("PuffState", 0)
+			.addVariant("PuffState", 1)
+			.addVariant("PuffState", 2).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.DOLPHIN).setRightClickBehavior(new MobEffectBehavior(MobEffects.DOLPHINS_GRACE, 300, 0)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.DROWNED).setRightClickBehavior(new ItemDropBehavior(Items.NAUTILUS_SHELL, 50000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.PHANTOM).setRightClickBehavior(new ItemDropBehavior(Items.PHANTOM_MEMBRANE, 20000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.TURTLE).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.CAT).setScale(1.25F).setRightClickBehavior(new PullFromLootTableBehavior(BuiltInLootTables.CAT_MORNING_GIFT, 20000)).addRegistryVariant("variant", Registries.CAT_VARIANT.location()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.FOX).setRightClickBehavior(new ItemDropBehavior(Items.SWEET_BERRIES, 20000))
-				.addVariant("Type", Fox.Type.RED.getSerializedName())
-				.addVariant("Type", Fox.Type.SNOW.getSerializedName()).build());
+			.addVariant("Type", Fox.Type.RED.getSerializedName())
+			.addVariant("Type", Fox.Type.SNOW.getSerializedName()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.PANDA).setScale(0.75F).setRightClickBehavior(new ItemDropBehavior(Items.BAMBOO, 20000))
-				.addVariant(this.buildPandaVariant(Panda.Gene.NORMAL.getSerializedName()))
-				.addVariant(this.buildPandaVariant(Panda.Gene.LAZY.getSerializedName()))
-				.addVariant(this.buildPandaVariant(Panda.Gene.WORRIED.getSerializedName()))
-				.addVariant(this.buildPandaVariant(Panda.Gene.PLAYFUL.getSerializedName()))
-				.addVariant(this.buildPandaVariant(Panda.Gene.AGGRESSIVE.getSerializedName()))
-				.addVariant(this.buildPandaVariant(Panda.Gene.WEAK.getSerializedName()))
-				.addVariant(this.buildPandaVariant(Panda.Gene.BROWN.getSerializedName())).build());
+			.addVariant(this.buildPandaVariant(Panda.Gene.NORMAL.getSerializedName()))
+			.addVariant(this.buildPandaVariant(Panda.Gene.LAZY.getSerializedName()))
+			.addVariant(this.buildPandaVariant(Panda.Gene.WORRIED.getSerializedName()))
+			.addVariant(this.buildPandaVariant(Panda.Gene.PLAYFUL.getSerializedName()))
+			.addVariant(this.buildPandaVariant(Panda.Gene.AGGRESSIVE.getSerializedName()))
+			.addVariant(this.buildPandaVariant(Panda.Gene.WEAK.getSerializedName()))
+			.addVariant(this.buildPandaVariant(Panda.Gene.BROWN.getSerializedName())).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.PILLAGER).setRightClickBehavior(new ShootArrowBehavior()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.RAVAGER).setScale(0.75F).setRightClickBehavior(new ItemDropBehavior(Items.SADDLE, 50000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.TRADER_LLAMA).setRightClickBehavior(new ShootLlamaSpitBehavior()).build());
@@ -201,11 +206,11 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOGLIN).setScale(0.85F).setRightClickBehavior(new ItemDropBehavior(Items.ROTTEN_FLESH, 10000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.PIGLIN_BRUTE).setRightClickBehavior(new ItemDropBehavior(Items.GOLDEN_AXE, 20000)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.AXOLOTL).setScale(1.25F)
-				.addVariant("Variant", 0)
-				.addVariant("Variant", 1)
-				.addVariant("Variant", 2)
-				.addVariant("Variant", 3)
-				.addVariant("Variant", 4).build());
+			.addVariant("Variant", Axolotl.Variant.LUCY.getId())
+			.addVariant("Variant", Axolotl.Variant.WILD.getId())
+			.addVariant("Variant", Axolotl.Variant.GOLD.getId())
+			.addVariant("Variant", Axolotl.Variant.CYAN.getId())
+			.addVariant("Variant", Axolotl.Variant.BLUE.getId()).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.GLOW_SQUID).setVerticalOffset(0.5D).setRightClickBehavior(new MobEffectBehavior(MobEffects.GLOWING, 200, 0)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.GOAT).setRightClickBehavior(new ClickWithItemBehavior(Items.BUCKET, true, new ItemDropBehavior(Items.MILK_BUCKET), 0, SoundEvents.GOAT_MILK)).build());
 		this.makeTrophy(new Trophy.Builder(EntityType.ALLAY).setScale(1.75F).build());
@@ -223,6 +228,10 @@ public class TrophyGenerator extends TrophyProvider {
 		tag.putString("MainGene", gene);
 		tag.putString("HiddenGene", gene);
 		return tag;
+	}
+
+	public int setHorseVariant(Variant variant, Markings markings) {
+		return variant.getId() & 255 | markings.getId() << 8 & '\uff00';
 	}
 
 	@Override
