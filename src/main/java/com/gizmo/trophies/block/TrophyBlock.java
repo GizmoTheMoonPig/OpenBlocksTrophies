@@ -119,12 +119,16 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 				if (trophy.type() == EntityType.PLAYER) {
 					level.playSound(null, pos, TrophyRegistries.OOF.get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
 				} else {
-					Pair<SoundEvent, Float> soundData = AmbientSoundFetcher.getAmbientSoundAndPitch(trophy.type(), level);
-					if (soundData.getFirst() != null) {
-						level.playSound(null, pos, soundData.getFirst(), SoundSource.BLOCKS, 1.0F, soundData.getSecond());
-					}
-					if (trophyBE.getCooldown() <= 0 && trophy.clickBehavior().isPresent()) {
-						trophyBE.setCooldown(trophy.clickBehavior().get().execute(trophyBE, (ServerPlayer) player, player.getItemInHand(hand)));
+					if (trophy.clickSoundOverride().isPresent()) {
+						level.playSound(null, pos, trophy.clickSoundOverride().get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
+					} else {
+						Pair<SoundEvent, Float> soundData = AmbientSoundFetcher.getAmbientSoundAndPitch(trophy.type(), level);
+						if (soundData.getFirst() != null) {
+							level.playSound(null, pos, soundData.getFirst(), SoundSource.BLOCKS, 1.0F, soundData.getSecond());
+						}
+						if (trophyBE.getCooldown() <= 0 && trophy.clickBehavior().isPresent()) {
+							trophyBE.setCooldown(trophy.clickBehavior().get().execute(trophyBE, (ServerPlayer) player, player.getItemInHand(hand)));
+						}
 					}
 				}
 			}
