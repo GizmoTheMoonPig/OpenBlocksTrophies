@@ -1,4 +1,4 @@
-package com.gizmo.trophies.block;
+package com.gizmo.trophies.block.entity;
 
 import com.gizmo.trophies.TrophyRegistries;
 import com.gizmo.trophies.trophy.Trophy;

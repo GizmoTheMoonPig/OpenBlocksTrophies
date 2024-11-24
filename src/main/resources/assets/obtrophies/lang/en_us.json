@@ -15,6 +15,8 @@
   "advancement.obtrophies.all_vanilla.desc": "Collect a trophy from every single vanilla mob!",
   "block.obtrophies.trophy": "Trophy",
   "block.obtrophies.trophy.entity": "%s Trophy",
+  "block.obtrophies.display_trophy": "Display Trophy",
+  "block.obtrophies.display_trophy.display": "%s Trophy",
   "command.obtrophies.count": "Trophy Count: %s",
   "command.obtrophies.empty_list": "Trophy list is not populated!",
   "command.obtrophies.mod_not_loaded": "Mod %s does not exist!",

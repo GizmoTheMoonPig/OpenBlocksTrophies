@@ -4,7 +4,7 @@ import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.TrophyConfig;
 import com.gizmo.trophies.TrophyRegistries;
 import com.gizmo.trophies.block.TrophyBlock;
-import com.gizmo.trophies.block.TrophyBlockEntity;
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
@@ -39,6 +39,7 @@ public class ClientEvents {
 	@SubscribeEvent
 	public static void registerBERenderer(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerBlockEntityRenderer(TrophyRegistries.TROPHY_BE.get(), TrophyRenderer::new);
+		event.registerBlockEntityRenderer(TrophyRegistries.DISPLAY_TROPHY_BE.get(), DisplayTrophyRenderer::new);
 	}
 
 	@SubscribeEvent
@@ -57,7 +58,7 @@ public class ClientEvents {
 		@SubscribeEvent
 		public static void dontRenderTrophyHitbox(RenderHighlightEvent.Block event) {
 			BlockState state = event.getCamera().getEntity().level().getBlockState(event.getTarget().getBlockPos());
-			if (state.is(TrophyRegistries.TROPHY.get())) {
+			if (state.is(TrophyRegistries.TROPHY.get()) || state.is(TrophyRegistries.DISPLAY_TROPHY.get())) {
 				if (TrophyConfig.CLIENT_CONFIG.playersRenderNames.get()) {
 					if (event.getCamera().getEntity().level().getBlockEntity(event.getTarget().getBlockPos()) instanceof TrophyBlockEntity trophy) {
 						if (trophy.getTrophy() != null && trophy.getTrophy().type() == EntityType.PLAYER && !trophy.getTrophyName().isBlank()) {

@@ -1,7 +1,10 @@
 package com.gizmo.trophies;
 
+import com.gizmo.trophies.block.DisplayTrophyBlock;
 import com.gizmo.trophies.block.TrophyBlock;
-import com.gizmo.trophies.block.TrophyBlockEntity;
+import com.gizmo.trophies.block.entity.DisplayTrophyBlockEntity;
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.item.DisplayTrophyItem;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.AddTrophyModifier;
 import com.gizmo.trophies.trophy.TrophyTabHelper;
@@ -9,6 +12,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -33,6 +37,10 @@ public class TrophyRegistries {
 	public static final RegistryObject<Block> TROPHY = BLOCKS.register("trophy", () -> new TrophyBlock(BlockBehaviour.Properties.of().strength(1.5F, 6.0F).forceSolidOn()));
 	public static final RegistryObject<BlockEntityType<TrophyBlockEntity>> TROPHY_BE = BLOCK_ENTITIES.register("trophy", () -> BlockEntityType.Builder.of(TrophyBlockEntity::new, TROPHY.get()).build(null));
 	public static final RegistryObject<Item> TROPHY_ITEM = ITEMS.register("trophy", () -> new TrophyItem(TROPHY.get(), new Item.Properties().stacksTo(1).fireResistant()));
+
+	public static final RegistryObject<Block> DISPLAY_TROPHY = BLOCKS.register("display_trophy", () -> new DisplayTrophyBlock(BlockBehaviour.Properties.of().strength(1.5F, 6.0F).forceSolidOn()));
+	public static final RegistryObject<BlockEntityType<DisplayTrophyBlockEntity>> DISPLAY_TROPHY_BE = BLOCK_ENTITIES.register("display_trophy", () -> BlockEntityType.Builder.of(DisplayTrophyBlockEntity::new, DISPLAY_TROPHY.get()).build(null));
+	public static final RegistryObject<Item> DISPLAY_TROPHY_ITEM = ITEMS.register("display_trophy", () -> new DisplayTrophyItem(DISPLAY_TROPHY.get(), new Item.Properties().stacksTo(1).fireResistant()));
 
 	public static final RegistryObject<Codec<AddTrophyModifier>> ADD_QUEST_RAM_TROPHY = LOOT_MODIFIERS.register("add_trophy", () -> AddTrophyModifier.CODEC);
 

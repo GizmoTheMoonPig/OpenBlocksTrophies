@@ -1,6 +1,7 @@
 package com.gizmo.trophies;
 
 import com.gizmo.trophies.behavior.CustomTrophyBehaviors;
+import com.gizmo.trophies.command.TrophiesCommands;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.TrophyReloadListener;
@@ -104,7 +105,7 @@ public class OpenBlocksTrophies {
 	}
 
 	public void registerCommands(RegisterCommandsEvent event) {
-		TrophiesCommands.register(event.getDispatcher());
+		TrophiesCommands.register(event.getDispatcher(), event.getBuildContext());
 	}
 
 	public void grantBeeQueenViaDesireAdvancement(AdvancementEvent.AdvancementEarnEvent event) {
