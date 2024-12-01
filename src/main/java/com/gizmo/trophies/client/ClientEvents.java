@@ -37,25 +37,28 @@ public class ClientEvents {
 
 	//if you see this and have to ask, no, you aren't being added to this list. Good day.
 	private static final Map<String, Function<Component, Component>> SPECIAL_CASES = ImmutableMap.<String, Function<Component, Component>>builder()
-			.put("celintro", name -> name.plainCopy().withStyle(ChatFormatting.GREEN).append(Component.literal(" ☠").withStyle(ChatFormatting.WHITE)))
-			.put("fastcheeta", name -> name.plainCopy().withStyle(ChatFormatting.DARK_PURPLE).append(Component.literal(" \uD83C\uDF3C").withStyle(ChatFormatting.LIGHT_PURPLE)))
-			.put("derpderpling", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x641ACF))))
-			.put("bigdious", name -> name.plainCopy().withStyle(ChatFormatting.DARK_RED).append(Component.literal(" ☺")))
-			.put("melodioustwin", name -> name.plainCopy().withStyle(ChatFormatting.DARK_AQUA).append(Component.literal(" ♫")))
-			.put("badneighbour", name -> name.plainCopy().withStyle(ChatFormatting.YELLOW).append(Component.literal(" \uD83D\uDE97")))
-			.put("jodlodi", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x992D22))))
-			.put("benimatic", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x11806A))))
-			.put("killer_demon", name -> name.plainCopy().withStyle(ChatFormatting.RED))
-			.put("drullkus", name -> name.plainCopy().withStyle(ChatFormatting.GOLD))
-			.put("tamaized", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFA4EA))))
-			.put("alphaleaf", name -> name.plainCopy().withStyle(ChatFormatting.GREEN))
-			.build();
+		.put("celintro", name -> name.plainCopy().withStyle(ChatFormatting.GREEN).append(Component.literal(" ☠").withStyle(ChatFormatting.WHITE)))
+		.put("fastcheeta", name -> name.plainCopy().withStyle(ChatFormatting.DARK_PURPLE).append(Component.literal(" \uD83C\uDF3C").withStyle(ChatFormatting.LIGHT_PURPLE)))
+		.put("derpderpling", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x641ACF))))
+		.put("bigdious", name -> name.plainCopy().withStyle(ChatFormatting.DARK_RED).append(Component.literal(" ☺")))
+		.put("melodioustwin", name -> name.plainCopy().withStyle(ChatFormatting.DARK_AQUA).append(Component.literal(" ♫")))
+		.put("badneighbour", name -> name.plainCopy().withStyle(ChatFormatting.YELLOW).append(Component.literal(" \uD83D\uDE97")))
+		.put("jodlodi", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x992D22))))
+		.put("benimatic", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x11806A))))
+		.put("killer_demon", name -> name.plainCopy().withStyle(ChatFormatting.RED))
+		.put("drullkus", name -> name.plainCopy().withStyle(ChatFormatting.GOLD))
+		.put("tamaized", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFA4EA))))
+		.put("alphaleaf", name -> name.plainCopy().withStyle(ChatFormatting.GREEN))
+		.build();
 
 	public static final ModelLayerLocation PLAYER_TROPHY = new ModelLayerLocation(new ResourceLocation(OpenBlocksTrophies.MODID, "player_trophy"), "main");
 	public static final ModelLayerLocation SLIM_PLAYER_TROPHY = new ModelLayerLocation(new ResourceLocation(OpenBlocksTrophies.MODID, "slim_player_trophy"), "main");
 
 	public static void init(IEventBus bus) {
-		bus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> event.registerBlockEntityRenderer(TrophyRegistries.TROPHY_BE.get(), TrophyRenderer::new));
+		bus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
+			event.registerBlockEntityRenderer(TrophyRegistries.TROPHY_BE.get(), TrophyRenderer::new);
+			event.registerBlockEntityRenderer(TrophyRegistries.DISPLAY_TROPHY_BE.get(), DisplayTrophyRenderer::new);
+		});
 		bus.addListener(EntityRenderersEvent.RegisterLayerDefinitions.class, event -> {
 			event.registerLayerDefinition(PLAYER_TROPHY, () -> LayerDefinition.create(PlayerTrophyModel.createMesh(false), 64, 64));
 			event.registerLayerDefinition(SLIM_PLAYER_TROPHY, () -> LayerDefinition.create(PlayerTrophyModel.createMesh(true), 64, 64));
