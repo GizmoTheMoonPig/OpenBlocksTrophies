@@ -2,7 +2,7 @@ package com.gizmo.trophies.client;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.block.TrophyBlock;
-import com.gizmo.trophies.block.TrophyBlockEntity;
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.gizmo.trophies.config.TrophyConfig;
 import com.gizmo.trophies.misc.TrophyRegistries;
 import com.google.common.collect.ImmutableMap;
@@ -57,7 +57,10 @@ public class ClientEvents {
 	public static final ModelLayerLocation SLIM_PLAYER_TROPHY = new ModelLayerLocation(OpenBlocksTrophies.prefix("slim_player_trophy"), "main");
 
 	public static void init(IEventBus bus) {
-		bus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> event.registerBlockEntityRenderer(TrophyRegistries.TROPHY_BE.get(), TrophyRenderer::new));
+		bus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
+			event.registerBlockEntityRenderer(TrophyRegistries.TROPHY_BE.get(), TrophyRenderer::new);
+			event.registerBlockEntityRenderer(TrophyRegistries.DISPLAY_TROPHY_BE.get(), DisplayTrophyRenderer::new);
+		});
 		bus.addListener(EntityRenderersEvent.RegisterLayerDefinitions.class, event -> {
 			event.registerLayerDefinition(PLAYER_TROPHY, () -> LayerDefinition.create(PlayerTrophyModel.createMesh(false), 64, 64));
 			event.registerLayerDefinition(SLIM_PLAYER_TROPHY, () -> LayerDefinition.create(PlayerTrophyModel.createMesh(true), 64, 64));
@@ -68,7 +71,7 @@ public class ClientEvents {
 			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
 				return new TrophyItemRenderer();
 			}
-		}, TrophyRegistries.TROPHY_ITEM.get()));
+		}, TrophyRegistries.TROPHY_ITEM.get(), TrophyRegistries.DISPLAY_TROPHY_ITEM.get()));
 	}
 
 	//disables rendering the trophy hitbox if there's no visible pedestal.

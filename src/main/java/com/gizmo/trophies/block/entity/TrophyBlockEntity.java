@@ -1,9 +1,11 @@
-package com.gizmo.trophies.block;
+package com.gizmo.trophies.block.entity;
 
 import com.gizmo.trophies.misc.TrophyRegistries;
+import com.gizmo.trophies.trophy.DisplayTrophy;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -49,7 +51,8 @@ public class TrophyBlockEntity extends BlockEntity {
 
 	public void setTrophy(Trophy trophy) {
 		this.trophy = trophy;
-		this.markUpdated();
+		this.setChanged();
+		this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
 	}
 
 	public CompoundTag getVariant() {
@@ -113,42 +116,12 @@ public class TrophyBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider provider) {
-		this.handleUpdateTag(Objects.requireNonNull(packet.getTag()), provider);
-	}
-
-	@Override
-	public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider provider) {
-		super.handleUpdateTag(tag, provider);
-		this.updateClient();
-	}
-
-	@Override
 	public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
-		return this.saveWithId(provider);
+		return this.saveCustomOnly(provider);
 	}
 
-	@Nullable
 	@Override
-	public Packet<ClientGamePacketListener> getUpdatePacket() {
-		return ClientboundBlockEntityDataPacket.create(this, (packet, access) -> this.getUpdateTag(access));
-	}
-
-	private void markUpdated() {
-		this.setChanged();
-
-		if (this.getLevel() != null) {
-			this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
-
-			this.getLevel().updateNeighborsAt(this.getBlockPos(), this.getBlockState().getBlock());
-			this.getBlockState().updateNeighbourShapes(this.getLevel(), this.getBlockPos(), 2);
-		}
-	}
-
-	private void updateClient() {
-		if (this.getLevel() != null && this.getLevel().isClientSide()) {
-			this.requestModelDataUpdate();
-			this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
-		}
+	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		return ClientboundBlockEntityDataPacket.create(this);
 	}
 }

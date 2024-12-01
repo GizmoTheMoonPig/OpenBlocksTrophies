@@ -2,6 +2,7 @@ package com.gizmo.trophies.block;
 
 import com.gizmo.trophies.config.TrophyConfig;
 import com.gizmo.trophies.misc.TrophyRegistries;
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.misc.AmbientSoundFetcher;
 import com.gizmo.trophies.trophy.Trophy;
@@ -21,19 +22,15 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
@@ -45,41 +42,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-@SuppressWarnings("unchecked")
-public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlock {
+public class TrophyBlock extends AbstractTrophyBlock {
 	public static final MapCodec<TrophyBlock> CODEC = simpleCodec(TrophyBlock::new);
-
-	public static final BooleanProperty PEDESTAL = BooleanProperty.create("pedestal");
-	private static final VoxelShape PEDESTAL_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 4.0D, 13.0D);
-	private static final VoxelShape NO_PEDESTAL_SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 12.0D, 12.0D);
 	private static final VoxelShape PLAYER_SHAPE = Block.box(5.0D, 4.0D, 5.0D, 11.0D, 16.0D, 11.0D);
 
 	public TrophyBlock(Properties properties) {
 		super(properties);
-		this.registerDefaultState(this.getStateDefinition().any().setValue(PEDESTAL, true));
 	}
 
 	@Override
-	protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+	protected MapCodec<? extends BaseEntityBlock> codec() {
 		return CODEC;
-	}
-
-	@Nullable
-	protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> blockAtPos, BlockEntityType<E> fedBlock, BlockEntityTicker<? super E> ticker) {
-		return fedBlock == blockAtPos ? (BlockEntityTicker<A>) ticker : null;
-	}
-
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-		return state.getValue(PEDESTAL) ? PEDESTAL_SHAPE : Shapes.empty();
-	}
-
-	@Nullable
-	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
@@ -89,7 +63,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 				return state.getValue(PEDESTAL) ? Shapes.or(PEDESTAL_SHAPE, PLAYER_SHAPE) : NO_PEDESTAL_SHAPE;
 			}
 		}
-		return state.getValue(PEDESTAL) ? PEDESTAL_SHAPE : NO_PEDESTAL_SHAPE;
+		return super.getShape(state, getter, pos, context);
 	}
 
 	@Override
@@ -125,12 +99,16 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 				if (trophy.type() == EntityType.PLAYER) {
 					level.playSound(null, pos, TrophyRegistries.OOF.get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
 				} else {
-					Pair<SoundEvent, Float> soundData = AmbientSoundFetcher.getAmbientSoundAndPitch(trophy.type(), level);
-					if (soundData.getFirst() != null) {
-						level.playSound(null, pos, soundData.getFirst(), SoundSource.BLOCKS, 1.0F, soundData.getSecond());
-					}
-					if (trophyBE.getCooldown() <= 0 && trophy.clickBehavior().isPresent() && !TrophyConfig.rightClickEffectOverride) {
-						trophyBE.setCooldown(trophy.clickBehavior().get().execute(trophyBE, (ServerPlayer) player, stack));
+					if (trophy.clickSoundOverride().isPresent()) {
+						level.playSound(null, pos, trophy.clickSoundOverride().get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
+					} else {
+						Pair<SoundEvent, Float> soundData = AmbientSoundFetcher.getAmbientSoundAndPitch(trophy.type(), level);
+						if (soundData.getFirst() != null) {
+							level.playSound(null, pos, soundData.getFirst(), SoundSource.BLOCKS, 1.0F, soundData.getSecond());
+						}
+						if (trophyBE.getCooldown() <= 0 && trophy.clickBehavior().isPresent() && !TrophyConfig.rightClickEffectOverride) {
+							trophyBE.setCooldown(trophy.clickBehavior().get().execute(trophyBE, (ServerPlayer) player, player.getItemInHand(hand)));
+						}
 					}
 				}
 			}
@@ -173,17 +151,6 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements EntityBlo
 			newStack.set(DataComponents.RARITY, TrophyItem.getTrophyRarity(newStack));
 		}
 		return newStack;
-	}
-
-	@Override
-	public boolean propagatesSkylightDown(BlockState state, BlockGetter getter, BlockPos pos) {
-		return true;
-	}
-
-	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		super.createBlockStateDefinition(builder);
-		builder.add(FACING, PEDESTAL);
 	}
 
 	@Nullable

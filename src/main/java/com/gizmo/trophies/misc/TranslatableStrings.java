@@ -11,6 +11,7 @@ public final class TranslatableStrings {
 	public static final String TROPHY_STUBS_MADE = "command.obtrophies.trophies_made";
 
 	public static final String TROPHY_WITH_ENTITY = TrophyRegistries.TROPHY.get().getDescriptionId() + ".entity";
+	public static final String DISPLAY_TROPHY = TrophyRegistries.DISPLAY_TROPHY.get().getDescriptionId() + ".display";
 	public static final String FROM_MOD_ID = TrophyRegistries.TROPHY_ITEM.get().getDescriptionId() + ".modid";
 	public static final String VARIANT_FORMATTER = TrophyRegistries.TROPHY_ITEM.get().getDescriptionId() + ".variant";
 

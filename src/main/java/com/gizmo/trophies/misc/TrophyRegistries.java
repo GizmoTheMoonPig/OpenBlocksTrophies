@@ -1,14 +1,19 @@
 package com.gizmo.trophies.misc;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
+import com.gizmo.trophies.block.DisplayTrophyBlock;
 import com.gizmo.trophies.block.TrophyBlock;
-import com.gizmo.trophies.block.TrophyBlockEntity;
 import com.gizmo.trophies.block.TrophyInfo;
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.block.entity.DisplayTrophyBlockEntity;
+import com.gizmo.trophies.item.DisplayTrophyItem;
 import com.gizmo.trophies.item.TrophyItem;
+import com.gizmo.trophies.trophy.DisplayTrophy;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -33,7 +38,12 @@ public class TrophyRegistries {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TrophyBlockEntity>> TROPHY_BE = BLOCK_ENTITIES.register("trophy", () -> BlockEntityType.Builder.of(TrophyBlockEntity::new, TROPHY.get()).build(null));
 	public static final DeferredItem<Item> TROPHY_ITEM = ITEMS.register("trophy", () -> new TrophyItem(TROPHY.get(), new Item.Properties().stacksTo(1).fireResistant()));
 
+	public static final DeferredBlock<Block> DISPLAY_TROPHY = BLOCKS.register("display_trophy", () -> new DisplayTrophyBlock(BlockBehaviour.Properties.of().strength(1.5F, 6.0F).forceSolidOn()));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DisplayTrophyBlockEntity>> DISPLAY_TROPHY_BE = BLOCK_ENTITIES.register("display_trophy", () -> BlockEntityType.Builder.of(DisplayTrophyBlockEntity::new, DISPLAY_TROPHY.get()).build(null));
+	public static final DeferredItem<Item> DISPLAY_TROPHY_ITEM = ITEMS.register("display_trophy", () -> new DisplayTrophyItem(DISPLAY_TROPHY.get(), new Item.Properties().stacksTo(1).fireResistant()));
+
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<TrophyInfo>> TROPHY_INFO = COMPONENTS.register("trophy_info", () -> DataComponentType.<TrophyInfo>builder().persistent(TrophyInfo.CODEC).networkSynchronized(TrophyInfo.STREAM_CODEC).cacheEncoding().build());
+	public static final DeferredHolder<DataComponentType<?>, DataComponentType<DisplayTrophy>> DISPLAY_TROPHY_INFO = COMPONENTS.register("display_trophy_info", () -> DataComponentType.<DisplayTrophy>builder().persistent(DisplayTrophy.CODEC).networkSynchronized(ByteBufCodecs.fromCodec(DisplayTrophy.CODEC)).cacheEncoding().build());
 
 	public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<AddTrophyModifier>> ADD_TROPHY = LOOT_MODIFIERS.register("add_trophy", () -> AddTrophyModifier.CODEC);
 

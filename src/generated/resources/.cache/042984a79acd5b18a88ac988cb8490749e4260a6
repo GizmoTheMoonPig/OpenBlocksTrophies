@@ -1,4 +1,4 @@
-// 1.21	2024-06-16T22:50:37.0090073	Default OpenBlocks Trophies
+// 1.21	2024-12-01T12:12:51.1391133	Default OpenBlocks Trophies
 9ab48ee8361c93363b4976c209fa1eeacccad979 data/obtrophies/trophies/allay.json
 91ceeb4d6813d3d7dbeaf4fb7bb7a2f82d052bf5 data/obtrophies/trophies/armadillo.json
 2942c3fdeb85f5462dacb128ea1122eb4c5f2fad data/obtrophies/trophies/axolotl.json
@@ -22,7 +22,7 @@ f1d7ad4487df7c87a6b4e6a1495c60c90c58fa02 data/obtrophies/trophies/drowned.json
 4bf0f5c6302e17f3c1adfb4364f9666d95316ac5 data/obtrophies/trophies/endermite.json
 633a789d812912805ecc813e8aa94a5152d5e9f6 data/obtrophies/trophies/ender_dragon.json
 4b640cafd34534dbb61a6528c58ba5a5cd63853b data/obtrophies/trophies/evoker.json
-2118f535df882d48c5451e621fab10bc4e520a3c data/obtrophies/trophies/fox.json
+9c542496eebb9084acbba70f6dd518d8a394137e data/obtrophies/trophies/fox.json
 c53225077ba0c937dff0c912b448c0661b95cf87 data/obtrophies/trophies/frog.json
 1f8655c6fbfed15014c589d2faf29b27b36a6d67 data/obtrophies/trophies/ghast.json
 fe78cb259aca46221194070ff1e9450ab2ef2ecd data/obtrophies/trophies/glow_squid.json
@@ -48,7 +48,7 @@ f9733d9b969637f0ba36703d3a6e6d4c2e8b9f1f data/obtrophies/trophies/piglin_brute.j
 37ad8e07ca9b9b3cf5a1f66c0707df826aa950c2 data/obtrophies/trophies/player.json
 081ed10e367370ffdbcfdb1a5b53f345aa112563 data/obtrophies/trophies/polar_bear.json
 0dd03494b0e6b103e009c0a01cfe34b041d9a877 data/obtrophies/trophies/pufferfish.json
-b17ad629f28c42a1d7ab08cd733c0485d59d72c7 data/obtrophies/trophies/rabbit.json
+c674f025e254fa2e5ca1e404ae5e18810bcd2f60 data/obtrophies/trophies/rabbit.json
 0d8ccc040947bbfa9571abaa21bc8243f98905d8 data/obtrophies/trophies/ravager.json
 a7b31c07456aa1421bfb837d610295594304b534 data/obtrophies/trophies/salmon.json
 bb5a3ee5d2e3551dddc08d49ef0ae5410de8caef data/obtrophies/trophies/sheep.json

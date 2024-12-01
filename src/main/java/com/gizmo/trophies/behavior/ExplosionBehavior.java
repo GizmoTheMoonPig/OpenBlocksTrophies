@@ -1,6 +1,6 @@
 package com.gizmo.trophies.behavior;
 
-import com.gizmo.trophies.block.TrophyBlockEntity;
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

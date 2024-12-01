@@ -14,6 +14,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.animal.horse.Markings;
+import net.minecraft.world.entity.animal.horse.Variant;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -90,63 +94,63 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.ENDERMITE).setScale(1.5F));
 		this.makeTrophy(new Trophy.Builder(EntityType.GUARDIAN).setRightClickBehavior(new ElderGuardianCurseBehavior()));
 		this.makeTrophy(new Trophy.Builder(EntityType.RABBIT).setScale(2.0F).setRightClickBehavior(new ItemDropBehavior(Items.CARROT, 20000))
-			.addVariant("RabbitType", Rabbit.Variant.BROWN.ordinal())
-			.addVariant("RabbitType", Rabbit.Variant.WHITE.ordinal())
-			.addVariant("RabbitType", Rabbit.Variant.BLACK.ordinal())
-			.addVariant("RabbitType", Rabbit.Variant.WHITE_SPLOTCHED.ordinal())
-			.addVariant("RabbitType", Rabbit.Variant.GOLD.ordinal())
-			.addVariant("RabbitType", Rabbit.Variant.SALT.ordinal())
-			.addVariant("RabbitType", Rabbit.Variant.EVIL.ordinal())
-			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("RabbitType", Rabbit.Variant.BROWN.ordinal()))));
+			.addVariant("RabbitType", Rabbit.Variant.BROWN.id())
+			.addVariant("RabbitType", Rabbit.Variant.WHITE.id())
+			.addVariant("RabbitType", Rabbit.Variant.BLACK.id())
+			.addVariant("RabbitType", Rabbit.Variant.WHITE_SPLOTCHED.id())
+			.addVariant("RabbitType", Rabbit.Variant.GOLD.id())
+			.addVariant("RabbitType", Rabbit.Variant.SALT.id())
+			.addVariant("RabbitType", Rabbit.Variant.EVIL.id())
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("RabbitType", Rabbit.Variant.BROWN.id()))));
 		this.makeTrophy(new Trophy.Builder(EntityType.POLAR_BEAR).setRightClickBehavior(new ItemDropBehavior(Items.COD, 20000)));
 		this.makeTrophy(new Trophy.Builder(EntityType.SHULKER).setRightClickBehavior(new MobEffectBehavior(MobEffects.LEVITATION, 100, 0)));
 		this.makeTrophy(new Trophy.Builder(EntityType.HORSE).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.WHEAT, 20000))
-			.addVariant("Variant", 0)
-			.addVariant("Variant", 1)
-			.addVariant("Variant", 2)
-			.addVariant("Variant", 3)
-			.addVariant("Variant", 4)
-			.addVariant("Variant", 5)
-			.addVariant("Variant", 6)
-			.addVariant("Variant", 256)
-			.addVariant("Variant", 257)
-			.addVariant("Variant", 258)
-			.addVariant("Variant", 259)
-			.addVariant("Variant", 260)
-			.addVariant("Variant", 261)
-			.addVariant("Variant", 262)
-			.addVariant("Variant", 512)
-			.addVariant("Variant", 513)
-			.addVariant("Variant", 514)
-			.addVariant("Variant", 515)
-			.addVariant("Variant", 516)
-			.addVariant("Variant", 517)
-			.addVariant("Variant", 518)
-			.addVariant("Variant", 768)
-			.addVariant("Variant", 769)
-			.addVariant("Variant", 770)
-			.addVariant("Variant", 771)
-			.addVariant("Variant", 772)
-			.addVariant("Variant", 773)
-			.addVariant("Variant", 774)
-			.addVariant("Variant", 1024)
-			.addVariant("Variant", 1025)
-			.addVariant("Variant", 1026)
-			.addVariant("Variant", 1027)
-			.addVariant("Variant", 1028)
-			.addVariant("Variant", 1029)
-			.addVariant("Variant", 1030)
-			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("Variant", 0))));
+			.addVariant("Variant", this.setHorseVariant(Variant.WHITE, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.CREAMY, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.CHESTNUT, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.BROWN, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.BLACK, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.GRAY, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.DARK_BROWN, Markings.NONE))
+			.addVariant("Variant", this.setHorseVariant(Variant.WHITE, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.CREAMY, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.CHESTNUT, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.BROWN, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.BLACK, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.GRAY, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.DARK_BROWN, Markings.WHITE))
+			.addVariant("Variant", this.setHorseVariant(Variant.WHITE, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.CREAMY, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.CHESTNUT, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.BROWN, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.BLACK, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.GRAY, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.DARK_BROWN, Markings.WHITE_FIELD))
+			.addVariant("Variant", this.setHorseVariant(Variant.WHITE, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.CREAMY, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.CHESTNUT, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.BROWN, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.BLACK, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.GRAY, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.DARK_BROWN, Markings.WHITE_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.WHITE, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.CREAMY, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.CHESTNUT, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.BROWN, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.BLACK, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.GRAY, Markings.BLACK_DOTS))
+			.addVariant("Variant", this.setHorseVariant(Variant.DARK_BROWN, Markings.BLACK_DOTS))
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("Variant", this.setHorseVariant(Variant.WHITE, Markings.NONE)))));
 		this.makeTrophy(new Trophy.Builder(EntityType.SKELETON_HORSE).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.BONE, 20000)));
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOMBIE_HORSE).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.ROTTEN_FLESH, 20000)));
 		this.makeTrophy(new Trophy.Builder(EntityType.DONKEY).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.WHEAT, 20000)));
 		this.makeTrophy(new Trophy.Builder(EntityType.MULE).setScale(0.9F).setRightClickBehavior(new ItemDropBehavior(Items.WHEAT, 20000)));
 		this.makeTrophy(new Trophy.Builder(EntityType.LLAMA).setScale(0.9F).setRightClickBehavior(new ShootLlamaSpitBehavior())
-			.addVariant("Variant", 0)
-			.addVariant("Variant", 1)
-			.addVariant("Variant", 2)
-			.addVariant("Variant", 3)
-			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("Variant", 0))));
+			.addVariant("Variant", Llama.Variant.CREAMY.getId())
+			.addVariant("Variant", Llama.Variant.WHITE.getId())
+			.addVariant("Variant", Llama.Variant.BROWN.getId())
+			.addVariant("Variant", Llama.Variant.GRAY.getId())
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("Variant", Llama.Variant.CREAMY.getId()))));
 		this.makeTrophy(new Trophy.Builder(EntityType.ELDER_GUARDIAN).setScale(0.5F).setRightClickBehavior(new ElderGuardianCurseBehavior()));
 		this.makeTrophy(new Trophy.Builder(EntityType.WITHER_SKELETON).setRightClickBehavior(new ItemDropBehavior(Items.WITHER_SKELETON_SKULL, 50000)));
 		this.makeTrophy(new Trophy.Builder(EntityType.STRAY).setRightClickBehavior(new ShootProjectileBehavior(new ItemStack(Holder.direct(Items.TIPPED_ARROW), 1, DataComponentPatch.builder().set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.SLOWNESS)).build()), 1, true, Optional.of(SoundEvents.ARROW_SHOOT))));
@@ -158,12 +162,12 @@ public class TrophyGenerator extends TrophyProvider {
 
 		//newbies - 1.12+ mobs
 		this.makeTrophy(new Trophy.Builder(EntityType.PARROT).setScale(1.75F)
-			.addVariant("Variant", 0)
-			.addVariant("Variant", 1)
-			.addVariant("Variant", 2)
-			.addVariant("Variant", 3)
-			.addVariant("Variant", 4)
-			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("Variant", 0))));
+			.addVariant("Variant", Parrot.Variant.RED_BLUE.getId())
+			.addVariant("Variant", Parrot.Variant.BLUE.getId())
+			.addVariant("Variant", Parrot.Variant.GREEN.getId())
+			.addVariant("Variant", Parrot.Variant.YELLOW_BLUE.getId())
+			.addVariant("Variant", Parrot.Variant.GRAY.getId())
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("Variant", Parrot.Variant.RED_BLUE.getId()))));
 		this.makeTrophy(new Trophy.Builder(EntityType.ILLUSIONER).setRightClickBehavior(new MobEffectBehavior(MobEffects.BLINDNESS, 100, 0)));
 		this.makeTrophy(new Trophy.Builder(EntityType.COD).setScale(1.75F));
 		this.makeTrophy(new Trophy.Builder(EntityType.SALMON).setScale(1.25F));
@@ -206,10 +210,7 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.FOX).setRightClickBehavior(new ItemDropBehavior(Items.SWEET_BERRIES, 20000))
 			.addVariant("Type", Fox.Type.RED.getSerializedName())
 			.addVariant("Type", Fox.Type.SNOW.getSerializedName())
-			.addDefaultVariant(Util.make(new CompoundTag(), tag -> {
-				tag.putString("Type", Fox.Type.RED.getSerializedName());
-				tag.putBoolean("Sitting", true);
-			})));
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("Type", Fox.Type.RED.getSerializedName()))));
 		this.makeTrophy(new Trophy.Builder(EntityType.PANDA).setScale(0.75F).setRightClickBehavior(new ItemDropBehavior(Items.BAMBOO, 20000))
 			.addVariant(this.buildPandaVariant(Panda.Gene.NORMAL.getSerializedName()))
 			.addVariant(this.buildPandaVariant(Panda.Gene.LAZY.getSerializedName()))
@@ -230,18 +231,18 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOGLIN).setScale(0.85F).setRightClickBehavior(new ItemDropBehavior(Items.ROTTEN_FLESH, 10000)));
 		this.makeTrophy(new Trophy.Builder(EntityType.PIGLIN_BRUTE).setRightClickBehavior(new ItemDropBehavior(Items.GOLDEN_AXE, 20000)));
 		this.makeTrophy(new Trophy.Builder(EntityType.AXOLOTL).setScale(1.25F).addCondition(new NotCondition(new ModLoadedCondition("mavm")))
-			.addVariant("Variant", 0)
-			.addVariant("Variant", 1)
-			.addVariant("Variant", 2)
-			.addVariant("Variant", 3)
-			.addVariant("Variant", 4)
-			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("Variant", 0))));
+			.addVariant("Variant", Axolotl.Variant.LUCY.getId())
+			.addVariant("Variant", Axolotl.Variant.WILD.getId())
+			.addVariant("Variant", Axolotl.Variant.GOLD.getId())
+			.addVariant("Variant", Axolotl.Variant.CYAN.getId())
+			.addVariant("Variant", Axolotl.Variant.BLUE.getId())
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("Variant", Axolotl.Variant.LUCY.getId()))));
 		this.makeTrophy(new Trophy.Builder(EntityType.GLOW_SQUID).setOffset(0.0D, 0.5D, 0.0D).setRightClickBehavior(new MobEffectBehavior(MobEffects.GLOWING, 200, 0)));
 		this.makeTrophy(new Trophy.Builder(EntityType.GOAT).setRightClickBehavior(new ClickWithItemBehavior(Items.BUCKET, true, new ItemDropBehavior(Items.MILK_BUCKET), 0, SoundEvents.GOAT_MILK)));
 		this.makeTrophy(new Trophy.Builder(EntityType.ALLAY).setScale(1.75F));
 		this.makeTrophy(new Trophy.Builder(EntityType.FROG).setScale(1.5F).setRightClickBehavior(new ItemDropBehavior(Items.SLIME_BALL, 20000))
 			.addRegistryVariant("variant", Registries.FROG_VARIANT.location())
-			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("variant", "minecraft:temperate"))));
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("variant", FrogVariant.TEMPERATE.location().toString()))));
 		this.makeTrophy(new Trophy.Builder(EntityType.TADPOLE).setScale(2.0F));
 		this.makeTrophy(new Trophy.Builder(EntityType.WARDEN).setScale(0.75F).setRightClickBehavior(new MobEffectBehavior(MobEffects.DARKNESS, 200, 0)));
 		this.makeTrophy(new Trophy.Builder(EntityType.WITHER).setDropChance(0.0075D).setOffset(0.0D, -0.2D, 0.0D).setScale(0.75F));
@@ -258,6 +259,10 @@ public class TrophyGenerator extends TrophyProvider {
 		tag.putString("MainGene", gene);
 		tag.putString("HiddenGene", gene);
 		return tag;
+	}
+
+	public int setHorseVariant(Variant variant, Markings markings) {
+		return variant.getId() & 255 | markings.getId() << 8 & '\uff00';
 	}
 
 	@Override

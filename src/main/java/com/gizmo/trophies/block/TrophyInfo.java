@@ -1,5 +1,6 @@
 package com.gizmo.trophies.block;
 
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;

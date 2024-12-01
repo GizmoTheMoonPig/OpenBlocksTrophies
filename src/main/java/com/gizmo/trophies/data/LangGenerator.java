@@ -40,6 +40,8 @@ public class LangGenerator extends LanguageProvider {
 
 		this.add(TrophyRegistries.TROPHY.get(), "Trophy");
 		this.add(TranslatableStrings.TROPHY_WITH_ENTITY, "%s Trophy");
+		this.add(TrophyRegistries.DISPLAY_TROPHY.get(), "Display Trophy");
+		this.add(TranslatableStrings.DISPLAY_TROPHY, "%s Trophy");
 		this.add(TranslatableStrings.TROPHY_COUNT, "Trophy Count: %s");
 		this.add(TranslatableStrings.EMPTY_TROPHY_LIST, "Trophy list is not populated!");
 		this.add(TranslatableStrings.MOD_NOT_LOADED, "Mod %s does not exist!");

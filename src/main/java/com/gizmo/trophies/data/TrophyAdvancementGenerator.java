@@ -2,7 +2,7 @@ package com.gizmo.trophies.data;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.block.TrophyInfo;
-import com.gizmo.trophies.misc.TrophiesCommands;
+import com.gizmo.trophies.command.GenerateTrophyStubCommand;
 import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.item.TrophyItem;
 import net.minecraft.Util;
@@ -107,7 +107,7 @@ public class TrophyAdvancementGenerator implements AdvancementProvider.Advanceme
 
 	private Advancement.Builder addEveryVanillaMob(Advancement.Builder builder) {
 		for (EntityType<?> type : BuiltInRegistries.ENTITY_TYPE.stream().filter(type -> BuiltInRegistries.ENTITY_TYPE.getKey(type).getNamespace().equals("minecraft") && !OpenBlocksTrophies.UNUSED_TYPES.contains(type)).toList()) {
-			Class<?> instance = TrophiesCommands.getEntityClass(type);
+			Class<?> instance = GenerateTrophyStubCommand.getEntityClass(type);
 			if (instance != null && Mob.class.isAssignableFrom(instance)) {
 				builder.addCriterion(BuiltInRegistries.ENTITY_TYPE.getKey(type).getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().hasComponents(DataComponentPredicate.builder().expect(TrophyRegistries.TROPHY_INFO.get(), new TrophyInfo(type)).build()).of(TrophyRegistries.TROPHY_ITEM).build()));
 			}

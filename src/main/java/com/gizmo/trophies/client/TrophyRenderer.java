@@ -2,11 +2,12 @@ package com.gizmo.trophies.client;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.block.TrophyBlock;
-import com.gizmo.trophies.block.TrophyBlockEntity;
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.gizmo.trophies.trophy.Trophy;
 import com.mojang.blaze3d.Blaze3D;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -15,16 +16,15 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Sheep;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -55,7 +55,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		if (trophy.type() == EntityType.PLAYER) {
 			stack.translate(0.5F, 0.0F, 0.5F);
 			if (be != null) {
-				stack.mulPose(Axis.YP.rotationDegrees(getCorrectRotation(be.getBlockState().getValue(TrophyBlock.FACING).getOpposite())));
+				stack.mulPose(Axis.YP.rotationDegrees(-be.getBlockState().getValue(TrophyBlock.FACING).toYRot()));
 			}
 			if (name.equalsIgnoreCase("dinnerbone") || name.equalsIgnoreCase("grumm")) {
 				stack.mulPose(Axis.ZP.rotationDegrees(180.0F));
@@ -112,20 +112,31 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 				if (be != null) {
 					//they watch
 					if (LocalDate.of(LocalDate.now().getYear(), 4, 1).equals(LocalDate.now())) {
-						Player player = level.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 64.0D, false);
-						if (player != null) {
-							Vec3 vec3 = new Vec3(player.getX(), player.getEyeY(), player.getZ());
-							Vec3 vec31 = new Vec3(pos.getX(), pos.getY() + (entity.getEyeHeight() / 1.5), pos.getZ());
-							Vec3 vec32 = vec3.subtract(vec31);
-							vec32 = vec32.normalize();
-							float f5 = (float) Math.acos(vec32.y());
-							float f6 = (float) Math.atan2(vec32.z(), vec32.x());
-							stack.mulPose(Axis.YP.rotationDegrees((Mth.HALF_PI - f6) * Mth.RAD_TO_DEG));
-							stack.mulPose(Axis.XP.rotationDegrees(f5 * (180F / (float) Math.PI) - 90.0F));
+						RandomSource rand = RandomSource.create(pos.asLong());
+						if (rand.nextInt(10) == 0) {
+							//they watch
+							if (Minecraft.getInstance().cameraEntity != null) {
+								Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+								Vec3 vec3 = new Vec3(camera.getPosition().x(), camera.getPosition().y(), camera.getPosition().z());
+								Vec3 vec31 = new Vec3(pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F);
+								Vec3 vec32 = vec3.subtract(vec31);
+								vec32 = vec32.normalize();
+								float f5 = (float) Math.acos(vec32.y());
+								float f6 = (float) Math.atan2(vec32.z(), vec32.x());
+								stack.mulPose(Axis.YP.rotationDegrees((Mth.HALF_PI - f6) * Mth.RAD_TO_DEG));
+								stack.mulPose(Axis.XP.rotationDegrees(f5 * Mth.RAD_TO_DEG - 90.0F));
+							}
+						} else {
+							//speen
+							stack.mulPose(Axis.YP.rotationDegrees(level.getGameTime() * 15.0F));
 						}
 					} else {
-						stack.mulPose(Axis.YP.rotationDegrees(getCorrectRotation(be.getBlockState().getValue(TrophyBlock.FACING).getOpposite())));
+						stack.mulPose(Axis.YP.rotationDegrees(-be.getBlockState().getValue(TrophyBlock.FACING).toYRot()));
 					}
+				}
+
+				if (trophy.type() == EntityType.FOX && name.equalsIgnoreCase("neoforge")) {
+					stack.mulPose(Axis.YP.rotationDegrees(level.getGameTime() * 15.0F));
 				}
 
 				stack.mulPose(Axis.XP.rotationDegrees((float) trophy.rotation().x()));
@@ -147,15 +158,6 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		}
 
 		stack.popPose();
-	}
-
-	private static float getCorrectRotation(Direction direction) {
-		return switch (direction) {
-			case DOWN, UP, NORTH -> 0.0F;
-			case SOUTH -> 180.0F;
-			case EAST -> 270.0F;
-			case WEST -> 90.0F;
-		};
 	}
 
 	@Override

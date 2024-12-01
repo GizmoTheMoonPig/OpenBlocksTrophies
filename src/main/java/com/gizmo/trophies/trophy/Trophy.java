@@ -13,6 +13,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.conditions.ConditionalOps;
@@ -20,9 +21,10 @@ import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.WithConditions;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.text.html.Option;
 import java.util.*;
 
-public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec3 offset, Vec3 rotation, float scale, Optional<CustomBehavior> clickBehavior, Either<Pair<String, ResourceLocation>, List<CompoundTag>> variants, Optional<CompoundTag> defaultData) {
+public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec3 offset, Vec3 rotation, float scale, Optional<CustomBehavior> clickBehavior, Either<Pair<String, ResourceLocation>, List<CompoundTag>> variants, Optional<CompoundTag> defaultData, Optional<SoundEvent> clickSoundOverride) {
 
 	public static final double DEFAULT_DROP_CHANCE = 0.001D;
 	public static final double BOSS_DROP_CHANCE = 0.0075D;
@@ -36,7 +38,8 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 			Codec.FLOAT.optionalFieldOf("scale", 1.0F).forGetter(Trophy::scale),
 			CustomBehaviorType.DISPATCH_CODEC.optionalFieldOf("behavior").forGetter(Trophy::clickBehavior),
 			Codec.either(Codec.pair(Codec.STRING.fieldOf("key").codec(), ResourceLocation.CODEC.fieldOf("registry").codec()), CompoundTag.CODEC.listOf()).optionalFieldOf("variants", Either.right(new ArrayList<>())).forGetter(Trophy::variants),
-			CompoundTag.CODEC.optionalFieldOf("default_variant").forGetter(Trophy::defaultData)
+			CompoundTag.CODEC.optionalFieldOf("default_variant").forGetter(Trophy::defaultData),
+			SoundEvent.DIRECT_CODEC.optionalFieldOf("click_sound_override").forGetter(Trophy::clickSoundOverride)
 	).apply(instance, Trophy::new));
 
 	public static final Codec<Optional<WithConditions<Trophy>>> CODEC = ConditionalOps.createConditionalCodecWithConditions(BASE_CODEC);
@@ -80,6 +83,8 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 		private List<CompoundTag> variants = new ArrayList<>();
 		@Nullable
 		private CompoundTag defaultVariant = null;
+		@Nullable
+		private SoundEvent soundOverride = null;
 		public List<ICondition> conditions = new ArrayList<>();
 
 		public Builder(EntityType<?> type) {
@@ -95,6 +100,7 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 			this.registryVariant = trophy.variants().left().orElse(null);
 			this.variants = new ArrayList<>(trophy.variants().right().orElse(new ArrayList<>()));
 			this.defaultVariant = trophy.defaultData().orElse(null);
+			this.soundOverride = trophy.clickSoundOverride().orElse(null);
 			return this;
 		}
 
@@ -188,8 +194,13 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 			return this;
 		}
 
+		public Trophy.Builder addSoundOverride(SoundEvent sound) {
+			this.soundOverride = sound;
+			return this;
+		}
+
 		public Trophy build() {
-			return new Trophy(this.replace, this.type, this.dropChance, this.offset, this.rotation, this.scale, Optional.ofNullable(this.clickBehavior), (this.registryVariant != null ? Either.left(this.registryVariant) : Either.right(this.variants)), Optional.ofNullable(this.defaultVariant));
+			return new Trophy(this.replace, this.type, this.dropChance, this.offset, this.rotation, this.scale, Optional.ofNullable(this.clickBehavior), (this.registryVariant != null ? Either.left(this.registryVariant) : Either.right(this.variants)), Optional.ofNullable(this.defaultVariant), Optional.ofNullable(this.soundOverride));
 		}
 	}
 }

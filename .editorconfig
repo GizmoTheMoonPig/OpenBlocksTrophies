@@ -7,6 +7,10 @@ indent_style = tab
 charset = utf-8
 max_line_length = off
 
-[*.json]
+[{*.js,*.vsh,*.fsh}]
+indent_style = space
+indent_size = 4
+
+[{*.json,*.mcmeta}]
 indent_style = space
 indent_size = 2

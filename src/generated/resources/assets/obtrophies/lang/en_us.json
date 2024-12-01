@@ -13,6 +13,8 @@
   "advancement.obtrophies.rarest_trophy.title": "Exotic Artifact Hunter",
   "advancement.obtrophies.root.desc": "Challenges revolving around trophy collection",
   "advancement.obtrophies.root.title": "OpenBlocks Trophies",
+  "block.obtrophies.display_trophy": "Display Trophy",
+  "block.obtrophies.display_trophy.display": "%s Trophy",
   "block.obtrophies.trophy": "Trophy",
   "block.obtrophies.trophy.entity": "%s Trophy",
   "block.obtrophies.trophy.modid": "From: %s",

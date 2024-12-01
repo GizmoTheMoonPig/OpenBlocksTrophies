@@ -9,7 +9,6 @@
     }
   },
   "default_variant": {
-    "Sitting": 1,
     "Type": "red"
   },
   "variants": [

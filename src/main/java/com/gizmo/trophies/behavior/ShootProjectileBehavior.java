@@ -1,7 +1,8 @@
 package com.gizmo.trophies.behavior;
 
+import com.gizmo.trophies.block.AbstractTrophyBlock;
 import com.gizmo.trophies.block.TrophyBlock;
-import com.gizmo.trophies.block.TrophyBlockEntity;
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
@@ -49,7 +50,7 @@ public record ShootProjectileBehavior(ItemStack projectile, int amount, boolean 
 	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		BlockPos pos = block.getBlockPos();
 		Level level = player.level();
-		Direction shootDir = this.shootUpwards() ? Direction.UP : block.getBlockState().getValue(TrophyBlock.FACING);
+		Direction shootDir = this.shootUpwards() ? Direction.UP : block.getBlockState().getValue(AbstractTrophyBlock.FACING);
 		ProjectileItem item = ((ProjectileItem) this.projectile().getItem());
 
 		for (int i = 0; i < this.amount(); i++) {
