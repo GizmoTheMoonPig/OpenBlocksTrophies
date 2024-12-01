@@ -3,9 +3,7 @@ package com.gizmo.trophies.block;
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.TrophyRegistries;
 import com.gizmo.trophies.block.entity.DisplayTrophyBlockEntity;
-import com.gizmo.trophies.block.entity.TrophyBlockEntity;
-import com.gizmo.trophies.item.TrophyItem;
-import com.gizmo.trophies.trophy.Trophy;
+import com.gizmo.trophies.item.DisplayTrophyItem;
 import com.gizmo.trophies.trophy.DisplayTrophy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -15,7 +13,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -36,6 +33,17 @@ public class DisplayTrophyBlock extends AbstractTrophyBlock {
 
 	public DisplayTrophyBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
+		BlockEntity be = level.getBlockEntity(pos);
+		if (be instanceof DisplayTrophyBlockEntity trophyBE) {
+			DisplayTrophy trophy = DisplayTrophyItem.getTrophy(stack);
+			if (trophy != null) {
+				trophyBE.display = trophy;
+			}
+		}
 	}
 
 	@Override
