@@ -52,7 +52,9 @@ public class TrophyBlockEntity extends BlockEntity {
 	public void setTrophy(Trophy trophy) {
 		this.trophy = trophy;
 		this.setChanged();
-		this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+		if (this.getLevel() != null) {
+			this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+		}
 	}
 
 	public CompoundTag getVariant() {
