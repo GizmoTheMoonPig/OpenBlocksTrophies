@@ -49,28 +49,6 @@ public class DisplayTrophyBlock extends AbstractTrophyBlock {
 	}
 
 	@Override
-	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
-		BlockEntity be = level.getBlockEntity(pos);
-		if (be instanceof TrophyBlockEntity trophyBE) {
-			Trophy trophy = TrophyItem.getTrophy(stack);
-			if (trophy != null) {
-				trophyBE.setTrophy(trophy);
-				trophyBE.setTrophyName(stack.hasCustomHoverName() ? stack.getHoverName().getString() : "");
-				CompoundTag tag = BlockItem.getBlockEntityData(stack);
-				if (tag != null) {
-					if (tag.contains(TrophyItem.COOLDOWN_TAG)) {
-						trophyBE.setCooldown(tag.getInt(TrophyItem.COOLDOWN_TAG));
-					}
-
-					if (tag.contains(TrophyItem.CYCLING_TAG)) {
-						trophyBE.setCycling(tag.getBoolean(TrophyItem.CYCLING_TAG));
-					}
-				}
-			}
-		}
-	}
-
-	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof DisplayTrophyBlockEntity trophy) {
 			if (trophy.display.rightClickSound().isPresent()) {
