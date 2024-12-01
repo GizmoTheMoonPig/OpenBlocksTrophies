@@ -2,7 +2,7 @@ package com.gizmo.trophies.client;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.block.TrophyBlock;
-import com.gizmo.trophies.block.TrophyBlockEntity;
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.gizmo.trophies.config.TrophyConfig;
 import com.gizmo.trophies.misc.TrophyRegistries;
 import com.google.common.collect.ImmutableMap;

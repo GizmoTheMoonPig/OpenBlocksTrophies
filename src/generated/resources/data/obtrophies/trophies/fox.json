@@ -8,14 +8,6 @@
       "id": "minecraft:sweet_berries"
     }
   },
-  "default_variant": {
-    "Sleeping": 1
-  },
-  "rotation": [
-    0.0,
-    -90.0,
-    0.0
-  ],
   "variants": [
     {
       "Type": "red"

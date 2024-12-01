@@ -12,6 +12,7 @@ import com.gizmo.trophies.data.TrophyGenerator;
 import com.gizmo.trophies.misc.*;
 import com.gizmo.trophies.network.SyncCommonConfigPacket;
 import com.gizmo.trophies.network.SyncTrophyConfigsPacket;
+import com.gizmo.trophies.command.TrophiesCommands;
 import com.gizmo.trophies.trophy.Trophy;
 import com.gizmo.trophies.trophy.TrophyReloadListener;
 import com.google.common.reflect.Reflection;
@@ -65,7 +66,7 @@ public class OpenBlocksTrophies {
 		bus.addListener(ConfigSetup::reloadConfigs);
 		NeoForge.EVENT_BUS.addListener(ConfigSetup::syncConfigOnLogin);
 
-		NeoForge.EVENT_BUS.addListener(RegisterCommandsEvent.class, event -> TrophiesCommands.register(event.getDispatcher()));
+		NeoForge.EVENT_BUS.addListener(RegisterCommandsEvent.class, event -> TrophiesCommands.register(event.getDispatcher(), event.getBuildContext()));
 		NeoForge.EVENT_BUS.addListener(AddReloadListenerEvent.class, event -> event.addListener(new TrophyReloadListener()));
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::maybeDropTrophy);
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::syncTrophiesToClient);

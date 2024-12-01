@@ -1,0 +1,21 @@
+{
+  "entity": "alexscaves:sweetish_fish",
+  "scale": 1.75,
+  "variants": [
+    {
+      "GummyColor": 0
+    },
+    {
+      "GummyColor": 1
+    },
+    {
+      "GummyColor": 2
+    },
+    {
+      "GummyColor": 3
+    },
+    {
+      "GummyColor": 4
+    }
+  ]
+}
