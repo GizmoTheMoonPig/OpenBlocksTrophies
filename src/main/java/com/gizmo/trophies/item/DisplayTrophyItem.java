@@ -2,6 +2,7 @@ package com.gizmo.trophies.item;
 
 import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.trophy.DisplayTrophy;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -16,9 +17,9 @@ public class DisplayTrophyItem extends BlockItem {
 	}
 
 	@Nullable
-	public static DisplayTrophy getTrophy(@Nonnull ItemStack stack) {
-		if (stack.has(TrophyRegistries.DISPLAY_TROPHY_INFO)) {
-			return stack.get(TrophyRegistries.DISPLAY_TROPHY_INFO);
+	public static DisplayTrophy getTrophy(@Nullable DataComponentMap map) {
+		if (map != null && map.has(TrophyRegistries.DISPLAY_TROPHY_INFO.get())) {
+			return map.get(TrophyRegistries.DISPLAY_TROPHY_INFO.get());
 		}
 
 		return null;
@@ -26,9 +27,9 @@ public class DisplayTrophyItem extends BlockItem {
 
 	@Override
 	public Component getName(ItemStack stack) {
-		DisplayTrophy trophy = getTrophy(stack);
+		DisplayTrophy trophy = getTrophy(stack.getComponents());
 		if (trophy != null) {
-			return Component.translatable("block.obtrophies.display_trophy.display", trophy.displayItem().getDescription().plainCopy().getString());
+			return Component.translatable("block.obtrophies.display_trophy.display", Component.translatable(trophy.displayItem().getDescriptionId()));
 		}
 		return super.getName(stack);
 	}

@@ -53,15 +53,15 @@ public class DumpRegistryCommand {
 			Path path = context.getSource().getLevel().getServer().getWorldPath(LevelResource.GENERATED_DIR).resolve("registries").resolve(registryName.getNamespace()).resolve(registryName.getPath() + ".json").normalize();
 			JsonObject object = new JsonObject();
 			JsonArray registryArray = new JsonArray();
-			context.getSource().registryAccess().registryOrThrow(key).entrySet().forEach(entry -> {
+			context.getSource().registryAccess().lookupOrThrow(key).entrySet().forEach(entry -> {
 				registryArray.add(entry.getKey().location().toString());
 			});
 			object.add("entries", registryArray);
 			TrophiesCommands.writeToFile(object, path);
 		} else {
-			context.getSource().registryAccess().registryOrThrow(key).entrySet().forEach(entry ->
+			context.getSource().registryAccess().lookupOrThrow(key).entrySet().forEach(entry ->
 				context.getSource().sendSystemMessage(Component.literal(entry.getKey().location().toString())));
-			context.getSource().sendSystemMessage(Component.literal("Registry Size: " + context.getSource().registryAccess().registryOrThrow(key).entrySet().size()));
+			context.getSource().sendSystemMessage(Component.literal("Registry Size: " + context.getSource().registryAccess().lookupOrThrow(key).entrySet().size()));
 		}
 	}
 }

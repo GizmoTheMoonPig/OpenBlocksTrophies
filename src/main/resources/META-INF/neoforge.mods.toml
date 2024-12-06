@@ -18,13 +18,13 @@ Brings back the trophies from OpenBlocks.
 [[dependencies.obtrophies]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.0.143,)"
+versionRange = "[21.4.0-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.obtrophies]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21]"
+versionRange = "[1.21.4]"
 ordering = "NONE"
 side = "BOTH"

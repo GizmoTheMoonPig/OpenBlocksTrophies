@@ -48,7 +48,7 @@ public class CreateDisplayTrophyCommand {
 	}
 
 	public static int createDisplayTrophy(CommandContext<CommandSourceStack> context, Collection<ServerPlayer> targets, Item displayItem, float scale, Vec3 offset, Vec3 rotation, float rotationSpeed, boolean bob, @Nullable ResourceLocation rightClickSound) {
-		DisplayTrophy trophy = new DisplayTrophy(displayItem, scale, offset, rotation, rotationSpeed, bob, Optional.ofNullable(BuiltInRegistries.SOUND_EVENT.get(rightClickSound)));
+		DisplayTrophy trophy = new DisplayTrophy(displayItem, scale, offset, rotation, rotationSpeed, bob, Optional.ofNullable(BuiltInRegistries.SOUND_EVENT.getValue(rightClickSound)));
 		for (ServerPlayer serverplayer : targets) {
 			ItemStack newStack = new ItemStack(TrophyRegistries.DISPLAY_TROPHY_ITEM.get());
 			newStack.set(TrophyRegistries.DISPLAY_TROPHY_INFO, trophy);

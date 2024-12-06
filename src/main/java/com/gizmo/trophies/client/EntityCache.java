@@ -5,10 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.npc.VillagerDataHolder;
 import net.minecraft.world.entity.npc.VillagerType;
@@ -31,7 +28,7 @@ public class EntityCache {
 			} else {
 				try {
 					entity = ENTITY_MAP.computeIfAbsent(type, t -> {
-						Entity created = t.create(level);
+						Entity created = t.create(level, EntitySpawnReason.LOAD);
 						if (created != null) {
 							created.setYRot(0.0F);
 							created.setYHeadRot(0.0F);
@@ -52,7 +49,7 @@ public class EntityCache {
 				defaultVariant.ifPresent(tag1 -> tag1.getAllKeys().forEach(s -> tag.put(s, Objects.requireNonNull(tag1.get(s)))));
 				if (!variant.isEmpty()) {
 					if (entity instanceof VillagerDataHolder villager) {
-						variant.getAllKeys().forEach(s -> villager.setVillagerData(new VillagerData(VillagerType.PLAINS, Objects.requireNonNull(Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.VILLAGER_PROFESSION).get(ResourceLocation.tryParse(variant.getString(s)))), 1)));
+						variant.getAllKeys().forEach(s -> villager.setVillagerData(new VillagerData(VillagerType.PLAINS, Objects.requireNonNull(Minecraft.getInstance().level.registryAccess().lookupOrThrow(Registries.VILLAGER_PROFESSION).getValue(ResourceLocation.tryParse(variant.getString(s)))), 1)));
 					} else {
 						variant.getAllKeys().forEach(s -> tag.put(s, Objects.requireNonNull(variant.get(s))));
 					}

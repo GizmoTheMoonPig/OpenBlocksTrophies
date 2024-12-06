@@ -19,6 +19,6 @@ public class LootModifierGenerator extends GlobalLootModifierProvider {
 
 	@Override
 	protected void start() {
-		add("quest_ram_trophy", new AddTrophyModifier(new LootItemCondition[]{LootTableIdCondition.builder(ResourceLocation.fromNamespaceAndPath("twilightforest", "entities/questing_ram_rewards")).build()}, BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("twilightforest", "quest_ram"))));
+		add("quest_ram_trophy", new AddTrophyModifier(new LootItemCondition[]{LootTableIdCondition.builder(ResourceLocation.fromNamespaceAndPath("twilightforest", "entities/questing_ram_rewards")).build()}, BuiltInRegistries.ENTITY_TYPE.getValue(ResourceLocation.fromNamespaceAndPath("twilightforest", "quest_ram"))));
 	}
 }

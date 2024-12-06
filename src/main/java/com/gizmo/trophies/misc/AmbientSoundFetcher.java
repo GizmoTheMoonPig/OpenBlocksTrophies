@@ -3,10 +3,7 @@ package com.gizmo.trophies.misc;
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.fml.util.ObfuscationReflectionHelper;
 
@@ -37,7 +34,7 @@ public class AmbientSoundFetcher {
 		if (!SOUND_CACHE.containsKey(type)) {
 			SoundEvent sound = null;
 			float pitch = 1.0F;
-			Entity entity = type.create(level);
+			Entity entity = type.create(level, EntitySpawnReason.LOAD);
 			if (handle_Mob_getAmbientSound != null && entity instanceof Mob mob) {
 				try {
 					sound = (SoundEvent) handle_Mob_getAmbientSound.invokeExact(mob);

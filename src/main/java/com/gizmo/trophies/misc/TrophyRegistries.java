@@ -14,6 +14,8 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -34,13 +36,13 @@ public class TrophyRegistries {
 	public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, OpenBlocksTrophies.MODID);
 	public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, OpenBlocksTrophies.MODID);
 
-	public static final DeferredBlock<Block> TROPHY = BLOCKS.register("trophy", () -> new TrophyBlock(BlockBehaviour.Properties.of().strength(1.5F, 6.0F).forceSolidOn()));
-	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TrophyBlockEntity>> TROPHY_BE = BLOCK_ENTITIES.register("trophy", () -> BlockEntityType.Builder.of(TrophyBlockEntity::new, TROPHY.get()).build(null));
-	public static final DeferredItem<Item> TROPHY_ITEM = ITEMS.register("trophy", () -> new TrophyItem(TROPHY.get(), new Item.Properties().stacksTo(1).fireResistant()));
+	public static final DeferredBlock<Block> TROPHY = BLOCKS.register("trophy", () -> new TrophyBlock(BlockBehaviour.Properties.of().strength(1.5F, 6.0F).forceSolidOn().setId(ResourceKey.create(Registries.BLOCK, OpenBlocksTrophies.prefix("trophy")))));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TrophyBlockEntity>> TROPHY_BE = BLOCK_ENTITIES.register("trophy", () -> new BlockEntityType<>(TrophyBlockEntity::new, TROPHY.get()));
+	public static final DeferredItem<Item> TROPHY_ITEM = ITEMS.register("trophy", () -> new TrophyItem(TROPHY.get(), new Item.Properties().stacksTo(1).fireResistant().setId(ResourceKey.create(Registries.ITEM, OpenBlocksTrophies.prefix("trophy")))));
 
-	public static final DeferredBlock<Block> DISPLAY_TROPHY = BLOCKS.register("display_trophy", () -> new DisplayTrophyBlock(BlockBehaviour.Properties.of().strength(1.5F, 6.0F).forceSolidOn()));
-	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DisplayTrophyBlockEntity>> DISPLAY_TROPHY_BE = BLOCK_ENTITIES.register("display_trophy", () -> BlockEntityType.Builder.of(DisplayTrophyBlockEntity::new, DISPLAY_TROPHY.get()).build(null));
-	public static final DeferredItem<Item> DISPLAY_TROPHY_ITEM = ITEMS.register("display_trophy", () -> new DisplayTrophyItem(DISPLAY_TROPHY.get(), new Item.Properties().stacksTo(1).fireResistant()));
+	public static final DeferredBlock<Block> DISPLAY_TROPHY = BLOCKS.register("display_trophy", () -> new DisplayTrophyBlock(BlockBehaviour.Properties.of().strength(1.5F, 6.0F).forceSolidOn().setId(ResourceKey.create(Registries.BLOCK, OpenBlocksTrophies.prefix("display_trophy")))));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DisplayTrophyBlockEntity>> DISPLAY_TROPHY_BE = BLOCK_ENTITIES.register("display_trophy", () -> new BlockEntityType<>(DisplayTrophyBlockEntity::new, DISPLAY_TROPHY.get()));
+	public static final DeferredItem<Item> DISPLAY_TROPHY_ITEM = ITEMS.register("display_trophy", () -> new DisplayTrophyItem(DISPLAY_TROPHY.get(), new Item.Properties().stacksTo(1).fireResistant().setId(ResourceKey.create(Registries.ITEM, OpenBlocksTrophies.prefix("display_trophy")))));
 
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<TrophyInfo>> TROPHY_INFO = COMPONENTS.register("trophy_info", () -> DataComponentType.<TrophyInfo>builder().persistent(TrophyInfo.CODEC).networkSynchronized(TrophyInfo.STREAM_CODEC).cacheEncoding().build());
 	public static final DeferredHolder<DataComponentType<?>, DataComponentType<DisplayTrophy>> DISPLAY_TROPHY_INFO = COMPONENTS.register("display_trophy_info", () -> DataComponentType.<DisplayTrophy>builder().persistent(DisplayTrophy.CODEC).networkSynchronized(ByteBufCodecs.fromCodec(DisplayTrophy.CODEC)).cacheEncoding().build());

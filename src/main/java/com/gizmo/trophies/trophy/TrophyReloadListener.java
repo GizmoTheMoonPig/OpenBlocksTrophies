@@ -6,22 +6,23 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.conditions.WithConditions;
 
 import java.util.*;
 
-public class TrophyReloadListener extends SimpleJsonResourceReloadListener {
+public class TrophyReloadListener extends SimpleJsonResourceReloadListener<JsonElement> {
 
-	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 	private static final TreeMap<ResourceLocation, Trophy> validTrophies = new TreeMap<>();
 
 	public TrophyReloadListener() {
-		super(GSON, "trophies");
+		super(ExtraCodecs.JSON, FileToIdConverter.json("trophies"));
 	}
 
 	public static TreeMap<ResourceLocation, Trophy> getValidTrophies() {

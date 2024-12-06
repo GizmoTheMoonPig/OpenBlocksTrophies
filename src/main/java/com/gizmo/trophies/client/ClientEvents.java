@@ -13,7 +13,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -25,9 +24,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 import net.neoforged.neoforge.client.event.RenderHighlightEvent;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import org.joml.Matrix4f;
 
@@ -39,19 +37,19 @@ public class ClientEvents {
 
 	//if you see this and have to ask, no, you aren't being added to this list. Good day.
 	private static final Map<String, Function<Component, Component>> SPECIAL_CASES = ImmutableMap.<String, Function<Component, Component>>builder()
-			.put("celintro", name -> name.plainCopy().withStyle(ChatFormatting.GREEN).append(Component.literal(" ☠").withStyle(ChatFormatting.WHITE)))
-			.put("fastcheeta", name -> name.plainCopy().withStyle(ChatFormatting.DARK_PURPLE).append(Component.literal(" \uD83C\uDF3C").withStyle(ChatFormatting.LIGHT_PURPLE)))
-			.put("derpderpling", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x641ACF))))
-			.put("bigdious", name -> name.plainCopy().withStyle(ChatFormatting.DARK_RED).append(Component.literal(" ☺")))
-			.put("melodioustwin", name -> name.plainCopy().withStyle(ChatFormatting.DARK_AQUA).append(Component.literal(" ♫")))
-			.put("badneighbour", name -> name.plainCopy().withStyle(ChatFormatting.YELLOW).append(Component.literal(" \uD83D\uDE97")))
-			.put("jodlodi", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x992D22))))
-			.put("benimatic", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x11806A))))
-			.put("killer_demon", name -> name.plainCopy().withStyle(ChatFormatting.RED))
-			.put("drullkus", name -> name.plainCopy().withStyle(ChatFormatting.GOLD))
-			.put("tamaized", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFA4EA))))
-			.put("alphaleaf", name -> name.plainCopy().withStyle(ChatFormatting.GREEN))
-			.build();
+		.put("celintro", name -> name.plainCopy().withStyle(ChatFormatting.GREEN).append(Component.literal(" ☠").withStyle(ChatFormatting.WHITE)))
+		.put("fastcheeta", name -> name.plainCopy().withStyle(ChatFormatting.DARK_PURPLE).append(Component.literal(" \uD83C\uDF3C").withStyle(ChatFormatting.LIGHT_PURPLE)))
+		.put("derpderpling", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x641ACF))))
+		.put("bigdious", name -> name.plainCopy().withStyle(ChatFormatting.DARK_RED).append(Component.literal(" ☺")))
+		.put("melodioustwin", name -> name.plainCopy().withStyle(ChatFormatting.DARK_AQUA).append(Component.literal(" ♫")))
+		.put("badneighbour", name -> name.plainCopy().withStyle(ChatFormatting.YELLOW).append(Component.literal(" \uD83D\uDE97")))
+		.put("jodlodi", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x992D22))))
+		.put("benimatic", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x11806A))))
+		.put("killer_demon", name -> name.plainCopy().withStyle(ChatFormatting.RED))
+		.put("drullkus", name -> name.plainCopy().withStyle(ChatFormatting.GOLD))
+		.put("tamaized", name -> name.plainCopy().setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFA4EA))))
+		.put("alphaleaf", name -> name.plainCopy().withStyle(ChatFormatting.GREEN))
+		.build();
 
 	public static final ModelLayerLocation PLAYER_TROPHY = new ModelLayerLocation(OpenBlocksTrophies.prefix("player_trophy"), "main");
 	public static final ModelLayerLocation SLIM_PLAYER_TROPHY = new ModelLayerLocation(OpenBlocksTrophies.prefix("slim_player_trophy"), "main");
@@ -65,13 +63,11 @@ public class ClientEvents {
 			event.registerLayerDefinition(PLAYER_TROPHY, () -> LayerDefinition.create(PlayerTrophyModel.createMesh(false), 64, 64));
 			event.registerLayerDefinition(SLIM_PLAYER_TROPHY, () -> LayerDefinition.create(PlayerTrophyModel.createMesh(true), 64, 64));
 		});
+		bus.addListener(RegisterSpecialModelRendererEvent.class, event -> {
+			event.register(OpenBlocksTrophies.prefix("trophy"), TrophySpecialRenderer.Unbaked.MAP_CODEC);
+			event.register(OpenBlocksTrophies.prefix("display_trophy"), DisplayTrophySpecialRenderer.Unbaked.MAP_CODEC);
+		});
 		NeoForge.EVENT_BUS.addListener(ClientEvents::dontRenderTrophyHitbox);
-		bus.addListener(RegisterClientExtensionsEvent.class, event -> event.registerItem(new IClientItemExtensions() {
-			@Override
-			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-				return new TrophyItemRenderer();
-			}
-		}, TrophyRegistries.TROPHY_ITEM.get(), TrophyRegistries.DISPLAY_TROPHY_ITEM.get()));
 	}
 
 	//disables rendering the trophy hitbox if there's no visible pedestal.

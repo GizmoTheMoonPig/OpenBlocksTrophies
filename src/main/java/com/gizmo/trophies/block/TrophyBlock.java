@@ -17,7 +17,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -70,7 +69,7 @@ public class TrophyBlock extends AbstractTrophyBlock {
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
 		BlockEntity be = level.getBlockEntity(pos);
 		if (be instanceof TrophyBlockEntity trophyBE) {
-			Trophy trophy = TrophyItem.getTrophy(stack);
+			Trophy trophy = TrophyItem.getTrophy(stack.getComponents());
 			if (trophy != null) {
 				trophyBE.setTrophy(trophy);
 				trophyBE.setTrophyName(stack.has(DataComponents.CUSTOM_NAME) ? stack.getHoverName().getString() : "");
@@ -92,7 +91,7 @@ public class TrophyBlock extends AbstractTrophyBlock {
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			Trophy trophy = trophyBE.getTrophy();
 			if (trophy != null) {
@@ -121,10 +120,10 @@ public class TrophyBlock extends AbstractTrophyBlock {
 		if (player.isShiftKeyDown()) {
 			level.setBlockAndUpdate(pos, state.cycle(PEDESTAL));
 			level.playSound(null, pos, SoundEvents.CANDLE_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
-			return InteractionResult.sidedSuccess(level.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
-		return InteractionResult.sidedSuccess(level.isClientSide());
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
@@ -141,12 +140,12 @@ public class TrophyBlock extends AbstractTrophyBlock {
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader reader, BlockPos pos, Player player) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
 		ItemStack newStack = new ItemStack(this);
-		if (reader.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
+		if (level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			newStack.set(TrophyRegistries.TROPHY_INFO, TrophyInfo.makeFromBlock(trophyBE));
 			if (!trophyBE.getTrophyName().isEmpty()) {
-				newStack.set(DataComponents.ITEM_NAME, Component.literal(trophyBE.getTrophyName()));
+				newStack.set(DataComponents.CUSTOM_NAME, Component.literal(trophyBE.getTrophyName()));
 			}
 			newStack.set(DataComponents.RARITY, TrophyItem.getTrophyRarity(newStack));
 		}

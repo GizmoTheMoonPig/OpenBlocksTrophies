@@ -5,7 +5,6 @@ import com.gizmo.trophies.misc.TrophyRegistries;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +19,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -44,7 +42,7 @@ public class DisplayTrophyBlock extends AbstractTrophyBlock {
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof DisplayTrophyBlockEntity trophy) {
 			if (trophy.display.rightClickSound().isPresent()) {
 				level.playSound(null, pos, trophy.display.rightClickSound().get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
-				return InteractionResult.sidedSuccess(level.isClientSide());
+				return InteractionResult.SUCCESS;
 			}
 		}
 		return super.useWithoutItem(state, level, pos, player, result);
@@ -64,9 +62,8 @@ public class DisplayTrophyBlock extends AbstractTrophyBlock {
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
 		ItemStack newStack = new ItemStack(this);
-		CompoundTag tag = new CompoundTag();
 		if (level.getBlockEntity(pos) instanceof DisplayTrophyBlockEntity trophy) {
 			newStack.set(TrophyRegistries.DISPLAY_TROPHY_INFO, trophy.display);
 			newStack.set(DataComponents.RARITY, trophy.display.displayItem().getDefaultInstance().getRarity());

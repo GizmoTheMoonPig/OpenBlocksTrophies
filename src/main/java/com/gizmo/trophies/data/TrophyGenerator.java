@@ -82,9 +82,9 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.MAGMA_CUBE).setScale(1.25F));
 		this.makeTrophy(new Trophy.Builder(EntityType.SQUID).setOffset(0.0D, 0.5D, 0.0D).setRightClickBehavior(new PlaceBlockBehavior(Blocks.WATER, PlaceBlockBehavior.PlacementMethod.ABOVE)));
 		this.makeTrophy(new Trophy.Builder(EntityType.MOOSHROOM).setRightClickBehavior(new PlaceBlockBehavior(Blocks.RED_MUSHROOM, PlaceBlockBehavior.PlacementMethod.AROUND))
-			.addVariant("Type", MushroomCow.MushroomType.RED.getSerializedName())
-			.addVariant("Type", MushroomCow.MushroomType.BROWN.getSerializedName())
-			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("Type", MushroomCow.MushroomType.RED.getSerializedName()))));
+			.addVariant("Type", MushroomCow.Variant.RED.getSerializedName())
+			.addVariant("Type", MushroomCow.Variant.BROWN.getSerializedName())
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("Type", MushroomCow.Variant.RED.getSerializedName()))));
 		this.makeTrophy(new Trophy.Builder(EntityType.IRON_GOLEM).setScale(0.75F));
 		this.makeTrophy(new Trophy.Builder(EntityType.SNOW_GOLEM).setRightClickBehavior(new PlaceBlockBehavior(Blocks.SNOW, PlaceBlockBehavior.PlacementMethod.AROUND))
 			.addVariant("Pumpkin", true)
@@ -208,9 +208,9 @@ public class TrophyGenerator extends TrophyProvider {
 			.addRegistryVariant("variant", Registries.CAT_VARIANT.location())
 			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("variant", "minecraft:red"))));
 		this.makeTrophy(new Trophy.Builder(EntityType.FOX).setRightClickBehavior(new ItemDropBehavior(Items.SWEET_BERRIES, 20000))
-			.addVariant("Type", Fox.Type.RED.getSerializedName())
-			.addVariant("Type", Fox.Type.SNOW.getSerializedName())
-			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("Type", Fox.Type.RED.getSerializedName()))));
+			.addVariant("Type", Fox.Variant.RED.getSerializedName())
+			.addVariant("Type", Fox.Variant.SNOW.getSerializedName())
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("Type", Fox.Variant.RED.getSerializedName()))));
 		this.makeTrophy(new Trophy.Builder(EntityType.PANDA).setScale(0.75F).setRightClickBehavior(new ItemDropBehavior(Items.BAMBOO, 20000))
 			.addVariant(this.buildPandaVariant(Panda.Gene.NORMAL.getSerializedName()))
 			.addVariant(this.buildPandaVariant(Panda.Gene.LAZY.getSerializedName()))
@@ -252,6 +252,7 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.BREEZE).setRightClickBehavior(new ShootProjectileBehavior(new ItemStack(Items.WIND_CHARGE), 1, false, Optional.of(SoundEvents.BREEZE_SHOOT))));
 		this.makeTrophy(new Trophy.Builder(EntityType.BOGGED).setRightClickBehavior(new ShootProjectileBehavior(new ItemStack(Holder.direct(Items.TIPPED_ARROW), 1, DataComponentPatch.builder().set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.POISON)).build()), 1, true, Optional.of(SoundEvents.ARROW_SHOOT))));
 		this.makeTrophy(new Trophy.Builder(EntityType.ARMADILLO).setScale(1.5F).setRightClickBehavior(new ClickWithItemBehavior(Items.BRUSH, false, new ItemDropBehavior(Items.ARMADILLO_SCUTE), 1000, SoundEvents.ARMADILLO_BRUSH)));
+		this.makeTrophy(new Trophy.Builder(EntityType.CREAKING).setScale(0.85F).setRightClickBehavior(new ItemDropBehavior(Items.RESIN_CLUMP, 20000)));
 	}
 
 	private CompoundTag buildPandaVariant(String gene) {

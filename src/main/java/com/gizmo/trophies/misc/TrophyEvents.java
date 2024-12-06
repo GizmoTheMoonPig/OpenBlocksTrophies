@@ -58,13 +58,13 @@ public class TrophyEvents {
 	public static void grantAdvancementBasedTrophies(AdvancementEvent.AdvancementEarnEvent event) {
 		if (ModList.get().isLoaded("the_bumblezone")) {
 			if (event.getAdvancement().id().equals(ResourceLocation.fromNamespaceAndPath("the_bumblezone", "the_bumblezone/the_queens_desire/journeys_end"))) {
-				ItemStack trophy = TrophyItem.loadEntityToTrophy(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("the_bumblezone", "bee_queen"))));
+				ItemStack trophy = TrophyItem.loadEntityToTrophy(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getValue(ResourceLocation.fromNamespaceAndPath("the_bumblezone", "bee_queen"))));
 				if (event.getEntity().addItem(trophy)) {
 					event.getEntity().drop(trophy, false);
 				}
 			}
 			if (event.getAdvancement().id().equals(ResourceLocation.fromNamespaceAndPath("the_bumblezone", "the_bumblezone/beehemoth/queen_beehemoth"))) {
-				ItemStack trophy = TrophyItem.loadVariantToTrophy(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.fromNamespaceAndPath("the_bumblezone", "beehemoth"))), Util.make(new CompoundTag(), tag -> tag.putBoolean("queen", true)));
+				ItemStack trophy = TrophyItem.loadVariantToTrophy(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getValue(ResourceLocation.fromNamespaceAndPath("the_bumblezone", "beehemoth"))), Util.make(new CompoundTag(), tag -> tag.putBoolean("queen", true)));
 				if (event.getEntity().addItem(trophy)) {
 					event.getEntity().drop(trophy, false);
 				}
@@ -74,7 +74,7 @@ public class TrophyEvents {
 
 	public static void maybeDropTrophy(LivingDropsEvent event) {
 		//follow gamerules and mob drop requirements
-		if (!event.getEntity().level().getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT) || !event.getEntity().shouldDropLoot())
+		if (!(event.getEntity().level() instanceof ServerLevel level) || !level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT) || !event.getEntity().shouldDropLoot())
 			return;
 
 		//players are a bit special.
@@ -90,12 +90,12 @@ public class TrophyEvents {
 				if (event.getSource().getEntity() instanceof FakePlayer && TrophyConfig.trophyDropSource != TrophyConfig.TrophySourceDrop.FAKE_PLAYER)
 					return;
 				Trophy trophy = Trophy.getTrophies().getOrDefault(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.PLAYER), new Trophy.Builder(EntityType.PLAYER).build());
-				dropChance = ((getLootingLevel((ServerLevel) event.getEntity().level(), event.getSource()) + (TROPHY_RANDOM.nextDouble() / 4)) * OpenBlocksTrophies.getTrophyDropChance(trophy)) - TROPHY_RANDOM.nextDouble();
+				dropChance = ((getLootingLevel(level, event.getSource()) + (TROPHY_RANDOM.nextDouble() / 4)) * OpenBlocksTrophies.getTrophyDropChance(trophy)) - TROPHY_RANDOM.nextDouble();
 			}
 			if (dropChance > 0.0D) {
 				ItemStack stack = TrophyItem.loadEntityToTrophy(EntityType.PLAYER);
 				stack.set(DataComponents.ITEM_NAME, Component.literal(player.getDisplayName().getString()));
-				event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack));
+				event.getDrops().add(new ItemEntity(level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack));
 			}
 		} else {
 			//don't drop trophies if the config doesn't allow this source to
@@ -107,9 +107,9 @@ public class TrophyEvents {
 			if (Trophy.getTrophies().containsKey(BuiltInRegistries.ENTITY_TYPE.getKey(event.getEntity().getType()))) {
 				Trophy trophy = Trophy.getTrophies().get(BuiltInRegistries.ENTITY_TYPE.getKey(event.getEntity().getType()));
 				if (trophy != null) {
-					double chance = ((getLootingLevel((ServerLevel) event.getEntity().level(), event.getSource()) + (TROPHY_RANDOM.nextDouble() / 4)) * OpenBlocksTrophies.getTrophyDropChance(trophy)) - TROPHY_RANDOM.nextDouble();
+					double chance = ((getLootingLevel(level, event.getSource()) + (TROPHY_RANDOM.nextDouble() / 4)) * OpenBlocksTrophies.getTrophyDropChance(trophy)) - TROPHY_RANDOM.nextDouble();
 					if (chance > 0.0D) {
-						event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadVariantToTrophy(trophy.type(), fetchVariantIfAny(event.getEntity(), trophy))));
+						event.getDrops().add(new ItemEntity(level, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), TrophyItem.loadVariantToTrophy(trophy.type(), fetchVariantIfAny(event.getEntity(), trophy))));
 					}
 				}
 			}

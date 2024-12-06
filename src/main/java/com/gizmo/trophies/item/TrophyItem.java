@@ -6,6 +6,7 @@ import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -36,10 +37,9 @@ public class TrophyItem extends BlockItem {
 	}
 
 	@Nullable
-	public static Trophy getTrophy(@Nonnull ItemStack stack) {
-		TrophyInfo info = stack.get(TrophyRegistries.TROPHY_INFO);
-		if (info != null) {
-			ResourceLocation entityKey = BuiltInRegistries.ENTITY_TYPE.getKey(info.type());
+	public static Trophy getTrophy(@Nullable DataComponentMap map) {
+		if (map != null && map.has(TrophyRegistries.TROPHY_INFO.get())) {
+			ResourceLocation entityKey = BuiltInRegistries.ENTITY_TYPE.getKey(map.get(TrophyRegistries.TROPHY_INFO.get()).type());
 			if (Trophy.getTrophies().containsKey(entityKey)) {
 				return Trophy.getTrophies().get(entityKey);
 			}
@@ -48,10 +48,9 @@ public class TrophyItem extends BlockItem {
 		return null;
 	}
 
-	public static boolean hasCycleOnTrophy(@Nonnull ItemStack stack) {
-		TrophyInfo info = stack.get(TrophyRegistries.TROPHY_INFO);
-		if (info != null) {
-			return info.cycling().isPresent();
+	public static boolean hasCycleOnTrophy(@Nullable DataComponentMap map) {
+		if (map != null && map.has(TrophyRegistries.TROPHY_INFO.get())) {
+			return map.get(TrophyRegistries.TROPHY_INFO.get()).cycling().isPresent();
 		}
 
 		return false;
@@ -75,17 +74,19 @@ public class TrophyItem extends BlockItem {
 		return stack;
 	}
 
-	public static CompoundTag getTrophyVariant(@Nonnull ItemStack stack) {
-		TrophyInfo info = stack.get(TrophyRegistries.TROPHY_INFO);
-		if (info != null && info.variant().isPresent()) {
-			return info.variant().get();
+	public static CompoundTag getTrophyVariant(@Nullable DataComponentMap map) {
+		if (map != null && map.has(TrophyRegistries.TROPHY_INFO.get())) {
+			TrophyInfo info = map.get(TrophyRegistries.TROPHY_INFO.get());
+			if (info.variant().isPresent()) {
+				return info.variant().get();
+			}
 		}
 
 		return new CompoundTag();
 	}
 
 	public static Rarity getTrophyRarity(ItemStack stack) {
-		Trophy trophy = getTrophy(stack);
+		Trophy trophy = getTrophy(stack.getComponents());
 		if (trophy != null) {
 			if (trophy.type() == EntityType.PLAYER) {
 				return Rarity.EPIC;
@@ -100,8 +101,8 @@ public class TrophyItem extends BlockItem {
 
 	@Override
 	public Component getName(ItemStack stack) {
-		Trophy trophy = getTrophy(stack);
-		if (trophy != null && !hasCycleOnTrophy(stack)) {
+		Trophy trophy = getTrophy(stack.getComponents());
+		if (trophy != null && !hasCycleOnTrophy(stack.getComponents())) {
 			return Component.translatable(TranslatableStrings.TROPHY_WITH_ENTITY, trophy.type().getDescription().plainCopy().getString());
 		}
 		return super.getName(stack);
@@ -109,11 +110,11 @@ public class TrophyItem extends BlockItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-		Trophy trophy = getTrophy(stack);
-		if (trophy != null && !hasCycleOnTrophy(stack)) {
+		Trophy trophy = getTrophy(stack.getComponents());
+		if (trophy != null && !hasCycleOnTrophy(stack.getComponents())) {
 			tooltip.add(Component.translatable(TranslatableStrings.FROM_MOD_ID, this.getModIdForTooltip(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(trophy.type())).getNamespace())).withStyle(ChatFormatting.GRAY));
 			if (flag.isAdvanced()) {
-				CompoundTag variant = getTrophyVariant(stack);
+				CompoundTag variant = getTrophyVariant(stack.getComponents());
 				HolderLookup.Provider provider = context.registries();
 				if (provider != null && !trophy.getVariants(provider).isEmpty() && !variant.isEmpty()) {
 					variant.getAllKeys().forEach(s -> tooltip.add(Component.translatable(TranslatableStrings.VARIANT_FORMATTER, s, Objects.requireNonNull(variant.get(s)).getAsString()).withStyle(ChatFormatting.GRAY)));

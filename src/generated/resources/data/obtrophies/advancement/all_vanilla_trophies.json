@@ -211,6 +211,21 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "creaking": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:creaking"
+              }
+            },
+            "items": "obtrophies:trophy"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "creeper": {
       "conditions": {
         "items": [
@@ -1249,6 +1264,9 @@
       "cow"
     ],
     [
+      "creaking"
+    ],
+    [
       "creeper"
     ],
     [
@@ -1264,13 +1282,13 @@
       "elder_guardian"
     ],
     [
-      "ender_dragon"
-    ],
-    [
       "enderman"
     ],
     [
       "endermite"
+    ],
+    [
+      "ender_dragon"
     ],
     [
       "evoker"

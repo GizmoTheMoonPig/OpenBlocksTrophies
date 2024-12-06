@@ -93,15 +93,15 @@ public class OpenBlocksTrophies {
 		CustomTrophyBehaviors.CUSTOM_BEHAVIORS.register(bus);
 	}
 
-	public void gatherData(GatherDataEvent event) {
-		event.getGenerator().addProvider(event.includeClient(), new LangGenerator(event.getGenerator().getPackOutput()));
-		event.getGenerator().addProvider(event.includeServer(), new LootModifierGenerator(event.getGenerator().getPackOutput(), event.getLookupProvider()));
-		event.getGenerator().addProvider(event.includeServer(), new TrophyGenerator(event.getGenerator().getPackOutput()));
-		event.getGenerator().addProvider(event.includeServer(), new TrophyAdvancementProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
+	public void gatherData(GatherDataEvent.Client event) {
+		event.getGenerator().addProvider(true, new LangGenerator(event.getGenerator().getPackOutput()));
+		event.getGenerator().addProvider(true, new LootModifierGenerator(event.getGenerator().getPackOutput(), event.getLookupProvider()));
+		event.getGenerator().addProvider(true, new TrophyGenerator(event.getGenerator().getPackOutput()));
+		event.getGenerator().addProvider(true, new TrophyAdvancementProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
 		event.getGenerator().addProvider(true, new PackMetadataGenerator(event.getGenerator().getPackOutput()).add(PackMetadataSection.TYPE, new PackMetadataSection(
-				Component.literal("Trophy Resources"),
-				DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA),
-				Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
+			Component.literal("Trophy Resources"),
+			DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA),
+			Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
 	}
 
 	public void registerPacket(RegisterPayloadHandlersEvent event) {

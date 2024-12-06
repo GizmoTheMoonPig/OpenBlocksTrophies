@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "obtrophies:item/trophy",
+    "model": {
+      "type": "obtrophies:trophy"
+    }
+  }
+}
