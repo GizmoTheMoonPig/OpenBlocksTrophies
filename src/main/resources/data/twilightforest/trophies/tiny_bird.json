@@ -11,6 +11,6 @@
   "scale": 1.75,
   "variants": {
     "key": "BirdType",
-    "registry": "twilightforest:tiny_bird_variant"
+    "registry": "twilight:tiny_bird_variant"
   }
 }

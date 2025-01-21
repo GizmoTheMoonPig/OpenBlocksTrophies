@@ -1,5 +1,9 @@
 {
   "entity": "bosses_of_mass_destruction:obsidilith",
   "scale": 0.45,
-  "offset": 0.7
+  "offset": [
+    0.0,
+    0.7,
+    0.0
+  ]
 }
