@@ -1,14 +1,14 @@
 {
   "entity": "touhou_little_maid:fairy",
   "variants": [
-	{
-	  "FairyType": 0
-	},
-	{
-	  "FairyType": 1
-	},
-	{
-	  "FairyType": 2
-	}
+    {
+      "FairyType": 0
+    },
+    {
+      "FairyType": 1
+    },
+    {
+      "FairyType": 2
+    }
   ]
 }

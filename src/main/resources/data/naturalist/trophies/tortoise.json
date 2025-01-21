@@ -1,16 +1,15 @@
 {
   "entity": "naturalist:tortoise",
   "scale": 0.9,
-
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    }
   ]
 }

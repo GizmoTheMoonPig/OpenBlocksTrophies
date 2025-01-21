@@ -1,20 +1,20 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 50000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:lost_tentacle"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 50000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:lost_tentacle"
+    }
   },
   "entity": "alexsmobs:giant_squid",
   "scale": 0.5,
   "variants": [
-	{
-	  "Blue": false
-	},
-	{
-	  "Blue": true
-	}
+    {
+      "Blue": false
+    },
+    {
+      "Blue": true
+    }
   ]
 }

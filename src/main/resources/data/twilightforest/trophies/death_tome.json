@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:paper"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:paper"
+    }
   },
   "entity": "twilightforest:death_tome"
 }

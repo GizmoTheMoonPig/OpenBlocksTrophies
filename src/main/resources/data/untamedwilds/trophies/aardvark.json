@@ -1,17 +1,17 @@
 {
   "entity": "untamedwilds:aardvark",
   "default_variant": {
-	"Size": 1.0
+    "Size": 1.0
   },
   "variants": [
-	{
-	  "Skin": 0
-	},
-	{
-	  "Skin": 1
-	},
-	{
-	  "Skin": 2
-	}
+    {
+      "Skin": 0
+    },
+    {
+      "Skin": 1
+    },
+    {
+      "Skin": 2
+    }
   ]
 }

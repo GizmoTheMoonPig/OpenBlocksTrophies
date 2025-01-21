@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:coal"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:coal"
+    }
   },
   "entity": "ornamental:coal_golem"
 }

@@ -1,81 +1,81 @@
 {
   "entity": "untamedwilds:big_cat",
   "default_variant": {
-	"Size": 1.0
+    "Size": 1.0
   },
   "variants": [
-	{
-	  "Variant": 0,
-	  "Gender": 0,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 0,
-	  "Gender": 1,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 0
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 1
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 2
-	},
-	{
-	  "Variant": 2,
-	  "Skin": 0
-	},
-	{
-	  "Variant": 2,
-	  "Skin": 1
-	},
-	{
-	  "Variant": 2,
-	  "Skin": 2
-	},
-	{
-	  "Variant": 3,
-	  "Skin": 0,
-	  "Gender": 0,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 3,
-	  "Skin": 1,
-	  "Gender": 0,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 3,
-	  "Skin": 0,
-	  "Gender": 1,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 3,
-	  "Skin": 1,
-	  "Gender": 1,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 4
-	},
-	{
-	  "Variant": 5
-	},
-	{
-	  "Variant": 6
-	},
-	{
-	  "Variant": 7
-	},
-	{
-	  "Variant": 8
-	}
+    {
+      "Variant": 0,
+      "Gender": 0,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 0,
+      "Gender": 1,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 1,
+      "Skin": 0
+    },
+    {
+      "Variant": 1,
+      "Skin": 1
+    },
+    {
+      "Variant": 1,
+      "Skin": 2
+    },
+    {
+      "Variant": 2,
+      "Skin": 0
+    },
+    {
+      "Variant": 2,
+      "Skin": 1
+    },
+    {
+      "Variant": 2,
+      "Skin": 2
+    },
+    {
+      "Variant": 3,
+      "Skin": 0,
+      "Gender": 0,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 3,
+      "Skin": 1,
+      "Gender": 0,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 3,
+      "Skin": 0,
+      "Gender": 1,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 3,
+      "Skin": 1,
+      "Gender": 1,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 4
+    },
+    {
+      "Variant": 5
+    },
+    {
+      "Variant": 6
+    },
+    {
+      "Variant": 7
+    },
+    {
+      "Variant": 8
+    }
   ]
 }

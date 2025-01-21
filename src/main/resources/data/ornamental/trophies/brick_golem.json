@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 10000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:brick"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 10000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:brick"
+    }
   },
   "entity": "ornamental:brick_golem"
 }

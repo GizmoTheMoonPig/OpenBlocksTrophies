@@ -1,7 +1,7 @@
 {
   "entity": "hamsters:hamster",
   "scale": 1.75,
-  "variants":[
+  "variants": [
     {
       "Variant": 0
     },

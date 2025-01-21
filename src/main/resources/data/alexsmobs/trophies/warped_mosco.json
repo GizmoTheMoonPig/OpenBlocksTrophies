@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 10000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:hemolymph_sac"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 10000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:hemolymph_sac"
+    }
   },
   "drop_chance": 0.0075,
   "entity": "alexsmobs:warped_mosco",

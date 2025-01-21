@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:tuff"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:tuff"
+    }
   },
   "entity": "alexsmobs:rocky_roller",
   "scale": 0.9

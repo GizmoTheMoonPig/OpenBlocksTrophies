@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:gold_ingot"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:gold_ingot"
+    }
   },
   "entity": "ornamental:gold_golem",
   "scale": 0.95

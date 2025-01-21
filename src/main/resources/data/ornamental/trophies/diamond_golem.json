@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:diamond"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:diamond"
+    }
   },
   "entity": "ornamental:diamond_golem"
 }

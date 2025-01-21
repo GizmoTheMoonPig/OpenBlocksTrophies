@@ -2,20 +2,20 @@
   "entity": "cnb:lizard",
   "scale": 1.75,
   "variants": [
-	{
-	  "LizardType": "cnb:desert"
-	},
-	{
-	  "LizardType": "cnb:desert_2"
-	},
-	{
-	  "LizardType": "cnb:jungle"
-	},
-	{
-	  "LizardType": "cnb:jungle_2"
-	},
-	{
-	  "LizardType": "cnb:mushroom"
-	}
+    {
+      "LizardType": "cnb:desert"
+    },
+    {
+      "LizardType": "cnb:desert_2"
+    },
+    {
+      "LizardType": "cnb:jungle"
+    },
+    {
+      "LizardType": "cnb:jungle_2"
+    },
+    {
+      "LizardType": "cnb:mushroom"
+    }
   ]
 }

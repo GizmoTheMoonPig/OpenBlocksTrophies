@@ -1,8 +1,8 @@
 {
   "behavior": {
-	"type": "obtrophies:explosion",
-	"power": 3,
-	"destructive": false
+    "type": "obtrophies:explosion",
+    "power": 3,
+    "destructive": false
   },
   "entity": "twilightforest:unstable_ice_core"
 }

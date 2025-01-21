@@ -2,68 +2,68 @@
   "entity": "upgrade_aquatic:pike",
   "scale": 0.75,
   "variants": [
-	{
-	  "PikeType": 1
-	},
-	{
-	  "PikeType": 2
-	},
-	{
-	  "PikeType": 3
-	},
-	{
-	  "PikeType": 4
-	},
-	{
-	  "PikeType": 5
-	},
-	{
-	  "PikeType": 6
-	},
-	{
-	  "PikeType": 7
-	},
-	{
-	  "PikeType": 8
-	},
-	{
-	  "PikeType": 9
-	},
-	{
-	  "PikeType": 10
-	},
-	{
-	  "PikeType": 11
-	},
-	{
-	  "PikeType": 12
-	},
-	{
-	  "PikeType": 13
-	},
-	{
-	  "PikeType": 14
-	},
-	{
-	  "PikeType": 15
-	},
-	{
-	  "PikeType": 16
-	},
-	{
-	  "PikeType": 17
-	},
-	{
-	  "PikeType": 18
-	},
-	{
-	  "PikeType": 19
-	},
-	{
-	  "PikeType": 20
-	},
-	{
-	  "PikeType": 21
-	}
+    {
+      "PikeType": 1
+    },
+    {
+      "PikeType": 2
+    },
+    {
+      "PikeType": 3
+    },
+    {
+      "PikeType": 4
+    },
+    {
+      "PikeType": 5
+    },
+    {
+      "PikeType": 6
+    },
+    {
+      "PikeType": 7
+    },
+    {
+      "PikeType": 8
+    },
+    {
+      "PikeType": 9
+    },
+    {
+      "PikeType": 10
+    },
+    {
+      "PikeType": 11
+    },
+    {
+      "PikeType": 12
+    },
+    {
+      "PikeType": 13
+    },
+    {
+      "PikeType": 14
+    },
+    {
+      "PikeType": 15
+    },
+    {
+      "PikeType": 16
+    },
+    {
+      "PikeType": 17
+    },
+    {
+      "PikeType": 18
+    },
+    {
+      "PikeType": 19
+    },
+    {
+      "PikeType": 20
+    },
+    {
+      "PikeType": 21
+    }
   ]
 }

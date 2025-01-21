@@ -3,6 +3,6 @@
   "entity": "aether:slider",
   "scale": 0.79,
   "default_variant": {
-	"Awake": true
+    "Awake": true
   }
 }

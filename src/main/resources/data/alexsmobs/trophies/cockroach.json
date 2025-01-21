@@ -2,11 +2,11 @@
   "entity": "alexsmobs:cockroach",
   "scale": 1.5,
   "variants": [
-	{
-	  "Maracas": false
-	},
-	{
-	  "Maracas": true
-	}
+    {
+      "Maracas": false
+    },
+    {
+      "Maracas": true
+    }
   ]
 }

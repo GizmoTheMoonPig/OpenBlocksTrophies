@@ -1,19 +1,19 @@
 {
   "behavior": {
-	"type": "obtrophies:right_click_item",
-	"cooldown": 20000,
-	"execute_behavior": {
-	  "type": "obtrophies:item",
-	  "item": {
-		"Count": 1,
-		"id": "alexsmobs:fish_oil"
-	  }
-	},
-	"item_to_use": {
-	  "Count": 1,
-	  "id": "minecraft:glass_bottle"
-	},
-	"shrink_item_stack": true
+    "type": "obtrophies:right_click_item",
+    "cooldown": 20000,
+    "execute_behavior": {
+      "type": "obtrophies:item",
+      "item": {
+        "Count": 1,
+        "id": "alexsmobs:fish_oil"
+      }
+    },
+    "item_to_use": {
+      "Count": 1,
+      "id": "minecraft:glass_bottle"
+    },
+    "shrink_item_stack": true
   },
   "entity": "alexsmobs:blobfish",
   "scale": 1.5

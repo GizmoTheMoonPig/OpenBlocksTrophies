@@ -2,71 +2,71 @@
   "entity": "productivebees:configurable_bee",
   "scale": 1.5,
   "variants": [
-	{
-	  "type": "productivebees:amber"
-	},
-	{
-	  "type": "productivebees:coal"
-	},
-	{
-	  "type": "productivebees:draconic"
-	},
-	{
-	  "type": "productivebees:ender"
-	},
-	{
-	  "type": "productivebees:experience"
-	},
-	{
-	  "type": "productivebees:frosty"
-	},
-	{
-	  "type": "productivebees:ghostly"
-	},
-	{
-	  "type": "productivebees:kamikaz"
-	},
-	{
-	  "type": "productivebees:magmatic"
-	},
-	{
-	  "type": "productivebees:obsidian"
-	},
-	{
-	  "type": "productivebees:pepto_bismol"
-	},
-	{
-	  "type": "productivebees:prismarine"
-	},
-	{
-	  "type": "productivebees:sculk"
-	},
-	{
-	  "type": "productivebees:silky"
-	},
-	{
-	  "type": "productivebees:skeletal"
-	},
-	{
-	  "type": "productivebees:slimy"
-	},
-	{
-	  "type": "productivebees:sponge"
-	},
-	{
-	  "type": "productivebees:sugarbag"
-	},
-	{
-	  "type": "productivebees:sussy"
-	},
-	{
-	  "type": "productivebees:wanna"
-	},
-	{
-	  "type": "productivebees:withered"
-	},
-	{
-	  "type": "productivebees:zombie"
-	}
+    {
+      "type": "productivebees:amber"
+    },
+    {
+      "type": "productivebees:coal"
+    },
+    {
+      "type": "productivebees:draconic"
+    },
+    {
+      "type": "productivebees:ender"
+    },
+    {
+      "type": "productivebees:experience"
+    },
+    {
+      "type": "productivebees:frosty"
+    },
+    {
+      "type": "productivebees:ghostly"
+    },
+    {
+      "type": "productivebees:kamikaz"
+    },
+    {
+      "type": "productivebees:magmatic"
+    },
+    {
+      "type": "productivebees:obsidian"
+    },
+    {
+      "type": "productivebees:pepto_bismol"
+    },
+    {
+      "type": "productivebees:prismarine"
+    },
+    {
+      "type": "productivebees:sculk"
+    },
+    {
+      "type": "productivebees:silky"
+    },
+    {
+      "type": "productivebees:skeletal"
+    },
+    {
+      "type": "productivebees:slimy"
+    },
+    {
+      "type": "productivebees:sponge"
+    },
+    {
+      "type": "productivebees:sugarbag"
+    },
+    {
+      "type": "productivebees:sussy"
+    },
+    {
+      "type": "productivebees:wanna"
+    },
+    {
+      "type": "productivebees:withered"
+    },
+    {
+      "type": "productivebees:zombie"
+    }
   ]
 }

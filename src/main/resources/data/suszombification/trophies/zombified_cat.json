@@ -1,13 +1,13 @@
 {
   "behavior": {
-	"type": "obtrophies:loot_table",
-	"cooldown": 20000,
-	"loot_table": "suszombification:gameplay/zombified_cat_morning_gift"
+    "type": "obtrophies:loot_table",
+    "cooldown": 20000,
+    "loot_table": "suszombification:gameplay/zombified_cat_morning_gift"
   },
   "entity": "suszombification:zombified_cat",
   "scale": 1.25,
   "variants": {
-	"key": "variant",
-	"registry": "minecraft:cat_variant"
+    "key": "variant",
+    "registry": "minecraft:cat_variant"
   }
 }

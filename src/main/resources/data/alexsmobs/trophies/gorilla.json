@@ -1,11 +1,11 @@
 {
   "entity": "alexsmobs:gorilla",
   "variants": [
-	{
-	  "Silverback": false
-	},
-	{
-	  "Silverback": true
-	}
+    {
+      "Silverback": false
+    },
+    {
+      "Silverback": true
+    }
   ]
 }

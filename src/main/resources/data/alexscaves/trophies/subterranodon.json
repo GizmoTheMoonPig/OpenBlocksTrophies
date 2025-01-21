@@ -2,14 +2,14 @@
   "entity": "alexscaves:subterranodon",
   "scale": 0.8,
   "variants": [
-	{
-	  "AltSkin": 0
-	},
-	{
-	  "AltSkin": 1
-	},
-	{
-	  "AltSkin": 2
-	}
+    {
+      "AltSkin": 0
+    },
+    {
+      "AltSkin": 1
+    },
+    {
+      "AltSkin": 2
+    }
   ]
 }

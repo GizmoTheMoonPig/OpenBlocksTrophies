@@ -3,6 +3,6 @@
   "entity": "witherstormmod:wither_storm",
   "scale": 0.075,
   "default_variant": {
-	"Phase": 4
+    "Phase": 4
   }
 }

@@ -2,20 +2,20 @@
   "entity": "iceandfire:pixie",
   "scale": 2.0,
   "variants": [
-	{
-	  "Color": 0
-	},
-	{
-	  "Color": 1
-	},
-	{
-	  "Color": 2
-	},
-	{
-	  "Color": 3
-	},
-	{
-	  "Color": 4
-	}
+    {
+      "Color": 0
+    },
+    {
+      "Color": 1
+    },
+    {
+      "Color": 2
+    },
+    {
+      "Color": 3
+    },
+    {
+      "Color": 4
+    }
   ]
 }

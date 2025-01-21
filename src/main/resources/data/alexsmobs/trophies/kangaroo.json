@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:kangaroo_hide"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:kangaroo_hide"
+    }
   },
   "entity": "alexsmobs:kangaroo",
   "scale": 0.75

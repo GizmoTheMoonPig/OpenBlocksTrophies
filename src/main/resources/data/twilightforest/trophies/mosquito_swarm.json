@@ -1,9 +1,9 @@
 {
   "behavior": {
-	"type": "obtrophies:mob_effect",
-	"effect": "minecraft:hunger",
-	"time": 200,
-	"amplifier": 1
+    "type": "obtrophies:mob_effect",
+    "effect": "minecraft:hunger",
+    "time": 200,
+    "amplifier": 1
   },
   "entity": "twilightforest:mosquito_swarm"
 }

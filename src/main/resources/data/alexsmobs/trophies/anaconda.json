@@ -1,20 +1,20 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:shed_snake_skin"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:shed_snake_skin"
+    }
   },
   "entity": "alexsmobs:anaconda",
   "scale": 1.25,
   "variants": [
-	{
-	  "Yellow": false
-	},
-	{
-	  "Yellow": true
-	}
+    {
+      "Yellow": false
+    },
+    {
+      "Yellow": true
+    }
   ]
 }

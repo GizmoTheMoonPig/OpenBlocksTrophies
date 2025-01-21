@@ -1,33 +1,33 @@
 {
   "behavior": {
-	"type": "obtrophies:right_click_item",
-	"cooldown": 200,
-	"execute_behavior": {
-	  "type": "obtrophies:loot_table",
-	  "loot_table": "alexsmobs:gameplay/seal_reward",
-	  "rolls": 1
-	},
-	"item_to_use": "minecraft:fishes",
-	"shrink_item_stack": true
+    "type": "obtrophies:right_click_item",
+    "cooldown": 200,
+    "execute_behavior": {
+      "type": "obtrophies:loot_table",
+      "loot_table": "alexsmobs:gameplay/seal_reward",
+      "rolls": 1
+    },
+    "item_to_use": "minecraft:fishes",
+    "shrink_item_stack": true
   },
   "entity": "alexsmobs:seal",
   "scale": 0.75,
   "variants": [
-	{
-	  "Arctic": false,
-	  "Variant": 0
-	},
-	{
-	  "Arctic": false,
-	  "Variant": 1
-	},
-	{
-	  "Arctic": true,
-	  "Variant": 0
-	},
-	{
-	  "Arctic": true,
-	  "Variant": 1
-	}
+    {
+      "Arctic": false,
+      "Variant": 0
+    },
+    {
+      "Arctic": false,
+      "Variant": 1
+    },
+    {
+      "Arctic": true,
+      "Variant": 0
+    },
+    {
+      "Arctic": true,
+      "Variant": 1
+    }
   ]
 }

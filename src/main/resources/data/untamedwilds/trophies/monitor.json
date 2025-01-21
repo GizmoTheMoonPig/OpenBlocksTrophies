@@ -1,67 +1,67 @@
 {
   "entity": "untamedwilds:monitor",
   "default_variant": {
-	"Size": 1.0
+    "Size": 1.0
   },
   "variants": [
-	{
-	  "Variant": 0,
-	  "Skin": 0
-	},
-	{
-	  "Variant": 0,
-	  "Skin": 100
-	},
-	{
-	  "Variant": 0,
-	  "Skin": 1
-	},
-	{
-	  "Variant": 0,
-	  "Skin": 2
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 0
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 1
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 2
-	},
-	{
-	  "Variant": 2
-	},
-	{
-	  "Variant": 3,
-	  "Skin": 0
-	},
-	{
-	  "Variant": 3,
-	  "Skin": 1
-	},
-	{
-	  "Variant": 4,
-	  "Skin": 0
-	},
-	{
-	  "Variant": 4,
-	  "Skin": 100
-	},
-	{
-	  "Variant": 4,
-	  "Skin": 1
-	},
-	{
-	  "Variant": 4,
-	  "Skin": 2
-	},
-	{
-	  "Variant": 4,
-	  "Skin": 3
-	}
+    {
+      "Variant": 0,
+      "Skin": 0
+    },
+    {
+      "Variant": 0,
+      "Skin": 100
+    },
+    {
+      "Variant": 0,
+      "Skin": 1
+    },
+    {
+      "Variant": 0,
+      "Skin": 2
+    },
+    {
+      "Variant": 1,
+      "Skin": 0
+    },
+    {
+      "Variant": 1,
+      "Skin": 1
+    },
+    {
+      "Variant": 1,
+      "Skin": 2
+    },
+    {
+      "Variant": 2
+    },
+    {
+      "Variant": 3,
+      "Skin": 0
+    },
+    {
+      "Variant": 3,
+      "Skin": 1
+    },
+    {
+      "Variant": 4,
+      "Skin": 0
+    },
+    {
+      "Variant": 4,
+      "Skin": 100
+    },
+    {
+      "Variant": 4,
+      "Skin": 1
+    },
+    {
+      "Variant": 4,
+      "Skin": 2
+    },
+    {
+      "Variant": 4,
+      "Skin": 3
+    }
   ]
 }

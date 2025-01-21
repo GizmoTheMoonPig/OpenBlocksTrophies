@@ -2,14 +2,14 @@
   "entity": "alexsmobs:catfish",
   "scale": 0.85,
   "variants": [
-	{
-	  "CatfishSize": 0
-	},
-	{
-	  "CatfishSize": 1
-	},
-	{
-	  "CatfishSize": 2
-	}
+    {
+      "CatfishSize": 0
+    },
+    {
+      "CatfishSize": 1
+    },
+    {
+      "CatfishSize": 2
+    }
   ]
 }

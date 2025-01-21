@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 10000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:acacia_blossom"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 10000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:acacia_blossom"
+    }
   },
   "entity": "alexsmobs:elephant",
   "scale": 0.4

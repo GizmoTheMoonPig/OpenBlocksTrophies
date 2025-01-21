@@ -2,99 +2,99 @@
   "entity": "untamedwilds:butterfly",
   "scale": 2.0,
   "default_variant": {
-	"Size": 1.0
+    "Size": 1.0
   },
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2,
-	  "Gender": 0,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 2,
-	  "Gender": 1,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 3
-	},
-	{
-	  "Variant": 4,
-	  "Skin": 0
-	},
-	{
-	  "Variant": 4,
-	  "Skin": 1
-	},
-	{
-	  "Variant": 5,
-	  "Gender": 0,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 5,
-	  "Gender": 1,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 6
-	},
-	{
-	  "Variant": 7
-	},
-	{
-	  "Variant": 8
-	},
-	{
-	  "Variant": 9
-	},
-	{
-	  "Variant": 10
-	},
-	{
-	  "Variant": 11
-	},
-	{
-	  "Variant": 12
-	},
-	{
-	  "Variant": 13,
-	  "Skin": 0
-	},
-	{
-	  "Variant": 13,
-	  "Skin": 1
-	},
-	{
-	  "Variant": 14,
-	  "Gender": 0,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 14,
-	  "Gender": 1,
-	  "hasDimorphism": 1
-	},
-	{
-	  "Variant": 15
-	},
-	{
-	  "Variant": 16
-	},
-	{
-	  "Variant": 17
-	},
-	{
-	  "Variant": 18
-	},
-	{
-	  "Variant": 19
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2,
+      "Gender": 0,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 2,
+      "Gender": 1,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 3
+    },
+    {
+      "Variant": 4,
+      "Skin": 0
+    },
+    {
+      "Variant": 4,
+      "Skin": 1
+    },
+    {
+      "Variant": 5,
+      "Gender": 0,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 5,
+      "Gender": 1,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 6
+    },
+    {
+      "Variant": 7
+    },
+    {
+      "Variant": 8
+    },
+    {
+      "Variant": 9
+    },
+    {
+      "Variant": 10
+    },
+    {
+      "Variant": 11
+    },
+    {
+      "Variant": 12
+    },
+    {
+      "Variant": 13,
+      "Skin": 0
+    },
+    {
+      "Variant": 13,
+      "Skin": 1
+    },
+    {
+      "Variant": 14,
+      "Gender": 0,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 14,
+      "Gender": 1,
+      "hasDimorphism": 1
+    },
+    {
+      "Variant": 15
+    },
+    {
+      "Variant": 16
+    },
+    {
+      "Variant": 17
+    },
+    {
+      "Variant": 18
+    },
+    {
+      "Variant": 19
+    }
   ]
 }

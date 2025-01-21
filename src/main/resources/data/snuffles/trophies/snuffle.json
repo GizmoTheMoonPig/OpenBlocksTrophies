@@ -1,17 +1,17 @@
 {
   "entity": "snuffles:snuffle",
   "variants": [
-	{
-	  "Hairstyle": 0
-	},
-	{
-	  "Hairstyle": 1
-	},
-	{
-	  "Hairstyle": 2
-	},
-	{
-	  "Hairstyle": 3
-	}
+    {
+      "Hairstyle": 0
+    },
+    {
+      "Hairstyle": 1
+    },
+    {
+      "Hairstyle": 2
+    },
+    {
+      "Hairstyle": 3
+    }
   ]
 }

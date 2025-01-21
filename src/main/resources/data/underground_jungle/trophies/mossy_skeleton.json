@@ -1,7 +1,7 @@
 {
   "entity": "underground_jungle:mossy_skeleton",
   "behavior": {
-	"type": "obtrophies:arrow",
-	"effect": "minecraft:poison"
+    "type": "obtrophies:arrow",
+    "effect": "minecraft:poison"
   }
 }

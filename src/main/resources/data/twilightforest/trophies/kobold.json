@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 5000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:gold_nugget"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 5000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:gold_nugget"
+    }
   },
   "entity": "twilightforest:kobold",
   "scale": 1.25

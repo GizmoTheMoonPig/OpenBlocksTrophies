@@ -2,8 +2,8 @@
   "drop_chance": 0.0075,
   "entity": "twilightforest:lich",
   "variants": [
-	{
-	  "ShieldStrength": 0
-	}
+    {
+      "ShieldStrength": 0
+    }
   ]
 }

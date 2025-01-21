@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 50000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:elastic_tendon"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 50000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:elastic_tendon"
+    }
   },
   "entity": "alexsmobs:murmur"
 }

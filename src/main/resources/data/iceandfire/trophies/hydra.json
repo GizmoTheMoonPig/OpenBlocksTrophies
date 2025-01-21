@@ -2,18 +2,18 @@
   "entity": "iceandfire:hydra",
   "scale": 0.6,
   "default_variant": {
-	"HeadCount": 3,
-	"SeveredHead": -1
+    "HeadCount": 3,
+    "SeveredHead": -1
   },
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    }
   ]
 }

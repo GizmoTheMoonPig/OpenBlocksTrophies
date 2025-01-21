@@ -2,50 +2,50 @@
   "entity": "the_bumblezone:variant_bee",
   "scale": 1.5,
   "variants": [
-	{
-	  "variant": "redtail_bee"
-	},
-	{
-	  "variant": "green_bee"
-	},
-	{
-	  "variant": "blue_bee"
-	},
-	{
-	  "variant": "white_bee"
-	},
-	{
-	  "variant": "ukraine_bee"
-	},
-	{
-	  "variant": "trans_bee"
-	},
-	{
-	  "variant": "asexual_bee"
-	},
-	{
-	  "variant": "agender_bee"
-	},
-	{
-	  "variant": "aroace_bee"
-	},
-	{
-	  "variant": "aromantic_bee"
-	},
-	{
-	  "variant": "bisexual_bee"
-	},
-	{
-	  "variant": "pan_bee"
-	},
-	{
-	  "variant": "enby_bee"
-	},
-	{
-	  "variant": "reverse_bee"
-	},
-	{
-	  "variant": "neapolitan_bee"
-	}
+    {
+      "variant": "redtail_bee"
+    },
+    {
+      "variant": "green_bee"
+    },
+    {
+      "variant": "blue_bee"
+    },
+    {
+      "variant": "white_bee"
+    },
+    {
+      "variant": "ukraine_bee"
+    },
+    {
+      "variant": "trans_bee"
+    },
+    {
+      "variant": "asexual_bee"
+    },
+    {
+      "variant": "agender_bee"
+    },
+    {
+      "variant": "aroace_bee"
+    },
+    {
+      "variant": "aromantic_bee"
+    },
+    {
+      "variant": "bisexual_bee"
+    },
+    {
+      "variant": "pan_bee"
+    },
+    {
+      "variant": "enby_bee"
+    },
+    {
+      "variant": "reverse_bee"
+    },
+    {
+      "variant": "neapolitan_bee"
+    }
   ]
 }

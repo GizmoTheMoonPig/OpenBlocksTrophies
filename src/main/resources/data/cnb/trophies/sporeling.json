@@ -2,23 +2,23 @@
   "entity": "cnb:sporeling",
   "scale": 1.5,
   "variants": [
-	{
-	  "SporelingType": "cnb:red_overworld"
-	},
-	{
-	  "SporelingType": "cnb:red_nether"
-	},
-	{
-	  "SporelingType": "cnb:brown_overworld"
-	},
-	{
-	  "SporelingType": "cnb:brown_nether"
-	},
-	{
-	  "SporelingType": "cnb:crimson_fungus"
-	},
-	{
-	  "SporelingType": "cnb:warped_fungus"
-	}
+    {
+      "SporelingType": "cnb:red_overworld"
+    },
+    {
+      "SporelingType": "cnb:red_nether"
+    },
+    {
+      "SporelingType": "cnb:brown_overworld"
+    },
+    {
+      "SporelingType": "cnb:brown_nether"
+    },
+    {
+      "SporelingType": "cnb:crimson_fungus"
+    },
+    {
+      "SporelingType": "cnb:warped_fungus"
+    }
   ]
 }

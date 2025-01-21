@@ -1,33 +1,33 @@
 {
   "entity": "untamedwilds:boar",
   "default_variant": {
-	"Size": 1.0
+    "Size": 1.0
   },
   "variants": [
-	{
-	  "Variant": 0,
-	  "Skin": 0
-	},
-	{
-	  "Variant": 0,
-	  "Skin": 1
-	},
-	{
-	  "Variant": 0,
-	  "Skin": 2
-	},
-	{
-	  "Variant": 0,
-	  "Skin": 3
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	}
+    {
+      "Variant": 0,
+      "Skin": 0
+    },
+    {
+      "Variant": 0,
+      "Skin": 1
+    },
+    {
+      "Variant": 0,
+      "Skin": 2
+    },
+    {
+      "Variant": 0,
+      "Skin": 3
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    },
+    {
+      "Variant": 3
+    }
   ]
 }

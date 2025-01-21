@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 50000,
-	"item": {
-	  "Count": 1,
-	  "id": "aquamirae:esca"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 50000,
+    "item": {
+      "Count": 1,
+      "id": "aquamirae:esca"
+    }
   },
   "entity": "aquamirae:anglerfish",
   "scale": 0.4

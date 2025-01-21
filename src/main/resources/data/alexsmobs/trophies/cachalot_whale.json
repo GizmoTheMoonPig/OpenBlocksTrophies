@@ -1,20 +1,20 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 50000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:ambergris"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 50000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:ambergris"
+    }
   },
   "entity": "alexsmobs:cachalot_whale",
   "scale": 0.1,
   "variants": [
-	{
-	  "Albino": false
-	},
-	{
-	  "Albino": true
-	}
+    {
+      "Albino": false
+    },
+    {
+      "Albino": true
+    }
   ]
 }

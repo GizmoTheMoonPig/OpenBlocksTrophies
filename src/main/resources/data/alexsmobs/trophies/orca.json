@@ -1,24 +1,24 @@
 {
   "behavior": {
-	"type": "obtrophies:mob_effect",
-	"amplifier": 0,
-	"effect": "alexsmobs:orcas_might",
-	"time": 12000
+    "type": "obtrophies:mob_effect",
+    "amplifier": 0,
+    "effect": "alexsmobs:orcas_might",
+    "time": 12000
   },
   "entity": "alexsmobs:orca",
   "scale": 0.4,
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    },
+    {
+      "Variant": 3
+    }
   ]
 }

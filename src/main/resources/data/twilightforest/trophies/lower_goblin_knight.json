@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "twilightforest:armor_shard"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "twilightforest:armor_shard"
+    }
   },
   "entity": "twilightforest:lower_goblin_knight",
   "scale": 1.25

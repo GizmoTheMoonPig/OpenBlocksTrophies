@@ -2,14 +2,14 @@
   "entity": "iceandfire:myrmex_queen",
   "scale": 0.3,
   "default_variant": {
-	"GrowthStage": 2
+    "GrowthStage": 2
   },
   "variants": [
-	{
-	  "Variant": false
-	},
-	{
-	  "Variant": true
-	}
+    {
+      "Variant": false
+    },
+    {
+      "Variant": true
+    }
   ]
 }

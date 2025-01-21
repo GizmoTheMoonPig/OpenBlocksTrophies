@@ -2,11 +2,11 @@
   "entity": "productivebees:configurable_bee",
   "scale": 1.5,
   "variants": [
-	{
-	  "type": "productivebees:bloody"
-	},
-	{
-	  "type": "productivebees:dark_gem"
-	}
+    {
+      "type": "productivebees:bloody"
+    },
+    {
+      "type": "productivebees:dark_gem"
+    }
   ]
 }

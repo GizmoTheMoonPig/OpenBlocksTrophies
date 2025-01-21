@@ -47,7 +47,7 @@ public class OpenBlocksTrophies {
 	public static final String MODID = "obtrophies";
 
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
-	public static final RandomSource TROPHY_RANDOM = RandomSource.create();
+	private static final RandomSource TROPHY_RANDOM = RandomSource.create();
 
 	public OpenBlocksTrophies() {
 		{

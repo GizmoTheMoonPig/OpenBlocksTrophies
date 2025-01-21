@@ -2,14 +2,14 @@
   "entity": "alexscaves:tremorzilla",
   "scale": 0.25,
   "variants": [
-	{
-	  "AltSkin": 0
-	},
-	{
-	  "AltSkin": 1
-	},
-	{
-	  "AltSkin": 2
-	}
+    {
+      "AltSkin": 0
+    },
+    {
+      "AltSkin": 1
+    },
+    {
+      "AltSkin": 2
+    }
   ]
 }

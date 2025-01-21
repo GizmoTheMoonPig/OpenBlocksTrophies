@@ -1,20 +1,20 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:serrated_shark_tooth"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:serrated_shark_tooth"
+    }
   },
   "entity": "alexsmobs:frilled_shark",
   "scale": 0.9,
   "variants": [
-	{
-	  "Depressurized": false
-	},
-	{
-	  "Depressurized": true
-	}
+    {
+      "Depressurized": false
+    },
+    {
+      "Depressurized": true
+    }
   ]
 }

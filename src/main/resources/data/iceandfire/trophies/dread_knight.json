@@ -1,14 +1,14 @@
 {
   "entity": "iceandfire:dread_knight",
   "variants": [
-	{
-	  "ArmorVariant": 0
-	},
-	{
-	  "ArmorVariant": 1
-	},
-	{
-	  "ArmorVariant": 2
-	}
+    {
+      "ArmorVariant": 0
+    },
+    {
+      "ArmorVariant": 1
+    },
+    {
+      "ArmorVariant": 2
+    }
   ]
 }

@@ -1,20 +1,20 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 10000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:blood_sac"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 10000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:blood_sac"
+    }
   },
   "entity": "alexsmobs:crimson_mosquito",
   "scale": 0.75,
   "variants": [
-	{
-	  "Sick": false
-	},
-	{
-	  "Sick": true
-	}
+    {
+      "Sick": false
+    },
+    {
+      "Sick": true
+    }
   ]
 }

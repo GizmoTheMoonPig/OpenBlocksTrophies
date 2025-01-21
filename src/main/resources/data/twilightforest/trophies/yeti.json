@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "twilightforest:arctic_fur"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "twilightforest:arctic_fur"
+    }
   },
   "entity": "twilightforest:yeti",
   "scale": 0.8

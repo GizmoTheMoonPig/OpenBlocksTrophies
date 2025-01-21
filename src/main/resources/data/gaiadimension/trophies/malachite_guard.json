@@ -3,8 +3,8 @@
   "entity": "gaiadimension:malachite_guard",
   "scale": 0.7,
   "variants": [
-	{
-	  "Phase": 1
-	}
+    {
+      "Phase": 1
+    }
   ]
 }

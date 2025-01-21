@@ -1,0 +1,33 @@
+{
+  "entity": "all_bark_all_bite:dog",
+  "scale": 1.5,
+  "variants": [
+    {
+      "variant": "all_bark_all_bite:black"
+    },
+    {
+      "variant": "all_bark_all_bite:blue"
+    },
+    {
+      "variant": "all_bark_all_bite:brown"
+    },
+    {
+      "variant": "all_bark_all_bite:cream"
+    },
+    {
+      "variant": "all_bark_all_bite:gold"
+    },
+    {
+      "variant": "all_bark_all_bite:gray"
+    },
+    {
+      "variant": "all_bark_all_bite:red"
+    },
+    {
+      "variant": "all_bark_all_bite:white"
+    },
+    {
+      "variant": "all_bark_all_bite:yellow"
+    }
+  ]
+}

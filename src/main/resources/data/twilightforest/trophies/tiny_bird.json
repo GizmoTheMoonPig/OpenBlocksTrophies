@@ -1,16 +1,16 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:feather"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:feather"
+    }
   },
   "entity": "twilightforest:tiny_bird",
   "scale": 1.75,
   "variants": {
-	"key": "BirdType",
-	"registry": "twilightforest:tiny_bird_variant"
+    "key": "BirdType",
+    "registry": "twilightforest:tiny_bird_variant"
   }
 }

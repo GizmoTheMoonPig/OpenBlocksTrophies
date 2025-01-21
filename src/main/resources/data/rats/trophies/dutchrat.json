@@ -3,14 +3,14 @@
   "entity": "rats:dutchrat",
   "scale": 0.8,
   "default_variant": {
-	"ArmorItems": [
-	  {},
-	  {},
-	  {},
-	  {
-		"Count": 1,
-		"id": "rats:ghost_pirat_hat"
-	  }
-	]
+    "ArmorItems": [
+      {},
+      {},
+      {},
+      {
+        "Count": 1,
+        "id": "rats:ghost_pirat_hat"
+      }
+    ]
   }
 }

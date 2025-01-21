@@ -2,20 +2,20 @@
   "entity": "untamedwilds:spadefish",
   "scale": 1.5,
   "default_variant": {
-	"Size": 1.0
+    "Size": 1.0
   },
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    },
+    {
+      "Variant": 3
+    }
   ]
 }

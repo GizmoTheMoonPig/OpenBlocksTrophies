@@ -2,23 +2,23 @@
   "entity": "quark:toretoise",
   "scale": 0.7,
   "variants": [
-	{
-	  "oreType": 0
-	},
-	{
-	  "oreType": 1
-	},
-	{
-	  "oreType": 2
-	},
-	{
-	  "oreType": 3
-	},
-	{
-	  "oreType": 4
-	},
-	{
-	  "oreType": 5
-	}
+    {
+      "oreType": 0
+    },
+    {
+      "oreType": 1
+    },
+    {
+      "oreType": 2
+    },
+    {
+      "oreType": 3
+    },
+    {
+      "oreType": 4
+    },
+    {
+      "oreType": 5
+    }
   ]
 }

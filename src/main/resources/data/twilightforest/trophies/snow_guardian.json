@@ -2,17 +2,17 @@
   "entity": "twilightforest:snow_guardian",
   "offset": -0.1,
   "default_variant": {
-	"ArmorItems": [
-	  {},
-	  {},
-	  {
-		"Count": 1,
-		"id": "twilightforest:arctic_chestplate"
-	  },
-	  {
-		"Count": 1,
-		"id": "twilightforest:arctic_helmet"
-	  }
-	]
+    "ArmorItems": [
+      {},
+      {},
+      {
+        "Count": 1,
+        "id": "twilightforest:arctic_chestplate"
+      },
+      {
+        "Count": 1,
+        "id": "twilightforest:arctic_helmet"
+      }
+    ]
   }
 }

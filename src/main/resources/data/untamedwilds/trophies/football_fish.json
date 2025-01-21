@@ -2,20 +2,20 @@
   "entity": "untamedwilds:football_fish",
   "scale": 1.25,
   "default_variant": {
-	"Size": 1.0
+    "Size": 1.0
   },
   "variants": [
-	{
-	  "Skin": 0
-	},
-	{
-	  "Skin": 1
-	},
-	{
-	  "Skin": 2
-	},
-	{
-	  "Skin": 3
-	}
+    {
+      "Skin": 0
+    },
+    {
+      "Skin": 1
+    },
+    {
+      "Skin": 2
+    },
+    {
+      "Skin": 3
+    }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "behavior": {
-	"type": "obtrophies:loot_table",
-	"cooldown": 10000,
-	"loot_table": "alexsmobs:gameplay/pupfish_reward"
+    "type": "obtrophies:loot_table",
+    "cooldown": 10000,
+    "loot_table": "alexsmobs:gameplay/pupfish_reward"
   },
   "entity": "alexsmobs:devils_hole_pupfish",
   "scale": 1.25

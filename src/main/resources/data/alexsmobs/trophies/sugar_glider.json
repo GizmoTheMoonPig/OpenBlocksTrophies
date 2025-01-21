@@ -1,14 +1,14 @@
 {
   "behavior": {
-	"type": "obtrophies:right_click_item",
-	"cooldown": 200,
-	"execute_behavior": {
-	  "type": "obtrophies:loot_table",
-	  "loot_table": "alexsmobs:gameplay/sugar_glider_reward",
-	  "rolls": 1
-	},
-	"item_to_use": "minecraft:leaves",
-	"shrink_item_stack": true
+    "type": "obtrophies:right_click_item",
+    "cooldown": 200,
+    "execute_behavior": {
+      "type": "obtrophies:loot_table",
+      "loot_table": "alexsmobs:gameplay/sugar_glider_reward",
+      "rolls": 1
+    },
+    "item_to_use": "minecraft:leaves",
+    "shrink_item_stack": true
   },
   "entity": "alexsmobs:sugar_glider",
   "scale": 1.5

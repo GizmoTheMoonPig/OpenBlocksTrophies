@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 2000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:snowball"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 2000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:snowball"
+    }
   },
   "drop_chance": 0.0075,
   "entity": "twilightforest:snow_queen",

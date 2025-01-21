@@ -1,20 +1,20 @@
 {
   "entity": "mca:female_zombie_villager",
   "default_variant": {
-	"ageState": 5,
-	"clothes": "mca:skins/clothing/normal/female/farmer/2.png",
-	"gender": 2,
-	"gene_breast": 0.70,
-	"gene_face": 0.34,
-	"gene_hemoglobin": 0.25,
-	"gene_melanin": 0.21,
-	"gene_pheomelanin": 0.67,
-	"gene_size": 0.70,
-	"gene_skin": 0.0,
-	"gene_width": 0.4,
-	"hair": "mca:skins/hair/female/16.png",
-	"traits": {
-	  "HETEROCHROMIA": true
-	}
+    "ageState": 5,
+    "clothes": "mca:skins/clothing/normal/female/farmer/2.png",
+    "gender": 2,
+    "gene_breast": 0.70,
+    "gene_face": 0.34,
+    "gene_hemoglobin": 0.25,
+    "gene_melanin": 0.21,
+    "gene_pheomelanin": 0.67,
+    "gene_size": 0.70,
+    "gene_skin": 0.0,
+    "gene_width": 0.4,
+    "hair": "mca:skins/hair/female/16.png",
+    "traits": {
+      "HETEROCHROMIA": true
+    }
   }
 }

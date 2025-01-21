@@ -3,28 +3,28 @@
   "entity": "rats:rat_baron",
   "scale": 1.5,
   "default_variant": {
-	"ArmorItems": [
-	  {},
-	  {},
-	  {},
-	  {
-		"Count": 1,
-		"id": "rats:aviator_hat"
-	  }
-	]
+    "ArmorItems": [
+      {},
+      {},
+      {},
+      {
+        "Count": 1,
+        "id": "rats:aviator_hat"
+      }
+    ]
   },
   "variants": [
-	{
-	  "ColorVariant": "rats:blue"
-	},
-	{
-	  "ColorVariant": "rats:brown"
-	},
-	{
-	  "ColorVariant": "rats:black"
-	},
-	{
-	  "ColorVariant": "rats:green"
-	}
+    {
+      "ColorVariant": "rats:blue"
+    },
+    {
+      "ColorVariant": "rats:brown"
+    },
+    {
+      "ColorVariant": "rats:black"
+    },
+    {
+      "ColorVariant": "rats:green"
+    }
   ]
 }

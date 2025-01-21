@@ -2,17 +2,17 @@
   "entity": "iceandfire:cyclops",
   "scale": 0.3,
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    },
+    {
+      "Variant": 3
+    }
   ]
 }

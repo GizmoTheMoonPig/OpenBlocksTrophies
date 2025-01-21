@@ -1,23 +1,23 @@
 {
   "entity": "extendedmushrooms:mushroom_sheep",
   "variants": [
-	{
-	  "Mushroom": 0
-	},
-	{
-	  "Mushroom": 1
-	},
-	{
-	  "Mushroom": 2
-	},
-	{
-	  "Mushroom": 3
-	},
-	{
-	  "Mushroom": 4
-	},
-	{
-	  "Mushroom": 5
-	}
+    {
+      "Mushroom": 0
+    },
+    {
+      "Mushroom": 1
+    },
+    {
+      "Mushroom": 2
+    },
+    {
+      "Mushroom": 3
+    },
+    {
+      "Mushroom": 4
+    },
+    {
+      "Mushroom": 5
+    }
   ]
 }

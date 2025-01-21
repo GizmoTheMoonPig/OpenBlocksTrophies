@@ -1,28 +1,28 @@
 {
   "entity": "untamedwilds:arowana",
   "default_variant": {
-	"Size": 1.0
+    "Size": 1.0
   },
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 100
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 101
-	},
-	{
-	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 1,
+      "Skin": 100
+    },
+    {
+      "Variant": 1,
+      "Skin": 101
+    },
+    {
+      "Variant": 2
+    },
+    {
+      "Variant": 3
+    }
   ]
 }

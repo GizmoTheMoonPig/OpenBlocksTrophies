@@ -2,35 +2,35 @@
   "entity": "iceandfire:hippogryph",
   "scale": 0.65,
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	},
-	{
-	  "Variant": 4
-	},
-	{
-	  "Variant": 5
-	},
-	{
-	  "Variant": 6
-	},
-	{
-	  "Variant": 7
-	},
-	{
-	  "Variant": 8
-	},
-	{
-	  "Variant": 9
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    },
+    {
+      "Variant": 3
+    },
+    {
+      "Variant": 4
+    },
+    {
+      "Variant": 5
+    },
+    {
+      "Variant": 6
+    },
+    {
+      "Variant": 7
+    },
+    {
+      "Variant": 8
+    },
+    {
+      "Variant": 9
+    }
   ]
 }

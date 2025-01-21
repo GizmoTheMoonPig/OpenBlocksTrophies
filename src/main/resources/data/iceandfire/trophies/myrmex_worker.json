@@ -2,14 +2,14 @@
   "entity": "iceandfire:myrmex_worker",
   "scale": 0.8,
   "default_variant": {
-	"GrowthStage": 2
+    "GrowthStage": 2
   },
   "variants": [
-	{
-	  "Variant": false
-	},
-	{
-	  "Variant": true
-	}
+    {
+      "Variant": false
+    },
+    {
+      "Variant": true
+    }
   ]
 }

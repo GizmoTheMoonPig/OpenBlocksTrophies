@@ -1,11 +1,11 @@
 {
   "entity": "the_bumblezone:beehemoth",
   "variants": [
-	{
-	  "queen": false
-	},
-	{
-	  "queen": true
-	}
+    {
+      "queen": false
+    },
+    {
+      "queen": true
+    }
   ]
 }

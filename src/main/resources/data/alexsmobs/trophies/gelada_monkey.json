@@ -1,11 +1,11 @@
 {
   "entity": "alexsmobs:gelada_monkey",
   "variants": [
-	{
-	  "Leader": false
-	},
-	{
-	  "Leader": true
-	}
+    {
+      "Leader": false
+    },
+    {
+      "Leader": true
+    }
   ]
 }

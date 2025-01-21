@@ -1,36 +1,36 @@
 {
   "entity": "iwannaskate:wandering_skater",
   "default_variant": {
-	"HandItems": [
-	  {},
-	  {
-		"Count": 1,
-		"id": "iwannaskate:skateboard",
-		"tag": {
-		  "Skateboard": {
-			"Banner": {
-			  "Base": 5,
-			  "Patterns": [
-				{
-				  "Color": 13,
-				  "Pattern": "gru"
-				},
-				{
-				  "Color": 12,
-				  "Pattern": "flo"
-				},
-				{
-				  "Color": 1,
-				  "Pattern": "flo"
-				}
-			  ]
-			},
-			"GripTape": 7,
-			"MadeOf": "minecraft:oak_slab",
-			"WheelType": -1
-		  }
-		}
-	  }
-	]
+    "HandItems": [
+      {},
+      {
+        "Count": 1,
+        "id": "iwannaskate:skateboard",
+        "tag": {
+          "Skateboard": {
+            "Banner": {
+              "Base": 5,
+              "Patterns": [
+                {
+                  "Color": 13,
+                  "Pattern": "gru"
+                },
+                {
+                  "Color": 12,
+                  "Pattern": "flo"
+                },
+                {
+                  "Color": 1,
+                  "Pattern": "flo"
+                }
+              ]
+            },
+            "GripTape": 7,
+            "MadeOf": "minecraft:oak_slab",
+            "WheelType": -1
+          }
+        }
+      }
+    ]
   }
 }

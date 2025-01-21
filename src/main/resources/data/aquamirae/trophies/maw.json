@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 50000,
-	"item": {
-	  "Count": 1,
-	  "id": "aquamirae:fin"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 50000,
+    "item": {
+      "Count": 1,
+      "id": "aquamirae:fin"
+    }
   },
   "entity": "aquamirae:maw",
   "scale": 0.5

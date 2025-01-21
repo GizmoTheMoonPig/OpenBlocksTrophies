@@ -1,17 +1,17 @@
 {
   "behavior": {
-	"type": "obtrophies:right_click_item",
-	"cooldown": 40,
-	"execute_behavior": {
-	  "type": "obtrophies:loot_table",
-	  "cooldown": 20000,
-	  "loot_table": "alexscaves:gameplay/sea_pig_digestion"
-	},
-	"item_to_use": "alexscaves:sea_pig_digests",
-	"shrink_item_stack": true,
-	"sound": {
-	  "sound_id": "alexscaves:sea_pig_eat"
-	}
+    "type": "obtrophies:right_click_item",
+    "cooldown": 40,
+    "execute_behavior": {
+      "type": "obtrophies:loot_table",
+      "cooldown": 20000,
+      "loot_table": "alexscaves:gameplay/sea_pig_digestion"
+    },
+    "item_to_use": "alexscaves:sea_pig_digests",
+    "shrink_item_stack": true,
+    "sound": {
+      "sound_id": "alexscaves:sea_pig_eat"
+    }
   },
   "entity": "alexscaves:sea_pig",
   "scale": 1.5

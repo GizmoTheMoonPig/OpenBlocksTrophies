@@ -2,26 +2,26 @@
   "entity": "untamedwilds:camel",
   "scale": 0.75,
   "default_variant": {
-	"Size": 1.0
+    "Size": 1.0
   },
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 0
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 1
-	},
-	{
-	  "Variant": 1,
-	  "Skin": 2
-	},
-	{
-	  "Variant": 2
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1,
+      "Skin": 0
+    },
+    {
+      "Variant": 1,
+      "Skin": 1
+    },
+    {
+      "Variant": 1,
+      "Skin": 2
+    },
+    {
+      "Variant": 2
+    }
   ]
 }

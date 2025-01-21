@@ -1,47 +1,47 @@
 {
   "entity": "georenouveau:geore_golem",
   "variants": [
-	{
-	  "LinkedGeOre": 0
-	},
-	{
-	  "LinkedGeOre": 1
-	},
-	{
-	  "LinkedGeOre": 2
-	},
-	{
-	  "LinkedGeOre": 3
-	},
-	{
-	  "LinkedGeOre": 4
-	},
-	{
-	  "LinkedGeOre": 5
-	},
-	{
-	  "LinkedGeOre": 6
-	},
-	{
-	  "LinkedGeOre": 7
-	},
-	{
-	  "LinkedGeOre": 8
-	},
-	{
-	  "LinkedGeOre": 9
-	},
-	{
-	  "LinkedGeOre": 10
-	},
-	{
-	  "LinkedGeOre": 11
-	},
-	{
-	  "LinkedGeOre": 12
-	},
-	{
-	  "LinkedGeOre": 13
-	}
+    {
+      "LinkedGeOre": 0
+    },
+    {
+      "LinkedGeOre": 1
+    },
+    {
+      "LinkedGeOre": 2
+    },
+    {
+      "LinkedGeOre": 3
+    },
+    {
+      "LinkedGeOre": 4
+    },
+    {
+      "LinkedGeOre": 5
+    },
+    {
+      "LinkedGeOre": 6
+    },
+    {
+      "LinkedGeOre": 7
+    },
+    {
+      "LinkedGeOre": 8
+    },
+    {
+      "LinkedGeOre": 9
+    },
+    {
+      "LinkedGeOre": 10
+    },
+    {
+      "LinkedGeOre": 11
+    },
+    {
+      "LinkedGeOre": 12
+    },
+    {
+      "LinkedGeOre": 13
+    }
   ]
 }

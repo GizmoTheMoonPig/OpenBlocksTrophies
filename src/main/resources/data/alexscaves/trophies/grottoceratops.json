@@ -2,14 +2,14 @@
   "entity": "alexscaves:grottoceratops",
   "scale": 0.5,
   "variants": [
-	{
-	  "AltSkin": 0
-	},
-	{
-	  "AltSkin": 1
-	},
-	{
-	  "AltSkin": 2
-	}
+    {
+      "AltSkin": 0
+    },
+    {
+      "AltSkin": 1
+    },
+    {
+      "AltSkin": 2
+    }
   ]
 }

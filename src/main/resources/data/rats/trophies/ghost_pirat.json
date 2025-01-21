@@ -1,14 +1,14 @@
 {
   "entity": "rats:ghost_pirat",
   "default_variant": {
-	"ArmorItems": [
-	  {},
-	  {},
-	  {},
-	  {
-		"Count": 1,
-		"id": "rats:ghost_pirat_hat"
-	  }
-	]
+    "ArmorItems": [
+      {},
+      {},
+      {},
+      {
+        "Count": 1,
+        "id": "rats:ghost_pirat_hat"
+      }
+    ]
   }
 }

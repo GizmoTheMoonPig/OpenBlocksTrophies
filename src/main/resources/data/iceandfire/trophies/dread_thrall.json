@@ -1,49 +1,49 @@
 {
   "entity": "iceandfire:dread_thrall",
   "default_variant": {
-	"ArmorItems": [
-	  {
-		"Count": 1,
-		"id": "minecraft:chainmail_boots"
-	  },
-	  {
-		"Count": 1,
-		"id": "minecraft:chainmail_leggings"
-	  },
-	  {
-		"Count": 1,
-		"id": "minecraft:chainmail_chestplate"
-	  },
-	  {
-		"Count": 1,
-		"id": "minecraft:chainmail_helmet"
-	  }
-	]
+    "ArmorItems": [
+      {
+        "Count": 1,
+        "id": "minecraft:chainmail_boots"
+      },
+      {
+        "Count": 1,
+        "id": "minecraft:chainmail_leggings"
+      },
+      {
+        "Count": 1,
+        "id": "minecraft:chainmail_chestplate"
+      },
+      {
+        "Count": 1,
+        "id": "minecraft:chainmail_helmet"
+      }
+    ]
   },
   "variants": [
-	{
-	  "ArmorVariant": 0
-	},
-	{
-	  "ArmorVariant": 1
-	},
-	{
-	  "ArmorVariant": 2
-	},
-	{
-	  "ArmorVariant": 3
-	},
-	{
-	  "ArmorVariant": 4
-	},
-	{
-	  "ArmorVariant": 5
-	},
-	{
-	  "ArmorVariant": 6
-	},
-	{
-	  "ArmorVariant": 7
-	}
+    {
+      "ArmorVariant": 0
+    },
+    {
+      "ArmorVariant": 1
+    },
+    {
+      "ArmorVariant": 2
+    },
+    {
+      "ArmorVariant": 3
+    },
+    {
+      "ArmorVariant": 4
+    },
+    {
+      "ArmorVariant": 5
+    },
+    {
+      "ArmorVariant": 6
+    },
+    {
+      "ArmorVariant": 7
+    }
   ]
 }

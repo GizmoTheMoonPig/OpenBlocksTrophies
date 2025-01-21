@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 50000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:netherite_scrap"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 50000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:netherite_scrap"
+    }
   },
   "entity": "ornamental:netherite_golem",
   "scale": 0.75

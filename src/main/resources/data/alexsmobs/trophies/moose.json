@@ -1,20 +1,20 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 50000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:moose_antler"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 50000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:moose_antler"
+    }
   },
   "entity": "alexsmobs:moose",
   "scale": 0.65,
   "variants": [
-	{
-	  "Antlered": true
-	},
-	{
-	  "Antlered": false
-	}
+    {
+      "Antlered": true
+    },
+    {
+      "Antlered": false
+    }
   ]
 }

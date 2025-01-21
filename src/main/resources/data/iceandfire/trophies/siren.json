@@ -2,14 +2,14 @@
   "entity": "iceandfire:siren",
   "scale": 0.75,
   "variants": [
-	{
-	  "HairColor": 0
-	},
-	{
-	  "HairColor": 1
-	},
-	{
-	  "HairColor": 2
-	}
+    {
+      "HairColor": 0
+    },
+    {
+      "HairColor": 1
+    },
+    {
+      "HairColor": 2
+    }
   ]
 }

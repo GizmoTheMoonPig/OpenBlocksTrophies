@@ -1,23 +1,23 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 20000,
-	"item": {
-	  "Count": 1,
-	  "id": "alexsmobs:gongylidia"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "Count": 1,
+      "id": "alexsmobs:gongylidia"
+    }
   },
   "entity": "alexsmobs:leafcutter_ant",
   "scale": 1.25,
   "variants": [
-	{
-	  "Leaf": false
-	},
-	{
-	  "Leaf": true
-	},
-	{
-	  "Queen": true
-	}
+    {
+      "Leaf": false
+    },
+    {
+      "Leaf": true
+    },
+    {
+      "Queen": true
+    }
   ]
 }

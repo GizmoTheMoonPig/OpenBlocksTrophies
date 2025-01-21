@@ -2,20 +2,20 @@
   "entity": "productivebees:configurable_bee",
   "scale": 1.5,
   "variants": [
-	{
-	  "type": "productivebees:elementium"
-	},
-	{
-	  "type": "productivebees:mana"
-	},
-	{
-	  "type": "productivebees:manasteel"
-	},
-	{
-	  "type": "productivebees:pure"
-	},
-	{
-	  "type": "productivebees:terrasteel"
-	}
+    {
+      "type": "productivebees:elementium"
+    },
+    {
+      "type": "productivebees:mana"
+    },
+    {
+      "type": "productivebees:manasteel"
+    },
+    {
+      "type": "productivebees:pure"
+    },
+    {
+      "type": "productivebees:terrasteel"
+    }
   ]
 }

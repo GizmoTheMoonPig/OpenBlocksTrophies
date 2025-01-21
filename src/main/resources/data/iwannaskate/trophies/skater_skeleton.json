@@ -1,14 +1,14 @@
 {
   "entity": "iwannaskate:skater_skeleton",
   "default_variant": {
-	"ArmorItems": [
-	  {},
-	  {},
-	  {},
-	  {
-		"Count": 1,
-		"id": "iwannaskate:spiked_skater_helmet"
-	  }
-	]
+    "ArmorItems": [
+      {},
+      {},
+      {},
+      {
+        "Count": 1,
+        "id": "iwannaskate:spiked_skater_helmet"
+      }
+    ]
   }
 }

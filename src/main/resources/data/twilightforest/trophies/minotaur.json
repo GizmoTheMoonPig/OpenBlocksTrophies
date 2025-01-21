@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 50000,
-	"item": {
-	  "Count": 1,
-	  "id": "twilightforest:gold_minotaur_axe"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 50000,
+    "item": {
+      "Count": 1,
+      "id": "twilightforest:gold_minotaur_axe"
+    }
   },
   "entity": "twilightforest:minotaur"
 }

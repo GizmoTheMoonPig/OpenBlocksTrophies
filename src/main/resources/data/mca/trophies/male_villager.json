@@ -1,17 +1,17 @@
 {
   "entity": "mca:male_villager",
   "default_variant": {
-	"ageState": 5,
-	"clothes": "mca:skins/clothing/normal/male/armorer/1.png",
-	"gender": 1,
-	"gene_breast": 0.0,
-	"gene_face": 0.12,
-	"gene_hemoglobin": 0.28,
-	"gene_melanin": 0.18,
-	"gene_pheomelanin": 0.47,
-	"gene_size": 0.70,
-	"gene_skin": 0.70,
-	"gene_width": 0.4,
-	"hair": "mca:skins/hair/male/36.png"
+    "ageState": 5,
+    "clothes": "mca:skins/clothing/normal/male/armorer/1.png",
+    "gender": 1,
+    "gene_breast": 0.0,
+    "gene_face": 0.12,
+    "gene_hemoglobin": 0.28,
+    "gene_melanin": 0.18,
+    "gene_pheomelanin": 0.47,
+    "gene_size": 0.70,
+    "gene_skin": 0.70,
+    "gene_width": 0.4,
+    "hair": "mca:skins/hair/male/36.png"
   }
 }

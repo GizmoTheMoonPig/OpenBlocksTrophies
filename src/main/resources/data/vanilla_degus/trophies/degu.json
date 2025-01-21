@@ -2,23 +2,23 @@
   "entity": "vanilla_degus:degu",
   "scale": 1.5,
   "variants": [
-	{
-	  "DeguType": 0
-	},
-	{
-	  "DeguType": 1
-	},
-	{
-	  "DeguType": 2
-	},
-	{
-	  "DeguType": 3
-	},
-	{
-	  "DeguType": 4
-	},
-	{
-	  "DeguType": 5
-	}
+    {
+      "DeguType": 0
+    },
+    {
+      "DeguType": 1
+    },
+    {
+      "DeguType": 2
+    },
+    {
+      "DeguType": 3
+    },
+    {
+      "DeguType": 4
+    },
+    {
+      "DeguType": 5
+    }
   ]
 }

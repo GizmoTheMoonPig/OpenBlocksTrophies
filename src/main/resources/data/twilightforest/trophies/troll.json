@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 40000,
-	"item": {
-	  "Count": 1,
-	  "id": "twilightforest:magic_beans"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 40000,
+    "item": {
+      "Count": 1,
+      "id": "twilightforest:magic_beans"
+    }
   },
   "entity": "twilightforest:troll",
   "scale": 0.9

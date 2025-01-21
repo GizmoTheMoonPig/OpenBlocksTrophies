@@ -2,14 +2,14 @@
   "entity": "iceandfire:myrmex_swarmer",
   "scale": 1.75,
   "default_variant": {
-	"GrowthStage": 2
+    "GrowthStage": 2
   },
   "variants": [
-	{
-	  "Variant": false
-	},
-	{
-	  "Variant": true
-	}
+    {
+      "Variant": false
+    },
+    {
+      "Variant": true
+    }
   ]
 }

@@ -1,23 +1,23 @@
 {
   "entity": "alexsmobs:lobster",
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	},
-	{
-	  "Variant": 4
-	},
-	{
-	  "Variant": 5
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    },
+    {
+      "Variant": 3
+    },
+    {
+      "Variant": 4
+    },
+    {
+      "Variant": 5
+    }
   ]
 }

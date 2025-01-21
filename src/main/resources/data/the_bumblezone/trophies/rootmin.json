@@ -1,8 +1,8 @@
 {
   "entity": "the_bumblezone:rootmin",
   "default_variant": {
-	"flowerBlock": {
-	  "Name": "minecraft:allium"
-	}
+    "flowerBlock": {
+      "Name": "minecraft:allium"
+    }
   }
 }

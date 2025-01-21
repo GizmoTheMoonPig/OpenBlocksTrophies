@@ -1,18 +1,18 @@
 {
   "behavior": {
-	"type": "obtrophies:mob_effect",
-	"amplifier": 0,
-	"effect": "alexsmobs:tigers_blessing",
-	"time": 12000
+    "type": "obtrophies:mob_effect",
+    "amplifier": 0,
+    "effect": "alexsmobs:tigers_blessing",
+    "time": 12000
   },
   "entity": "alexsmobs:tiger",
   "scale": 0.9,
   "variants": [
-	{
-	  "White": false
-	},
-	{
-	  "White": true
-	}
+    {
+      "White": false
+    },
+    {
+      "White": true
+    }
   ]
 }

@@ -1,11 +1,11 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 50000,
-	"item": {
-	  "Count": 1,
-	  "id": "aquamirae:abyssal_amethyst"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 50000,
+    "item": {
+      "Count": 1,
+      "id": "aquamirae:abyssal_amethyst"
+    }
   },
   "entity": "aquamirae:maze_mother",
   "scale": 0.2

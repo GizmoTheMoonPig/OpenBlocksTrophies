@@ -1,20 +1,20 @@
 {
   "entity": "mca:female_villager",
   "default_variant": {
-	"ageState": 5,
-	"clothes": "mca:skins/clothing/normal/female/librarian/3.png",
-	"gender": 2,
-	"gene_breast": 0.70,
-	"gene_face": 0.34,
-	"gene_hemoglobin": 0.28,
-	"gene_melanin": 0.08,
-	"gene_pheomelanin": 0.75,
-	"gene_size": 0.70,
-	"gene_skin": 0.0,
-	"gene_width": 0.4,
-	"hair": "mca:skins/hair/female/28.png",
-	"traits": {
-	  "HETEROCHROMIA": true
-	}
+    "ageState": 5,
+    "clothes": "mca:skins/clothing/normal/female/librarian/3.png",
+    "gender": 2,
+    "gene_breast": 0.70,
+    "gene_face": 0.34,
+    "gene_hemoglobin": 0.28,
+    "gene_melanin": 0.08,
+    "gene_pheomelanin": 0.75,
+    "gene_size": 0.70,
+    "gene_skin": 0.0,
+    "gene_width": 0.4,
+    "hair": "mca:skins/hair/female/28.png",
+    "traits": {
+      "HETEROCHROMIA": true
+    }
   }
 }

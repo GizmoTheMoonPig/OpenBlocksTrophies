@@ -1,19 +1,19 @@
 {
   "behavior": {
-	"type": "obtrophies:right_click_item",
-	"cooldown": 5000,
-	"execute_behavior": {
-	  "type": "obtrophies:item",
-	  "item": {
-		"Count": 1,
-		"id": "alexsmobs:stink_bottle"
-	  }
-	},
-	"item_to_use": {
-	  "Count": 1,
-	  "id": "minecraft:glass_bottle"
-	},
-	"shrink_item_stack": true
+    "type": "obtrophies:right_click_item",
+    "cooldown": 5000,
+    "execute_behavior": {
+      "type": "obtrophies:item",
+      "item": {
+        "Count": 1,
+        "id": "alexsmobs:stink_bottle"
+      }
+    },
+    "item_to_use": {
+      "Count": 1,
+      "id": "minecraft:glass_bottle"
+    },
+    "shrink_item_stack": true
   },
   "entity": "alexsmobs:skunk",
   "scale": 1.25

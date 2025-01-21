@@ -1,23 +1,23 @@
 {
   "behavior": {
-	"type": "obtrophies:item",
-	"cooldown": 5000,
-	"item": {
-	  "Count": 1,
-	  "id": "minecraft:sand"
-	}
+    "type": "obtrophies:item",
+    "cooldown": 5000,
+    "item": {
+      "Count": 1,
+      "id": "minecraft:sand"
+    }
   },
   "entity": "alexsmobs:guster",
   "scale": 0.8,
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    }
   ]
 }

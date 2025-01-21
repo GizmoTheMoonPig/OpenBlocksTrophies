@@ -2,11 +2,11 @@
   "entity": "alexsmobs:tarantula_hawk",
   "scale": 0.8,
   "variants": [
-	{
-	  "Nether": false
-	},
-	{
-	  "Nether": true
-	}
+    {
+      "Nether": false
+    },
+    {
+      "Nether": true
+    }
   ]
 }

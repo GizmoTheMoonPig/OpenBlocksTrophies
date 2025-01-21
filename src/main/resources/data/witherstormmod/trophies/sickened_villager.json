@@ -1,7 +1,7 @@
 {
   "entity": "witherstormmod:sickened_villager",
   "variants": {
-	"key": "profession",
-	"registry": "minecraft:villager_profession"
+    "key": "profession",
+    "registry": "minecraft:villager_profession"
   }
 }

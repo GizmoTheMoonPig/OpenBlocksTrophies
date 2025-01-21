@@ -1,69 +1,69 @@
 {
   "entity": "earthmobsmod:horned_sheep",
   "variants": [
-	{
-	  "Color": 0,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 1,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 2,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 3,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 4,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 5,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 6,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 7,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 8,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 9,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 10,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 11,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 12,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 13,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 14,
-	  "HasHorn": true
-	},
-	{
-	  "Color": 15,
-	  "HasHorn": true
-	}
+    {
+      "Color": 0,
+      "HasHorn": true
+    },
+    {
+      "Color": 1,
+      "HasHorn": true
+    },
+    {
+      "Color": 2,
+      "HasHorn": true
+    },
+    {
+      "Color": 3,
+      "HasHorn": true
+    },
+    {
+      "Color": 4,
+      "HasHorn": true
+    },
+    {
+      "Color": 5,
+      "HasHorn": true
+    },
+    {
+      "Color": 6,
+      "HasHorn": true
+    },
+    {
+      "Color": 7,
+      "HasHorn": true
+    },
+    {
+      "Color": 8,
+      "HasHorn": true
+    },
+    {
+      "Color": 9,
+      "HasHorn": true
+    },
+    {
+      "Color": 10,
+      "HasHorn": true
+    },
+    {
+      "Color": 11,
+      "HasHorn": true
+    },
+    {
+      "Color": 12,
+      "HasHorn": true
+    },
+    {
+      "Color": 13,
+      "HasHorn": true
+    },
+    {
+      "Color": 14,
+      "HasHorn": true
+    },
+    {
+      "Color": 15,
+      "HasHorn": true
+    }
   ]
 }

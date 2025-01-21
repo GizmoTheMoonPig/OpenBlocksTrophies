@@ -2,11 +2,11 @@
   "entity": "alexsmobs:froststalker",
   "scale": 0.9,
   "variants": [
-	{
-	  "Spiked": false
-	},
-	{
-	  "Spiked": true
-	}
+    {
+      "Spiked": false
+    },
+    {
+      "Spiked": true
+    }
   ]
 }

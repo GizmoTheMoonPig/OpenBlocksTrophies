@@ -2,29 +2,29 @@
   "entity": "alexscaves:vallumraptor",
   "scale": 0.9,
   "variants": [
-	{
-	  "AltSkin": 0,
-	  "Elder": true
-	},
-	{
-	  "AltSkin": 1,
-	  "Elder": true
-	},
-	{
-	  "AltSkin": 2,
-	  "Elder": true
-	},
-	{
-	  "AltSkin": 0,
-	  "Elder": false
-	},
-	{
-	  "AltSkin": 1,
-	  "Elder": false
-	},
-	{
-	  "AltSkin": 2,
-	  "Elder": false
-	}
+    {
+      "AltSkin": 0,
+      "Elder": true
+    },
+    {
+      "AltSkin": 1,
+      "Elder": true
+    },
+    {
+      "AltSkin": 2,
+      "Elder": true
+    },
+    {
+      "AltSkin": 0,
+      "Elder": false
+    },
+    {
+      "AltSkin": 1,
+      "Elder": false
+    },
+    {
+      "AltSkin": 2,
+      "Elder": false
+    }
   ]
 }

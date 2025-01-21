@@ -3,21 +3,21 @@
   "entity": "twilightforest:knight_phantom",
   "offset": -0.1,
   "default_variant": {
-	"ArmorItems": [
-	  {},
-	  {},
-	  {
-		"Count": 1,
-		"id": "twilightforest:phantom_chestplate"
-	  },
-	  {
-		"Count": 1,
-		"id": "twilightforest:phantom_helmet"
-	  }
-	],
-	"HandItems": [
-	  {},
-	  {}
-	]
+    "ArmorItems": [
+      {},
+      {},
+      {
+        "Count": 1,
+        "id": "twilightforest:phantom_chestplate"
+      },
+      {
+        "Count": 1,
+        "id": "twilightforest:phantom_helmet"
+      }
+    ],
+    "HandItems": [
+      {},
+      {}
+    ]
   }
 }

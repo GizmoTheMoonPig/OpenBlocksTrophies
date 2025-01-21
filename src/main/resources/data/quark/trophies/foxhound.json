@@ -1,11 +1,11 @@
 {
   "entity": "quark:foxhound",
   "variants": [
-	{
-	  "IsBlue": false
-	},
-	{
-	  "IsBlue": true
-	}
+    {
+      "IsBlue": false
+    },
+    {
+      "IsBlue": true
+    }
   ]
 }

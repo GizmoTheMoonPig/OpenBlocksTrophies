@@ -1,33 +1,33 @@
 {
   "behavior": {
-	"type": "obtrophies:right_click_item",
-	"execute_behavior": {
-	  "type": "obtrophies:item",
-	  "item": {
-		"Count": 1,
-		"id": "alexsmobs:banana_peel"
-	  }
-	},
-	"item_to_use": {
-	  "Count": 1,
-	  "id": "alexsmobs:banana"
-	},
-	"shrink_item_stack": true
+    "type": "obtrophies:right_click_item",
+    "execute_behavior": {
+      "type": "obtrophies:item",
+      "item": {
+        "Count": 1,
+        "id": "alexsmobs:banana_peel"
+      }
+    },
+    "item_to_use": {
+      "Count": 1,
+      "id": "alexsmobs:banana"
+    },
+    "shrink_item_stack": true
   },
   "entity": "alexsmobs:capuchin_monkey",
   "scale": 1.5,
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    },
+    {
+      "Variant": 3
+    }
   ]
 }

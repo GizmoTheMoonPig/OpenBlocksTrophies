@@ -2,38 +2,38 @@
   "entity": "untamedwilds:shark",
   "scale": 0.85,
   "default_variant": {
-	"Size": 1.0
+    "Size": 1.0
   },
   "variants": [
-	{
-	  "Variant": 0
-	},
-	{
-	  "Variant": 1
-	},
-	{
-	  "Variant": 2
-	},
-	{
-	  "Variant": 3
-	},
-	{
-	  "Variant": 4
-	},
-	{
-	  "Variant": 5
-	},
-	{
-	  "Variant": 6
-	},
-	{
-	  "Variant": 7
-	},
-	{
-	  "Variant": 8
-	},
-	{
-	  "Variant": 9
-	}
+    {
+      "Variant": 0
+    },
+    {
+      "Variant": 1
+    },
+    {
+      "Variant": 2
+    },
+    {
+      "Variant": 3
+    },
+    {
+      "Variant": 4
+    },
+    {
+      "Variant": 5
+    },
+    {
+      "Variant": 6
+    },
+    {
+      "Variant": 7
+    },
+    {
+      "Variant": 8
+    },
+    {
+      "Variant": 9
+    }
   ]
 }
