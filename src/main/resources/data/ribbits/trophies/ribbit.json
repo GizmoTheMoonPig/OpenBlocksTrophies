@@ -1,0 +1,31 @@
+{
+  "entity": "ribbits:ribbit",
+  "scale": 2.0,
+  "variants": [
+    {
+      "RibbitData": {
+        "profession": "ribbits:nitwit"
+      }
+    },
+    {
+      "RibbitData": {
+        "profession": "ribbits:gardener"
+      }
+    },
+    {
+      "RibbitData": {
+        "profession": "ribbits:sorcerer"
+      }
+    },
+    {
+      "RibbitData": {
+        "profession": "ribbits:fisherman"
+      }
+    },
+    {
+      "RibbitData": {
+        "profession": "ribbits:merchant"
+      }
+    }
+  ]
+}

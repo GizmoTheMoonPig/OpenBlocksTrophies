@@ -1,3 +1,4 @@
 {
-  "entity": "mna:wither_lich"
+  "entity": "mna:wither_lich",
+  "scale": 0.67
 }

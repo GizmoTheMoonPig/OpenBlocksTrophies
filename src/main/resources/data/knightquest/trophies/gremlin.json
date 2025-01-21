@@ -1,3 +1,4 @@
 {
-  "entity": "knightquest:gremlin"
+  "entity": "knightquest:gremlin",
+  "scale": 2.0
 }

@@ -1,3 +1,4 @@
 {
-  "entity": "enemyexpansion:vampire"
+  "entity": "enemyexpansion:vampire",
+  "scale": 1.03
 }
