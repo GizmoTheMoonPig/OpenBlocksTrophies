@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -47,7 +48,7 @@ public class TrophyItemRenderer extends BlockEntityWithoutLevelRenderer {
 			if (stack.has(TrophyRegistries.TROPHY_INFO)) {
 				Trophy trophy = TrophyItem.getTrophy(stack);
 				if (trophy != null && Minecraft.getInstance().level != null) {
-					TrophyRenderer.renderEntity(null, TrophyItem.getTrophyVariant(stack), stack.has(DataComponents.CUSTOM_NAME) ? stack.getHoverName().getString() : "", Minecraft.getInstance().level, BlockPos.ZERO, trophy, ms, source, light, TrophyItem.hasCycleOnTrophy(stack), this.trophy, this.slimTrophy);
+					TrophyRenderer.renderEntity(null, TrophyItem.getTrophyVariant(stack), stack.has(DataComponents.CUSTOM_NAME) ? stack.getHoverName() : Component.empty(), Minecraft.getInstance().level, BlockPos.ZERO, trophy, ms, source, light, TrophyItem.hasCycleOnTrophy(stack), this.trophy, this.slimTrophy);
 				}
 			}
 		} else if (item instanceof DisplayTrophyItem) {

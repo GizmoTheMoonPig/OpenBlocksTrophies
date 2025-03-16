@@ -84,8 +84,8 @@ public class ClientEvents {
 			if (TrophyConfig.playersRenderNames) {
 				if (event.getCamera().getEntity().level().getBlockEntity(event.getTarget().getBlockPos()) instanceof TrophyBlockEntity trophy) {
 					if (trophy.getTrophy() != null && trophy.getTrophy().type() == EntityType.PLAYER) {
-						if (!trophy.getTrophyName().isBlank()) {
-							renderNameTag(Component.literal(trophy.getTrophyName()), event.getCamera(), event.getTarget().getBlockPos(), event.getPoseStack(), event.getMultiBufferSource(), state.getValue(TrophyBlock.PEDESTAL));
+						if (trophy.getName() != null && !trophy.getName().getString().isBlank()) {
+							renderNameTag(trophy.getName(), event.getCamera(), event.getTarget().getBlockPos(), event.getPoseStack(), event.getMultiBufferSource(), state.getValue(TrophyBlock.PEDESTAL));
 						}
 						event.setCanceled(true);
 					}
@@ -108,13 +108,13 @@ public class ClientEvents {
 		stack.pushPose();
 		stack.translate(f + 0.5F, f1 + offset, f2 + 0.5F);
 		stack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
-		stack.scale(-0.015F, -0.015F, 0.015F);
+		stack.scale(0.015F, -0.015F, 0.015F);
 		Matrix4f matrix4f = stack.last().pose();
 		float opacity = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
 		int j = (int) (opacity * 255.0F) << 24;
 		Font font = Minecraft.getInstance().font;
 		float width = (float) (-font.width(name) / 2);
-		font.drawInBatch(name, width, (float) i, 553648127, false, matrix4f, source, Font.DisplayMode.NORMAL, j, LightTexture.FULL_BRIGHT);
+		font.drawInBatch(name, width, (float) i, 553648127, false, matrix4f, source, Font.DisplayMode.SEE_THROUGH, j, LightTexture.FULL_BRIGHT);
 		font.drawInBatch(name, width, (float) i, -1, false, matrix4f, source, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
 
 		stack.popPose();

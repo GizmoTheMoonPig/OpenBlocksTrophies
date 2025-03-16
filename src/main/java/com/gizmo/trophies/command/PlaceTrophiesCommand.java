@@ -82,9 +82,7 @@ public class PlaceTrophiesCommand {
 		level.setBlockAndUpdate(pos, TrophyRegistries.TROPHY.get().defaultBlockState().setValue(TrophyBlock.FACING, Direction.WEST));
 		if (level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			trophyBE.setTrophy(trophy);
-			if (variant != null) {
-				trophyBE.setVariant(variant);
-			}
+			trophyBE.setVariant(variant);
 		}
 	}
 }

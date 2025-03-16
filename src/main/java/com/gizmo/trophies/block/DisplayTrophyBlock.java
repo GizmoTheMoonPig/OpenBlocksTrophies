@@ -41,37 +41,16 @@ public class DisplayTrophyBlock extends AbstractTrophyBlock {
 
 	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result) {
-		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof DisplayTrophyBlockEntity trophy) {
-			if (trophy.display.rightClickSound().isPresent()) {
-				level.playSound(null, pos, trophy.display.rightClickSound().get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
-				return InteractionResult.sidedSuccess(level.isClientSide());
+		var standResult = super.useWithoutItem(state, level, pos, player, result);
+		if (!standResult.consumesAction()) {
+			if (!level.isClientSide() && level.getBlockEntity(pos) instanceof DisplayTrophyBlockEntity trophy) {
+				if (trophy.display.rightClickSound().isPresent()) {
+					level.playSound(null, pos, trophy.display.rightClickSound().get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
+					return InteractionResult.sidedSuccess(level.isClientSide());
+				}
 			}
 		}
-		return super.useWithoutItem(state, level, pos, player, result);
-	}
-
-	@Override
-	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-		List<ItemStack> drop = new ArrayList<>();
-		BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-		if (blockEntity instanceof DisplayTrophyBlockEntity trophy) {
-			ItemStack newStack = new ItemStack(this);
-			newStack.set(TrophyRegistries.DISPLAY_TROPHY_INFO, trophy.display);
-			newStack.set(DataComponents.RARITY, trophy.display.displayItem().getDefaultInstance().getRarity());
-			drop.add(newStack);
-		}
-		return drop;
-	}
-
-	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-		ItemStack newStack = new ItemStack(this);
-		CompoundTag tag = new CompoundTag();
-		if (level.getBlockEntity(pos) instanceof DisplayTrophyBlockEntity trophy) {
-			newStack.set(TrophyRegistries.DISPLAY_TROPHY_INFO, trophy.display);
-			newStack.set(DataComponents.RARITY, trophy.display.displayItem().getDefaultInstance().getRarity());
-		}
-		return newStack;
+		return standResult;
 	}
 
 	@Nullable
