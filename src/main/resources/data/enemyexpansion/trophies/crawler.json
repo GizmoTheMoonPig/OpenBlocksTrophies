@@ -1,3 +1,4 @@
 {
-  "entity": "enemyexpansion:crawler"
+  "entity": "enemyexpansion:crawler",
+  "scale": 2.0
 }

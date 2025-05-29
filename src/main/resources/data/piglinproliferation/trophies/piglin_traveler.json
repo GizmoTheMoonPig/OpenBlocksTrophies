@@ -1,3 +1,4 @@
 {
-  "entity": "piglinproliferation:piglin_traveler"
+  "entity": "piglinproliferation:piglin_traveler",
+  "scale": 1.03
 }

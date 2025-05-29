@@ -1,9 +1,5 @@
 {
   "entity": "divinerpg:mandragora",
   "scale": 0.85,
-  "offset": [
-    0.0,
-    -0.25,
-    0.0
-  ]
+  "offset": -0.25
 }

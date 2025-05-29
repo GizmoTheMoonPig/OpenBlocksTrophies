@@ -1,28 +1,39 @@
 package com.gizmo.trophies.block;
 
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.item.TrophyItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractTrophyBlock extends BaseEntityBlock {
 
@@ -66,6 +77,29 @@ public abstract class AbstractTrophyBlock extends BaseEntityBlock {
 		}
 
 		return InteractionResult.PASS;
+	}
+
+	@Override
+	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+		List<ItemStack> drop = new ArrayList<>();
+		BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+		if (blockEntity instanceof BlockEntity trophyBE) {
+			ItemStack newStack = new ItemStack(this);
+			newStack.applyComponents(trophyBE.collectComponents());
+			newStack.set(DataComponents.RARITY, TrophyItem.getTrophyRarity(newStack));
+			drop.add(newStack);
+		}
+		return drop;
+	}
+
+	@Override
+	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader reader, BlockPos pos, Player player) {
+		ItemStack newStack = new ItemStack(this);
+		if (reader.getBlockEntity(pos) instanceof BlockEntity trophyBE) {
+			newStack.applyComponents(trophyBE.collectComponents());
+			newStack.set(DataComponents.RARITY, TrophyItem.getTrophyRarity(newStack));
+		}
+		return newStack;
 	}
 
 	@Override

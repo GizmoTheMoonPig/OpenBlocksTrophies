@@ -1,3 +1,4 @@
 {
-  "entity": "knightquest:ghastling"
+  "entity": "knightquest:ghastling",
+  "scale": 1.75
 }

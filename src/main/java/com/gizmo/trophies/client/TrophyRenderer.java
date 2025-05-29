@@ -54,6 +54,8 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 	}
 
 	public static void renderEntity(@Nullable TrophyBlockEntity be, CompoundTag variant, String name, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light, boolean cycling, PlayerTrophyModel normalTrophy, PlayerTrophyModel slimTrophy, PlayerCapeModel<?> cape, PlayerEarsModel ears) {
+		if (name == null) name = Component.empty();
+
 		stack.pushPose();
 		if (KEYS.isEmpty() && !Trophy.getTrophies().isEmpty()) {
 			KEYS.addAll(Trophy.getTrophies().keySet().stream().filter(location -> !location.equals(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.PLAYER))).toList());
@@ -64,7 +66,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			if (be != null) {
 				stack.mulPose(Axis.YP.rotationDegrees(-be.getBlockState().getValue(TrophyBlock.FACING).toYRot()));
 			}
-			if (name.equalsIgnoreCase("dinnerbone") || name.equalsIgnoreCase("grumm")) {
+			if (name.getString().equalsIgnoreCase("dinnerbone") || name.getString().equalsIgnoreCase("grumm")) {
 				stack.mulPose(Axis.ZP.rotationDegrees(180.0F));
 				stack.translate(0.0F, 0.295F, 0.0F);
 			} else {
@@ -72,6 +74,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			}
 			stack.scale(0.35F, -0.35F, -0.35F);
 			PlayerInfoHolder holder = PlayerInfoHolder.getSkinFromName(name.toLowerCase(Locale.ROOT));
+
 			if (holder.slim()) {
 				slimTrophy.renderToBuffer(stack, source.getBuffer(holder.type()), light, OverlayTexture.NO_OVERLAY);
 			} else {
@@ -101,7 +104,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 				boolean hitboxes = dispatcher.shouldRenderHitBoxes();
 				dispatcher.setRenderShadow(false);
 				dispatcher.setRenderHitBoxes(false);
-				entity.setCustomName(!name.isEmpty() ? Component.literal(name) : null);
+				entity.setCustomName(name);
 				entity.setCustomNameVisible(false);
 				//tick named sheep so the jeb_ name Easter Egg works properly. Lucky us the sheep doesn't need the tickCount for anything animation related so this works well.
 				//I can't do this for every mob because mobs such as the blaze or pufferfish move when the tickCount is incremented, and I HATE moving trophies
@@ -138,7 +141,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 					}
 				}
 
-				if (trophy.type() == EntityType.FOX && name.equalsIgnoreCase("neoforge")) {
+				if (trophy.type() == EntityType.FOX && name.getString().equalsIgnoreCase("neoforge")) {
 					stack.mulPose(Axis.YP.rotationDegrees(level.getGameTime() * 15.0F));
 				}
 

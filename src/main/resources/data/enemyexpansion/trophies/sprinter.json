@@ -1,3 +1,4 @@
 {
-  "entity": "enemyexpansion:sprinter"
+  "entity": "enemyexpansion:sprinter",
+  "scale": 1.03
 }

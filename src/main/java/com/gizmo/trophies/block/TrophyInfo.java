@@ -1,6 +1,5 @@
 package com.gizmo.trophies.block;
 
-import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,6 +10,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EntityType;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -44,13 +44,12 @@ public record TrophyInfo(EntityType<?> type, Optional<CompoundTag> variant, Opti
 		this(type, Optional.empty(), cycling ? Optional.of(Unit.INSTANCE) : Optional.empty(), Optional.empty());
 	}
 
-	public static TrophyInfo makeFromBlock(TrophyBlockEntity trophy) {
-		if (trophy.getTrophy() != null) {
-			Optional<Unit> cycling = trophy.isCycling() ? Optional.of(Unit.INSTANCE) : Optional.empty();
-			Optional<Integer> cooldown = trophy.getCooldown() > 0 ? Optional.of(trophy.getCooldown()) : Optional.empty();
-			return new TrophyInfo(trophy.getTrophy().type(), Optional.of(trophy.getVariant()), cycling, cooldown);
-		}
-		return DEFAULT;
+	public TrophyInfo withVariant(@Nullable CompoundTag variant) {
+		return new TrophyInfo(this.type(), Optional.ofNullable(variant), this.cycling(), this.cooldown());
+	}
+
+	public TrophyInfo withCooldown(int cooldown) {
+		return new TrophyInfo(this.type(), this.variant(), this.cycling(), Optional.of(cooldown));
 	}
 
 }

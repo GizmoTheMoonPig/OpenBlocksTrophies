@@ -1,3 +1,4 @@
 {
-  "entity": "upgrade_aquatic:box_jellyfish"
+  "entity": "upgrade_aquatic:box_jellyfish",
+  "scale": 2.0
 }

@@ -1,4 +1,5 @@
 {
+  "drop_chance": 0.0075,
   "entity": "mowziesmobs:umvuthi",
-  "scale": 0.62
+  "scale": 0.6
 }

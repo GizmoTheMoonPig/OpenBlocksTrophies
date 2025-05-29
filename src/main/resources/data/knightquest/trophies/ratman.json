@@ -1,3 +1,4 @@
 {
-  "entity": "knightquest:ratman"
+  "entity": "knightquest:ratman",
+  "scale": 1.5
 }
