@@ -49,7 +49,7 @@ public class TrophySpecialRenderer implements SpecialModelRenderer<DataComponent
 
 		Trophy trophy = TrophyItem.getTrophy(map);
 		if (trophy != null && Minecraft.getInstance().level != null) {
-			TrophyRenderer.renderEntity(null, TrophyItem.getTrophyVariant(map), map.has(DataComponents.CUSTOM_NAME) ? map.get(DataComponents.CUSTOM_NAME).getString() : "", Minecraft.getInstance().level, BlockPos.ZERO, trophy, stack, buffer, light, TrophyItem.hasCycleOnTrophy(map), this.trophy, this.slimTrophy, this.cape, this.ears);
+			TrophyRenderer.renderEntity(null, TrophyItem.getTrophyVariant(map), map.get(DataComponents.CUSTOM_NAME), Minecraft.getInstance().level, BlockPos.ZERO, trophy, stack, buffer, light, TrophyItem.hasCycleOnTrophy(map), this.trophy, this.slimTrophy, this.cape, this.ears);
 		}
 	}
 

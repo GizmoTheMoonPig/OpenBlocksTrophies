@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.monster.creaking.Creaking;
 import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.npc.VillagerDataHolder;
 import net.minecraft.world.entity.npc.VillagerType;
@@ -36,6 +37,11 @@ public class EntityCache {
 							created.hasImpulse = false;
 							if (created instanceof Mob mob) {
 								mob.setNoAi(true);
+							}
+							//pain
+							//eye glowing isnt stored via NBT and I want the trophy to glow
+							if (created instanceof Creaking creaking) {
+								creaking.setIsActive(true);
 							}
 						}
 						return created;
