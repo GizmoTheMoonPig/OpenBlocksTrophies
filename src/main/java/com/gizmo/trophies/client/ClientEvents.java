@@ -1,6 +1,7 @@
 package com.gizmo.trophies.client;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
+import com.gizmo.trophies.block.AbstractTrophyBlock;
 import com.gizmo.trophies.block.TrophyBlock;
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.gizmo.trophies.config.TrophyConfig;
@@ -76,7 +77,7 @@ public class ClientEvents {
 	//this event also handles rendering name tags of player trophies when hovering over them
 	private static void dontRenderTrophyHitbox(RenderHighlightEvent.Block event) {
 		BlockState state = event.getCamera().getEntity().level().getBlockState(event.getTarget().getBlockPos());
-		if (state.is(TrophyRegistries.TROPHY)) {
+		if (state.getBlock() instanceof AbstractTrophyBlock) {
 			if (TrophyConfig.playersRenderNames) {
 				if (event.getCamera().getEntity().level().getBlockEntity(event.getTarget().getBlockPos()) instanceof TrophyBlockEntity trophy) {
 					if (trophy.getTrophy() != null && trophy.getTrophy().type() == EntityType.PLAYER) {

@@ -11,20 +11,18 @@ displayURL = "https://www.curseforge.com/minecraft/mc-mods/openblocks-trophies"
 logoFile = "trophy.png"
 credits = "Original Trophies made by the OpenMods team"
 authors = "GizmoTheMoonPig"
-description = '''
-Brings back the trophies from OpenBlocks.
-'''
+description = 'Brings back the trophies from OpenBlocks.'
 
 [[dependencies.obtrophies]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.4.0-beta,)"
+versionRange = "[21.5.0-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.obtrophies]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.4]"
+versionRange = "[1.21.5]"
 ordering = "NONE"
 side = "BOTH"

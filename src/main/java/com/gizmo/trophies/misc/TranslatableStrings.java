@@ -14,6 +14,7 @@ public final class TranslatableStrings {
 	public static final String DISPLAY_TROPHY = TrophyRegistries.DISPLAY_TROPHY.get().getDescriptionId() + ".display";
 	public static final String FROM_MOD_ID = TrophyRegistries.TROPHY_ITEM.get().getDescriptionId() + ".modid";
 	public static final String VARIANT_FORMATTER = TrophyRegistries.TROPHY_ITEM.get().getDescriptionId() + ".variant";
+	public static final String INVALID_DATA = TrophyRegistries.TROPHY_ITEM.get().getDescriptionId() + ".invalid";
 
 	public static final String TROPHY_CATEGORY = "gui.obtrophies.trophy_category";
 	public static final String TROPHY_DROP_CHANCE = "gui.obtrophies.drop_chance";

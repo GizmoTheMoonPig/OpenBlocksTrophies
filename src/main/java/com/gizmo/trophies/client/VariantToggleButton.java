@@ -51,8 +51,6 @@ public class VariantToggleButton extends Button {
 
 	@Override
 	public void renderWidget(GuiGraphics graphics, int x, int y, float partialTicks) {
-		RenderSystem.enableDepthTest();
-		RenderSystem.enableBlend();
 		ResourceLocation resourcelocation;
 		if (this.selected) {
 			resourcelocation = this.isHovered() ? CHECKBOX_SELECTED_HOVERED_SPRITE : CHECKBOX_SELECTED_SPRITE;

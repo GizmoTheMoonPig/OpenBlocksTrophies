@@ -4,6 +4,7 @@ import com.gizmo.trophies.OpenBlocksTrophies;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.creaking.Creaking;
@@ -52,12 +53,12 @@ public class EntityCache {
 			}
 			if (entity instanceof LivingEntity living) {
 				CompoundTag tag = new CompoundTag();
-				defaultVariant.ifPresent(tag1 -> tag1.getAllKeys().forEach(s -> tag.put(s, Objects.requireNonNull(tag1.get(s)))));
+				defaultVariant.ifPresent(tag1 -> tag1.entrySet().forEach(entry -> tag.put(entry.getKey(), entry.getValue())));
 				if (!variant.isEmpty()) {
 					if (entity instanceof VillagerDataHolder villager) {
-						variant.getAllKeys().forEach(s -> villager.setVillagerData(new VillagerData(VillagerType.PLAINS, Objects.requireNonNull(Minecraft.getInstance().level.registryAccess().lookupOrThrow(Registries.VILLAGER_PROFESSION).getValue(ResourceLocation.tryParse(variant.getString(s)))), 1)));
+						variant.keySet().forEach(s -> villager.setVillagerData(villager.getVillagerData().withProfession(Minecraft.getInstance().level.registryAccess(), ResourceKey.create(Registries.VILLAGER_PROFESSION, ResourceLocation.tryParse(variant.getStringOr(s, ""))))));
 					} else {
-						variant.getAllKeys().forEach(s -> tag.put(s, Objects.requireNonNull(variant.get(s))));
+						variant.keySet().forEach(s -> tag.put(s, Objects.requireNonNull(variant.get(s))));
 					}
 				}
 				if (!tag.isEmpty()) {

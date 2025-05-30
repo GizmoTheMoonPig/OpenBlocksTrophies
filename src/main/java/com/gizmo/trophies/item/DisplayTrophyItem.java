@@ -1,15 +1,26 @@
 package com.gizmo.trophies.item;
 
+import com.gizmo.trophies.misc.TranslatableStrings;
 import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.trophy.DisplayTrophy;
+import com.gizmo.trophies.trophy.Trophy;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 public class DisplayTrophyItem extends BlockItem {
 	public DisplayTrophyItem(Block block, Properties properties) {
@@ -26,12 +37,28 @@ public class DisplayTrophyItem extends BlockItem {
 	}
 
 	@Override
+	protected boolean placeBlock(BlockPlaceContext context, BlockState state) {
+		if (!context.getItemInHand().has(TrophyRegistries.DISPLAY_TROPHY_INFO)) {
+			return false;
+		}
+		return super.placeBlock(context, state);
+	}
+
+	@Override
 	public Component getName(ItemStack stack) {
 		DisplayTrophy trophy = getTrophy(stack.getComponents());
 		if (trophy != null) {
 			return Component.translatable("block.obtrophies.display_trophy.display", Component.translatable(trophy.displayItem().getDescriptionId()));
 		}
 		return super.getName(stack);
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltip, TooltipFlag flag) {
+		DisplayTrophy trophy = getTrophy(stack.getComponents());
+		if (trophy == null) {
+			tooltip.accept(Component.translatable(TranslatableStrings.INVALID_DATA).withStyle(ChatFormatting.RED));
+		}
 	}
 
 	@Override

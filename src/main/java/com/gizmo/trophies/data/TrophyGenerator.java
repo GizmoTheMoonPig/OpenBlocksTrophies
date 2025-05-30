@@ -15,6 +15,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.frog.FrogVariant;
+import net.minecraft.world.entity.animal.frog.FrogVariants;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.animal.horse.Markings;
 import net.minecraft.world.entity.animal.horse.Variant;
@@ -42,8 +44,14 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.WOLF).setScale(1.25F)
 			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("variant", "minecraft:pale")))
 			.addRegistryVariant("variant", Registries.WOLF_VARIANT.location()));
-		this.makeTrophy(new Trophy.Builder(EntityType.CHICKEN).setScale(1.5F).setRightClickBehavior(new ItemDropBehavior(Items.EGG, 10000, SoundEvents.CHICKEN_EGG)));
-		this.makeTrophy(new Trophy.Builder(EntityType.COW).setRightClickBehavior(new ClickWithItemBehavior(Items.BUCKET, true, new ItemDropBehavior(Items.MILK_BUCKET), SoundEvents.COW_MILK)));
+		this.makeTrophy(new Trophy.Builder(EntityType.CHICKEN)
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("variant", TemperatureVariants.TEMPERATE.toString())))
+			.addRegistryVariant("variant", Registries.CHICKEN_VARIANT.location())
+			.setScale(1.5F).setRightClickBehavior(new ItemDropBehavior(Items.EGG, 10000, SoundEvents.CHICKEN_EGG)));
+		this.makeTrophy(new Trophy.Builder(EntityType.COW)
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("variant", TemperatureVariants.TEMPERATE.toString())))
+			.addRegistryVariant("variant", Registries.COW_VARIANT.location())
+			.setRightClickBehavior(new ClickWithItemBehavior(Items.BUCKET, true, new ItemDropBehavior(Items.MILK_BUCKET), SoundEvents.COW_MILK)));
 		this.makeTrophy(new Trophy.Builder(EntityType.CREEPER).setRightClickBehavior(new ExplosionBehavior(2, false))
 			.addVariant("powered", false)
 			.addVariant("powered", true));
@@ -90,7 +98,10 @@ public class TrophyGenerator extends TrophyProvider {
 			.addVariant("Pumpkin", true)
 			.addVariant("Pumpkin", false)
 			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putBoolean("Pumpkin", true))));
-		this.makeTrophy(new Trophy.Builder(EntityType.PIG).setRightClickBehavior(new ItemDropBehavior(Items.PORKCHOP, 20000)));
+		this.makeTrophy(new Trophy.Builder(EntityType.PIG)
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("variant", TemperatureVariants.TEMPERATE.toString())))
+			.addRegistryVariant("variant", Registries.PIG_VARIANT.location())
+			.setRightClickBehavior(new ItemDropBehavior(Items.PORKCHOP, 20000)));
 		this.makeTrophy(new Trophy.Builder(EntityType.ENDERMITE).setScale(1.5F));
 		this.makeTrophy(new Trophy.Builder(EntityType.GUARDIAN).setRightClickBehavior(new ElderGuardianCurseBehavior()));
 		this.makeTrophy(new Trophy.Builder(EntityType.RABBIT).setScale(2.0F).setRightClickBehavior(new ItemDropBehavior(Items.CARROT, 20000))
@@ -195,7 +206,7 @@ public class TrophyGenerator extends TrophyProvider {
 			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.CLAYFISH, DyeColor.WHITE, DyeColor.RED))
 			.addVariant("Variant", TropicalFish.packVariant(TropicalFish.Pattern.SNOOPER, DyeColor.GRAY, DyeColor.RED))
 			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putInt("Variant", TropicalFish.packVariant(TropicalFish.Pattern.KOB, DyeColor.ORANGE, DyeColor.WHITE)))));
-		this.makeTrophy(new Trophy.Builder(EntityType.PUFFERFISH).setScale(2.0F).setRightClickBehavior(new MobEffectBehavior(MobEffects.CONFUSION, 100, 0))
+		this.makeTrophy(new Trophy.Builder(EntityType.PUFFERFISH).setScale(2.0F).setRightClickBehavior(new MobEffectBehavior(MobEffects.NAUSEA, 100, 0))
 			.addVariant("PuffState", 0)
 			.addVariant("PuffState", 1)
 			.addVariant("PuffState", 2)
@@ -242,7 +253,7 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.ALLAY).setScale(1.75F));
 		this.makeTrophy(new Trophy.Builder(EntityType.FROG).setScale(1.5F).setRightClickBehavior(new ItemDropBehavior(Items.SLIME_BALL, 20000))
 			.addRegistryVariant("variant", Registries.FROG_VARIANT.location())
-			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("variant", FrogVariant.TEMPERATE.location().toString()))));
+			.addDefaultVariant(Util.make(new CompoundTag(), tag -> tag.putString("variant", TemperatureVariants.TEMPERATE.toString()))));
 		this.makeTrophy(new Trophy.Builder(EntityType.TADPOLE).setScale(2.0F));
 		this.makeTrophy(new Trophy.Builder(EntityType.WARDEN).setScale(0.75F).setRightClickBehavior(new MobEffectBehavior(MobEffects.DARKNESS, 200, 0)));
 		this.makeTrophy(new Trophy.Builder(EntityType.WITHER).setDropChance(0.0075D).setOffset(0.0D, -0.2D, 0.0D).setScale(0.75F));

@@ -1,9 +1,18 @@
 {
   "model": {
-    "type": "minecraft:special",
-    "base": "obtrophies:item/trophy",
-    "model": {
-      "type": "obtrophies:trophy"
-    }
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "obtrophies:block/trophy"
+      },
+      {
+        "type": "minecraft:special",
+        "base": "obtrophies:block/trophy",
+        "model": {
+          "type": "obtrophies:trophy"
+        }
+      }
+    ]
   }
 }

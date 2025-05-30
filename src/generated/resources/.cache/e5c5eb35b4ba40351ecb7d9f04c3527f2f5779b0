@@ -1,8 +1,8 @@
-// 1.21.4	2024-12-05T22:58:34.9023361	Advancements
-8daad2bf9e4b961d548111093f6d426eb2536228 data/obtrophies/advancement/all_fish_trophies.json
-4b800f16dcb67f4348283b6b512c04fc9db2dada data/obtrophies/advancement/all_horse_trophies.json
-41e048c177d3a716d345f52fe1e8d427da497186 data/obtrophies/advancement/all_vanilla_trophies.json
-712cd12d6ac2e1b56b76f88b08930e6d2fad09a1 data/obtrophies/advancement/boss_trophy.json
+// 1.21.5	2025-05-29T19:23:41.618933402	Advancements
+24db313c2f74c4f6713e12f151a99b33868169e8 data/obtrophies/advancement/all_fish_trophies.json
+96d86c0829b0b58262655515f88e939d09d68247 data/obtrophies/advancement/all_horse_trophies.json
+7486133876efd82d17ec432292e9a5f0f3f061c4 data/obtrophies/advancement/all_vanilla_trophies.json
+817b0df4f7e6c524a6c29900eb61564cd4958dd8 data/obtrophies/advancement/boss_trophy.json
 824181280cc13e2f76926cbad1f201908cfdbd00 data/obtrophies/advancement/one_trophy.json
-9a5855f4ea46a88850d9fc29802a825092ee29d9 data/obtrophies/advancement/rarest_trophy.json
+408f6e005db959f7f17d2fb3d77fbc651df8096e data/obtrophies/advancement/rarest_trophy.json
 dbef580dac67a64c582cb847a6c4c638eb751413 data/obtrophies/advancement/root.json

@@ -7,5 +7,12 @@
       "count": 1,
       "id": "minecraft:porkchop"
     }
+  },
+  "default_variant": {
+    "variant": "minecraft:temperate"
+  },
+  "variants": {
+    "key": "variant",
+    "registry": "minecraft:pig_variant"
   }
 }

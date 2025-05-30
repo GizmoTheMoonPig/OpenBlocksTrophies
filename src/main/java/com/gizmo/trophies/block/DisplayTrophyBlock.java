@@ -32,7 +32,7 @@ public class DisplayTrophyBlock extends AbstractTrophyBlock {
 	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result) {
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof DisplayTrophyBlockEntity trophy) {
-			if (trophy.display.rightClickSound().isPresent()) {
+			if (trophy.display != null && trophy.display.rightClickSound().isPresent()) {
 				level.playSound(null, pos, trophy.display.rightClickSound().get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
 				return InteractionResult.SUCCESS;
 			}

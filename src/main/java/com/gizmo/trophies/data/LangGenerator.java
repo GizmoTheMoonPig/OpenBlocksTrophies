@@ -50,6 +50,7 @@ public class LangGenerator extends LanguageProvider {
 		this.add(TranslatableStrings.TROPHY_STUBS_MADE, "Sucessfully made %s trophy configs!");
 		this.add(TranslatableStrings.FROM_MOD_ID, "From: %s");
 		this.add(TranslatableStrings.VARIANT_FORMATTER, "\"%s\": \"%s\"");
+		this.add(TranslatableStrings.INVALID_DATA, "This trophy is missing its info component");
 
 		this.add(TranslatableStrings.TROPHY_TAB, "Trophies");
 		this.add(TranslatableStrings.TROPHY_DROP_CHANCE, "Chance: %s%%");

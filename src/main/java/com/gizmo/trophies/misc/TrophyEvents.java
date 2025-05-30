@@ -137,9 +137,9 @@ public class TrophyEvents {
 			entity.addAdditionalSaveData(tag);
 			for (int i = 0; i < trophy.getVariants(entity.level().registryAccess()).size(); i++) {
 				CompoundTag variantKeys = trophy.getVariants(entity.level().registryAccess()).get(i);
-				for (String s : variantKeys.getAllKeys()) {
+				for (String s : variantKeys.keySet()) {
 					if (entity instanceof VillagerDataHolder villager) {
-						if (BuiltInRegistries.VILLAGER_PROFESSION.getKey(villager.getVillagerData().getProfession()).toString().equals(variantKeys.getString(s))) {
+						if (villager.getVillagerData().profession().getKey().location().toString().equals(variantKeys.getString(s))) {
 							return variantKeys;
 						}
 					} else {
@@ -149,7 +149,7 @@ public class TrophyEvents {
 							//most values save as bytes in the json, but sometimes they also be things like shorts.
 							//we'll compare both numbers to long as they should always match this way.
 							//comparing to int is going to cause issues for doubles
-							if (tagVer instanceof NumericTag number && number.getAsLong() == num.getAsLong()) {
+							if (tagVer instanceof NumericTag number && number.longValue() == num.longValue()) {
 								return variantKeys;
 							}
 						} else if (Objects.equals(tagVer, variantVer)) {

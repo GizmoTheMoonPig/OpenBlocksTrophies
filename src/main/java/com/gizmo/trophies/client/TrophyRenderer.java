@@ -9,9 +9,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.PlayerCapeModel;
 import net.minecraft.client.model.PlayerEarsModel;
 import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -27,10 +29,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.sheep.Sheep;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Quaternionf;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -165,14 +169,35 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 	}
 
 	@Override
-	public void render(TrophyBlockEntity blockEntity, float partialTicks, PoseStack stack, MultiBufferSource source, int light, int overlay) {
-		if (blockEntity.getTrophy() != null) {
-			stack.pushPose();
-			if (!blockEntity.getBlockState().getValue(TrophyBlock.PEDESTAL)) {
-				stack.translate(0.0D, -0.25D, 0.0D);
-			}
-			renderEntity(blockEntity, blockEntity.getVariant(), blockEntity.getName(), blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light, blockEntity.isCycling(), this.trophy, this.slimTrophy, this.cape, this.ears);
-			stack.popPose();
+	public void render(TrophyBlockEntity blockEntity, float partialTicks, PoseStack stack, MultiBufferSource source, int light, int overlay, Vec3 cameraPos) {
+		stack.pushPose();
+		if (!blockEntity.getBlockState().getValue(TrophyBlock.PEDESTAL)) {
+			stack.translate(0.0D, -0.25D, 0.0D);
 		}
+		if (blockEntity.getTrophy() != null) {
+			renderEntity(blockEntity, blockEntity.getVariant(), blockEntity.getName(), blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light, blockEntity.isCycling(), this.trophy, this.slimTrophy, this.cape, this.ears);
+		} else {
+			stack.translate(0.5F, 0.85F, 0.5F);
+			renderNullDisplay(stack, source);
+		}
+		stack.popPose();
+	}
+
+	public static void renderNullDisplay(PoseStack stack, MultiBufferSource source) {
+		Quaternionf camRot = Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation();
+		stack.mulPose(new Quaternionf(0.0F, camRot.y, 0.0F, camRot.w));
+		stack.scale(-0.075F, -0.075F, 0.075F);
+		Minecraft.getInstance().font.drawInBatch("?", -2.5F, 0, -1, false, stack.last().pose(), source, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
+		stack.mulPose(Axis.YP.rotationDegrees(180));
+		Minecraft.getInstance().font.drawInBatch("?", -2.5F, 0, -1, false, stack.last().pose(), source, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
+	}
+
+	public static void renderNullItemDisplay(PoseStack stack, MultiBufferSource source, boolean gui) {
+		stack.translate(0.5F, 1.05F, 0.5F);
+		stack.mulPose(Axis.YP.rotationDegrees(gui ? 135 : 0));
+		stack.scale(-0.1F, -0.1F, 0.1F);
+		Minecraft.getInstance().font.drawInBatch("?", -2.5F, 0, -1, false, stack.last().pose(), source, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
+		stack.mulPose(Axis.YP.rotationDegrees(180));
+		Minecraft.getInstance().font.drawInBatch("?", -2.5F, 0, -1, false, stack.last().pose(), source, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
 	}
 }

@@ -18,7 +18,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.Tags;
@@ -29,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class TrophyItem extends BlockItem {
 
@@ -46,6 +50,14 @@ public class TrophyItem extends BlockItem {
 		}
 
 		return null;
+	}
+
+	@Override
+	protected boolean placeBlock(BlockPlaceContext context, BlockState state) {
+		if (!context.getItemInHand().has(TrophyRegistries.TROPHY_INFO)) {
+			return false;
+		}
+		return super.placeBlock(context, state);
 	}
 
 	public static boolean hasCycleOnTrophy(@Nullable DataComponentMap map) {
@@ -109,17 +121,21 @@ public class TrophyItem extends BlockItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltip, TooltipFlag flag) {
 		Trophy trophy = getTrophy(stack.getComponents());
-		if (trophy != null && !hasCycleOnTrophy(stack.getComponents())) {
-			tooltip.add(Component.translatable(TranslatableStrings.FROM_MOD_ID, this.getModIdForTooltip(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(trophy.type())).getNamespace())).withStyle(ChatFormatting.GRAY));
-			if (flag.isAdvanced()) {
-				CompoundTag variant = getTrophyVariant(stack.getComponents());
-				HolderLookup.Provider provider = context.registries();
-				if (provider != null && !trophy.getVariants(provider).isEmpty() && !variant.isEmpty()) {
-					variant.getAllKeys().forEach(s -> tooltip.add(Component.translatable(TranslatableStrings.VARIANT_FORMATTER, s, Objects.requireNonNull(variant.get(s)).getAsString()).withStyle(ChatFormatting.GRAY)));
+		if (trophy != null) {
+			if (!hasCycleOnTrophy(stack.getComponents())) {
+				tooltip.accept(Component.translatable(TranslatableStrings.FROM_MOD_ID, this.getModIdForTooltip(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(trophy.type())).getNamespace())).withStyle(ChatFormatting.GRAY));
+				if (flag.isAdvanced()) {
+					CompoundTag variant = getTrophyVariant(stack.getComponents());
+					HolderLookup.Provider provider = context.registries();
+					if (provider != null && !trophy.getVariants(provider).isEmpty() && !variant.isEmpty()) {
+						variant.keySet().forEach(s -> tooltip.accept(Component.translatable(TranslatableStrings.VARIANT_FORMATTER, s, Objects.requireNonNull(variant.get(s)).asString().orElse("")).withStyle(ChatFormatting.GRAY)));
+					}
 				}
 			}
+		} else {
+			tooltip.accept(Component.translatable(TranslatableStrings.INVALID_DATA).withStyle(ChatFormatting.RED));
 		}
 	}
 

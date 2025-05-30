@@ -6,6 +6,7 @@ import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,10 +15,12 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class TrophyBlockEntity extends BlockEntity {
@@ -46,7 +49,7 @@ public class TrophyBlockEntity extends BlockEntity {
 
 	@Nullable
 	public Trophy getTrophy() {
-		if (this.cachedTrophy == null) {
+		if (this.cachedTrophy == null && this.info != null) {
 			ResourceLocation entityKey = BuiltInRegistries.ENTITY_TYPE.getKey(this.info.type());
 			this.cachedTrophy = Trophy.getTrophies().get(entityKey);
 		}
@@ -77,9 +80,7 @@ public class TrophyBlockEntity extends BlockEntity {
 	@Override
 	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
 		super.saveAdditional(tag, provider);
-		if (tag.contains("name", 8)) {
-			this.name = parseCustomNameSafe(tag.getString("name"), provider);
-		}
+		this.name = parseCustomNameSafe(tag.get("name"), provider);
 		if (this.info != null) {
 			tag.put("info", TrophyInfo.CODEC.encodeStart(NbtOps.INSTANCE, this.info.withCooldown(this.cooldown)).getOrThrow());
 		}
@@ -98,9 +99,9 @@ public class TrophyBlockEntity extends BlockEntity {
 			if (this.name != null) {
 				tag.putString("name", Component.Serializer.toJson(this.name, provider));
 			}
-			TrophyInfo.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("info")).resultOrPartial(OpenBlocksTrophies.LOGGER::error).ifPresent(info -> {
-				this.info = info;
-				this.setCooldown(info.cooldown().orElse(0));
+			tag.getCompound("info").flatMap(info -> TrophyInfo.CODEC.parse(NbtOps.INSTANCE, info).resultOrPartial()).ifPresent(parsedInfo -> {
+				this.info = parsedInfo;
+				this.setCooldown(parsedInfo.cooldown().orElse(0));
 			});
 		}
 	}
@@ -116,10 +117,10 @@ public class TrophyBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	protected void applyImplicitComponents(BlockEntity.DataComponentInput componentInput) {
-		super.applyImplicitComponents(componentInput);
-		this.info = componentInput.get(TrophyRegistries.TROPHY_INFO);
-		this.name = componentInput.get(DataComponents.CUSTOM_NAME);
+	protected void applyImplicitComponents(DataComponentGetter components) {
+		super.applyImplicitComponents(components);
+		this.info = components.get(TrophyRegistries.TROPHY_INFO);
+		this.name = components.get(DataComponents.CUSTOM_NAME);
 		if (this.info != null) {
 			this.cooldown = this.info.cooldown().orElse(0);
 		}
@@ -139,20 +140,15 @@ public class TrophyBlockEntity extends BlockEntity {
 	}
 
 	public void parseLegacyInfo(CompoundTag tag) {
-		if (Trophy.getTrophies().containsKey(ResourceLocation.tryParse(tag.getString("entity")))) {
-			this.setTrophy(Trophy.getTrophies().get(ResourceLocation.tryParse(tag.getString("entity"))));
-		}
-		this.setCooldown(tag.getInt("cooldown"));
+		tag.getString("entity").ifPresent(entity -> {
+			if (Trophy.getTrophies().containsKey(ResourceLocation.tryParse(entity))) {
+				this.setTrophy(Trophy.getTrophies().get(ResourceLocation.tryParse(entity)));
+			}
+		});
+		this.setCooldown(tag.getIntOr("cooldown", 0));
 
-		Optional<CompoundTag> variant = Optional.empty();
-		if (tag.contains("VariantID")) {
-			variant = Optional.of(tag.getCompound("VariantID"));
-		}
+		tag.getString("CustomNameEntity").ifPresent(name -> this.name = Component.literal(name));
 
-		if (tag.contains("CustomNameEntity")) {
-			this.name = Component.literal(tag.getString("CustomNameEntity"));
-		}
-
-		this.info = new TrophyInfo(this.getTrophy().type(), variant, Optional.empty(), Optional.of(this.getCooldown()));
+		this.info = new TrophyInfo(this.getTrophy().type(), tag.getCompound("VariantID"), Optional.empty(), Optional.of(this.getCooldown()));
 	}
 }

@@ -5,15 +5,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 1028
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -23,15 +23,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 4
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -41,15 +41,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 260
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -59,15 +59,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 772
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -77,15 +77,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 516
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -95,15 +95,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 1027
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -113,15 +113,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 3
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -131,15 +131,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 259
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -149,15 +149,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 771
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -167,15 +167,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 515
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -185,15 +185,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 1026
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -203,15 +203,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 2
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -221,15 +221,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 258
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -239,15 +239,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 770
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -257,15 +257,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 514
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -275,15 +275,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 1025
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -293,15 +293,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 1
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -311,15 +311,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 257
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -329,15 +329,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 769
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -347,15 +347,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 513
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -365,15 +365,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 1030
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -383,15 +383,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 6
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -401,15 +401,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 262
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -419,15 +419,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 774
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -437,15 +437,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 518
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -455,15 +455,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 1029
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -473,15 +473,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 5
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -491,15 +491,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 261
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -509,15 +509,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 773
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -527,15 +527,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 517
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -545,15 +545,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 1024
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -563,15 +563,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 0
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -581,15 +581,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 256
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -599,15 +599,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 768
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -617,15 +617,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse",
                 "variant": {
                   "Variant": 512
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },

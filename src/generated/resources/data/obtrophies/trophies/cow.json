@@ -17,5 +17,12 @@
     "sound": {
       "sound_id": "minecraft:entity.cow.milk"
     }
+  },
+  "default_variant": {
+    "variant": "minecraft:temperate"
+  },
+  "variants": {
+    "key": "variant",
+    "registry": "minecraft:cow_variant"
   }
 }

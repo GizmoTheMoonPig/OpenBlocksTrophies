@@ -5,15 +5,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:axolotl",
                 "variant": {
                   "Variant": 4
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },

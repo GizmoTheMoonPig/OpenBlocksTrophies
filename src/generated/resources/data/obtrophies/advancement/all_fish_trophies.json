@@ -5,15 +5,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 117506305
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -23,15 +23,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 117899265
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -41,15 +41,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 185008129
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -59,15 +59,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 117441793
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -77,15 +77,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 118161664
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -95,15 +95,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 65536
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -113,15 +113,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 50726144
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -131,15 +131,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 67764993
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -149,15 +149,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 234882305
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -167,15 +167,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 67110144
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -185,15 +185,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 117441025
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -203,15 +203,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 16778497
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -221,15 +221,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 101253888
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -239,15 +239,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 50660352
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -257,15 +257,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 918529
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -275,15 +275,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 235340288
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -293,15 +293,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 918273
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -311,15 +311,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 67108865
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -329,15 +329,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 917504
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -347,15 +347,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 459008
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -365,15 +365,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 67371009
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -383,15 +383,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish",
                 "variant": {
                   "Variant": 67699456
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },

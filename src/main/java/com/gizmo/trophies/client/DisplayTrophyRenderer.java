@@ -22,11 +22,16 @@ public class DisplayTrophyRenderer implements BlockEntityRenderer<DisplayTrophyB
 	}
 
 	@Override
-	public void render(DisplayTrophyBlockEntity entity, float partialTicks, PoseStack stack, MultiBufferSource source, int light, int overlay) {
+	public void render(DisplayTrophyBlockEntity entity, float partialTicks, PoseStack stack, MultiBufferSource source, int light, int overlay, Vec3 cameraPos) {
 		stack.pushPose();
 		stack.translate(0.5F, entity.getBlockState().getValue(TrophyBlock.PEDESTAL) ? 0.5D : 0.25D, 0.5F);
 		stack.mulPose(Axis.YP.rotationDegrees(-entity.getBlockState().getValue(DisplayTrophyBlock.FACING).getOpposite().toYRot()));
-		renderDisplay(entity.display.displayItem(), entity.display.scale(), entity.display.offset(), entity.display.rotation(), entity.display.rotationSpeed(), entity.display.bob(), entity.ticker + partialTicks, stack, source, light, overlay);
+		if (entity.display != null) {
+			renderDisplay(entity.display.displayItem(), entity.display.scale(), entity.display.offset(), entity.display.rotation(), entity.display.rotationSpeed(), entity.display.bob(), entity.ticker + partialTicks, stack, source, light, overlay);
+		} else {
+			stack.translate(0.0F, 0.35F, 0.0F);
+			TrophyRenderer.renderNullDisplay(stack, source);
+		}
 		stack.popPose();
 	}
 

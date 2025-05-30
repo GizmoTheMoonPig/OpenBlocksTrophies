@@ -11,5 +11,12 @@
       "sound_id": "minecraft:entity.chicken.egg"
     }
   },
-  "scale": 1.5
+  "default_variant": {
+    "variant": "minecraft:temperate"
+  },
+  "scale": 1.5,
+  "variants": {
+    "key": "variant",
+    "registry": "minecraft:chicken_variant"
+  }
 }
