@@ -53,7 +53,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 		this.ears = new PlayerEarsModel(context.bakeLayer(ModelLayers.PLAYER_EARS));
 	}
 
-	public static void renderEntity(@Nullable TrophyBlockEntity be, CompoundTag variant, String name, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light, boolean cycling, PlayerTrophyModel normalTrophy, PlayerTrophyModel slimTrophy, PlayerCapeModel<?> cape, PlayerEarsModel ears) {
+	public static void renderEntity(@Nullable TrophyBlockEntity be, CompoundTag variant, @Nullable Component name, Level level, BlockPos pos, Trophy trophy, PoseStack stack, MultiBufferSource source, int light, boolean cycling, PlayerTrophyModel normalTrophy, PlayerTrophyModel slimTrophy, PlayerCapeModel<?> cape, PlayerEarsModel ears) {
 		if (name == null) name = Component.empty();
 
 		stack.pushPose();
@@ -69,11 +69,9 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			if (name.getString().equalsIgnoreCase("dinnerbone") || name.getString().equalsIgnoreCase("grumm")) {
 				stack.mulPose(Axis.ZP.rotationDegrees(180.0F));
 				stack.translate(0.0F, 0.295F, 0.0F);
-			} else {
-				//
 			}
 			stack.scale(0.35F, -0.35F, -0.35F);
-			PlayerInfoHolder holder = PlayerInfoHolder.getSkinFromName(name.toLowerCase(Locale.ROOT));
+			PlayerInfoHolder holder = PlayerInfoHolder.getSkinFromName(name.getString().toLowerCase(Locale.ROOT));
 
 			if (holder.slim()) {
 				slimTrophy.renderToBuffer(stack, source.getBuffer(holder.type()), light, OverlayTexture.NO_OVERLAY);
@@ -85,7 +83,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 				cape.renderToBuffer(stack, source.getBuffer(RenderType.entitySolid(holder.cape())), light, OverlayTexture.NO_OVERLAY);
 				stack.popPose();
 			}
-			if (name.equalsIgnoreCase("deadmau5")) {
+			if (name.getString().equalsIgnoreCase("deadmau5")) {
 				stack.pushPose();
 				stack.translate(0.0F, -0.1F, 0.05F);
 				stack.scale(1.25F, 1.25F, 1.25F);
@@ -173,7 +171,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity> {
 			if (!blockEntity.getBlockState().getValue(TrophyBlock.PEDESTAL)) {
 				stack.translate(0.0D, -0.25D, 0.0D);
 			}
-			renderEntity(blockEntity, blockEntity.getVariant(), blockEntity.getTrophyName(), blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light, blockEntity.isCycling(), this.trophy, this.slimTrophy, this.cape, this.ears);
+			renderEntity(blockEntity, blockEntity.getVariant(), blockEntity.getName(), blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getTrophy(), stack, source, light, blockEntity.isCycling(), this.trophy, this.slimTrophy, this.cape, this.ears);
 			stack.popPose();
 		}
 	}

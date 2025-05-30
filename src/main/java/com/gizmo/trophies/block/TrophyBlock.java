@@ -12,7 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -55,38 +55,13 @@ public class TrophyBlock extends AbstractTrophyBlock {
 	}
 
 	@Override
-	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
-		BlockEntity be = level.getBlockEntity(pos);
-		if (be instanceof TrophyBlockEntity trophyBE) {
-			Trophy trophy = TrophyItem.getTrophy(stack.getComponents());
-			if (trophy != null) {
-				trophyBE.setTrophy(trophy);
-				trophyBE.setTrophyName(stack.has(DataComponents.CUSTOM_NAME) ? stack.getHoverName().getString() : "");
-				TrophyInfo info = stack.get(TrophyRegistries.TROPHY_INFO);
-				if (info != null) {
-					if (info.variant().isPresent()) {
-						trophyBE.setVariant(info.variant().get());
-					}
-					if (info.cooldown().isPresent()) {
-						trophyBE.setCooldown(info.cooldown().get());
-					}
-
-					if (info.cooldown().isPresent()) {
-						trophyBE.setCycling(true);
-					}
-				}
-			}
-		}
-	}
-
-	@Override
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			Trophy trophy = trophyBE.getTrophy();
 			if (trophy != null && !player.isShiftKeyDown()) {
 				if (trophy.type() == EntityType.PLAYER) {
 					level.playSound(null, pos, TrophyRegistries.OOF.get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
-					return ItemInteractionResult.sidedSuccess(level.isClientSide());
+					return InteractionResult.SUCCESS;
 				} else {
 					boolean successfulInteraction = false;
 					if (trophy.clickSoundOverride().isPresent()) {
@@ -109,49 +84,12 @@ public class TrophyBlock extends AbstractTrophyBlock {
 					}
 
 					if (successfulInteraction) {
-						return ItemInteractionResult.sidedSuccess(level.isClientSide());
+						return InteractionResult.SUCCESS;
 					}
 				}
 			}
 		}
 		return super.useItemOn(stack, state, level, pos, player, hand, result);
-	}
-
-	@Override
-	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result) {
-		if (player.isShiftKeyDown()) {
-			level.setBlockAndUpdate(pos, state.cycle(PEDESTAL));
-			level.playSound(null, pos, SoundEvents.CANDLE_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
-			return InteractionResult.SUCCESS;
-		}
-
-		return InteractionResult.SUCCESS;
-	}
-
-	@Override
-	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-		List<ItemStack> drop = new ArrayList<>();
-		BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-		if (blockEntity instanceof TrophyBlockEntity trophyBE) {
-			ItemStack newStack = new ItemStack(this);
-			newStack.set(TrophyRegistries.TROPHY_INFO, TrophyInfo.makeFromBlock(trophyBE));
-			newStack.set(DataComponents.RARITY, TrophyItem.getTrophyRarity(newStack));
-			drop.add(newStack);
-		}
-		return drop;
-	}
-
-	@Override
-	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
-		ItemStack newStack = new ItemStack(this);
-		if (level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
-			newStack.set(TrophyRegistries.TROPHY_INFO, TrophyInfo.makeFromBlock(trophyBE));
-			if (!trophyBE.getTrophyName().isEmpty()) {
-				newStack.set(DataComponents.CUSTOM_NAME, Component.literal(trophyBE.getTrophyName()));
-			}
-			newStack.set(DataComponents.RARITY, TrophyItem.getTrophyRarity(newStack));
-		}
-		return newStack;
 	}
 
 	@Nullable

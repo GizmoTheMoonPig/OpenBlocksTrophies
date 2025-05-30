@@ -1,6 +1,5 @@
 package com.gizmo.trophies.block;
 
-import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.gizmo.trophies.item.TrophyItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,7 +25,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -93,7 +91,7 @@ public abstract class AbstractTrophyBlock extends BaseEntityBlock {
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader reader, BlockPos pos, Player player) {
+	public ItemStack getCloneItemStack(LevelReader reader, BlockPos pos, BlockState state, boolean includeData, Player player) {
 		ItemStack newStack = new ItemStack(this);
 		if (reader.getBlockEntity(pos) instanceof BlockEntity trophyBE) {
 			newStack.applyComponents(trophyBE.collectComponents());

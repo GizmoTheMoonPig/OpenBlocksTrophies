@@ -4,25 +4,17 @@ import com.gizmo.trophies.block.entity.DisplayTrophyBlockEntity;
 import com.gizmo.trophies.misc.TrophyRegistries;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DisplayTrophyBlock extends AbstractTrophyBlock {
 
@@ -46,29 +38,6 @@ public class DisplayTrophyBlock extends AbstractTrophyBlock {
 			}
 		}
 		return super.useWithoutItem(state, level, pos, player, result);
-	}
-
-	@Override
-	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-		List<ItemStack> drop = new ArrayList<>();
-		BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-		if (blockEntity instanceof DisplayTrophyBlockEntity trophy) {
-			ItemStack newStack = new ItemStack(this);
-			newStack.set(TrophyRegistries.DISPLAY_TROPHY_INFO, trophy.display);
-			newStack.set(DataComponents.RARITY, trophy.display.displayItem().getDefaultInstance().getRarity());
-			drop.add(newStack);
-		}
-		return drop;
-	}
-
-	@Override
-	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
-		ItemStack newStack = new ItemStack(this);
-		if (level.getBlockEntity(pos) instanceof DisplayTrophyBlockEntity trophy) {
-			newStack.set(TrophyRegistries.DISPLAY_TROPHY_INFO, trophy.display);
-			newStack.set(DataComponents.RARITY, trophy.display.displayItem().getDefaultInstance().getRarity());
-		}
-		return newStack;
 	}
 
 	@Nullable
