@@ -3,15 +3,12 @@ package com.gizmo.trophies.client;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.PlayerCapeModel;
 import net.minecraft.client.model.PlayerEarsModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.core.BlockPos;
@@ -20,6 +17,9 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
+
+import java.util.Set;
 
 public class TrophySpecialRenderer implements SpecialModelRenderer<DataComponentMap> {
 
@@ -48,6 +48,14 @@ public class TrophySpecialRenderer implements SpecialModelRenderer<DataComponent
 		} else {
 			TrophyRenderer.renderNullItemDisplay(stack, buffer, context == ItemDisplayContext.GUI);
 		}
+	}
+
+	@Override
+	public void getExtents(Set<Vector3f> set) {
+		PoseStack stack = new PoseStack();
+		this.trophy.root().getExtentsForGui(stack, set);
+		this.ears.root().getExtentsForGui(stack, set);
+		this.cape.root().getExtentsForGui(stack, set);
 	}
 
 	public record Unbaked() implements SpecialModelRenderer.Unbaked {

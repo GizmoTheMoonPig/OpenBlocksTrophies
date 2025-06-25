@@ -1,13 +1,12 @@
 package com.gizmo.trophies.client;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ARGB;
@@ -25,6 +24,7 @@ public class VariantToggleButton extends Button {
 	public VariantToggleButton(int x, int y, Component message, boolean selected, Button.OnPress press) {
 		super(x, y, 12, 12, message, press, Supplier::get);
 		this.selected = selected;
+		this.setTooltip(Tooltip.create(message));
 	}
 
 	@Override
@@ -57,10 +57,6 @@ public class VariantToggleButton extends Button {
 		} else {
 			resourcelocation = this.isHovered() ? CHECKBOX_HOVERED_SPRITE : CHECKBOX_SPRITE;
 		}
-		graphics.blit(RenderType::guiTextured, resourcelocation, this.getX(), this.getY(), 0, 0, 14, 14, 14, 14, ARGB.white(this.alpha));
-
-		if (this.isMouseOver(x, y)) {
-			graphics.renderTooltip(Minecraft.getInstance().font, this.getMessage(), x, y);
-		}
+		graphics.blit(RenderPipelines.GUI_TEXTURED, resourcelocation, this.getX(), this.getY(), 0, 0, 14, 14, 14, 14, ARGB.white(this.alpha));
 	}
 }

@@ -3,12 +3,8 @@ package com.gizmo.trophies.item;
 import com.gizmo.trophies.misc.TranslatableStrings;
 import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.trophy.DisplayTrophy;
-import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -18,8 +14,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 public class DisplayTrophyItem extends BlockItem {

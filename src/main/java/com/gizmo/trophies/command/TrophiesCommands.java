@@ -46,7 +46,7 @@ public class TrophiesCommands {
 		for (IModInfo info : ModList.get().getMods()) {
 			modids.add(info.getModId());
 		}
-		modids.add(0, "all");
+		modids.addFirst("all");
 		Collections.sort(modids);
 		return modids;
 	}

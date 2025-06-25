@@ -1,6 +1,5 @@
 package com.gizmo.trophies.block.entity;
 
-import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.block.TrophyInfo;
 import com.gizmo.trophies.misc.TrophyRegistries;
 import com.gizmo.trophies.trophy.Trophy;
@@ -11,16 +10,16 @@ import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
 import java.util.Optional;
 
 public class TrophyBlockEntity extends BlockEntity {
@@ -78,11 +77,12 @@ public class TrophyBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
-		super.saveAdditional(tag, provider);
-		this.name = parseCustomNameSafe(tag.get("name"), provider);
+	protected void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+
+		output.storeNullable("name", ComponentSerialization.CODEC, this.name);
 		if (this.info != null) {
-			tag.put("info", TrophyInfo.CODEC.encodeStart(NbtOps.INSTANCE, this.info.withCooldown(this.cooldown)).getOrThrow());
+			output.store("info", TrophyInfo.CODEC, this.info.withCooldown(this.cooldown));
 		}
 	}
 
@@ -91,15 +91,13 @@ public class TrophyBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
-		super.loadAdditional(tag, provider);
-		if (tag.contains("entity")) {
-			this.parseLegacyInfo(tag);
+	protected void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
+		if (input.getString("entity").isPresent()) {
+			this.parseLegacyInfo(input);
 		} else {
-			if (this.name != null) {
-				tag.putString("name", Component.Serializer.toJson(this.name, provider));
-			}
-			tag.getCompound("info").flatMap(info -> TrophyInfo.CODEC.parse(NbtOps.INSTANCE, info).resultOrPartial()).ifPresent(parsedInfo -> {
+			this.name = parseCustomNameSafe(input, "name");
+			input.read("info", TrophyInfo.CODEC).ifPresent(parsedInfo -> {
 				this.info = parsedInfo;
 				this.setCooldown(parsedInfo.cooldown().orElse(0));
 			});
@@ -134,21 +132,21 @@ public class TrophyBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public void removeComponentsFromTag(CompoundTag tag) {
-		tag.remove("info");
-		tag.remove("name");
+	public void removeComponentsFromTag(ValueOutput output) {
+		output.discard("info");
+		output.discard("name");
 	}
 
-	public void parseLegacyInfo(CompoundTag tag) {
-		tag.getString("entity").ifPresent(entity -> {
+	public void parseLegacyInfo(ValueInput input) {
+		input.getString("entity").ifPresent(entity -> {
 			if (Trophy.getTrophies().containsKey(ResourceLocation.tryParse(entity))) {
 				this.setTrophy(Trophy.getTrophies().get(ResourceLocation.tryParse(entity)));
 			}
 		});
-		this.setCooldown(tag.getIntOr("cooldown", 0));
+		this.setCooldown(input.getIntOr("cooldown", 0));
 
-		tag.getString("CustomNameEntity").ifPresent(name -> this.name = Component.literal(name));
+		input.getString("CustomNameEntity").ifPresent(name -> this.name = Component.literal(name));
 
-		this.info = new TrophyInfo(this.getTrophy().type(), tag.getCompound("VariantID"), Optional.empty(), Optional.of(this.getCooldown()));
+		this.info = new TrophyInfo(this.getTrophy().type(), input.read("VariantID", CompoundTag.CODEC), Optional.empty(), Optional.of(this.getCooldown()));
 	}
 }

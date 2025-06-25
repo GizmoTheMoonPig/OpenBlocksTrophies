@@ -21,7 +21,6 @@ import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.WithConditions;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
 public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec3 offset, Vec3 rotation, float scale, Optional<CustomBehavior> clickBehavior, Either<Pair<String, ResourceLocation>, List<CompoundTag>> variants, Optional<CompoundTag> defaultData, Optional<SoundEvent> clickSoundOverride) {
@@ -85,7 +84,7 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 		private CompoundTag defaultVariant = null;
 		@Nullable
 		private SoundEvent soundOverride = null;
-		public List<ICondition> conditions = new ArrayList<>();
+		public final List<ICondition> conditions = new ArrayList<>();
 
 		public Builder(EntityType<?> type) {
 			this.type = type;

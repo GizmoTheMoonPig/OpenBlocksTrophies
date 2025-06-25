@@ -1,7 +1,6 @@
 package com.gizmo.trophies.behavior;
 
 import com.gizmo.trophies.block.AbstractTrophyBlock;
-import com.gizmo.trophies.block.TrophyBlock;
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;

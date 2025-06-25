@@ -5,6 +5,7 @@ import com.gizmo.trophies.config.TrophyConfig;
 import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.network.SyncTrophyConfigsPacket;
 import com.gizmo.trophies.trophy.Trophy;
+import com.mojang.logging.LogUtils;
 import net.minecraft.Util;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,6 +15,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -28,6 +30,7 @@ import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentTarget;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.util.FakePlayer;
@@ -35,12 +38,14 @@ import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.slf4j.Logger;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TrophyEvents {
 
+	private static final Logger LOGGER = LogUtils.getLogger();
 	public static final RandomSource TROPHY_RANDOM = RandomSource.create();
 
 	public static void syncTrophiesToClient(OnDatapackSyncEvent event) {
@@ -133,27 +138,31 @@ public class TrophyEvents {
 
 	private static CompoundTag fetchVariantIfAny(LivingEntity entity, Trophy trophy) {
 		if (!trophy.getVariants(entity.level().registryAccess()).isEmpty()) {
-			CompoundTag tag = new CompoundTag();
-			entity.addAdditionalSaveData(tag);
-			for (int i = 0; i < trophy.getVariants(entity.level().registryAccess()).size(); i++) {
-				CompoundTag variantKeys = trophy.getVariants(entity.level().registryAccess()).get(i);
-				for (String s : variantKeys.keySet()) {
-					if (entity instanceof VillagerDataHolder villager) {
-						if (villager.getVillagerData().profession().getKey().location().toString().equals(variantKeys.getString(s))) {
-							return variantKeys;
-						}
-					} else {
-						Tag tagVer = tag.get(s);
-						Tag variantVer = variantKeys.get(s);
-						if (variantVer instanceof NumericTag num) {
-							//most values save as bytes in the json, but sometimes they also be things like shorts.
-							//we'll compare both numbers to long as they should always match this way.
-							//comparing to int is going to cause issues for doubles
-							if (tagVer instanceof NumericTag number && number.longValue() == num.longValue()) {
+			try (ProblemReporter.ScopedCollector collector = new ProblemReporter.ScopedCollector(entity.problemPath(), LOGGER)) {
+				TagValueOutput output = TagValueOutput.createWithContext(collector, entity.registryAccess());
+				entity.saveWithoutId(output);
+
+				CompoundTag tag = output.buildResult();
+				for (int i = 0; i < trophy.getVariants(entity.level().registryAccess()).size(); i++) {
+					CompoundTag variantKeys = trophy.getVariants(entity.level().registryAccess()).get(i);
+					for (String s : variantKeys.keySet()) {
+						if (entity instanceof VillagerDataHolder villager) {
+							if (villager.getVillagerData().profession().getKey().location().toString().equals(variantKeys.getStringOr(s, ""))) {
 								return variantKeys;
 							}
-						} else if (Objects.equals(tagVer, variantVer)) {
-							return variantKeys;
+						} else {
+							Tag tagVer = tag.get(s);
+							Tag variantVer = variantKeys.get(s);
+							if (variantVer instanceof NumericTag num) {
+								//most values save as bytes in the json, but sometimes they also be things like shorts.
+								//we'll compare both numbers to long as they should always match this way.
+								//comparing to int is going to cause issues for doubles
+								if (tagVer instanceof NumericTag number && number.longValue() == num.longValue()) {
+									return variantKeys;
+								}
+							} else if (Objects.equals(tagVer, variantVer)) {
+								return variantKeys;
+							}
 						}
 					}
 				}

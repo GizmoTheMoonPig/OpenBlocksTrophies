@@ -1,4 +1,4 @@
-// 1.21.5	2025-05-29T19:28:43.480021126	Default OpenBlocks Trophies
+// 1.21.6	2025-06-25T10:50:31.234172632	Default OpenBlocks Trophies
 9ab48ee8361c93363b4976c209fa1eeacccad979 data/obtrophies/trophies/allay.json
 91ceeb4d6813d3d7dbeaf4fb7bb7a2f82d052bf5 data/obtrophies/trophies/armadillo.json
 2942c3fdeb85f5462dacb128ea1122eb4c5f2fad data/obtrophies/trophies/axolotl.json
@@ -29,6 +29,7 @@ c53225077ba0c937dff0c912b448c0661b95cf87 data/obtrophies/trophies/frog.json
 fe78cb259aca46221194070ff1e9450ab2ef2ecd data/obtrophies/trophies/glow_squid.json
 c5e46efeba19d55f21f7c405c984a18278a036dc data/obtrophies/trophies/goat.json
 77cfc4b6c5adac7efbfc65cd53b18aa783671ce9 data/obtrophies/trophies/guardian.json
+cc0928870ec79af603aa922519bda60e9e2e28d7 data/obtrophies/trophies/happy_ghast.json
 53c9c21dc2e52875f13f0a5573d781278d84eca4 data/obtrophies/trophies/hoglin.json
 1ff64217f71a2e20e3b84fdc18287519131a3cc4 data/obtrophies/trophies/horse.json
 7075797df269c66439ca564ac097c66d66268e4d data/obtrophies/trophies/husk.json

@@ -5,16 +5,16 @@ import com.gizmo.trophies.trophy.DisplayTrophy;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
+
+import java.util.Set;
 
 public class DisplayTrophySpecialRenderer implements SpecialModelRenderer<DataComponentMap> {
 
@@ -35,6 +35,11 @@ public class DisplayTrophySpecialRenderer implements SpecialModelRenderer<DataCo
 			TrophyRenderer.renderNullItemDisplay(stack, buffer, context == ItemDisplayContext.GUI);
 		}
 		stack.popPose();
+	}
+
+	@Override
+	public void getExtents(Set<Vector3f> set) {
+		//TODO...?
 	}
 
 	public record Unbaked() implements SpecialModelRenderer.Unbaked {

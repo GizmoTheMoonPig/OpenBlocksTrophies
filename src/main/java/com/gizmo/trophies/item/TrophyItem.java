@@ -29,8 +29,6 @@ import net.neoforged.neoforgespi.language.IModInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 

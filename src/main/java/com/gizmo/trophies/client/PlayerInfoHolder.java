@@ -11,16 +11,9 @@ import net.minecraft.util.StringUtil;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.Serial;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public record PlayerInfoHolder(RenderType type, @Nullable ResourceLocation cape, boolean slim) {
-
-	private static final Map<String, GameProfile> GAMEPROFILE_CACHE = new HashMap<>();
 
 	public static final List<String> TF_DEVS = List.of("benimatic", "drullkus", "tamaized", "jodlodi", "alphaleaf", "killer_demon", "gizmothemoonpig");
 	public static final List<String> MOJANGSTAS = new ArrayList<>();
@@ -32,24 +25,14 @@ public record PlayerInfoHolder(RenderType type, @Nullable ResourceLocation cape,
 		//MC names can't be shorter than 2 characters and shouldn't have any spaces either
 		try {
 			if (name.length() > 2 && !name.contains(" ") && StringUtil.isValidPlayerName(name)) {
-				//fetch profile from cache if it exists already
-				GameProfile profile = GAMEPROFILE_CACHE.get(name);
-
-				//if no cache exists build a new profile and fill it out
 				//im using SkullBlockEntity.fetchGameProfile to prevent a bunch of copy and paste. The method fills out the game profile with missing info.
-				//using this also means I don't have to make my own executor, GameProfileCache, or Session Service instance
-				if (profile == null) {
-					SkullBlockEntity.fetchGameProfile(name).thenAccept(newProfile ->
-						newProfile.ifPresent(gameProfile ->
-							GAMEPROFILE_CACHE.put(name, gameProfile)));
-				}
+				//using this also means I don't have to make my own executor or profile cache
+				//this will also allow me to grab skins if theyve already been loaded via player head blocks
+				Optional<GameProfile> profile = SkullBlockEntity.fetchGameProfile(name).getNow(null);
 
-				//attempt to fetch the profile after filling it out
-				profile = GAMEPROFILE_CACHE.get(name);
-
-				if (profile != null) {
+				if (profile.isPresent()) {
 					SkinManager manager = Minecraft.getInstance().getSkinManager();
-					Optional<PlayerSkin> skin = manager.getOrLoad(profile).getNow(null);
+					Optional<PlayerSkin> skin = manager.getOrLoad(profile.get()).getNow(null);
 					if (skin.isPresent()) {
 						type = RenderType.entityTranslucent(skin.get().texture());
 						slim = skin.get().model().equals(PlayerSkin.Model.SLIM);

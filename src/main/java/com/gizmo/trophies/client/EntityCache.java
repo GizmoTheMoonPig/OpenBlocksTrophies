@@ -1,23 +1,26 @@
 package com.gizmo.trophies.client;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
+import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.creaking.Creaking;
-import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.npc.VillagerDataHolder;
-import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.TagValueInput;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
 import java.util.*;
 
 public class EntityCache {
 
+	private static final Logger LOGGER = LogUtils.getLogger();
 	private static final Map<EntityType<?>, Entity> ENTITY_MAP = new WeakHashMap<>();
 	private static final Set<EntityType<?>> IGNORED_ENTITIES = new HashSet<>();
 
@@ -62,7 +65,10 @@ public class EntityCache {
 					}
 				}
 				if (!tag.isEmpty()) {
-					living.readAdditionalSaveData(tag);
+					try (ProblemReporter.ScopedCollector collector = new ProblemReporter.ScopedCollector(living.problemPath(), LOGGER)) {
+						living.load(TagValueInput.create(collector, living.registryAccess(), tag));
+					}
+
 					if (entity instanceof Mob mob) {
 						mob.setNoAi(true);
 					}

@@ -15,8 +15,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
-import net.minecraft.world.entity.animal.frog.FrogVariant;
-import net.minecraft.world.entity.animal.frog.FrogVariants;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.animal.horse.Markings;
 import net.minecraft.world.entity.animal.horse.Variant;
@@ -264,6 +262,7 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.BOGGED).setRightClickBehavior(new ShootProjectileBehavior(new ItemStack(Holder.direct(Items.TIPPED_ARROW), 1, DataComponentPatch.builder().set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.POISON)).build()), 1, true, Optional.of(SoundEvents.ARROW_SHOOT))));
 		this.makeTrophy(new Trophy.Builder(EntityType.ARMADILLO).setScale(1.5F).setRightClickBehavior(new ClickWithItemBehavior(Items.BRUSH, false, new ItemDropBehavior(Items.ARMADILLO_SCUTE), 1000, SoundEvents.ARMADILLO_BRUSH)));
 		this.makeTrophy(new Trophy.Builder(EntityType.CREAKING).setScale(0.85F).setRightClickBehavior(new ItemDropBehavior(Items.RESIN_CLUMP, 20000)));
+		this.makeTrophy(new Trophy.Builder(EntityType.HAPPY_GHAST).setOffset(0.0D, 0.3D, 0.0D).setScale(0.25F));
 	}
 
 	private CompoundTag buildPandaVariant(String gene) {

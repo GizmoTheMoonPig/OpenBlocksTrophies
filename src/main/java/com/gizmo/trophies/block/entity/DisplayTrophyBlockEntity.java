@@ -7,10 +7,11 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class DisplayTrophyBlockEntity extends BlockEntity {
 
@@ -26,19 +27,17 @@ public class DisplayTrophyBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-		super.saveAdditional(tag, registries);
-		if (this.display != null) {
-			tag.put("display", DisplayTrophy.CODEC.encodeStart(NbtOps.INSTANCE, this.display).getOrThrow());
-		}
-		tag.putInt("tick", this.ticker);
+	protected void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+		output.storeNullable("display", DisplayTrophy.CODEC, this.display);
+		output.putInt("tick", this.ticker);
 	}
 
 	@Override
-	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-		super.loadAdditional(tag, registries);
-		tag.getCompound("display").flatMap(display -> DisplayTrophy.CODEC.parse(NbtOps.INSTANCE, display).resultOrPartial()).ifPresent(parsedDisplay -> this.display = parsedDisplay);
-		this.ticker = tag.getIntOr("tick", 0);
+	protected void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
+		input.read("display", DisplayTrophy.CODEC).ifPresent(parsedDisplay -> this.display = parsedDisplay);
+		this.ticker = input.getIntOr("tick", 0);
 	}
 
 	@Override
@@ -54,9 +53,9 @@ public class DisplayTrophyBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public void removeComponentsFromTag(CompoundTag tag) {
-		super.removeComponentsFromTag(tag);
-		tag.remove("display");
+	public void removeComponentsFromTag(ValueOutput output) {
+		super.removeComponentsFromTag(output);
+		output.discard("display");
 	}
 
 	@Override

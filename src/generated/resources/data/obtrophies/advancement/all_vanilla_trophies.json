@@ -451,6 +451,21 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "happy_ghast": {
+      "conditions": {
+        "items": [
+          {
+            "items": "obtrophies:trophy",
+            "predicates": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:happy_ghast"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "hoglin": {
       "conditions": {
         "items": [
@@ -1301,6 +1316,9 @@
     ],
     [
       "ghast"
+    ],
+    [
+      "happy_ghast"
     ],
     [
       "glow_squid"
