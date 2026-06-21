@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
   "type": "obtrophies:add_trophy",
   "conditions": [
     {
@@ -6,5 +12,6 @@
       "loot_table_id": "twilightforest:entities/questing_ram_rewards"
     }
   ],
-  "entity": "twilightforest:quest_ram"
+  "entity": "minecraft:pig",
+  "priority": 0
 }

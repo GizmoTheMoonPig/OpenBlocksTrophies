@@ -8,16 +8,16 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.Map;
 
-public record SyncTrophyConfigsPacket(Map<ResourceLocation, Trophy> trophies) implements CustomPacketPayload {
+public record SyncTrophyConfigsPacket(Map<Identifier, Trophy> trophies) implements CustomPacketPayload {
 
 	public static final Type<SyncTrophyConfigsPacket> TYPE = new Type<>(OpenBlocksTrophies.prefix("sync_trophy_configs"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, SyncTrophyConfigsPacket> STREAM_CODEC = StreamCodec.composite(
-		ByteBufCodecs.map(Maps::newHashMapWithExpectedSize, ResourceLocation.STREAM_CODEC, ByteBufCodecs.fromCodecTrusted(Trophy.BASE_CODEC)),
+		ByteBufCodecs.map(Maps::newHashMapWithExpectedSize, Identifier.STREAM_CODEC, ByteBufCodecs.fromCodecTrusted(Trophy.BASE_CODEC)),
 		SyncTrophyConfigsPacket::trophies, SyncTrophyConfigsPacket::new);
 
 	@Override

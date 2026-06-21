@@ -5,12 +5,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:allay"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -20,12 +20,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:armadillo"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -35,12 +35,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:axolotl"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -50,12 +50,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:bat"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -65,12 +65,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:bee"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -80,12 +80,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:blaze"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -95,12 +95,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:bogged"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -110,12 +110,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:breeze"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -125,12 +125,27 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:camel"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "camel_husk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "obtrophies:trophy",
+            "predicates": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:camel_husk"
+              }
+            }
           }
         ]
       },
@@ -140,12 +155,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:cat"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -155,12 +170,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:cave_spider"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -170,12 +185,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:chicken"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -185,12 +200,27 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:cod"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "copper_golem": {
+      "conditions": {
+        "items": [
+          {
+            "items": "obtrophies:trophy",
+            "predicates": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:copper_golem"
+              }
+            }
           }
         ]
       },
@@ -200,12 +230,27 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:cow"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "creaking": {
+      "conditions": {
+        "items": [
+          {
+            "items": "obtrophies:trophy",
+            "predicates": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:creaking"
+              }
+            }
           }
         ]
       },
@@ -215,12 +260,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:creeper"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -230,12 +275,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:dolphin"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -245,12 +290,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:donkey"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -260,12 +305,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:drowned"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -275,12 +320,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:elder_guardian"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -290,12 +335,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:ender_dragon"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -305,12 +350,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:enderman"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -320,12 +365,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:endermite"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -335,12 +380,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:evoker"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -350,12 +395,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:fox"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -365,12 +410,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:frog"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -380,12 +425,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:ghast"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -395,12 +440,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:glow_squid"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -410,12 +455,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:goat"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -425,12 +470,27 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:guardian"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "happy_ghast": {
+      "conditions": {
+        "items": [
+          {
+            "items": "obtrophies:trophy",
+            "predicates": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:happy_ghast"
+              }
+            }
           }
         ]
       },
@@ -440,12 +500,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:hoglin"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -455,12 +515,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:horse"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -470,12 +530,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:husk"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -485,12 +545,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:iron_golem"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -500,12 +560,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:llama"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -515,12 +575,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:magma_cube"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -530,12 +590,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:mooshroom"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -545,12 +605,27 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:mule"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "nautilus": {
+      "conditions": {
+        "items": [
+          {
+            "items": "obtrophies:trophy",
+            "predicates": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:nautilus"
+              }
+            }
           }
         ]
       },
@@ -560,12 +635,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:ocelot"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -575,12 +650,27 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:panda"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "parched": {
+      "conditions": {
+        "items": [
+          {
+            "items": "obtrophies:trophy",
+            "predicates": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:parched"
+              }
+            }
           }
         ]
       },
@@ -590,12 +680,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:parrot"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -605,12 +695,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:phantom"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -620,12 +710,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:pig"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -635,12 +725,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:piglin"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -650,12 +740,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:piglin_brute"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -665,12 +755,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:pillager"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -680,12 +770,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:polar_bear"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -695,12 +785,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:pufferfish"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -710,12 +800,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:rabbit"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -725,12 +815,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:ravager"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -740,12 +830,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:salmon"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -755,12 +845,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:sheep"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -770,12 +860,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:shulker"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -785,12 +875,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:silverfish"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -800,12 +890,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:skeleton"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -815,12 +905,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:skeleton_horse"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -830,12 +920,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:slime"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -845,12 +935,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:sniffer"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -860,12 +950,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:snow_golem"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -875,12 +965,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:spider"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -890,12 +980,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:squid"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -905,12 +995,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:stray"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -920,12 +1010,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:strider"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -935,12 +1025,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tadpole"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -950,12 +1040,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:trader_llama"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -965,12 +1055,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:tropical_fish"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -980,12 +1070,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:turtle"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -995,12 +1085,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:vex"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1010,12 +1100,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:villager"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1025,12 +1115,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:vindicator"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1040,12 +1130,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:wandering_trader"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1055,12 +1145,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:warden"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1070,12 +1160,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:witch"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1085,12 +1175,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:wither"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1100,12 +1190,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:wither_skeleton"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1115,12 +1205,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:wolf"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1130,12 +1220,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:zoglin"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1145,12 +1235,42 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:zombie"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "zombie_horse": {
+      "conditions": {
+        "items": [
+          {
+            "items": "obtrophies:trophy",
+            "predicates": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:zombie_horse"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "zombie_nautilus": {
+      "conditions": {
+        "items": [
+          {
+            "items": "obtrophies:trophy",
+            "predicates": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:zombie_nautilus"
+              }
+            }
           }
         ]
       },
@@ -1160,12 +1280,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:zombie_villager"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1175,12 +1295,12 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:zombified_piglin"
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -1194,11 +1314,11 @@
     "frame": "challenge",
     "icon": {
       "components": {
+        "minecraft:rarity": "common",
         "obtrophies:trophy_info": {
           "entity": "minecraft:fox"
         }
       },
-      "count": 1,
       "id": "obtrophies:trophy"
     },
     "title": {
@@ -1234,6 +1354,9 @@
       "camel"
     ],
     [
+      "camel_husk"
+    ],
+    [
       "cat"
     ],
     [
@@ -1246,7 +1369,13 @@
       "cod"
     ],
     [
+      "copper_golem"
+    ],
+    [
       "cow"
+    ],
+    [
+      "creaking"
     ],
     [
       "creeper"
@@ -1264,13 +1393,13 @@
       "elder_guardian"
     ],
     [
-      "ender_dragon"
-    ],
-    [
       "enderman"
     ],
     [
       "endermite"
+    ],
+    [
+      "ender_dragon"
     ],
     [
       "evoker"
@@ -1283,6 +1412,9 @@
     ],
     [
       "ghast"
+    ],
+    [
+      "happy_ghast"
     ],
     [
       "glow_squid"
@@ -1318,10 +1450,16 @@
       "mule"
     ],
     [
+      "nautilus"
+    ],
+    [
       "ocelot"
     ],
     [
       "panda"
+    ],
+    [
+      "parched"
     ],
     [
       "parrot"
@@ -1436,6 +1574,12 @@
     ],
     [
       "zombie"
+    ],
+    [
+      "zombie_horse"
+    ],
+    [
+      "zombie_nautilus"
     ],
     [
       "zombie_villager"

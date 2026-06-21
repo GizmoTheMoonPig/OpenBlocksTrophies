@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "com.gizmo.trophies.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AnvilMenuMixin",
+    "YggdrasilGameProfileRepositoryMixin"
+  ],
+  "minVersion": "0.8"
+}

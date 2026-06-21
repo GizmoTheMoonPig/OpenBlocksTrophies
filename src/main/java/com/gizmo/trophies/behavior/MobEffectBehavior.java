@@ -1,6 +1,7 @@
 package com.gizmo.trophies.behavior;
 
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.init.TrophyBehaviors;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -21,7 +22,7 @@ public record MobEffectBehavior(Holder<MobEffect> effect, int time, int amplifie
 
 	@Override
 	public CustomBehaviorType getType() {
-		return CustomTrophyBehaviors.MOB_EFFECT.get();
+		return TrophyBehaviors.MOB_EFFECT.get();
 	}
 
 	@Override

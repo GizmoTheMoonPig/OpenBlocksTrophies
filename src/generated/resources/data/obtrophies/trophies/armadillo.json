@@ -6,14 +6,10 @@
     "execute_behavior": {
       "type": "obtrophies:item",
       "item": {
-        "count": 1,
         "id": "minecraft:armadillo_scute"
       }
     },
-    "item_to_use": {
-      "count": 1,
-      "id": "minecraft:brush"
-    },
+    "item_to_use": "minecraft:brush",
     "shrink_item_stack": false,
     "sound": {
       "sound_id": "minecraft:entity.armadillo.brush"

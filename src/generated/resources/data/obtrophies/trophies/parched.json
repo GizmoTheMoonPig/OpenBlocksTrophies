@@ -1,0 +1,16 @@
+{
+  "entity": "minecraft:parched",
+  "behavior": {
+    "type": "obtrophies:shoot_projectile",
+    "projectile_item": {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:weakness"
+        }
+      },
+      "id": "minecraft:tipped_arrow"
+    },
+    "shoot_sound": "minecraft:entity.arrow.shoot",
+    "shoot_upwards": true
+  }
+}

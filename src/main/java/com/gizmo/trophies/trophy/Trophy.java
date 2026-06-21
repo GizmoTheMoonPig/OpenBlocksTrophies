@@ -7,51 +7,55 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.conditions.ConditionalOps;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.WithConditions;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
-public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec3 offset, Vec3 rotation, float scale, Optional<CustomBehavior> clickBehavior, Either<Pair<String, ResourceLocation>, List<CompoundTag>> variants, Optional<CompoundTag> defaultData, Optional<SoundEvent> clickSoundOverride) {
+//TODO drop chance array (for variants)
+//if array is 1 entry that value is used for all variants
+//otherwise check that the array is the same size as the variant list
+public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vector3fc offset, Vector3fc rotation, float scale, Optional<CustomBehavior> clickBehavior, Either<Pair<String, Identifier>, List<CompoundTag>> variants, Optional<CompoundTag> defaultData, Optional<SoundEvent> clickSoundOverride) {
 
 	public static final double DEFAULT_DROP_CHANCE = 0.001D;
 	public static final double BOSS_DROP_CHANCE = 0.0075D;
 
 	public static final Codec<Trophy> BASE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			Codec.BOOL.optionalFieldOf("replace", false).forGetter(Trophy::replace),
-			BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(Trophy::type),
-			Codec.DOUBLE.optionalFieldOf("drop_chance", DEFAULT_DROP_CHANCE).forGetter(Trophy::dropChance),
-			Vec3.CODEC.optionalFieldOf("offset", Vec3.ZERO).forGetter(Trophy::offset),
-			Vec3.CODEC.optionalFieldOf("rotation", Vec3.ZERO).forGetter(Trophy::rotation),
-			Codec.FLOAT.optionalFieldOf("scale", 1.0F).forGetter(Trophy::scale),
-			CustomBehaviorType.DISPATCH_CODEC.optionalFieldOf("behavior").forGetter(Trophy::clickBehavior),
-			Codec.either(Codec.pair(Codec.STRING.fieldOf("key").codec(), ResourceLocation.CODEC.fieldOf("registry").codec()), CompoundTag.CODEC.listOf()).optionalFieldOf("variants", Either.right(new ArrayList<>())).forGetter(Trophy::variants),
-			CompoundTag.CODEC.optionalFieldOf("default_variant").forGetter(Trophy::defaultData),
-			SoundEvent.DIRECT_CODEC.optionalFieldOf("click_sound_override").forGetter(Trophy::clickSoundOverride)
+		Codec.BOOL.optionalFieldOf("replace", false).forGetter(Trophy::replace),
+		BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(Trophy::type),
+		Codec.DOUBLE.optionalFieldOf("drop_chance", DEFAULT_DROP_CHANCE).forGetter(Trophy::dropChance),
+		ExtraCodecs.VECTOR3F.optionalFieldOf("offset", new Vector3f()).forGetter(Trophy::offset),
+		ExtraCodecs.VECTOR3F.optionalFieldOf("rotation", new Vector3f()).forGetter(Trophy::rotation),
+		Codec.FLOAT.optionalFieldOf("scale", 1.0F).forGetter(Trophy::scale),
+		CustomBehaviorType.DISPATCH_CODEC.optionalFieldOf("behavior").forGetter(Trophy::clickBehavior),
+		Codec.either(Codec.pair(Codec.STRING.fieldOf("key").codec(), Identifier.CODEC.fieldOf("registry").codec()), CompoundTag.CODEC.listOf()).optionalFieldOf("variants", Either.right(new ArrayList<>())).forGetter(Trophy::variants),
+		CompoundTag.CODEC.optionalFieldOf("default_variant").forGetter(Trophy::defaultData),
+		SoundEvent.DIRECT_CODEC.optionalFieldOf("click_sound_override").forGetter(Trophy::clickSoundOverride)
 	).apply(instance, Trophy::new));
 
 	public static final Codec<Optional<WithConditions<Trophy>>> CODEC = ConditionalOps.createConditionalCodecWithConditions(BASE_CODEC);
 
-	public List<CompoundTag> getVariants(@Nullable HolderLookup.Provider access) {
+	public List<CompoundTag> getVariants(HolderLookup.@Nullable Provider access) {
 		if (this.variants.left().isPresent() && access != null) {
 			List<CompoundTag> entries = new ArrayList<>();
-			Pair<String, ResourceLocation> registryVariant = this.variants.left().get();
+			Pair<String, Identifier> registryVariant = this.variants.left().get();
 			HolderLookup<?> registry = access.lookupOrThrow(ResourceKey.createRegistryKey(registryVariant.getSecond()));
 			for (ResourceKey<?> entry : registry.listElementIds().toList()) {
 				try {
-					CompoundTag formattedTag = Util.make(new CompoundTag(), tag -> tag.putString(registryVariant.getFirst(), entry.location().toString()));
+					CompoundTag formattedTag = Util.make(new CompoundTag(), tag -> tag.putString(registryVariant.getFirst(), entry.identifier().toString()));
 					if (!entries.contains(formattedTag)) {
 						entries.add(formattedTag);
 					}
@@ -64,7 +68,7 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 		return this.variants.right().orElse(new ArrayList<>());
 	}
 
-	public static TreeMap<ResourceLocation, Trophy> getTrophies() {
+	public static Map<Identifier, Trophy> getTrophies() {
 		return TrophyReloadListener.getValidTrophies();
 	}
 
@@ -72,20 +76,20 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 	public static class Builder {
 		private boolean replace;
 		private final EntityType<?> type;
-		private double dropChance = 0.001D;
-		private Vec3 offset = Vec3.ZERO;
-		private Vec3 rotation = Vec3.ZERO;
+		private double dropChance = DEFAULT_DROP_CHANCE;
+		private Vector3fc offset = new Vector3f();
+		private Vector3fc rotation = new Vector3f();
 		private float scale = 1.0F;
 		@Nullable
 		private CustomBehavior clickBehavior = null;
 		@Nullable
-		private Pair<String, ResourceLocation> registryVariant;
+		private Pair<String, Identifier> registryVariant;
 		private List<CompoundTag> variants = new ArrayList<>();
 		@Nullable
 		private CompoundTag defaultVariant = null;
 		@Nullable
 		private SoundEvent soundOverride = null;
-		public List<ICondition> conditions = new ArrayList<>();
+		public final List<ICondition> loadConditions = new ArrayList<>();
 
 		public Builder(EntityType<?> type) {
 			this.type = type;
@@ -114,13 +118,13 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 			return this;
 		}
 
-		public Trophy.Builder setOffset(double xOffset, double yOffset, double zOffset) {
-			this.offset = new Vec3(xOffset, yOffset, zOffset);
+		public Trophy.Builder setOffset(float xOffset, float yOffset, float zOffset) {
+			this.offset = new Vector3f(xOffset, yOffset, zOffset);
 			return this;
 		}
 
-		public Trophy.Builder setRotation(double xOffset, double yOffset, double zOffset) {
-			this.rotation = new Vec3(xOffset, yOffset, zOffset);
+		public Trophy.Builder setRotation(float xRot, float yRot, float zRot) {
+			this.rotation = new Vector3f(xRot, yRot, zRot);
 			return this;
 		}
 
@@ -179,7 +183,7 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 			return this;
 		}
 
-		public Trophy.Builder addRegistryVariant(String key, ResourceLocation registryName) {
+		public Trophy.Builder addRegistryVariant(String key, Identifier registryName) {
 			this.registryVariant = Pair.of(key, registryName);
 			return this;
 		}
@@ -189,8 +193,8 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 			return this;
 		}
 
-		public Trophy.Builder addCondition(ICondition condition) {
-			this.conditions.add(condition);
+		public Trophy.Builder addLoadCondition(ICondition condition) {
+			this.loadConditions.add(condition);
 			return this;
 		}
 

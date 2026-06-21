@@ -1,8 +1,9 @@
 package com.gizmo.trophies.command;
 
 import com.gizmo.trophies.block.TrophyBlock;
+import com.gizmo.trophies.block.TrophyInfo;
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
-import com.gizmo.trophies.misc.TrophyRegistries;
+import com.gizmo.trophies.init.TrophyBlocks;
 import com.gizmo.trophies.trophy.Trophy;
 import com.google.common.collect.Maps;
 import com.mojang.brigadier.Command;
@@ -20,9 +21,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class PlaceTrophiesCommand {
 
 	public static LiteralArgumentBuilder<CommandSourceStack> register() {
 		return Commands.literal("placetrophies")
-			.requires(cs -> cs.hasPermission(3))
+			.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
 			.executes(context -> placeAll(context, false, "all"))
 			.then(Commands.argument("variants", BoolArgumentType.bool())
 				.executes(context -> placeAll(context, BoolArgumentType.getBool(context, "variants"), "all"))
@@ -46,7 +47,7 @@ public class PlaceTrophiesCommand {
 			throw new SimpleCommandExceptionType(Component.translatable("command.obtrophies.empty_list").withStyle(ChatFormatting.RED)).create();
 		}
 
-		Map<ResourceLocation, Trophy> sortedTrophies = new TreeMap<>(Comparator.naturalOrder());
+		Map<Identifier, Trophy> sortedTrophies = new TreeMap<>(Comparator.naturalOrder());
 		if (!modid.equals("all")) {
 			sortedTrophies.putAll(Maps.filterKeys(Trophy.getTrophies(), input -> input.getNamespace().equals(modid)));
 		} else {
@@ -61,16 +62,17 @@ public class PlaceTrophiesCommand {
 				int index = j + i * sideLength;
 				if (index > amount - 1) break;
 				Trophy trophy = sortedTrophies.entrySet().stream().toList().get(index).getValue();
+				TrophyInfo basicInfo = new TrophyInfo(trophy.type());
 				if (placeVariants && !trophy.getVariants(context.getSource().getLevel().registryAccess()).isEmpty()) {
 					int yOffs = 0;
 					for (CompoundTag tag : trophy.getVariants(context.getSource().getLevel().registryAccess())) {
 						BlockPos pos = BlockPos.containing(context.getSource().getPosition()).offset(i, yOffs, j);
-						setupTrophy(context.getSource().getLevel(), pos, trophy, tag);
+						setupTrophy(context.getSource().getLevel(), pos, basicInfo, tag);
 						yOffs++;
 					}
 				} else {
 					BlockPos pos = BlockPos.containing(context.getSource().getPosition()).offset(i, 0, j);
-					setupTrophy(context.getSource().getLevel(), pos, trophy, null);
+					setupTrophy(context.getSource().getLevel(), pos, basicInfo, null);
 				}
 			}
 		}
@@ -78,10 +80,10 @@ public class PlaceTrophiesCommand {
 		return Command.SINGLE_SUCCESS;
 	}
 
-	private static void setupTrophy(Level level, BlockPos pos, Trophy trophy, @Nullable CompoundTag variant) {
-		level.setBlockAndUpdate(pos, TrophyRegistries.TROPHY.get().defaultBlockState().setValue(TrophyBlock.FACING, Direction.WEST));
+	private static void setupTrophy(Level level, BlockPos pos, TrophyInfo info, @Nullable CompoundTag variant) {
+		level.setBlockAndUpdate(pos, TrophyBlocks.TROPHY.get().defaultBlockState().setValue(TrophyBlock.FACING, Direction.WEST));
 		if (level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
-			trophyBE.setTrophy(trophy);
+			trophyBE.setInfo(info);
 			trophyBE.setVariant(variant);
 		}
 	}

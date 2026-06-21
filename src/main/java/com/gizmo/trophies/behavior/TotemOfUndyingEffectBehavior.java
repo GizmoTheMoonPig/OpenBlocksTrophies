@@ -1,6 +1,7 @@
 package com.gizmo.trophies.behavior;
 
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.init.TrophyBehaviors;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.network.protocol.game.ClientboundEntityEventPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,7 +13,7 @@ public record TotemOfUndyingEffectBehavior() implements CustomBehavior {
 
 	@Override
 	public CustomBehaviorType getType() {
-		return CustomTrophyBehaviors.TOTEM_OF_UNDYING.get();
+		return TrophyBehaviors.TOTEM_OF_UNDYING.get();
 	}
 
 	@Override

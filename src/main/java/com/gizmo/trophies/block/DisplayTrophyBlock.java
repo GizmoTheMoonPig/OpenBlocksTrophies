@@ -1,30 +1,20 @@
 package com.gizmo.trophies.block;
 
 import com.gizmo.trophies.block.entity.DisplayTrophyBlockEntity;
-import com.gizmo.trophies.misc.TrophyRegistries;
+import com.gizmo.trophies.init.TrophyBlockEntities;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.jspecify.annotations.Nullable;
 
 public class DisplayTrophyBlock extends AbstractTrophyBlock {
 
@@ -41,16 +31,13 @@ public class DisplayTrophyBlock extends AbstractTrophyBlock {
 
 	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result) {
-		var standResult = super.useWithoutItem(state, level, pos, player, result);
-		if (!standResult.consumesAction()) {
-			if (!level.isClientSide() && level.getBlockEntity(pos) instanceof DisplayTrophyBlockEntity trophy) {
-				if (trophy.display.rightClickSound().isPresent()) {
-					level.playSound(null, pos, trophy.display.rightClickSound().get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
-					return InteractionResult.sidedSuccess(level.isClientSide());
-				}
+		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof DisplayTrophyBlockEntity trophy) {
+			if (trophy.display != null && trophy.display.rightClickSound().isPresent()) {
+				level.playSound(null, pos, trophy.display.rightClickSound().get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
+				return InteractionResult.SUCCESS;
 			}
 		}
-		return standResult;
+		return super.useWithoutItem(state, level, pos, player, result);
 	}
 
 	@Nullable
@@ -62,6 +49,6 @@ public class DisplayTrophyBlock extends AbstractTrophyBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return !level.isClientSide() ? null : createTickerHelper(type, TrophyRegistries.DISPLAY_TROPHY_BE.get(), (level1, pos, state1, blockEntity) -> DisplayTrophyBlockEntity.tick(blockEntity));
+		return !level.isClientSide() ? null : createTickerHelper(type, TrophyBlockEntities.DISPLAY_TROPHY.get(), (level1, pos, state1, blockEntity) -> DisplayTrophyBlockEntity.tick(blockEntity));
 	}
 }

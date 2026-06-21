@@ -1,6 +1,7 @@
 package com.gizmo.trophies.behavior;
 
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.init.TrophyBehaviors;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -20,7 +21,7 @@ public record ExplosionBehavior(float power, boolean destructive) implements Cus
 
 	@Override
 	public CustomBehaviorType getType() {
-		return CustomTrophyBehaviors.EXPLOSION.get();
+		return TrophyBehaviors.EXPLOSION.get();
 	}
 
 	@Override

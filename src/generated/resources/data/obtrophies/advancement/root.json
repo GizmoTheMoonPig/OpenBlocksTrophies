@@ -13,17 +13,17 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "minecraft:textures/block/dark_prismarine.png",
+    "background": "minecraft:block/dark_prismarine",
     "description": {
       "translate": "advancement.obtrophies.root.desc"
     },
     "icon": {
       "components": {
+        "minecraft:rarity": "common",
         "obtrophies:trophy_info": {
           "entity": "minecraft:chicken"
         }
       },
-      "count": 1,
       "id": "obtrophies:trophy"
     },
     "show_toast": false,

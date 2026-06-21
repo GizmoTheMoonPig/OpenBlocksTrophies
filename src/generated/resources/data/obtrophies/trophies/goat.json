@@ -5,14 +5,10 @@
     "execute_behavior": {
       "type": "obtrophies:item",
       "item": {
-        "count": 1,
         "id": "minecraft:milk_bucket"
       }
     },
-    "item_to_use": {
-      "count": 1,
-      "id": "minecraft:bucket"
-    },
+    "item_to_use": "minecraft:bucket",
     "shrink_item_stack": true,
     "sound": {
       "sound_id": "minecraft:entity.goat.milk"

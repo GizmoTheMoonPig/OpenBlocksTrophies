@@ -1,6 +1,7 @@
 package com.gizmo.trophies.behavior;
 
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.init.TrophyBehaviors;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,7 +13,7 @@ public record ElderGuardianCurseBehavior() implements CustomBehavior {
 
 	@Override
 	public CustomBehaviorType getType() {
-		return CustomTrophyBehaviors.ELDER_GUARDIAN_CURSE.get();
+		return TrophyBehaviors.ELDER_GUARDIAN_CURSE.get();
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.gizmo.trophies.behavior;
 import com.gizmo.trophies.block.AbstractTrophyBlock;
 import com.gizmo.trophies.block.TrophyBlock;
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.init.TrophyBehaviors;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
@@ -14,9 +15,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
@@ -24,26 +26,26 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
 
-public record ShootProjectileBehavior(ItemStack projectile, int amount, boolean shootUpwards, Optional<SoundEvent> shootSound) implements CustomBehavior {
+public record ShootProjectileBehavior(ItemStackTemplate projectile, int amount, boolean shootUpwards, Optional<SoundEvent> shootSound) implements CustomBehavior {
 
 	public static final MapCodec<ShootProjectileBehavior> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-		ItemStack.SINGLE_ITEM_CODEC.fieldOf("projectile_item").validate(ShootProjectileBehavior::validate).forGetter(ShootProjectileBehavior::projectile),
+		ItemStackTemplate.CODEC.fieldOf("projectile_item").validate(ShootProjectileBehavior::validate).forGetter(ShootProjectileBehavior::projectile),
 		Codec.INT.optionalFieldOf("amount", 1).forGetter(ShootProjectileBehavior::amount),
 		Codec.BOOL.fieldOf("shoot_upwards").forGetter(ShootProjectileBehavior::shootUpwards),
 		BuiltInRegistries.SOUND_EVENT.byNameCodec().optionalFieldOf("shoot_sound").forGetter(ShootProjectileBehavior::shootSound)
 	).apply(instance, ShootProjectileBehavior::new));
 
-	private static DataResult<ItemStack> validate(ItemStack stack) {
-		return stack.getItem() instanceof ProjectileItem ? DataResult.success(stack) : DataResult.error(() -> "Item must implement the ProjectileItem interface");
+	private static DataResult<ItemStackTemplate> validate(ItemStackTemplate template) {
+		return template.item().value() instanceof ProjectileItem ? DataResult.success(template) : DataResult.error(() -> "Item must implement the ProjectileItem interface");
 	}
 
 	public ShootProjectileBehavior() {
-		this(new ItemStack(Items.ARROW), 1, true, Optional.of(SoundEvents.ARROW_SHOOT));
+		this(new ItemStackTemplate(Items.ARROW), 1, true, Optional.of(SoundEvents.ARROW_SHOOT));
 	}
 
 	@Override
 	public CustomBehaviorType getType() {
-		return CustomTrophyBehaviors.PROJECTILE.get();
+		return TrophyBehaviors.PROJECTILE.get();
 	}
 
 	@Override
@@ -51,10 +53,10 @@ public record ShootProjectileBehavior(ItemStack projectile, int amount, boolean 
 		BlockPos pos = block.getBlockPos();
 		Level level = player.level();
 		Direction shootDir = this.shootUpwards() ? Direction.UP : block.getBlockState().getValue(AbstractTrophyBlock.FACING);
-		ProjectileItem item = ((ProjectileItem) this.projectile().getItem());
+		ProjectileItem item = ((ProjectileItem) this.projectile().item().value());
 
 		for (int i = 0; i < this.amount(); i++) {
-			Projectile projectile = item.asProjectile(level, Vec3.atCenterOf(pos), this.projectile(), shootDir);
+			Projectile projectile = item.asProjectile(level, Vec3.atCenterOf(pos), this.projectile().create(), shootDir);
 			if (projectile instanceof AbstractArrow arrow) {
 				arrow.setBaseDamage(0.1D);
 				arrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;

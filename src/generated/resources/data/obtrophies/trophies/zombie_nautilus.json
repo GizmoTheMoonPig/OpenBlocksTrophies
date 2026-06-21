@@ -1,0 +1,10 @@
+{
+  "entity": "minecraft:zombie_nautilus",
+  "default_variant": {
+    "variant": "minecraft:temperate"
+  },
+  "variants": {
+    "key": "variant",
+    "registry": "minecraft:zombie_nautilus_variant"
+  }
+}

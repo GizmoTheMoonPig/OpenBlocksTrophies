@@ -1,11 +1,13 @@
 package com.gizmo.trophies.behavior;
 
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.init.TrophyBehaviors;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.projectile.ThrownEnderpearl;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public record ShootEnderPearlBehavior() implements CustomBehavior {
@@ -14,13 +16,13 @@ public record ShootEnderPearlBehavior() implements CustomBehavior {
 
 	@Override
 	public CustomBehaviorType getType() {
-		return CustomTrophyBehaviors.ENDER_PEARL.get();
+		return TrophyBehaviors.ENDER_PEARL.get();
 	}
 
 	@Override
 	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		Level level = player.level();
-		ThrownEnderpearl pearl = new ThrownEnderpearl(level, player);
+		ThrownEnderpearl pearl = new ThrownEnderpearl(level, player, new ItemStack(Items.ENDER_PEARL));
 		BlockPos pos = block.getBlockPos();
 		pearl.setPos(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
 		pearl.setDeltaMovement(level.getRandom().nextGaussian(), 1.0D, level.getRandom().nextGaussian());

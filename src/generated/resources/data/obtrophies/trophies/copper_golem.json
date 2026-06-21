@@ -1,0 +1,20 @@
+{
+  "entity": "minecraft:copper_golem",
+  "default_variant": {
+    "weather_state": "unaffected"
+  },
+  "variants": [
+    {
+      "weather_state": "unaffected"
+    },
+    {
+      "weather_state": "exposed"
+    },
+    {
+      "weather_state": "weathered"
+    },
+    {
+      "weather_state": "oxidized"
+    }
+  ]
+}

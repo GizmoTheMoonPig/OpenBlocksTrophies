@@ -1,7 +1,7 @@
 package com.gizmo.trophies.client;
 
-import com.gizmo.trophies.item.TrophyItem;
-import com.gizmo.trophies.misc.TrophyRegistries;
+import com.gizmo.trophies.init.TrophyRegistries;
+import com.gizmo.trophies.item.TrophyHelper;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -10,7 +10,7 @@ import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.multiplayer.SessionSearchTrees;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.CreativeModeTabSearchRegistry;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
@@ -26,6 +26,7 @@ public class CreativeModeVariantToggle {
 
 	private static CreativeModeTab lastTab = CreativeModeTabs.getDefaultTab();
 	private static String lastSearchQuery = "";
+	@Nullable
 	public static VariantToggleButton showVariants;
 	private static int guiCenterX = 0;
 	private static int guiCenterY = 0;
@@ -37,8 +38,8 @@ public class CreativeModeVariantToggle {
 
 	private static void addVariantButton(ScreenEvent.Init.Post event) {
 		if (event.getScreen() instanceof CreativeModeInventoryScreen creativeScreen) {
-			guiCenterX = creativeScreen.getGuiLeft();
-			guiCenterY = creativeScreen.getGuiTop();
+			guiCenterX = creativeScreen.getLeftPos();
+			guiCenterY = creativeScreen.getTopPos();
 
 			event.addListener(showVariants = new VariantToggleButton(guiCenterX + 174, guiCenterY + 3, Component.literal("Show variants"), false, button -> {
 				Screen screen = Minecraft.getInstance().screen;
@@ -53,8 +54,8 @@ public class CreativeModeVariantToggle {
 
 	private static void setupVariantButton(ScreenEvent.Render.Post event) {
 		if (event.getScreen() instanceof CreativeModeInventoryScreen creativeScreen) {
-			guiCenterX = creativeScreen.getGuiLeft();
-			guiCenterY = creativeScreen.getGuiTop();
+			guiCenterX = creativeScreen.getLeftPos();
+			guiCenterY = creativeScreen.getTopPos();
 
 			CreativeModeTab tab = CreativeModeInventoryScreen.selectedTab;
 			if (lastTab != tab) {
@@ -70,11 +71,13 @@ public class CreativeModeVariantToggle {
 	}
 
 	private static void onSwitchCreativeTab(CreativeModeTab tab, CreativeModeInventoryScreen screen) {
-		if (tab == TrophyRegistries.TROPHY_TAB.get()) {
-			showVariants.visible = true;
-			updateItems(screen);
-		} else {
-			showVariants.visible = false;
+		if (showVariants != null) {
+			if (tab == TrophyRegistries.TROPHY_TAB.get()) {
+				showVariants.visible = true;
+				updateItems(screen);
+			} else {
+				showVariants.visible = false;
+			}
 		}
 	}
 
@@ -88,17 +91,17 @@ public class CreativeModeVariantToggle {
 		screen.scrollOffs = 0.0F;
 	}
 
-	private static List<ItemStack> getTrophyList(RegistryAccess access, FeatureFlagSet set, @Nullable SessionSearchTrees.Key searchTree, String queriedSearch) {
+	private static List<ItemStack> getTrophyList(RegistryAccess access, FeatureFlagSet set, SessionSearchTrees.@Nullable Key searchTree, String queriedSearch) {
 		List<ItemStack> trophies = new ArrayList<>();
 		if (!Trophy.getTrophies().isEmpty()) {
-			Map<ResourceLocation, Trophy> sortedTrophies = new TreeMap<>(Comparator.naturalOrder());
+			Map<Identifier, Trophy> sortedTrophies = new TreeMap<>(Comparator.naturalOrder());
 			sortedTrophies.putAll(Trophy.getTrophies());
-			for (Map.Entry<ResourceLocation, Trophy> trophyEntry : sortedTrophies.entrySet()) {
+			for (Map.Entry<Identifier, Trophy> trophyEntry : sortedTrophies.entrySet()) {
 				if (trophyEntry.getValue().type().isEnabled(set)) {
 					if (!trophyEntry.getValue().getVariants(access).isEmpty() && showVariants.isSelected()) {
-						trophyEntry.getValue().getVariants(access).forEach(tag -> trophies.add(TrophyItem.loadVariantToTrophy(trophyEntry.getValue().type(), tag)));
+						trophyEntry.getValue().getVariants(access).forEach(tag -> trophies.add(TrophyHelper.loadVariantToTrophy(trophyEntry.getValue().type(), tag).create()));
 					} else {
-						trophies.add(TrophyItem.loadEntityToTrophy(trophyEntry.getValue().type()));
+						trophies.add(TrophyHelper.loadEntityToTrophy(trophyEntry.getValue().type()).create());
 					}
 				}
 			}

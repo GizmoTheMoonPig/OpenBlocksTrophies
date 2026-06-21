@@ -19,11 +19,11 @@
     "frame": "goal",
     "icon": {
       "components": {
+        "minecraft:rarity": "common",
         "obtrophies:trophy_info": {
           "entity": "minecraft:chicken"
         }
       },
-      "count": 1,
       "id": "obtrophies:trophy"
     },
     "title": {

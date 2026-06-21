@@ -8,7 +8,7 @@
       "cooldown": 0,
       "loot_table": "minecraft:gameplay/piglin_bartering"
     },
-    "item_to_use": "c:ingots/gold",
+    "item_to_use": "#c:ingots/gold",
     "shrink_item_stack": true,
     "sound": {
       "sound_id": "minecraft:entity.piglin.admiring_item"

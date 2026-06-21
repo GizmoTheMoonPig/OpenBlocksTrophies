@@ -1,5 +1,8 @@
 package com.gizmo.trophies.misc;
 
+import com.gizmo.trophies.init.TrophyBlocks;
+import com.gizmo.trophies.init.TrophyItems;
+
 public final class TranslatableStrings {
 	public static final String TROPHY_TAB = "itemGroup.obtrophies";
 
@@ -10,10 +13,11 @@ public final class TranslatableStrings {
 	public static final String TROPHY_STUB_MADE = "command.obtrophies.trophy_made";
 	public static final String TROPHY_STUBS_MADE = "command.obtrophies.trophies_made";
 
-	public static final String TROPHY_WITH_ENTITY = TrophyRegistries.TROPHY.get().getDescriptionId() + ".entity";
-	public static final String DISPLAY_TROPHY = TrophyRegistries.DISPLAY_TROPHY.get().getDescriptionId() + ".display";
-	public static final String FROM_MOD_ID = TrophyRegistries.TROPHY_ITEM.get().getDescriptionId() + ".modid";
-	public static final String VARIANT_FORMATTER = TrophyRegistries.TROPHY_ITEM.get().getDescriptionId() + ".variant";
+	public static final String TROPHY_WITH_ENTITY = TrophyBlocks.TROPHY.get().getDescriptionId() + ".entity";
+	public static final String DISPLAY_TROPHY = TrophyBlocks.DISPLAY_TROPHY.get().getDescriptionId() + ".display";
+	public static final String FROM_MOD_ID = TrophyItems.TROPHY.get().getDescriptionId() + ".modid";
+	public static final String VARIANT_FORMATTER = TrophyItems.TROPHY.get().getDescriptionId() + ".variant";
+	public static final String INVALID_DATA = TrophyItems.TROPHY.get().getDescriptionId() + ".invalid";
 
 	public static final String TROPHY_CATEGORY = "gui.obtrophies.trophy_category";
 	public static final String TROPHY_DROP_CHANCE = "gui.obtrophies.drop_chance";

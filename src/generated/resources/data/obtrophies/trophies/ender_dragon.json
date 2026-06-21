@@ -5,14 +5,10 @@
     "execute_behavior": {
       "type": "obtrophies:item",
       "item": {
-        "count": 1,
         "id": "minecraft:dragon_breath"
       }
     },
-    "item_to_use": {
-      "count": 1,
-      "id": "minecraft:glass_bottle"
-    },
+    "item_to_use": "minecraft:glass_bottle",
     "shrink_item_stack": true
   },
   "drop_chance": 0.0075,

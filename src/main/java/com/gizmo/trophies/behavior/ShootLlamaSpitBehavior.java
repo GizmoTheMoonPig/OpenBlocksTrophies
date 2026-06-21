@@ -1,6 +1,7 @@
 package com.gizmo.trophies.behavior;
 
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.init.TrophyBehaviors;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,7 +19,7 @@ public record ShootLlamaSpitBehavior() implements CustomBehavior {
 
 	@Override
 	public CustomBehaviorType getType() {
-		return CustomTrophyBehaviors.LLAMA_SPIT.get();
+		return TrophyBehaviors.LLAMA_SPIT.get();
 	}
 
 	@Override

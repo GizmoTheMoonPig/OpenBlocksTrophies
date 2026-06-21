@@ -17,15 +17,15 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.storage.LevelResource;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.fml.ModList;
-import org.jetbrains.annotations.Nullable;
+import net.neoforged.neoforge.common.Tags;
+import org.jspecify.annotations.Nullable;
 
 import java.nio.file.Path;
 import java.text.DecimalFormat;
@@ -53,10 +53,10 @@ public class GenerateTrophyStubCommand {
 		for (EntityType<?> entity : BuiltInRegistries.ENTITY_TYPE.stream().filter(type -> (modid.equals("all") || BuiltInRegistries.ENTITY_TYPE.getKey(type).getNamespace().equals(modid)) && checkExistingConfigs != Trophy.getTrophies().containsKey(BuiltInRegistries.ENTITY_TYPE.getKey(type))).toList()) {
 			Class<?> instance = getEntityClass(entity);
 			if (instance != null && Mob.class.isAssignableFrom(instance) && entity.getCategory() != MobCategory.MISC) {
-				ResourceLocation entityName = BuiltInRegistries.ENTITY_TYPE.getKey(entity);
+				Identifier entityName = BuiltInRegistries.ENTITY_TYPE.getKey(entity);
 				Path path = context.getSource().getLevel().getServer().getWorldPath(LevelResource.GENERATED_DIR).resolve(entityName.getNamespace()).resolve("trophies").resolve(entityName.getPath() + ".json").normalize();
 				Trophy.Builder dummy = new Trophy.Builder(entity);
-				if (entity.is(Tags.EntityTypes.BOSSES)) dummy.setDropChance(0.0075D);
+				if (entity.getTags().anyMatch(tag -> tag.equals(Tags.EntityTypes.BOSSES))) dummy.setDropChance(0.0075D);
 				if (entity.getHeight() > 0.0F)
 					dummy.setScale(Float.parseFloat(FORMAT.format(Math.min(2.0F, 2.0F / entity.getHeight()))));
 				if (TrophiesCommands.writeToFile(Trophy.BASE_CODEC.encodeStart(JsonOps.INSTANCE, dummy.build()).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path)) {

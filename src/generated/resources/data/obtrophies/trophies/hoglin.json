@@ -4,7 +4,6 @@
     "type": "obtrophies:item",
     "cooldown": 20000,
     "item": {
-      "count": 1,
       "id": "minecraft:leather"
     }
   },

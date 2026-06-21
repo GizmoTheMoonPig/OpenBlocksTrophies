@@ -26,14 +26,17 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class TrophiesCommands {
 
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context) {
 		dispatcher.register(Commands.literal("obtrophies")
 			.then(Commands.literal("debug")
-				.requires(cs -> cs.hasPermission(3))
+				.requires(Commands.hasPermission(Commands.LEVEL_ADMINS))
 				.then(DumpRegistryCommand.register())
 				.then(GenerateTrophyStubCommand.register()))
 			.then(CreateDisplayTrophyCommand.register(context))

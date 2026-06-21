@@ -5,15 +5,15 @@
       "conditions": {
         "items": [
           {
-            "components": {
+            "items": "obtrophies:trophy",
+            "predicates": {
               "obtrophies:trophy_info": {
                 "entity": "minecraft:axolotl",
                 "variant": {
                   "Variant": 4
                 }
               }
-            },
-            "items": "obtrophies:trophy"
+            }
           }
         ]
       },
@@ -27,6 +27,7 @@
     "frame": "challenge",
     "icon": {
       "components": {
+        "minecraft:rarity": "common",
         "obtrophies:trophy_info": {
           "entity": "minecraft:axolotl",
           "variant": {
@@ -34,7 +35,6 @@
           }
         }
       },
-      "count": 1,
       "id": "obtrophies:trophy"
     },
     "title": {

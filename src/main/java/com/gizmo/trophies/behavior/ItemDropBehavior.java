@@ -1,6 +1,7 @@
 package com.gizmo.trophies.behavior;
 
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.init.TrophyBehaviors;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -9,34 +10,34 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.item.ItemStackTemplate;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
 
-public record ItemDropBehavior(ItemStack itemToDrop, int cooldown, Optional<SoundEvent> sound) implements CustomBehavior {
+public record ItemDropBehavior(ItemStackTemplate itemToDrop, int cooldown, Optional<SoundEvent> sound) implements CustomBehavior {
 
 	public static final MapCodec<ItemDropBehavior> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-			ItemStack.CODEC.fieldOf("item").forGetter(ItemDropBehavior::itemToDrop),
+			ItemStackTemplate.CODEC.fieldOf("item").forGetter(ItemDropBehavior::itemToDrop),
 			Codec.INT.optionalFieldOf("cooldown", 0).forGetter(ItemDropBehavior::cooldown),
 			SoundEvent.DIRECT_CODEC.optionalFieldOf("sound").forGetter(ItemDropBehavior::sound)
 	).apply(instance, ItemDropBehavior::new));
 
 	public ItemDropBehavior(Item itemToDrop) {
-		this(new ItemStack(itemToDrop), 0, Optional.empty());
+		this(new ItemStackTemplate(itemToDrop), 0, Optional.empty());
 	}
 
 	public ItemDropBehavior(Item itemToDrop, int cooldown) {
-		this(new ItemStack(itemToDrop), cooldown, Optional.empty());
+		this(new ItemStackTemplate(itemToDrop), cooldown, Optional.empty());
 	}
 
 	public ItemDropBehavior(Item itemToDrop, int cooldown, @Nullable SoundEvent sound) {
-		this(new ItemStack(itemToDrop), cooldown, Optional.ofNullable(sound));
+		this(new ItemStackTemplate(itemToDrop), cooldown, Optional.ofNullable(sound));
 	}
 
 	@Override
 	public CustomBehaviorType getType() {
-		return CustomTrophyBehaviors.ITEM_DROP.get();
+		return TrophyBehaviors.ITEM_DROP.get();
 	}
 
 	@Override
@@ -44,7 +45,7 @@ public record ItemDropBehavior(ItemStack itemToDrop, int cooldown, Optional<Soun
 		if (this.sound().isPresent()) {
 			player.level().playSound(null, player.blockPosition(), this.sound().get(), SoundSource.BLOCKS, 1.0F, (player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.2F + 1.0F);
 		}
-		ItemHandlerHelper.giveItemToPlayer(player, this.itemToDrop().copy());
+		player.getInventory().placeItemBackInInventory(this.itemToDrop().create().copy());
 		return this.cooldown();
 	}
 }

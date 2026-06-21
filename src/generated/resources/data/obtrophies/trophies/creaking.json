@@ -1,0 +1,11 @@
+{
+  "entity": "minecraft:creaking",
+  "behavior": {
+    "type": "obtrophies:item",
+    "cooldown": 20000,
+    "item": {
+      "id": "minecraft:resin_clump"
+    }
+  },
+  "scale": 0.85
+}

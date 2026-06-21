@@ -1,21 +1,26 @@
 package com.gizmo.trophies.block;
 
+import com.gizmo.trophies.command.GenerateTrophyStubCommand;
 import com.gizmo.trophies.config.TrophyConfig;
-import com.gizmo.trophies.misc.TrophyRegistries;
+import com.gizmo.trophies.init.TrophyBlockEntities;
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.init.TrophyRegistries;
 import com.gizmo.trophies.misc.AmbientSoundFetcher;
 import com.gizmo.trophies.trophy.Trophy;
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -55,41 +60,67 @@ public class TrophyBlock extends AbstractTrophyBlock {
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		if (level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		if (level.isClientSide()) return InteractionResult.SUCCESS; //do not try to place a block on the client side
+		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
+			Trophy trophy = trophyBE.getTrophy();
+			if (trophy != null && !player.isShiftKeyDown()) {
+				if (stack.is(Items.GOLDEN_DANDELION)) {
+					Class<?> instance = GenerateTrophyStubCommand.getEntityClass(trophy.type());
+					if (instance != null && AgeableMob.class.isAssignableFrom(instance)) {
+						boolean baby = trophyBE.cycleBaby();
+						level.playSound(null, pos, baby ? SoundEvents.GOLDEN_DANDELION_USE : SoundEvents.GOLDEN_DANDELION_UNUSE, SoundSource.BLOCKS, 1.0F, 1.0F);
+						return InteractionResult.SUCCESS_SERVER;
+					}
+
+				}
+
+				if (trophyBE.getCooldown() <= 0 && trophy.clickBehavior().isPresent() && !TrophyConfig.rightClickEffectOverride && !trophyBE.isBabyTrophy()) {
+					trophyBE.setCooldown(trophy.clickBehavior().get().execute(trophyBE, (ServerPlayer) player, stack));
+				}
+			}
+		}
+		return super.useItemOn(stack, state, level, pos, player, hand, result);
+	}
+
+	@Override
+	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result) {
+		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			Trophy trophy = trophyBE.getTrophy();
 			if (trophy != null && !player.isShiftKeyDown()) {
 				if (trophy.type() == EntityType.PLAYER) {
-					level.playSound(null, pos, TrophyRegistries.OOF.get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
-					return ItemInteractionResult.sidedSuccess(level.isClientSide());
+					level.playSound(null, pos, TrophyRegistries.OOF.get(), SoundSource.BLOCKS, 1.0F, this.getSoundPitch(level.getRandom(), false));
+					if (trophyBE.getPlayerProfile() != null && trophyBE.getPlayerProfile().name().orElse("").equalsIgnoreCase("notch") && trophyBE.getCooldown() <= 0) {
+						player.getInventory().placeItemBackInInventory(new ItemStack(Items.APPLE));
+						trophyBE.setCooldown(10000);
+					}
+					return InteractionResult.SUCCESS;
 				} else {
 					boolean successfulInteraction = false;
 					if (trophy.clickSoundOverride().isPresent()) {
 						if (!level.isClientSide()) {
-							level.playSound(null, pos, trophy.clickSoundOverride().get(), SoundSource.BLOCKS, 1.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
+							level.playSound(null, pos, trophy.clickSoundOverride().get(), SoundSource.BLOCKS, 1.0F, this.getSoundPitch(level.getRandom(), trophyBE.isBabyTrophy()));
 						}
 						successfulInteraction = true;
 					} else {
-						Pair<SoundEvent, Float> soundData = AmbientSoundFetcher.getAmbientSoundAndPitch(trophy.type(), level);
-						if (soundData.getFirst() != null) {
-							if (!level.isClientSide()) {
-								level.playSound(null, pos, soundData.getFirst(), SoundSource.BLOCKS, 1.0F, soundData.getSecond());
-							}
-							successfulInteraction = true;
-						}
-						if (!level.isClientSide() && trophyBE.getCooldown() <= 0 && trophy.clickBehavior().isPresent() && !TrophyConfig.rightClickEffectOverride) {
-							trophyBE.setCooldown(trophy.clickBehavior().get().execute(trophyBE, (ServerPlayer) player, stack));
+						SoundEvent sound = AmbientSoundFetcher.getAmbientSound(trophy.type(), level);
+						if (sound != null) {
+							level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, this.getSoundPitch(level.getRandom(), trophyBE.isBabyTrophy()));
 							successfulInteraction = true;
 						}
 					}
 
 					if (successfulInteraction) {
-						return ItemInteractionResult.sidedSuccess(level.isClientSide());
+						return InteractionResult.SUCCESS;
 					}
 				}
 			}
 		}
-		return super.useItemOn(stack, state, level, pos, player, hand, result);
+		return super.useWithoutItem(state, level, pos, player, result);
+	}
+
+	private float getSoundPitch(RandomSource random, boolean baby) {
+		return baby ? (random.nextFloat() - random.nextFloat()) * 0.2F + 1.5F : (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F;
 	}
 
 	@Nullable
@@ -101,6 +132,6 @@ public class TrophyBlock extends AbstractTrophyBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return level.isClientSide() ? null : createTickerHelper(type, TrophyRegistries.TROPHY_BE.get(), (level1, pos, state1, blockEntity) -> TrophyBlockEntity.tick(blockEntity));
+		return level.isClientSide() ? null : createTickerHelper(type, TrophyBlockEntities.TROPHY.get(), (level1, pos, state1, blockEntity) -> TrophyBlockEntity.tick(blockEntity));
 	}
 }

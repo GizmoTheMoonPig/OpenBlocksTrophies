@@ -1,0 +1,39 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "obtrophies:block/trophy"
+      },
+      {
+        "type": "minecraft:select",
+        "cases": [
+          {
+            "model": {
+              "type": "minecraft:special",
+              "base": "obtrophies:block/trophy",
+              "model": {
+                "type": "obtrophies:trophy",
+                "rotation_override": [
+                  0.0,
+                  45.0,
+                  0.0
+                ]
+              }
+            },
+            "when": "gui"
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:special",
+          "base": "obtrophies:block/trophy",
+          "model": {
+            "type": "obtrophies:trophy"
+          }
+        },
+        "property": "minecraft:display_context"
+      }
+    ]
+  }
+}

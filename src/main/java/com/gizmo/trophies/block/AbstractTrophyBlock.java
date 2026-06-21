@@ -1,7 +1,7 @@
 package com.gizmo.trophies.block;
 
-import com.gizmo.trophies.block.entity.TrophyBlockEntity;
-import com.gizmo.trophies.item.TrophyItem;
+import com.gizmo.trophies.init.TrophyComponents;
+import com.gizmo.trophies.item.TrophyHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -22,22 +22,21 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractTrophyBlock extends BaseEntityBlock {
 
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty PEDESTAL = BooleanProperty.create("pedestal");
 	protected static final VoxelShape PEDESTAL_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 4.0D, 13.0D);
 	protected static final VoxelShape NO_PEDESTAL_SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 12.0D, 12.0D);
@@ -73,7 +72,7 @@ public abstract class AbstractTrophyBlock extends BaseEntityBlock {
 		if (player.isShiftKeyDown()) {
 			level.setBlockAndUpdate(pos, state.cycle(PEDESTAL));
 			level.playSound(null, pos, SoundEvents.CANDLE_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
-			return InteractionResult.sidedSuccess(level.isClientSide());
+			return InteractionResult.SUCCESS;
 		}
 
 		return InteractionResult.PASS;
@@ -86,24 +85,24 @@ public abstract class AbstractTrophyBlock extends BaseEntityBlock {
 		if (blockEntity instanceof BlockEntity trophyBE) {
 			ItemStack newStack = new ItemStack(this);
 			newStack.applyComponents(trophyBE.collectComponents());
-			newStack.set(DataComponents.RARITY, TrophyItem.getTrophyRarity(newStack));
+			newStack.set(DataComponents.RARITY, TrophyHelper.getTrophyRarity(trophyBE.components().get(TrophyComponents.TROPHY_INFO)));
 			drop.add(newStack);
 		}
 		return drop;
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader reader, BlockPos pos, Player player) {
+	public ItemStack getCloneItemStack(LevelReader reader, BlockPos pos, BlockState state, boolean includeData, Player player) {
 		ItemStack newStack = new ItemStack(this);
 		if (reader.getBlockEntity(pos) instanceof BlockEntity trophyBE) {
 			newStack.applyComponents(trophyBE.collectComponents());
-			newStack.set(DataComponents.RARITY, TrophyItem.getTrophyRarity(newStack));
+			newStack.set(DataComponents.RARITY, TrophyHelper.getTrophyRarity(trophyBE.components().get(TrophyComponents.TROPHY_INFO)));
 		}
 		return newStack;
 	}
 
 	@Override
-	public boolean propagatesSkylightDown(BlockState state, BlockGetter getter, BlockPos pos) {
+	public boolean propagatesSkylightDown(BlockState state) {
 		return true;
 	}
 

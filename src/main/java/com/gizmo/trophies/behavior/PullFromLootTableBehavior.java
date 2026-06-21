@@ -1,12 +1,12 @@
 package com.gizmo.trophies.behavior;
 
 import com.gizmo.trophies.block.entity.TrophyBlockEntity;
+import com.gizmo.trophies.init.TrophyBehaviors;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -14,7 +14,6 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 public record PullFromLootTableBehavior(ResourceKey<LootTable> lootTable, int rolls, int cooldown) implements CustomBehavior {
 
@@ -30,19 +29,19 @@ public record PullFromLootTableBehavior(ResourceKey<LootTable> lootTable, int ro
 
 	@Override
 	public CustomBehaviorType getType() {
-		return CustomTrophyBehaviors.LOOT_TABLE.get();
+		return TrophyBehaviors.LOOT_TABLE.get();
 	}
 
 	@Override
 	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
 		for (int i = 0; i < this.rolls(); i++) {
-			LootParams.Builder builder = new LootParams.Builder((ServerLevel) player.level())
+			LootParams.Builder builder = new LootParams.Builder(player.level())
 					.withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(block.getBlockPos()))
 					.withParameter(LootContextParams.THIS_ENTITY, player)
 					.withLuck(player.getLuck());
-			player.serverLevel().getServer().reloadableRegistries().getLootTable(this.lootTable())
+			player.level().getServer().reloadableRegistries().getLootTable(this.lootTable())
 					.getRandomItems(builder.create(LootContextParamSets.ADVANCEMENT_REWARD)) //use advancement reward just so we only need to provide the pos and player
-					.forEach(stack -> ItemHandlerHelper.giveItemToPlayer(player, stack.copy()));
+					.forEach(stack -> player.getInventory().placeItemBackInInventory(stack.copy()));
 		}
 
 		return this.cooldown();
