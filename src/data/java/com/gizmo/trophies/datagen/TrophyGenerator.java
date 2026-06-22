@@ -29,7 +29,6 @@ import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -244,7 +243,7 @@ public class TrophyGenerator extends TrophyProvider {
 		this.makeTrophy(new Trophy.Builder(EntityType.WANDERING_TRADER).setRightClickBehavior(new ItemDropBehavior(Items.EMERALD, 10000, SoundEvents.WANDERING_TRADER_YES)));
 		this.makeTrophy(new Trophy.Builder(EntityType.BEE).setScale(1.5F).setRightClickBehavior(new ClickWithItemBehavior(Items.GLASS_BOTTLE, true, new ItemDropBehavior(Items.HONEY_BOTTLE, 0), 20000, SoundEvents.BOTTLE_FILL)));
 		this.makeTrophy(new Trophy.Builder(EntityType.HOGLIN).setScale(0.85F).setRightClickBehavior(new ItemDropBehavior(Items.LEATHER, 20000)));
-		this.makeTrophy(new Trophy.Builder(EntityType.PIGLIN).setRightClickBehavior(new ClickWithItemBehavior(Ingredient.of(provider.getOrThrow(Tags.Items.INGOTS_GOLD)), true, new PullFromLootTableBehavior(BuiltInLootTables.PIGLIN_BARTERING, 0), 200, SoundEvents.PIGLIN_ADMIRING_ITEM)));
+		this.makeTrophy(new Trophy.Builder(EntityType.PIGLIN).setRightClickBehavior(new ClickWithItemBehavior(provider.getOrThrow(Tags.Items.INGOTS_GOLD), true, new PullFromLootTableBehavior(BuiltInLootTables.PIGLIN_BARTERING, 0), 200, SoundEvents.PIGLIN_ADMIRING_ITEM)));
 		this.makeTrophy(new Trophy.Builder(EntityType.STRIDER));
 		this.makeTrophy(new Trophy.Builder(EntityType.ZOGLIN).setScale(0.85F).setRightClickBehavior(new ItemDropBehavior(Items.ROTTEN_FLESH, 10000)));
 		this.makeTrophy(new Trophy.Builder(EntityType.PIGLIN_BRUTE).setRightClickBehavior(new ItemDropBehavior(Items.GOLDEN_AXE, 20000)));

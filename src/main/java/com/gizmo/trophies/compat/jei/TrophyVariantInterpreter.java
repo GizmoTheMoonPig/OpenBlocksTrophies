@@ -6,8 +6,6 @@ import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.Nullable;
 
-import java.util.*;
-
 public class TrophyVariantInterpreter implements ISubtypeInterpreter<ItemStack> {
 	public static final TrophyVariantInterpreter INSTANCE = new TrophyVariantInterpreter();
 

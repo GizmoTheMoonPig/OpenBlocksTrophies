@@ -2,20 +2,15 @@ package com.gizmo.trophies.compat;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.client.EntityCache;
-import com.gizmo.trophies.client.renderer.TrophyRenderHelper;
 import com.gizmo.trophies.misc.TranslatableStrings;
 import com.gizmo.trophies.trophy.Trophy;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.renderer.entity.AgeableMobRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -94,7 +89,7 @@ public final class TrophyRecipeViewerConstants {
 
 		EntityRenderState renderState = extractRenderState(entity);
 
-		Vector3f translation = new Vector3f(entity.getBbWidth() > 1.0F ? -0.175F : 0.0F, renderState.boundingBoxHeight / 2.0F, 0.0F);
+		Vector3f translation = new Vector3f(entity.getBbWidth() > 1.0F ? -0.175F : 0.0F, renderState.boundingBoxHeight / 2.0F + 0.15F, 0.0F);
 		scale = applyAdditionalTransforms(entity.getType(), translation, quaternion, scale);
 
 		graphics.entity(renderState, scale * 0.75F, translation, quaternion, new Quaternionf(), x, y, x + 32, y + 32);
@@ -118,7 +113,7 @@ public final class TrophyRecipeViewerConstants {
 	//certain entities are a pain. This exists to fix vanilla cases.
 	private static int applyAdditionalTransforms(EntityType<?> entity, Vector3f translation, Quaternionf rotation, float scale) {
 		if (entity == EntityType.GHAST || entity == EntityType.HAPPY_GHAST) {
-			translation.add(0.0F, -1.0F, 0.0F);
+			translation.add(0.0F, -1.25F, 0.0F);
 			scale *= 0.5F;
 		}
 		if (entity == EntityType.ENDER_DRAGON) {
@@ -126,8 +121,8 @@ public final class TrophyRecipeViewerConstants {
 			rotation.mul(Axis.YP.rotationDegrees(180.0F));
 			scale *= 0.5F;
 		}
-		if (entity == EntityType.WITHER) translation.add(0.0F, 0.5F, 0.0F);
-		if (entity == EntityType.SQUID || entity == EntityType.GLOW_SQUID) translation.add(0.0F, -0.5F, 0.0F);
+		if (entity == EntityType.WITHER) translation.add(0.0F, 0.25F, 0.0F);
+		if (entity == EntityType.SQUID || entity == EntityType.GLOW_SQUID) translation.add(0.0F, -0.75F, 0.0F);
 		return Math.round(scale);
 	}
 

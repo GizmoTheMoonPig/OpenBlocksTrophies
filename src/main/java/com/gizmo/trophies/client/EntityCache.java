@@ -35,25 +35,25 @@ public class EntityCache {
 					long start = System.currentTimeMillis();
 					CompoundTag tag = new CompoundTag();
 					tag.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(t).toString());
-					Entity created = EntityType.loadEntityRecursive(tag, level, EntitySpawnReason.COMMAND, EntityProcessor.NOP);
-					if (created != null) {
-						created.setYRot(0.0F);
-						created.setYHeadRot(0.0F);
-						created.setYBodyRot(0.0F);
-						created.setOldRot();
-						created.setId(0);
-						created.setCustomNameVisible(false);
-						created.needsSync = false;
-						created.hurtMarked = false;
-						if (created instanceof Mob mob) {
+					Entity created = EntityType.loadEntityRecursive(tag, level, EntitySpawnReason.COMMAND, input -> {
+						input.setId(-1);
+						input.setYRot(0.0F);
+						input.setYHeadRot(0.0F);
+						input.setYBodyRot(0.0F);
+						input.setOldRot();
+						input.setCustomNameVisible(false);
+						input.needsSync = false;
+						input.hurtMarked = false;
+						if (input instanceof Mob mob) {
 							mob.setNoAi(true);
 						}
 						//pain
 						//eye glowing isnt stored via NBT and I want the trophy to glow
-						if (created instanceof Creaking creaking) {
+						if (input instanceof Creaking creaking) {
 							creaking.setIsActive(true);
 						}
-					}
+						return input;
+					});
 					LOGGER.trace("{} creation took {}ms", t.getDescription().getString(), System.currentTimeMillis() - start);
 					return created;
 				});

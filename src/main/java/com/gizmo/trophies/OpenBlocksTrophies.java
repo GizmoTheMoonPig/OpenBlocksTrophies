@@ -64,7 +64,7 @@ public class OpenBlocksTrophies {
 		NeoForge.EVENT_BUS.addListener(ConfigSetup::syncConfigOnLogin);
 
 		NeoForge.EVENT_BUS.addListener(RegisterCommandsEvent.class, event -> TrophiesCommands.register(event.getDispatcher(), event.getBuildContext()));
-		NeoForge.EVENT_BUS.addListener(AddServerReloadListenersEvent.class, event -> event.addListener(prefix("trophies"), new TrophyReloadListener()));
+		NeoForge.EVENT_BUS.addListener(AddServerReloadListenersEvent.class, event -> event.addListener(prefix("trophies"), new TrophyReloadListener(event.getServerResources().getRegistryLookup())));
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::maybeDropTrophy);
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::syncTrophiesToClient);
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::grantAdvancementBasedTrophies);
