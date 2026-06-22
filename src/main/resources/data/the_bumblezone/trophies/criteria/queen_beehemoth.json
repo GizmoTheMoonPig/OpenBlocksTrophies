@@ -1,0 +1,8 @@
+{
+  "type": "obtrophies:advancement",
+  "entity": "the_bumblezone:beehemoth",
+  "variant": {
+    "queen": true
+  },
+  "advancement": "the_bumblezone:beehemoth/queen_beehemoth"
+}

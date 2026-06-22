@@ -16,7 +16,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.Util;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,18 +32,15 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentTarget;
 import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
 import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
-import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TrophyEvents {
@@ -61,25 +57,6 @@ public class TrophyEvents {
 				PacketDistributor.sendToPlayer(player, new SyncTrophyConfigsPacket(Trophy.getTrophies()));
 				OpenBlocksTrophies.LOGGER.debug("Sent {} trophy configs to {} from server.", Trophy.getTrophies().size(), player.getDisplayName().getString());
 			});
-		}
-	}
-
-	//TODO unhardcode into new system.
-	//
-	public static void grantAdvancementBasedTrophies(AdvancementEvent.AdvancementEarnEvent event) {
-		if (ModList.get().isLoaded("the_bumblezone")) {
-			if (event.getAdvancement().id().equals(Identifier.fromNamespaceAndPath("the_bumblezone", "the_bumblezone/the_queens_desire/journeys_end"))) {
-				ItemStack trophy = TrophyHelper.loadEntityToTrophy(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getValue(Identifier.fromNamespaceAndPath("the_bumblezone", "bee_queen")))).create();
-				if (event.getEntity().addItem(trophy)) {
-					event.getEntity().drop(trophy, false);
-				}
-			}
-			if (event.getAdvancement().id().equals(Identifier.fromNamespaceAndPath("the_bumblezone", "the_bumblezone/beehemoth/queen_beehemoth"))) {
-				ItemStack trophy = TrophyHelper.loadVariantToTrophy(Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getValue(Identifier.fromNamespaceAndPath("the_bumblezone", "beehemoth"))), Util.make(new CompoundTag(), tag -> tag.putBoolean("queen", true))).create();
-				if (event.getEntity().addItem(trophy)) {
-					event.getEntity().drop(trophy, false);
-				}
-			}
 		}
 	}
 

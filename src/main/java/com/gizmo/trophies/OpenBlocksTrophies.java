@@ -6,12 +6,15 @@ import com.gizmo.trophies.client.CreativeModeVariantToggle;
 import com.gizmo.trophies.command.TrophiesCommands;
 import com.gizmo.trophies.config.ConfigSetup;
 import com.gizmo.trophies.config.TrophyConfig;
+import com.gizmo.trophies.criteria.TrophyCriteriaType;
+import com.gizmo.trophies.event.CriteriaEvents;
 import com.gizmo.trophies.event.TrophyEvents;
 import com.gizmo.trophies.init.*;
 import com.gizmo.trophies.network.SyncCommonConfigPacket;
 import com.gizmo.trophies.network.SyncTrophyConfigsPacket;
 import com.gizmo.trophies.trophy.Trophy;
-import com.gizmo.trophies.trophy.TrophyReloadListener;
+import com.gizmo.trophies.trophy.listener.TrophyCriteriaReloadListener;
+import com.gizmo.trophies.trophy.listener.TrophyReloadListener;
 import com.google.common.reflect.Reflection;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
@@ -19,7 +22,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
@@ -47,16 +50,21 @@ public class OpenBlocksTrophies {
 	public static final ResourceKey<Registry<CustomBehaviorType>> CUSTOM_BEHAVIORS_KEY = ResourceKey.createRegistryKey(prefix("custom_behavior"));
 	public static final Registry<CustomBehaviorType> CUSTOM_BEHAVIORS = new RegistryBuilder<>(CUSTOM_BEHAVIORS_KEY).sync(true).create();
 
+	public static final ResourceKey<Registry<TrophyCriteriaType>> TROPHY_CRITERIA_KEY = ResourceKey.createRegistryKey(prefix("trophy_criteria"));
+	public static final Registry<TrophyCriteriaType> TROPHY_CRITERIA = new RegistryBuilder<>(TROPHY_CRITERIA_KEY).sync(true).create();
 
-	public OpenBlocksTrophies(IEventBus bus, Dist dist) {
+	public OpenBlocksTrophies(IEventBus bus, ModContainer container, Dist dist) {
 		Reflection.initialize(ConfigSetup.class);
-		ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> ConfigurationScreen::new);
+		container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		if (dist.isClient()) {
 			ClientEvents.init(bus);
 			CreativeModeVariantToggle.setupButton();
 		}
 
-		bus.addListener(NewRegistryEvent.class, event -> event.register(CUSTOM_BEHAVIORS));
+		bus.addListener(NewRegistryEvent.class, event -> {
+			event.register(CUSTOM_BEHAVIORS);
+			event.register(TROPHY_CRITERIA);
+		});
 		bus.addListener(this::registerPackets);
 
 		bus.addListener(ConfigSetup::loadConfigs);
@@ -64,11 +72,17 @@ public class OpenBlocksTrophies {
 		NeoForge.EVENT_BUS.addListener(ConfigSetup::syncConfigOnLogin);
 
 		NeoForge.EVENT_BUS.addListener(RegisterCommandsEvent.class, event -> TrophiesCommands.register(event.getDispatcher(), event.getBuildContext()));
-		NeoForge.EVENT_BUS.addListener(AddServerReloadListenersEvent.class, event -> event.addListener(prefix("trophies"), new TrophyReloadListener(event.getServerResources().getRegistryLookup())));
+		NeoForge.EVENT_BUS.addListener(AddServerReloadListenersEvent.class, event -> {
+			event.addListener(prefix("trophies"), new TrophyReloadListener(event.getServerResources().getRegistryLookup()));
+			event.addListener(prefix("trophy_criteria"), new TrophyCriteriaReloadListener(event.getServerResources().getRegistryLookup()));
+		});
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::maybeDropTrophy);
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::syncTrophiesToClient);
-		NeoForge.EVENT_BUS.addListener(TrophyEvents::grantAdvancementBasedTrophies);
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::dontVisuallyShowSkinsWhileRenaming);
+
+		NeoForge.EVENT_BUS.addListener(CriteriaEvents::grantAdvancementTrophies);
+		NeoForge.EVENT_BUS.addListener(CriteriaEvents::grantInteractionTrophies);
+		NeoForge.EVENT_BUS.addListener(CriteriaEvents::grantSpecialKillTrophies);
 
 		TrophyBlocks.BLOCKS.register(bus);
 		TrophyBlockEntities.BLOCK_ENTITIES.register(bus);
@@ -80,6 +94,7 @@ public class OpenBlocksTrophies {
 		TrophyRegistries.TABS.register(bus);
 
 		TrophyBehaviors.CUSTOM_BEHAVIORS.register(bus);
+		TrophyCriteria.TROPHY_CRITERIA.register(bus);
 	}
 
 	public void registerPackets(RegisterPayloadHandlersEvent event) {

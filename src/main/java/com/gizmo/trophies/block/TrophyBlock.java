@@ -1,9 +1,9 @@
 package com.gizmo.trophies.block;
 
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.gizmo.trophies.command.GenerateTrophyStubCommand;
 import com.gizmo.trophies.config.TrophyConfig;
 import com.gizmo.trophies.init.TrophyBlockEntities;
-import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.gizmo.trophies.init.TrophyRegistries;
 import com.gizmo.trophies.misc.AmbientSoundFetcher;
 import com.gizmo.trophies.trophy.Trophy;

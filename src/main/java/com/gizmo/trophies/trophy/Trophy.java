@@ -3,6 +3,7 @@ package com.gizmo.trophies.trophy;
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.behavior.CustomBehavior;
 import com.gizmo.trophies.behavior.CustomBehaviorType;
+import com.gizmo.trophies.trophy.listener.TrophyReloadListener;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;

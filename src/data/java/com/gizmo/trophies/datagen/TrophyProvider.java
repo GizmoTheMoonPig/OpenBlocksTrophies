@@ -1,6 +1,8 @@
 package com.gizmo.trophies.datagen;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
+import com.gizmo.trophies.criteria.SpecialTrophyCriteria;
+import com.gizmo.trophies.criteria.TrophyCriteriaType;
 import com.gizmo.trophies.trophy.Trophy;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -46,14 +48,17 @@ public abstract class TrophyProvider implements DataProvider {
 	private static final Comparator<String> KEY_COMPARATOR = Comparator.comparingInt(FIXED_ORDER_FIELDS).thenComparing(s -> s);
 
 	protected final Map<Identifier, Trophy.Builder> builder = Maps.newLinkedHashMap();
+	protected final Map<Identifier, SpecialTrophyCriteria> criteriaBuilder = Maps.newLinkedHashMap();
 	private final CompletableFuture<HolderLookup.Provider> registriesLookup;
 	private final String modid;
 	private final PackOutput.PathProvider entryPath;
+	private final PackOutput.PathProvider criteriaPath;
 
 	public TrophyProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, String modid) {
 		this.registriesLookup = registries;
 		this.modid = modid;
 		this.entryPath = output.createPathProvider(PackOutput.Target.DATA_PACK, "trophies");
+		this.criteriaPath = output.createPathProvider(PackOutput.Target.DATA_PACK, "trophies/criteria");
 	}
 
 	@Override
@@ -62,17 +67,21 @@ public abstract class TrophyProvider implements DataProvider {
 	}
 
 	public CompletableFuture<?> run(CachedOutput output, HolderLookup.Provider provider) {
-		Map<Identifier, Trophy.Builder> map = Maps.newHashMap();
 		this.builder.clear();
+		this.criteriaBuilder.clear();
 		this.createTrophies(provider);
-		map.putAll(this.builder);
 
 		ImmutableList.Builder<CompletableFuture<?>> futuresBuilder = new ImmutableList.Builder<>();
 
 		RegistryOps<JsonElement> ops = provider.createSerializationContext(JsonOps.INSTANCE);
-		for (Map.Entry<Identifier, Trophy.Builder> entry : map.entrySet()) {
+		for (Map.Entry<Identifier, Trophy.Builder> entry : this.builder.entrySet()) {
 			Path path = this.entryPath.json(entry.getKey());
 			futuresBuilder.add(this.saveTrophy(output, ConditionalOps.createConditionalCodecWithConditions(Trophy.CODEC).encodeStart(ops, Optional.of(new WithConditions<>(entry.getValue().loadConditions, entry.getValue().build()))).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path));
+		}
+
+		for (Map.Entry<Identifier, SpecialTrophyCriteria> entry : this.criteriaBuilder.entrySet()) {
+			Path path = this.criteriaPath.json(entry.getKey());
+			futuresBuilder.add(this.saveTrophy(output, TrophyCriteriaType.DIRECT_CODEC.encodeStart(ops, entry.getValue()).getOrThrow(), path));
 		}
 		return CompletableFuture.allOf(futuresBuilder.build().toArray(CompletableFuture[]::new));
 	}
@@ -86,6 +95,14 @@ public abstract class TrophyProvider implements DataProvider {
 	 */
 	protected void makeTrophy(Trophy.Builder trophy) {
 		this.builder.putIfAbsent(Identifier.fromNamespaceAndPath(this.modid, Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(trophy.build().type())).getPath()), trophy);
+	}
+
+	/**
+	 * Datagen some special trophy criteria here! <br>
+	 * Trophy criteria is used to drop special variants during a specific event: eg, earning an advancement or interacting with an entity in a specific way.
+	 */
+	protected void makeCriteria(String name, SpecialTrophyCriteria criteria) {
+		this.criteriaBuilder.putIfAbsent(Identifier.fromNamespaceAndPath(this.modid, name), criteria);
 	}
 
 	@Override

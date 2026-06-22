@@ -2,7 +2,7 @@ package com.gizmo.trophies.network;
 
 import com.gizmo.trophies.OpenBlocksTrophies;
 import com.gizmo.trophies.trophy.Trophy;
-import com.gizmo.trophies.trophy.TrophyReloadListener;
+import com.gizmo.trophies.trophy.listener.TrophyReloadListener;
 import com.google.common.collect.Maps;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
