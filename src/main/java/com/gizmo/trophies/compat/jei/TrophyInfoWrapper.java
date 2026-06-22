@@ -1,7 +1,6 @@
 package com.gizmo.trophies.compat.jei;
 
 import com.gizmo.trophies.item.TrophyHelper;
-import com.gizmo.trophies.item.TrophyItem;
 import com.gizmo.trophies.trophy.Trophy;
 import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
 import net.minecraft.nbt.CompoundTag;

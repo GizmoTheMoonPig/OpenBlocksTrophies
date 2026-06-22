@@ -18,7 +18,7 @@ import net.minecraft.util.ProblemReporter;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Util;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
@@ -100,11 +100,11 @@ public class TrophyEvents {
 					return;
 				if (event.getSource().getEntity() instanceof FakePlayer && TrophyConfig.trophyDropSource != TrophyConfig.TrophySourceDrop.FAKE_PLAYER)
 					return;
-				Trophy trophy = Trophy.getTrophies().getOrDefault(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.PLAYER), new Trophy.Builder(EntityType.PLAYER).build());
+				Trophy trophy = Trophy.getTrophies().getOrDefault(BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.PLAYER), new Trophy.Builder(EntityTypes.PLAYER).build());
 				dropChance = ((getLootingLevel(level, event.getSource()) + (TROPHY_RANDOM.nextDouble() / 4)) * OpenBlocksTrophies.getTrophyDropChance(trophy)) - TROPHY_RANDOM.nextDouble();
 			}
 			if (dropChance > 0.0D) {
-				ItemStack stack = TrophyHelper.loadEntityToTrophy(EntityType.PLAYER).create();
+				ItemStack stack = TrophyHelper.loadEntityToTrophy(EntityTypes.PLAYER).create();
 				stack.set(DataComponents.ITEM_NAME, Component.literal(player.getDisplayName().getString()));
 				stack.set(DataComponents.PROFILE, ResolvableProfile.createResolved(player.getGameProfile()));
 				stack.set(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.PROFILE, true));
@@ -190,7 +190,7 @@ public class TrophyEvents {
 	public static void dontVisuallyShowSkinsWhileRenaming(AnvilUpdateEvent event) {
 		if (event.getOutput().is(TrophyItems.TROPHY) && event.getOutput().has(DataComponents.PROFILE)) {
 			Trophy trophy = TrophyHelper.getTrophy(event.getOutput().getComponents().get(TrophyComponents.TROPHY_INFO));
-			if (trophy != null && trophy.type() == EntityType.PLAYER) {
+			if (trophy != null && trophy.type() == EntityTypes.PLAYER) {
 				event.getOutput().remove(DataComponents.PROFILE);
 			}
 		}

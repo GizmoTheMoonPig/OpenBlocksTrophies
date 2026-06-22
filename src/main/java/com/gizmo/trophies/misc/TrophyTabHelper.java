@@ -5,7 +5,7 @@ import com.gizmo.trophies.item.TrophyHelper;
 import com.gizmo.trophies.trophy.Trophy;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +18,7 @@ import java.util.TreeMap;
 public class TrophyTabHelper {
 
 	public static ItemStack makeIcon() {
-		return TrophyHelper.createCyclingTrophy(EntityType.CHICKEN).create();
+		return TrophyHelper.createCyclingTrophy(EntityTypes.CHICKEN).create();
 	}
 
 	public static void getAllTrophies(CreativeModeTab.Output output, HolderLookup.Provider provider, FeatureFlagSet flags, boolean showVariants) {

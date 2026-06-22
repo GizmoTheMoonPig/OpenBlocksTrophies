@@ -16,14 +16,15 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.Util;
 import net.minecraft.world.entity.EntityType;
-import net.neoforged.neoforge.common.conditions.ConditionalOps;
 import net.neoforged.neoforge.common.conditions.ICondition;
-import net.neoforged.neoforge.common.conditions.WithConditions;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 //TODO drop chance array (for variants)
 //if array is 1 entry that value is used for all variants
@@ -33,7 +34,7 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 	public static final double DEFAULT_DROP_CHANCE = 0.001D;
 	public static final double BOSS_DROP_CHANCE = 0.0075D;
 
-	public static final Codec<Trophy> BASE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	public static final Codec<Trophy> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		Codec.BOOL.optionalFieldOf("replace", false).forGetter(Trophy::replace),
 		BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(Trophy::type),
 		Codec.DOUBLE.optionalFieldOf("drop_chance", DEFAULT_DROP_CHANCE).forGetter(Trophy::dropChance),
@@ -45,8 +46,6 @@ public record Trophy(boolean replace, EntityType<?> type, double dropChance, Vec
 		CompoundTag.CODEC.optionalFieldOf("default_variant").forGetter(Trophy::defaultData),
 		SoundEvent.DIRECT_CODEC.optionalFieldOf("click_sound_override").forGetter(Trophy::clickSoundOverride)
 	).apply(instance, Trophy::new));
-
-	public static final Codec<Optional<WithConditions<Trophy>>> CODEC = ConditionalOps.createConditionalCodecWithConditions(BASE_CODEC);
 
 	public List<CompoundTag> getVariants(HolderLookup.@Nullable Provider access) {
 		if (this.variants.left().isPresent() && access != null) {

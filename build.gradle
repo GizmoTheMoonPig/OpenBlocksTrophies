@@ -150,7 +150,7 @@ dependencies {
 //	compileOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${project.rei_version}"
 //	implementation "dev.emi:emi-neoforge:${project.emi_version}+${project.minecraft_version}"
 
-	implementation "curse.maven:jade-324717:8251883"
+	implementation "curse.maven:jade-324717:8281956"
 //	runtimeOnly "team-twilight:twilightforest:4.6.2582:universal"
 
 	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

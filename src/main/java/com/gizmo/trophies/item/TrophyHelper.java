@@ -12,6 +12,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.common.Tags;
@@ -73,7 +74,7 @@ public class TrophyHelper {
 	public static Rarity getTrophyRarity(@Nullable TrophyInfo info) {
 		Trophy trophy = getTrophy(info);
 		if (trophy != null) {
-			if (trophy.type() == EntityType.PLAYER) {
+			if (trophy.type() == EntityTypes.PLAYER) {
 				return Rarity.EPIC;
 			} else if (trophy.type().getTags().anyMatch(tag -> tag.equals(Tags.EntityTypes.BOSSES)) || trophy.dropChance() >= Trophy.BOSS_DROP_CHANCE) {
 				return Rarity.RARE;

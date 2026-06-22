@@ -59,7 +59,7 @@ public class GenerateTrophyStubCommand {
 				if (entity.getTags().anyMatch(tag -> tag.equals(Tags.EntityTypes.BOSSES))) dummy.setDropChance(0.0075D);
 				if (entity.getHeight() > 0.0F)
 					dummy.setScale(Float.parseFloat(FORMAT.format(Math.min(2.0F, 2.0F / entity.getHeight()))));
-				if (TrophiesCommands.writeToFile(Trophy.BASE_CODEC.encodeStart(JsonOps.INSTANCE, dummy.build()).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path)) {
+				if (TrophiesCommands.writeToFile(Trophy.CODEC.encodeStart(JsonOps.INSTANCE, dummy.build()).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path)) {
 					if (printEachEntity) {
 						context.getSource().sendSuccess(() -> Component.translatable("command.obtrophies.trophy_made", entityName.toString()), false);
 					}

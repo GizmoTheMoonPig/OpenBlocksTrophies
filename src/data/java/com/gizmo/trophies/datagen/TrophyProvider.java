@@ -19,6 +19,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Util;
+import net.neoforged.neoforge.common.conditions.ConditionalOps;
 import net.neoforged.neoforge.common.conditions.WithConditions;
 
 import java.io.ByteArrayOutputStream;
@@ -71,7 +72,7 @@ public abstract class TrophyProvider implements DataProvider {
 		RegistryOps<JsonElement> ops = provider.createSerializationContext(JsonOps.INSTANCE);
 		for (Map.Entry<Identifier, Trophy.Builder> entry : map.entrySet()) {
 			Path path = this.entryPath.json(entry.getKey());
-			futuresBuilder.add(this.saveTrophy(output, Trophy.CODEC.encodeStart(ops, Optional.of(new WithConditions<>(entry.getValue().loadConditions, entry.getValue().build()))).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path));
+			futuresBuilder.add(this.saveTrophy(output, ConditionalOps.createConditionalCodecWithConditions(Trophy.CODEC).encodeStart(ops, Optional.of(new WithConditions<>(entry.getValue().loadConditions, entry.getValue().build()))).resultOrPartial(OpenBlocksTrophies.LOGGER::error).orElseThrow(), path));
 		}
 		return CompletableFuture.allOf(futuresBuilder.build().toArray(CompletableFuture[]::new));
 	}

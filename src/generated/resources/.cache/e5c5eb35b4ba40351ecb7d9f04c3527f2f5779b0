@@ -1,7 +1,7 @@
-// 26.1.2	2026-06-21T07:51:45.855272772	Advancements
+// 26.2	2026-06-21T20:34:01.673045996	Advancements
 5ae66af20200e4cd2ff9d9fe80025a676682c2ab data/obtrophies/advancement/all_fish_trophies.json
 a393e93e0ef87ee57d42cfeb229a2ff8d9972ead data/obtrophies/advancement/all_horse_trophies.json
-92ade159a3ae5e84d153b0efdc9d4634d2db5416 data/obtrophies/advancement/all_vanilla_trophies.json
+544fa7f6bac626c14c1b65c5a403607db3a3d4a9 data/obtrophies/advancement/all_vanilla_trophies.json
 065d33b63baa8a7f1a7f479035103d244344b914 data/obtrophies/advancement/boss_trophy.json
 c7a6d7226cd6276748dad10a603e3af8ac8be1d5 data/obtrophies/advancement/one_trophy.json
 e53e35ceae9061d53a547aa3c15d98956c348af6 data/obtrophies/advancement/rarest_trophy.json

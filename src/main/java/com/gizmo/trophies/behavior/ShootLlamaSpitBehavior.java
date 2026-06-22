@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.projectile.LlamaSpit;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -27,7 +27,7 @@ public record ShootLlamaSpitBehavior() implements CustomBehavior {
 		BlockPos pos = block.getBlockPos();
 		Level level = player.level();
 
-		LlamaSpit spit = new LlamaSpit(EntityType.LLAMA_SPIT, level);
+		LlamaSpit spit = new LlamaSpit(EntityTypes.LLAMA_SPIT, level);
 		spit.setPos(pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5D);
 
 		double dX = player.getX() - (pos.getX() + 0.5F);

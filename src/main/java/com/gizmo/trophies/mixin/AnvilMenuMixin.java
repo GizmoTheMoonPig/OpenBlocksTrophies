@@ -8,7 +8,7 @@ import com.mojang.util.UndashedUuid;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringUtil;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
@@ -32,7 +32,7 @@ public class AnvilMenuMixin {
 	public void setProfileOnTake(Player player, ItemStack output, CallbackInfo ci) {
 		if (output.is(TrophyItems.TROPHY) && this.itemName != null) {
 			Trophy trophy = TrophyHelper.getTrophy(output.getComponents().get(TrophyComponents.TROPHY_INFO));
-			if (trophy != null && trophy.type() == EntityType.PLAYER) {
+			if (trophy != null && trophy.type() == EntityTypes.PLAYER) {
 				ResolvableProfile profile = trophies$fetchProfile(this.itemName);
 				if (profile != null) {
 					output.remove(DataComponents.CUSTOM_NAME);

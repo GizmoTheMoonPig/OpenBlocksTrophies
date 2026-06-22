@@ -85,7 +85,7 @@ public class TrophyCategory implements IRecipeCategory<TrophyInfoWrapper> {
 
 	@Override
 	public void getTooltip(ITooltipBuilder tooltip, TrophyInfoWrapper recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-		if (mouseX > 8 && mouseX < 43 && mouseY > 9 && mouseY < 44) {
+		if (mouseX > 9 && mouseX < 43 && mouseY > 10 && mouseY < 44) {
 			tooltip.addAll(TrophyRecipeViewerConstants.getMobTooltip(recipe.getTrophyEntity()));
 			tooltip.add(Component.literal(TrophyRecipeViewerConstants.getModIdForTooltip(BuiltInRegistries.ENTITY_TYPE.getKey(recipe.getTrophyEntity()).getNamespace())).withStyle(ChatFormatting.BLUE, ChatFormatting.ITALIC));
 		}

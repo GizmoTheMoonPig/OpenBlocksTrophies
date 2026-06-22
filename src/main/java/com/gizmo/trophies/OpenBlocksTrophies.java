@@ -17,6 +17,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
@@ -42,7 +43,7 @@ public class OpenBlocksTrophies {
 
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 
-	public static final List<EntityType<?>> UNUSED_TYPES = List.of(EntityType.GIANT, EntityType.ILLUSIONER);
+	public static final List<EntityType<?>> UNUSED_TYPES = List.of(EntityTypes.GIANT, EntityTypes.ILLUSIONER);
 
 	public static final ResourceKey<Registry<CustomBehaviorType>> CUSTOM_BEHAVIORS_KEY = ResourceKey.createRegistryKey(prefix("custom_behavior"));
 	public static final Registry<CustomBehaviorType> CUSTOM_BEHAVIORS = new RegistryBuilder<>(CUSTOM_BEHAVIORS_KEY).sync(true).create();
@@ -64,7 +65,7 @@ public class OpenBlocksTrophies {
 		NeoForge.EVENT_BUS.addListener(ConfigSetup::syncConfigOnLogin);
 
 		NeoForge.EVENT_BUS.addListener(RegisterCommandsEvent.class, event -> TrophiesCommands.register(event.getDispatcher(), event.getBuildContext()));
-		NeoForge.EVENT_BUS.addListener(AddServerReloadListenersEvent.class, event -> event.addListener(prefix("trophies"), new TrophyReloadListener()));
+		NeoForge.EVENT_BUS.addListener(AddServerReloadListenersEvent.class, event -> event.addListener(prefix("trophies"), new TrophyReloadListener(event.getServerResources().getRegistryLookup())));
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::maybeDropTrophy);
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::syncTrophiesToClient);
 		NeoForge.EVENT_BUS.addListener(TrophyEvents::grantAdvancementBasedTrophies);

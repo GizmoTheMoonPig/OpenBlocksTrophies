@@ -5,6 +5,7 @@ import com.gizmo.trophies.init.TrophyBehaviors;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -15,10 +16,10 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
 
-public record ClickWithItemBehavior(Ingredient ingredient, boolean consumeStack, Optional<CustomBehavior> behavior, int cooldown, Optional<SoundEvent> sound) implements CustomBehavior {
+public record ClickWithItemBehavior(Ingredient useItem, boolean consumeStack, Optional<CustomBehavior> behavior, int cooldown, Optional<SoundEvent> sound) implements CustomBehavior {
 
 	public static final MapCodec<ClickWithItemBehavior> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-			Ingredient.CODEC.fieldOf("item_to_use").forGetter(ClickWithItemBehavior::ingredient),
+			Ingredient.CODEC.fieldOf("item_to_use").forGetter(ClickWithItemBehavior::useItem),
 			Codec.BOOL.fieldOf("shrink_item_stack").forGetter(ClickWithItemBehavior::consumeStack),
 			CustomBehaviorType.DISPATCH_CODEC.optionalFieldOf("execute_behavior").forGetter(ClickWithItemBehavior::behavior),
 			Codec.INT.optionalFieldOf("cooldown", 0).forGetter(ClickWithItemBehavior::cooldown),
@@ -37,8 +38,8 @@ public record ClickWithItemBehavior(Ingredient ingredient, boolean consumeStack,
 		this(Ingredient.of(clickedItem), consumeStack, Optional.ofNullable(executeBehavior), cooldown, Optional.ofNullable(sound));
 	}
 
-	public ClickWithItemBehavior(Ingredient clickedItem, boolean consumeStack, @Nullable CustomBehavior executeBehavior, int cooldown, @Nullable SoundEvent sound) {
-		this(clickedItem, consumeStack, Optional.ofNullable(executeBehavior), cooldown, Optional.ofNullable(sound));
+	public ClickWithItemBehavior(HolderSet<Item> clickedItem, boolean consumeStack, @Nullable CustomBehavior executeBehavior, int cooldown, @Nullable SoundEvent sound) {
+		this(Ingredient.of(clickedItem), consumeStack, Optional.ofNullable(executeBehavior), cooldown, Optional.ofNullable(sound));
 	}
 
 	@Override
@@ -48,7 +49,7 @@ public record ClickWithItemBehavior(Ingredient ingredient, boolean consumeStack,
 
 	@Override
 	public int execute(TrophyBlockEntity block, ServerPlayer player, ItemStack usedItem) {
-		if (this.ingredient().test(usedItem)) {
+		if (this.useItem().test(usedItem)) {
 			if (this.behavior().isPresent()) {
 				this.behavior().get().execute(block, player, usedItem);
 			}

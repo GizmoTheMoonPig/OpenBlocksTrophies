@@ -1021,6 +1021,21 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "sulfur_cube": {
+      "conditions": {
+        "items": [
+          {
+            "items": "obtrophies:trophy",
+            "predicates": {
+              "obtrophies:trophy_info": {
+                "entity": "minecraft:sulfur_cube"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "tadpole": {
       "conditions": {
         "items": [
@@ -1529,6 +1544,9 @@
     ],
     [
       "strider"
+    ],
+    [
+      "sulfur_cube"
     ],
     [
       "tadpole"

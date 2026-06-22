@@ -14,7 +14,7 @@ import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class JEICompat implements IModPlugin {
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addCraftingStation(TROPHY, TrophyHelper.createCyclingTrophy(EntityType.CHICKEN).create());
+		registration.addCraftingStation(TROPHY, TrophyHelper.createCyclingTrophy(EntityTypes.CHICKEN).create());
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class JEICompat implements IModPlugin {
 		List<TrophyInfoWrapper> trophies = new LinkedList<>();
 		if (!Trophy.getTrophies().isEmpty()) {
 			for (Map.Entry<Identifier, Trophy> trophyEntry : Trophy.getTrophies().entrySet()) {
-				if (trophyEntry.getValue().type() == EntityType.PLAYER || OpenBlocksTrophies.getTrophyDropChance(trophyEntry.getValue()) <= 0.0D) continue;
+				if (trophyEntry.getValue().type() == EntityTypes.PLAYER || OpenBlocksTrophies.getTrophyDropChance(trophyEntry.getValue()) <= 0.0D) continue;
 				if (!trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess()).isEmpty()) {
 					for (CompoundTag variant : trophyEntry.getValue().getVariants(Minecraft.getInstance().level.registryAccess())) {
 						trophies.add(new TrophyInfoWrapper(trophyEntry.getValue(), variant));

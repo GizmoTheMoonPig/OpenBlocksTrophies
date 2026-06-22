@@ -10,13 +10,14 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
 
 public record TrophyInfo(EntityType<?> type, Optional<CompoundTag> variant, Optional<Unit> cycling, Optional<Integer> cooldown, boolean baby) {
 
-	public static final TrophyInfo DEFAULT = new TrophyInfo(EntityType.CHICKEN, Optional.empty(), Optional.empty(), Optional.empty(), false);
+	public static final TrophyInfo DEFAULT = new TrophyInfo(EntityTypes.CHICKEN, Optional.empty(), Optional.empty(), Optional.empty(), false);
 
 	public static final Codec<TrophyInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(TrophyInfo::type),

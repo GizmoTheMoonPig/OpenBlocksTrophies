@@ -33,6 +33,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.level.Level;
@@ -56,10 +57,10 @@ public class TrophyRenderHelper {
 
 		stack.pushPose();
 		if (KEYS.isEmpty() && !Trophy.getTrophies().isEmpty()) {
-			KEYS.addAll(Trophy.getTrophies().keySet().stream().filter(location -> !location.equals(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.PLAYER))).toList());
+			KEYS.addAll(Trophy.getTrophies().keySet().stream().filter(location -> !location.equals(BuiltInRegistries.ENTITY_TYPE.getKey(EntityTypes.PLAYER))).toList());
 			Collections.shuffle(KEYS);
 		}
-		if (trophy.type() == EntityType.PLAYER) {
+		if (trophy.type() == EntityTypes.PLAYER) {
 			renderPlayer(collector, stack, rotation, profile, normal, slim, cape, ears, light);
 		} else {
 			renderEntity(collector, state, cameraState, stack, rotation, name, pos, trophy, cycling, timer);
@@ -136,7 +137,7 @@ public class TrophyRenderHelper {
 			if (rand.nextInt(10) == 0) {
 				//they watch
 				if (Minecraft.getInstance().getCameraEntity() != null) {
-					Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+					Camera camera = Minecraft.getInstance().gameRenderer.mainCamera();
 					Vec3 vec3 = new Vec3(camera.position().x(), camera.position().y(), camera.position().z());
 					Vec3 vec31 = new Vec3(pos.getX() + 0.5F, pos.getY() + 1.0F, pos.getZ() + 0.5F);
 					Vec3 vec32 = vec3.subtract(vec31);
@@ -154,7 +155,7 @@ public class TrophyRenderHelper {
 			stack.mulPose(Axis.YP.rotationDegrees(rotation));
 		}
 
-		if (trophy.type() == EntityType.FOX && name.getString().equalsIgnoreCase("neoforge")) {
+		if (trophy.type() == EntityTypes.FOX && name.getString().equalsIgnoreCase("neoforge")) {
 			stack.mulPose(Axis.YP.rotationDegrees(timer * 15.0F));
 		}
 

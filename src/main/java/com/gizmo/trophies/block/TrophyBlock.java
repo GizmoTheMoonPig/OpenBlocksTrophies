@@ -1,9 +1,9 @@
 package com.gizmo.trophies.block;
 
+import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.gizmo.trophies.command.GenerateTrophyStubCommand;
 import com.gizmo.trophies.config.TrophyConfig;
 import com.gizmo.trophies.init.TrophyBlockEntities;
-import com.gizmo.trophies.block.entity.TrophyBlockEntity;
 import com.gizmo.trophies.init.TrophyRegistries;
 import com.gizmo.trophies.misc.AmbientSoundFetcher;
 import com.gizmo.trophies.trophy.Trophy;
@@ -17,7 +17,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -52,7 +52,7 @@ public class TrophyBlock extends AbstractTrophyBlock {
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
 		if (getter.getBlockEntity(pos) instanceof TrophyBlockEntity trophy) {
-			if (trophy.getTrophy() != null && trophy.getTrophy().type() == EntityType.PLAYER) {
+			if (trophy.getTrophy() != null && trophy.getTrophy().type() == EntityTypes.PLAYER) {
 				return state.getValue(PEDESTAL) ? Shapes.or(PEDESTAL_SHAPE, PLAYER_SHAPE) : NO_PEDESTAL_SHAPE;
 			}
 		}
@@ -88,7 +88,7 @@ public class TrophyBlock extends AbstractTrophyBlock {
 		if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TrophyBlockEntity trophyBE) {
 			Trophy trophy = trophyBE.getTrophy();
 			if (trophy != null && !player.isShiftKeyDown()) {
-				if (trophy.type() == EntityType.PLAYER) {
+				if (trophy.type() == EntityTypes.PLAYER) {
 					level.playSound(null, pos, TrophyRegistries.OOF.get(), SoundSource.BLOCKS, 1.0F, this.getSoundPitch(level.getRandom(), false));
 					if (trophyBE.getPlayerProfile() != null && trophyBE.getPlayerProfile().name().orElse("").equalsIgnoreCase("notch") && trophyBE.getCooldown() <= 0) {
 						player.getInventory().placeItemBackInInventory(new ItemStack(Items.APPLE));

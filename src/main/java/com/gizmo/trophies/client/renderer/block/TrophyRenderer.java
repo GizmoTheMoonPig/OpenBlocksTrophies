@@ -70,7 +70,7 @@ public class TrophyRenderer implements BlockEntityRenderer<TrophyBlockEntity, Tr
 		if (state.trophy != null && state.entityState != null) {
 			TrophyRenderHelper.renderTrophy(collector, state.entityState, cameraState, stack, state.blockPos, state.trophy, state.name, state.profile, -state.blockState.getValue(TrophyBlock.FACING).toYRot(), state.cycling, state.tickTimer, this.trophy, this.slimTrophy, this.cape, this.ears, state.lightCoords);
 			if (TrophyConfig.playersRenderNames && state.distanceToCameraSq > 0.0D && state.profile != null && state.profile.name().isPresent()) {
-				collector.submitNameTag(stack, new Vec3(0.5D, 0.85D, 0.5D), 0, handleSpecialNames(state.profile.name().get()), true, state.lightCoords, state.distanceToCameraSq, cameraState);
+				collector.submitNameTag(stack, new Vec3(0.5D, 0.85D, 0.5D), 0, handleSpecialNames(state.profile.name().get()), true, state.lightCoords, cameraState);
 			}
 
 		} else {

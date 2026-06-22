@@ -42,7 +42,7 @@ public class CreativeModeVariantToggle {
 			guiCenterY = creativeScreen.getTopPos();
 
 			event.addListener(showVariants = new VariantToggleButton(guiCenterX + 174, guiCenterY + 3, Component.literal("Show variants"), false, button -> {
-				Screen screen = Minecraft.getInstance().screen;
+				Screen screen = Minecraft.getInstance().gui.screen();
 				if (screen instanceof CreativeModeInventoryScreen creative) {
 					CreativeModeVariantToggle.updateItems(creative);
 				}
